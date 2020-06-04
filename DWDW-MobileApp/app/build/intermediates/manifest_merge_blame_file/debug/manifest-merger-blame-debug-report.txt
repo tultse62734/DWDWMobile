@@ -1,0 +1,99 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.dwdwproject"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:5:22-64
+12
+13    <application
+13-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:7:5-38:19
+14        android:allowBackup="true"
+14-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:8:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_worker"
+17-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:9:9-41
+18        android:label="@string/app_name"
+18-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:10:9-41
+19        android:roundIcon="@mipmap/ic_worker"
+19-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:11:9-46
+20        android:supportsRtl="true"
+20-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:12:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+22-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:13:9-76
+23        <activity android:name="com.example.dwdwproject.activities.NewsAdminActivity" />
+23-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:9-75
+23-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:19-63
+24        <activity android:name="com.example.dwdwproject.activities.ManageDeviceActivity" />
+24-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:9-69
+24-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:19-66
+25        <activity android:name="com.example.dwdwproject.activities.ProfileManageActivity" />
+25-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:9-70
+25-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:19-67
+26        <activity android:name="com.example.dwdwproject.activities.ManageWorkerActivity" />
+26-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:17:9-69
+26-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:17:19-66
+27        <activity android:name="com.example.dwdwproject.activities.HomeWorkerActivity" />
+27-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:18:9-67
+27-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:18:19-64
+28        <activity
+28-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:19:9-21:83
+29            android:name="com.example.dwdwproject.activities.HomeAdminActivity"
+29-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:20:13-57
+30            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+30-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:21:13-80
+31        <activity
+31-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:22:9-30:20
+32            android:name="com.example.dwdwproject.activities.SplashActivity"
+32-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:23:13-54
+33            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+33-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:24:13-80
+34            <intent-filter>
+34-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:25:13-29:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:17-69
+35-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:25-66
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:17-77
+37-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:27-74
+38            </intent-filter>
+39        </activity>
+40        <activity
+40-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:31:9-33:83
+41            android:name="com.example.dwdwproject.activities.SignUpActivity"
+41-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:32:13-54
+42            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+42-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:33:13-80
+43        <activity
+43-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:34:9-36:83
+44            android:name="com.example.dwdwproject.activities.LoginActivity"
+44-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:35:13-53
+45            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+45-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:36:13-80
+46        <activity android:name="com.example.dwdwproject.MainActivity" />
+46-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:9-50
+46-->C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:19-47
+47
+48        <provider
+48-->[com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
+49            android:name="com.squareup.picasso.PicassoProvider"
+49-->[com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
+50            android:authorities="com.example.dwdwproject.com.squareup.picasso"
+50-->[com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
+51            android:exported="false" />
+51-->[com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
+52    </application>
+53
+54</manifest>
