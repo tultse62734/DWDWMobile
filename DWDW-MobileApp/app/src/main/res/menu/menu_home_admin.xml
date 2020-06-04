@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_manage"
+        android:icon="@mipmap/ic_collaboration"
+        android:title="Quản lý manage" />
+    <item
+        android:id="@+id/action_device"
+        android:icon="@mipmap/ic_project_management"
+        android:title="Quản lý Thiết bị"/>
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@mipmap/ic_worker"
+        android:title="Thông tin" />
+    <item
+        android:id="@+id/action_notify"
+        android:icon="@mipmap/ic_notification"
+        android:title="Thông báo" />
+
+</menu>

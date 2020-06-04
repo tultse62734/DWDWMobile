@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.HomeAdminActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/colorOrange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:weightSum="10"
+                android:layout_marginTop="@dimen/dp40"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="8"
+                    android:textSize="@dimen/sp22"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="Welcome Admin"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <LinearLayout
+                    android:id="@+id/lnl_log_out"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@mipmap/ic_exit"
+                        android:layout_width="@dimen/dp40"
+                        android:layout_height="@dimen/dp40">
+
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="31/05/2020"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="Trang chủ"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@drawable/radius_conner_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="440dp"
+                    android:layout_marginBottom="@dimen/dp20"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:id="@+id/lnl_manage_management"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_weight="5"
+                            android:background="@drawable/radius_conner_grey"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp80"
+                                android:layout_height="@dimen/dp80"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:src="@mipmap/ic_collaboration"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp10"
+                                android:gravity="center"
+                                android:text="Quản lý manager"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/sp15"
+                                android:textStyle="bold">
+
+                            </TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_weight="5"
+                            android:background="@drawable/radius_conner_grey"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp80"
+                                android:layout_height="@dimen/dp80"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:src="@mipmap/ic_project_management"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp10"
+                                android:gravity="center"
+                                android:text="Quản lý thiết bị"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/sp15"
+                                android:textStyle="bold">
+
+                            </TextView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:id="@+id/lnl_profile"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_weight="5"
+                            android:background="@drawable/radius_conner_grey"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp80"
+                                android:layout_height="@dimen/dp80"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:src="@mipmap/ic_worker"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp10"
+                                android:gravity="center"
+                                android:text="Thông tin"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/sp15"
+                                android:textStyle="bold">
+
+                            </TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_weight="5"
+                            android:background="@drawable/radius_conner_grey"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp80"
+                                android:layout_height="@dimen/dp80"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:src="@mipmap/ic_notification"></ImageView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:layout_marginBottom="@dimen/dp10"
+                                android:gravity="center"
+                                android:text="Tin tức"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/sp15"
+                                android:textStyle="bold">
+
+                            </TextView>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_gravity="center|bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.michaldrabik.tapbarmenulib.TapBarMenu
+                        android:id="@+id/tapBarMenu"
+                        android:layout_width="match_parent"
+                        app:tbm_iconClosed="@mipmap/ic_add"
+                        app:tbm_iconOpened="@mipmap/ic_exit"
+                        android:layout_height="@dimen/dp100"
+                        app:tbm_backgroundColor="@color/colorWhite"
+                        app:tbm_menuAnchor="bottom"
+                        >
+                        <LinearLayout
+                            android:background="@drawable/radius_conner_grey"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp80">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:src="@mipmap/ic_collaboration"
+                                tools:visibility="visible"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp80">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:src="@mipmap/ic_collaboration"
+                                tools:visibility="visible"
+                                />
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            />
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp80">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:src="@mipmap/ic_collaboration"
+                                tools:visibility="visible"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp80">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:src="@mipmap/ic_collaboration"
+                                tools:visibility="visible"
+                                />
+                        </LinearLayout>
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/item2"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="@dimen/dp80"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:paddingTop="10dp"-->
+<!--                            android:paddingBottom="10dp"-->
+<!--                            android:src="@mipmap/ic_project_management"-->
+<!--                            />-->
+
+<!--                        <Space-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            />-->
+<!--                        <ImageView-->
+<!--                            android:id="@+id/item3"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="@dimen/dp80"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:paddingTop="10dp"-->
+<!--                            android:paddingBottom="10dp"-->
+<!--                            android:src="@mipmap/ic_worker"-->
+<!--                            />-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/item4"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="@dimen/dp80"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:paddingTop="10dp"-->
+<!--                            android:paddingBottom="10dp"-->
+<!--                            android:src="@mipmap/ic_notification"-->
+<!--                            />-->
+
+                    </com.michaldrabik.tapbarmenulib.TapBarMenu>
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

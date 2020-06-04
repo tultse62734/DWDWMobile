@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.ManageWorkerActivity">
+    <LinearLayout
+        android:background="@drawable/bg_employee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp200">
+       <TextView
+           android:layout_marginLeft="@dimen/dp16"
+           android:layout_marginTop="@dimen/dp50"
+           android:textStyle="bold"
+           android:textSize="@dimen/sp22"
+           android:textColor="@color/colorWhite"
+           android:text="Quản lý Manager"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView
+            android:id="@+id/fast_scroller_recycler"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>
