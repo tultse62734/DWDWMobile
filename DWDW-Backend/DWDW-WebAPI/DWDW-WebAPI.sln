@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWDW-WebAPI", "DWDW-WebAPI\DWDW-WebAPI.csproj", "{58E151F9-6316-48F4-BB5A-E1AED9F89A5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58E151F9-6316-48F4-BB5A-E1AED9F89A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E151F9-6316-48F4-BB5A-E1AED9F89A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E151F9-6316-48F4-BB5A-E1AED9F89A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E151F9-6316-48F4-BB5A-E1AED9F89A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E66C5579-9F5B-47C6-882F-992D7A104458}
+	EndGlobalSection
+EndGlobal
