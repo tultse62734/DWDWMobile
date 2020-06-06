@@ -4,15 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using DWDW_WebAPI.Models;
 
 namespace DWDW_WebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            DWDWDBEntities entities = new DWDWDBEntities();
+            var x = entities.Users.ToList();
+            return Ok(x);
         }
 
         // GET api/values/5
