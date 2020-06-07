@@ -9,6 +9,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="well" style="font-size:30px">
             <b>User's Profile</b>
+            <input id="btnLogout" class="btn btn-success float-md-right" type="button" value="Logout"/>
         </div>
         <div id="divData" class="well">
             <table class="table table-bordered" id="tblData">
@@ -64,6 +65,11 @@
             if (sessionStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
             }
+
+            $('#btnLogout').click(function () {
+                sessionStorage.removeItem('accessToken');
+                window.location.href = "Login.html";
+            });
 
             $('#linkClose').click(function () {
                 $('#divError').hide('fade');
