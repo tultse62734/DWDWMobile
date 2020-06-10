@@ -11,10 +11,14 @@
         android:roundIcon="@mipmap/ic_worker"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".activities.NewsAdminActivity"></activity>
+        <activity android:name=".activities.AdminCreateDeviceActivity"></activity>
+        <activity android:name=".activities.ManageAccidentActivity" />
+        <activity android:name=".activities.ManageRoomActivity" />
+        <activity android:name=".activities.ManageWorkerActivity" />
+        <activity android:name=".activities.ManageLocationActivity" />
         <activity android:name=".activities.ManageDeviceActivity" />
         <activity android:name=".activities.ProfileManageActivity" />
-        <activity android:name=".activities.ManageWorkerActivity" />
+        <activity android:name=".activities.ManageManagerActivity" />
         <activity android:name=".activities.HomeWorkerActivity" />
         <activity
             android:name=".activities.HomeAdminActivity"

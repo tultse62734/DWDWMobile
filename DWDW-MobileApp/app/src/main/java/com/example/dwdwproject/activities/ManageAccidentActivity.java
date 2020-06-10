@@ -6,11 +6,10 @@ import android.os.Bundle;
 
 import com.example.dwdwproject.R;
 
-public class NewsAdminActivity extends AppCompatActivity {
-
+public class ManageAccidentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_admin);
+        setContentView(R.layout.activity_manage_accident);
     }
 }
