@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/lnl_root_choose_location"
+        android:id="@+id/lnl_root_choose_room"
         android:weightSum="10"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@mipmap/ic_event"
+                android:src="@mipmap/ic_door"
                 android:scaleType="fitXY"
                 android:layout_width="@dimen/dp30"
                 android:layout_height="@dimen/dp30">
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/txt_name_choose_location"
+                android:id="@+id/txt_name_choose_room"
                 android:text="Khu A"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/sp18"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
-                android:id="@+id/txt_choose_create_date_location"
+                android:id="@+id/txt_choose_create_date_room"
                 android:text="18-11-2011 11:30 pm"
                 android:textColor="@color/colorGreyDark"
                 android:textSize="@dimen/sp15"
@@ -49,7 +49,7 @@
 
             </TextView>
             <TextView
-                android:id="@+id/txt_choose_status_location"
+                android:id="@+id/txt_choose_status_room"
                 android:textSize="@dimen/sp15"
                 android:textStyle="bold"
                 android:text="Không hoạt động"

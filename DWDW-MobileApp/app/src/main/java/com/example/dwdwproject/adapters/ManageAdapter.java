@@ -27,7 +27,6 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
         this.mContext = mContext;
         this.mManagerList = mManagerList;
     }
-
     @NonNull
     @Override
     public WorkerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

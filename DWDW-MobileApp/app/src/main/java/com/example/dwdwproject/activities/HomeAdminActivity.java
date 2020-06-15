@@ -15,8 +15,7 @@ import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 public class HomeAdminActivity extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout mBtnMManageWorker,mBtnLogout,mBtnProfile,mBtnLocation,mBtnDevice;
-    private LinearLayout mBtnmenu1,mBtnmenu2,mBtnmenu3,mBtnmenu4;
-    private TapBarMenu tapBarMenu;
+    private LinearLayout mBtnManageRoom,mBtnManageAccident,mBtnManageProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,57 +27,26 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
         mBtnMManageWorker = findViewById(R.id.lnl_manage_management);
         mBtnLogout = findViewById(R.id.lnl_log_out);
         mBtnProfile = findViewById(R.id.lnl_profile);
-        tapBarMenu = findViewById(R.id.tapBarMenu);
         mBtnDevice = findViewById(R.id.lnl_managa_device_home);
         mBtnLocation = findViewById(R.id.lnl_manage_location_home);
-        mBtnmenu1 = tapBarMenu.findViewById(R.id.tap_menu_1);
-        mBtnmenu2 = tapBarMenu.findViewById(R.id.tap_menu_2);
-        mBtnmenu3 = tapBarMenu.findViewById(R.id.tap_menu_3);
-        mBtnmenu4 = tapBarMenu.findViewById(R.id.tap_menu_4);
+        mBtnManageRoom = findViewById(R.id.lnl_manage_room_admin);
+        mBtnManageAccident = findViewById(R.id.lnl_manage_accident);
+        mBtnManageProfile = findViewById(R.id.lnl_manage_profile);
     }
     private void initData(){
+        mBtnManageProfile.setOnClickListener(this);
         mBtnMManageWorker.setOnClickListener(this);
         mBtnLogout.setOnClickListener(this);
         mBtnProfile.setOnClickListener(this);
-        tapBarMenu.setOnClickListener(this);
+        mBtnManageRoom.setOnClickListener(this);
         mBtnDevice.setOnClickListener(this);
         mBtnLocation.setOnClickListener(this);
-        mBtnmenu1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tapBarMenu.close();
-                intentManageWorḳerActivity();
-            }
-        });
-        mBtnmenu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tapBarMenu.close();
-                intentToManagaDeviceActivity();
-            }
-        });
-        mBtnmenu3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tapBarMenu.close();
-                intentToProfileActivity();
-            }
-        });
-        mBtnmenu4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tapBarMenu.close();
-                    intentToLocationActivity();
-            }
-        });
+        mBtnManageAccident.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.tapBarMenu:
-                tapBarMenu.toggle();
-                break;
             case R.id.lnl_manage_management:
                 intentManageWorḳerActivity();
                 break;
@@ -94,7 +62,20 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
             case R.id.lnl_profile:
                 intentToProfileActivity();
                 break;
+            case R.id.lnl_manage_room_admin:
+                intentToManagerRoomActivity();
+                break;
+            case R.id.lnl_manage_accident:
+                intentToManageAccidentActivity();
+                break;
+            case R.id.lnl_manage_profile:
+                intentToProfileActivity();
+                break;
         }
+    }
+    private void intentToManageAccidentActivity(){
+        Intent intent = new Intent(HomeAdminActivity.this,ManageAccidentActivity.class);
+        startActivity(intent);
     }
     private void intentManageWorḳerActivity(){
         Intent intent = new Intent(HomeAdminActivity.this, ManageManagerActivity.class);
@@ -106,6 +87,10 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
     }
     private void intentToProfileActivity(){
         Intent intent = new Intent(HomeAdminActivity.this,ProfileManageActivity.class);
+        startActivity(intent);
+    }
+    private void intentToManagerRoomActivity(){
+        Intent intent = new Intent(HomeAdminActivity.this,ManageRoomActivity.class);
         startActivity(intent);
     }
     private void intentToLocationActivity(){

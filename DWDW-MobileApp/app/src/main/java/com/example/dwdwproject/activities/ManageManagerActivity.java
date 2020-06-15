@@ -2,14 +2,22 @@ package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.adapters.ManageAdapter;
+import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
+import com.example.dwdwproject.utils.BundleString;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +25,11 @@ import java.util.List;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
 public class ManageManagerActivity extends AppCompatActivity implements View.OnClickListener {
-    private List<Manager> mManagerList;
-    private IndexFastScrollRecyclerView recyclerView;
-    private ManageAdapter mManageAdapter;
-    private LinearLayout mBtnClose;
+    private FragmentPagerItemAdapter mAdapter;
+    private ViewPager mViewPager;
+    private List<Location> mLocationList;
+    private SmartTabLayout mViewPagerTab;
+    private LinearLayout mBtnClose,mBtnAddManagerAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,56 +38,77 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         initData();
     }
     private void initView(){
-        recyclerView = (IndexFastScrollRecyclerView) findViewById(R.id.fast_scroller_recycler);
         mBtnClose = findViewById(R.id.lnl_close_manage_manage);
-        recyclerView.setIndexBarTextColor(R.color.colorWhite);
-        recyclerView.setIndexBarCornerRadius(20);
-
-        recyclerView.setIndexBarTransparentValue((float) 0.4);
-
-        recyclerView.setIndexbarMargin(10);
-
-        recyclerView.setIndexTextSize(15);
-        recyclerView.setIndexBarTextColor(R.color.colorWhite);
-        recyclerView.setIndexBarColor("#33334c");
-
-        recyclerView.setIndexBarColor(R.color.colorYellowOrange);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mBtnAddManagerAdmin = findViewById(R.id.lnl_add_manager_admin);
     }
     private void  initData(){
         mBtnClose.setOnClickListener(this);
-        mManagerList = new ArrayList<>();
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","A","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","B","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","C","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","D","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","E","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","M","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","N","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","T","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","U","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","V","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Y","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Z","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","K","01224959623","tultse62734@fpt.edu.vn"));
-        updateUI();
+        mBtnAddManagerAdmin.setOnClickListener(this);
+        mLocationList = new ArrayList<>();
+        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
+        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
+        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
+        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
+        getCategoryData(mLocationList);
     }
-    private void updateUI(){
-        if(mManageAdapter ==null){
-            mManageAdapter = new ManageAdapter(ManageManagerActivity.this, mManagerList);
-            recyclerView.setAdapter(mManageAdapter);
-
-        }else {
-            mManageAdapter.notifyDataSetChanged();
+    private void getCategoryData(List<Location> locationList) {
+        FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
+        for (int i = 0; i <locationList.size(); i++) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(BundleString.LOCATION_INFO,locationList.get(i));
+            creator.add(locationList.get(i).getNameLocation(), PageManagerFragment.class, bundle);
         }
+        mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+                creator.create());
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_manager);
+        mViewPager.setOffscreenPageLimit(locationList.size());
+        mViewPager.setAdapter(mAdapter);
+        //set viewPager for SmartTabLayout
+        mViewPagerTab = (SmartTabLayout) findViewById(R.id.view_pager_tab_manage_manager);
+        mViewPagerTab.setViewPager(mViewPager);
+        TextView view = (TextView) mViewPagerTab.getTabAt(0);
+        view.setBackground(getResources().getDrawable(R.color.colorOrange));
+        view.setTextColor(getResources().getColor(R.color.colorWhite));
+        mViewPagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                setColorForTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+    //set color for tab
+    private void setColorForTab(int position) {
+        int count = mAdapter.getCount();
+        for (int i = 0; i < count; i++) {
+            TextView view = (TextView) mViewPagerTab.getTabAt(i);
+            view.setBackground(getResources().getDrawable(R.color.colorWhite));
+            view.setTextColor(getResources().getColor(R.color.colorOrange));
+
+        }
+        TextView view = (TextView) mViewPagerTab.getTabAt(position);
+        view.setBackground(getResources().getDrawable(R.color.colorOrange));
+        view.setTextColor(getResources().getColor(R.color.colorWhite));
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
             case R.id.lnl_close_manage_manage:
                 finish();
+                break;
+            case  R.id.lnl_add_manager_admin:
+                Intent intent = new Intent(ManageManagerActivity.this,AdminCreateManagerActivity.class);
+                startActivity(intent);
                 break;
         }
     }

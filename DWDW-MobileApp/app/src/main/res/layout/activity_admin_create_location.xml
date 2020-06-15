@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AdminCreateDeviceActivity">
+    tools:context=".activities.AdminCreateLocationActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,14 +24,14 @@
                     android:textSize="@dimen/sp22"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
-                    android:text="Thêm thiết bị"
+                    android:text="Thêm Khu Vực"
                     android:layout_marginRight="@dimen/dp10"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                 </TextView>
                 <LinearLayout
-                    android:id="@+id/lnl_close_admin_add_device"
+                    android:id="@+id/lnl_close_admin_add_location"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_weight="2"
@@ -66,41 +65,21 @@
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Tên Thiết bị :"
+                    android:text="Tên khu vực :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                 </TextView>
-                <EditText
-                    android:textSize="@dimen/sp18"
-                    android:textStyle="italic"
-                    android:background="@drawable/rounder_edit_text_1dp"
-                    android:hint="Tên thiết bị"
-                    android:textColorHighlight="@color/colorGreyDark"
-                    android:textColorHint="@color/colorGrey"
-                    android:textColor="@color/colorYellowOrange"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp60">
-                </EditText>
-                <TextView
-                    android:layout_marginTop="@dimen/dp10"
-                    android:layout_marginBottom="@dimen/dp10"
-                    android:textSize="@dimen/sp18"
-                    android:textStyle="bold"
-                    android:text="Khu vực :"
-                    android:textColor="@color/colorRed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                </TextView>
+
                 <EditText
-                    android:id="@+id/edt_choose_location_add_admin"
+                    android:id="@+id/edt_choose_location_add_location_admin"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
                     android:textColorHighlight="@color/colorGreyDark"
-                    android:hint="Khu Vực thiết bị"
+                    android:hint="Chọn khu vực"
                     android:textColorHint="@color/colorGrey"
                     android:textColor="@color/colorYellowOrange"
                     android:layout_width="match_parent"
@@ -112,19 +91,19 @@
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Phòng :"
+                    android:text="Trạng thái :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                 </TextView>
                 <EditText
-                    android:id="@+id/edt_choose_room_add_admin"
+                    android:id="@+id/edt_choose_status_add__location_admin"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
                     android:textColorHighlight="@color/colorGreyDark"
-                    android:hint="Phòng "
+                    android:hint="Chọn trạng thái"
                     android:textColorHint="@color/colorGrey"
                     android:textColor="@color/colorYellowOrange"
                     android:layout_width="match_parent"

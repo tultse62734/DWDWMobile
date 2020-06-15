@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
-    private LinearLayout mBtnClose;
+    private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +35,14 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private void initView(){
         mRecyclerView = findViewById(R.id.rcv_location);
         mBtnClose = findViewById(R.id.lnl_close_manage_location);
+        mBtnAddLocation = findViewById(R.id.lnl_add_location_admin);
          RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
+        mBtnAddLocation.setOnClickListener(this);
         mLocationList = new ArrayList<>();
         mLocationList.add(new Location(1,"Khu A","20-11-2020",true));
         mLocationList.add(new Location(2,"Khu B","12-10-2019",false));
@@ -72,14 +75,17 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
         else {
             mLocationAdapter.notifyDataSetChanged();
         }
-
     }
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.lnl_close_manage_location:
                 finish();
+                break;
+            case R.id.lnl_add_location_admin:
+                Intent intent = new Intent(ManageLocationActivity.this, AdminCreateLocationActivity.class);
+                startActivity(intent);
                 break;
         }
     }

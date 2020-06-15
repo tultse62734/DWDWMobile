@@ -66,7 +66,6 @@ public class PageFragment extends Fragment{
         mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
         mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
         mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-
         updateUI();
     }
     private void updateUI(){
