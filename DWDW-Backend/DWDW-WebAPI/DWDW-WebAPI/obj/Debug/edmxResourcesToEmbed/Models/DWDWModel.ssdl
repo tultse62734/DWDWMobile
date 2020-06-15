@@ -69,6 +69,7 @@
     <Property Name="Gender" Type="int" />
     <Property Name="roleId" Type="int" />
     <Property Name="isActive" Type="bit" />
+    <Property Name="deviceToken" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <Association Name="FK_Device_Log">
     <End Role="Log" Type="Self.Log" Multiplicity="0..1" />

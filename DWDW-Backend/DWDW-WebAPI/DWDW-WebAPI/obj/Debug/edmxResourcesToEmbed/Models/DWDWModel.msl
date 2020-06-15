@@ -67,6 +67,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="DWDWDBModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="deviceToken" ColumnName="deviceToken" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="fullName" ColumnName="fullName" />
           <ScalarProperty Name="password" ColumnName="password" />

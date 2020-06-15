@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DWDWDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DWDWDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Device">
           <Key>
             <PropertyRef Name="deviceId" />
@@ -74,6 +74,7 @@
           <Property Name="Gender" Type="int" />
           <Property Name="roleId" Type="int" />
           <Property Name="isActive" Type="bit" />
+          <Property Name="deviceToken" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Device_Log">
           <End Role="Log" Type="Self.Log" Multiplicity="0..1" />
@@ -164,8 +165,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DWDWDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -248,6 +248,7 @@
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="Locations" Relationship="Self.FK_Location_User" FromRole="User" ToRole="Location" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <Property Name="deviceToken" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Device_Log">
           <End Role="Log" Type="Self.Log" Multiplicity="0..1" />
@@ -410,6 +411,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DWDWDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="deviceToken" ColumnName="deviceToken" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="fullName" ColumnName="fullName" />
                 <ScalarProperty Name="password" ColumnName="password" />

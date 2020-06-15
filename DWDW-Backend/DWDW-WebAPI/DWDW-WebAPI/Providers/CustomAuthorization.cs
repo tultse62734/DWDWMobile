@@ -34,7 +34,6 @@ namespace DWDW_WebAPI.Providers
                 identity.AddClaim(new Claim("Status", user.isActive.ToString()));
                 identity.AddClaim(new Claim(ClaimTypes.Name, user.fullName));
                 identity.AddClaim(new Claim("Phone", user.phone.ToString()));
-
                 context.Validated(identity);
             }
         }

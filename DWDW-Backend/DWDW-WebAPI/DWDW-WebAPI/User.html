@@ -21,6 +21,7 @@
                         <td>Date of Birth</td>
                         <td>Gender</td>
                         <td>Role</td>
+                        <td>Device Token</td>
                         <td>Status</td>
                     </tr>
                 </thead>
@@ -62,12 +63,12 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            if (sessionStorage.getItem('accessToken') == null) {
+            if (localStorage.getItem('accessToken') == null) {
                 window.location.href = "Login.html";
             }
 
             $('#btnLogout').click(function () {
-                sessionStorage.removeItem('accessToken');
+                localStorage.removeItem('accessToken');
                 window.location.href = "Login.html";
             });
 
@@ -84,7 +85,7 @@
                 contentType: "json",
                 headers: {
                     'Authorization': 'Bearer '
-                        + sessionStorage.getItem("accessToken")
+                        + localStorage.getItem("accessToken")
                 },
                 success: function (data) {
                     $('#tblBody').empty();
@@ -95,7 +96,8 @@
                         + '<td>' + data.phone + '</td>'
                         + '<td>' + data.dateOfBirth + '</td>'
                         + '<td>' + data.Gender + '</td>'
-                        + '<td>' + data.roleId + '</td>'
+                        + '<td>' + data.Role.roleName + '</td>'
+                        + '<td>' + data.deviceToken + '</td>'
                         + '<td>' + data.isActive + '</td>' + '</tr>');
                     $('#tblBody').append(row);
                     $.each(data, function () {

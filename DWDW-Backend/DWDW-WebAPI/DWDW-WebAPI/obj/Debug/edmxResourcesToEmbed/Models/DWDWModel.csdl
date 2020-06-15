@@ -79,6 +79,7 @@
     <Property Name="isActive" Type="Boolean" />
     <NavigationProperty Name="Locations" Relationship="Self.FK_Location_User" FromRole="User" ToRole="Location" />
     <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+    <Property Name="deviceToken" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Device_Log">
     <End Role="Log" Type="Self.Log" Multiplicity="0..1" />
