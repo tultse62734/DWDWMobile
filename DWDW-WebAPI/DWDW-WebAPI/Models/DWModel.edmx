@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DWDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="deviceId" />
+          </Key>
+          <Property Name="deviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deviceCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="deviceStatus" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locationCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="recordId" />
+          </Key>
+          <Property Name="recordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deviceId" Type="int" />
+          <Property Name="recordDate" Type="datetime" />
+          <Property Name="image" Type="nvarchar" MaxLength="255" />
+          <Property Name="recordStatus" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="roomId" />
+          </Key>
+          <Property Name="roomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roomCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="locationId" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="RoomDevice">
+          <Key>
+            <PropertyRef Name="roomDeviceId" />
+          </Key>
+          <Property Name="roomDeviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roomId" Type="int" />
+          <Property Name="deviceId" Type="int" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="shiftId" />
+          </Key>
+          <Property Name="shiftId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userLocationId" Type="int" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="roomId" Type="int" />
+          <Property Name="shiftType" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="int" />
+          <Property Name="dateOfBirth" Type="datetime" />
+          <Property Name="gender" Type="int" />
+          <Property Name="deviceToken" Type="nvarchar" MaxLength="300" />
+          <Property Name="roleId" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserLocation">
+          <Key>
+            <PropertyRef Name="userLocationId" />
+          </Key>
+          <Property Name="userLocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="locationId" Type="int" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Record_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="deviceId" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="deviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomDevice_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="RoomDevice" Type="Self.RoomDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="deviceId" />
+            </Principal>
+            <Dependent Role="RoomDevice">
+              <PropertyRef Name="deviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomDevice_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="RoomDevice" Type="Self.RoomDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="RoomDevice">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Shift" Type="Self.Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_UserLocation">
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="0..1" />
+          <End Role="Shift" Type="Self.Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLocation">
+              <PropertyRef Name="userLocationId" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="userLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="UserLocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="UserLocation">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DWDBModelStoreContainer">
+          <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomDevice" EntityType="Self.RoomDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLocation" EntityType="Self.UserLocation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Record_Device" Association="Self.FK_Record_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Location" Association="Self.FK_Room_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Room" EntitySet="Room" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomDevice_Device" Association="Self.FK_RoomDevice_Device">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="RoomDevice" EntitySet="RoomDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomDevice_Room" Association="Self.FK_RoomDevice_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="RoomDevice" EntitySet="RoomDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_Room" Association="Self.FK_Shift_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Shift" EntitySet="Shift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_UserLocation" Association="Self.FK_Shift_UserLocation">
+            <End Role="UserLocation" EntitySet="UserLocation" />
+            <End Role="Shift" EntitySet="Shift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation_Location" Association="Self.FK_UserLocation_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="UserLocation" EntitySet="UserLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation_User" Association="Self.FK_UserLocation_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserLocation" EntitySet="UserLocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DWDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="deviceId" />
+          </Key>
+          <Property Name="deviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deviceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="deviceStatus" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="RoomDevices" Relationship="Self.FK_RoomDevice_Device" FromRole="Device" ToRole="RoomDevice" />
+          <NavigationProperty Name="Records" Relationship="DWDBModel.FK_Record_Device" FromRole="Device" ToRole="Record" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="locationId" />
+          </Key>
+          <Property Name="locationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_Room_Location" FromRole="Location" ToRole="Room" />
+          <NavigationProperty Name="UserLocations" Relationship="Self.FK_UserLocation_Location" FromRole="Location" ToRole="UserLocation" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="roomId" />
+          </Key>
+          <Property Name="roomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roomCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="locationId" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Room_Location" FromRole="Room" ToRole="Location" />
+          <NavigationProperty Name="RoomDevices" Relationship="Self.FK_RoomDevice_Room" FromRole="Room" ToRole="RoomDevice" />
+          <NavigationProperty Name="Shifts" Relationship="Self.FK_Shift_Room" FromRole="Room" ToRole="Shift" />
+        </EntityType>
+        <EntityType Name="RoomDevice">
+          <Key>
+            <PropertyRef Name="roomDeviceId" />
+          </Key>
+          <Property Name="roomDeviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roomId" Type="Int32" />
+          <Property Name="deviceId" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Device" Relationship="Self.FK_RoomDevice_Device" FromRole="RoomDevice" ToRole="Device" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_RoomDevice_Room" FromRole="RoomDevice" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Shift">
+          <Key>
+            <PropertyRef Name="shiftId" />
+          </Key>
+          <Property Name="shiftId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userLocationId" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="roomId" Type="Int32" />
+          <Property Name="shiftType" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_Shift_Room" FromRole="Shift" ToRole="Room" />
+          <NavigationProperty Name="UserLocation" Relationship="Self.FK_Shift_UserLocation" FromRole="Shift" ToRole="UserLocation" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="Int32" />
+          <Property Name="dateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="gender" Type="Int32" />
+          <Property Name="deviceToken" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="roleId" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="UserLocations" Relationship="Self.FK_UserLocation_User" FromRole="User" ToRole="UserLocation" />
+        </EntityType>
+        <EntityType Name="UserLocation">
+          <Key>
+            <PropertyRef Name="userLocationId" />
+          </Key>
+          <Property Name="userLocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="locationId" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_UserLocation_Location" FromRole="UserLocation" ToRole="Location" />
+          <NavigationProperty Name="Shifts" Relationship="Self.FK_Shift_UserLocation" FromRole="UserLocation" ToRole="Shift" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserLocation_User" FromRole="UserLocation" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RoomDevice_Device">
+          <End Role="Device" Type="Self.Device" Multiplicity="0..1" />
+          <End Role="RoomDevice" Type="Self.RoomDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="deviceId" />
+            </Principal>
+            <Dependent Role="RoomDevice">
+              <PropertyRef Name="deviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Room_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="Room">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="locationId" />
+            </Principal>
+            <Dependent Role="UserLocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomDevice_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="RoomDevice" Type="Self.RoomDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="RoomDevice">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="0..1" />
+          <End Role="Shift" Type="Self.Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="roomId" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="roomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_UserLocation">
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="0..1" />
+          <End Role="Shift" Type="Self.Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLocation">
+              <PropertyRef Name="userLocationId" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="userLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLocation_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserLocation" Type="Self.UserLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="UserLocation">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DWDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Devices" EntityType="Self.Device" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="RoomDevices" EntityType="Self.RoomDevice" />
+          <EntitySet Name="Shifts" EntityType="Self.Shift" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserLocations" EntityType="Self.UserLocation" />
+          <AssociationSet Name="FK_RoomDevice_Device" Association="Self.FK_RoomDevice_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="RoomDevice" EntitySet="RoomDevices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Room_Location" Association="Self.FK_Room_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation_Location" Association="Self.FK_UserLocation_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="UserLocation" EntitySet="UserLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomDevice_Room" Association="Self.FK_RoomDevice_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="RoomDevice" EntitySet="RoomDevices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_Room" Association="Self.FK_Shift_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Shift" EntitySet="Shifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_UserLocation" Association="Self.FK_Shift_UserLocation">
+            <End Role="UserLocation" EntitySet="UserLocations" />
+            <End Role="Shift" EntitySet="Shifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLocation_User" Association="Self.FK_UserLocation_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserLocation" EntitySet="UserLocations" />
+          </AssociationSet>
+          <EntitySet Name="Records" EntityType="DWDBModel.Record" />
+          <AssociationSet Name="FK_Record_Device" Association="DWDBModel.FK_Record_Device">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Record" EntitySet="Records" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="recordId" />
+          </Key>
+          <Property Name="recordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deviceId" Type="Int32" />
+          <Property Name="recordDate" Type="DateTime" Precision="3" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="recordStatus" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Device" Relationship="DWDBModel.FK_Record_Device" FromRole="Record" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK_Record_Device">
+          <End Type="DWDBModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="DWDBModel.Record" Role="Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="deviceId" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="deviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DWDBModelStoreContainer" CdmEntityContainer="DWDBContext">
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="DWDBModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="deviceId" ColumnName="deviceId" />
+                <ScalarProperty Name="deviceCode" ColumnName="deviceCode" />
+                <ScalarProperty Name="deviceStatus" ColumnName="deviceStatus" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="DWDBModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="locationCode" ColumnName="locationCode" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DWDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="DWDBModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="roomCode" ColumnName="roomCode" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomDevices">
+            <EntityTypeMapping TypeName="DWDBModel.RoomDevice">
+              <MappingFragment StoreEntitySet="RoomDevice">
+                <ScalarProperty Name="roomDeviceId" ColumnName="roomDeviceId" />
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="deviceId" ColumnName="deviceId" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="DWDBModel.Shift">
+              <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="shiftId" ColumnName="shiftId" />
+                <ScalarProperty Name="userLocationId" ColumnName="userLocationId" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="shiftType" ColumnName="shiftType" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DWDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="deviceToken" ColumnName="deviceToken" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLocations">
+            <EntityTypeMapping TypeName="DWDBModel.UserLocation">
+              <MappingFragment StoreEntitySet="UserLocation">
+                <ScalarProperty Name="userLocationId" ColumnName="userLocationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="locationId" ColumnName="locationId" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Records">
+            <EntityTypeMapping TypeName="DWDBModel.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="recordStatus" ColumnName="recordStatus" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="recordDate" ColumnName="recordDate" />
+                <ScalarProperty Name="deviceId" ColumnName="deviceId" />
+                <ScalarProperty Name="recordId" ColumnName="recordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
