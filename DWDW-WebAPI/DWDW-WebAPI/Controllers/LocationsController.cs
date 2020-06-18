@@ -16,24 +16,27 @@ namespace DWDW_WebAPI.Controllers
     {
         private DWDBContext db = new DWDBContext();
 
-        // GET: api/Locations
-        public IQueryable<Location> GetLocations()
+        //GET ALL Location for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/locationList")]
+        public IHttpActionResult GetLocations()
         {
-            return db.Locations;
+            var locationList = db.Locations.ToList();
+            return Ok(locationList);
         }
 
-        // GET: api/Locations/5
-        [ResponseType(typeof(Location))]
-        public IHttpActionResult GetLocation(int id)
+        //Search Location for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/locationFinder/{locationID}")]
+        public IHttpActionResult FindLocations(int locationID)
         {
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(location);
+            var searchedLocation = db.Locations.Find(locationID);
+            return Ok(searchedLocation);
         }
+
+        
 
         // PUT: api/Locations/5
         [ResponseType(typeof(void))]

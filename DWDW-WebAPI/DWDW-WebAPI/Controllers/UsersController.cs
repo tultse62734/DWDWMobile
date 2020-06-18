@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
@@ -16,24 +17,59 @@ namespace DWDW_WebAPI.Controllers
     {
         private DWDBContext db = new DWDBContext();
 
-        // GET: api/Users
-        public IQueryable<User> GetUsers()
+        // GET ALL User for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/userList")]
+        public IHttpActionResult GetUsers()
         {
-            return db.Users;
+            var userList = db.Users.ToList();
+            return Ok(userList);
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        //Get user detail
+        [Authorize(Roles = "1, 2, 3")]
+        [HttpGet]
+        [Route("api/user/UserDetail")]
+        public IHttpActionResult getAccountDetail()
         {
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
+            var identity = (ClaimsIdentity)User.Identity;
+            var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            var currentAccount = db.Users.Find(int.Parse(ID));
+            return Ok(currentAccount);
         }
+
+        //Search User for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/userFinder/{userID}")]
+        public IHttpActionResult FindUser(int userID)
+        {
+            var searchedUser = db.Users.Find(userID);
+            return Ok(searchedUser);
+        }
+
+        //Get ALL assigned worker for manager
+
+
+        //Search assigned worker for manager
+        //[Authorize(Roles = "2")]
+        //[HttpGet]
+        //[Route("api/manager/userFinder/{userID}")]
+        //public IHttpActionResult FindUserForManager(int userID)
+        //{
+        //    //Lấy ID của manager account đang đăng nhập
+        //    var identity = (ClaimsIdentity)User.Identity;
+        //    var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+
+        //    //Chọn ra location đang gán với manager đó
+        //    var relatedLocation = db.UserLocations.Where(c => c.userId == int.Parse(ID)).ToList();
+
+        //    var searchedUser = relatedLocation.Where(x => x.userId == userID).FirstOrDefault();
+        //    return Ok(searchedUser);
+        //}
+
+
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
