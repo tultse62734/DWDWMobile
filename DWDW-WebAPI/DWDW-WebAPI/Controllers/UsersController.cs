@@ -8,8 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
+using System.Text;
+using DWDW_WebAPI.Firebase;
 
 namespace DWDW_WebAPI.Controllers
 {
@@ -49,25 +52,56 @@ namespace DWDW_WebAPI.Controllers
             return Ok(searchedUser);
         }
 
-        //Get ALL assigned worker for manager
+        //Update device Token
+        [Authorize(Roles = "1, 2, 3")]
+        [HttpPut]
+        [Route("api/managerToken/{deviceToken}")]
+        public void PutToken(string deviceToken)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            int id = int.Parse(identity.Claims.FirstOrDefault(c => c.Type == "ID").Value);
+            using (db)
+            {
+                var entity = db.Users.FirstOrDefault(e => e.userId == id);
+                entity.deviceToken = deviceToken;
+                db.SaveChanges();
+            }
+        }
+
+        //Send notify through deviceToken
+        [HttpGet]
+        [Route("api/test/Notification/{deviceID}")]
+        public IHttpActionResult SendNotify(int deviceID)
+        {
+            //room = "212";
+
+            string deviceToken = "cAF8JeveS9av5pIdQtge0-:APA91bGvzkAno7ycM_fIzqwEjhIUTBy-la9u71_" +
+                "vYocHFhnnuGIO0PyfAMU2ph0cae6YuRGpYTAnbw9KtcKgN-aENmED3Bz4KLHnjrpU9HgfRHhBcTBP_" +
+                "gbd41-tcsMD4kC9Vl0dnHC2";
+            string now = DateTime.Now.ToString("H:mm");
+            string room = "AZ1";
+
+            string titleText = "Detect drowsiness!";
+            string bodyText = "There was a drowsiness in " + room + " at " + now;
 
 
-        //Search assigned worker for manager
-        //[Authorize(Roles = "2")]
-        //[HttpGet]
-        //[Route("api/manager/userFinder/{userID}")]
-        //public IHttpActionResult FindUserForManager(int userID)
-        //{
-        //    //Lấy ID của manager account đang đăng nhập
-        //    var identity = (ClaimsIdentity)User.Identity;
-        //    var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-
-        //    //Chọn ra location đang gán với manager đó
-        //    var relatedLocation = db.UserLocations.Where(c => c.userId == int.Parse(ID)).ToList();
-
-        //    var searchedUser = relatedLocation.Where(x => x.userId == userID).FirstOrDefault();
-        //    return Ok(searchedUser);
-        //}
+            var data = new
+            {
+                to = deviceToken,
+                data = new
+                {
+                    title = titleText,
+                    body = bodyText,
+                    message = bodyText
+                }
+            };
+            var serializer = new JavaScriptSerializer();
+            var json = serializer.Serialize(data);
+            byte[] byteArray = Encoding.UTF8.GetBytes(json);
+            FirebaseNotification firebaseNotification = new FirebaseNotification();
+            firebaseNotification.SendNotification(byteArray);
+            return Ok();
+        }
 
 
 
