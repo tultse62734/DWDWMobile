@@ -69,12 +69,10 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Send notify through deviceToken
-        [HttpGet]
+        [HttpPost]
         [Route("api/test/Notification/{deviceID}")]
         public IHttpActionResult SendNotify(int deviceID)
         {
-            //room = "212";
-
             string deviceToken = "cAF8JeveS9av5pIdQtge0-:APA91bGvzkAno7ycM_fIzqwEjhIUTBy-la9u71_" +
                 "vYocHFhnnuGIO0PyfAMU2ph0cae6YuRGpYTAnbw9KtcKgN-aENmED3Bz4KLHnjrpU9HgfRHhBcTBP_" +
                 "gbd41-tcsMD4kC9Vl0dnHC2";
@@ -82,21 +80,34 @@ namespace DWDW_WebAPI.Controllers
             string room = "AZ1";
 
             string titleText = "Detect drowsiness!";
-            string bodyText = "There was a drowsiness in " + room + " at " + now;
+            string bodyText = "There was a drowsiness in " + room + deviceID + " at " + now;
+            string randomNum = deviceID.ToString();
 
-
-            var data = new
+            //Nhận intent thẳng vào activity nhưng không generate đc nhiều notify
+            //var data = new
+            //{
+            //    to = deviceToken,
+            //    data = new
+            //    {
+            //        title = titleText,
+            //        message = bodyText,
+            //        userId = randomNum,
+            //        status = true
+            //    }
+            //};
+            
+            //Phải qua app home page rồi ấn thêm lần nữa sẽ vào đc activity mong muốn.
+            var messageInformation = new Message()
             {
-                to = deviceToken,
-                data = new
+                notification = new Notification()
                 {
                     title = titleText,
-                    body = bodyText,
-                    message = bodyText
-                }
+                    body = bodyText
+                },
+                to = deviceToken
             };
             var serializer = new JavaScriptSerializer();
-            var json = serializer.Serialize(data);
+            var json = serializer.Serialize(messageInformation);
             byte[] byteArray = Encoding.UTF8.GetBytes(json);
             FirebaseNotification firebaseNotification = new FirebaseNotification();
             firebaseNotification.SendNotification(byteArray);

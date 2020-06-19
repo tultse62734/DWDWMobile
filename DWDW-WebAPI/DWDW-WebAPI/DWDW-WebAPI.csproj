@@ -276,6 +276,8 @@
     <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Firebase\FirebaseNotification.cs" />
+    <Compile Include="Firebase\Message.cs" />
+    <Compile Include="Firebase\Notification.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
