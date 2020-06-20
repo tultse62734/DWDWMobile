@@ -6,9 +6,13 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
+using System.Text;
+using DWDW_WebAPI.Firebase;
 
 namespace DWDW_WebAPI.Controllers
 {
@@ -16,24 +20,101 @@ namespace DWDW_WebAPI.Controllers
     {
         private DWDBContext db = new DWDBContext();
 
-        // GET: api/Users
-        public IQueryable<User> GetUsers()
+        // GET ALL User for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/userList")]
+        public IHttpActionResult GetUsers()
         {
-            return db.Users;
+            var userList = db.Users.ToList();
+            return Ok(userList);
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        //Get user detail
+        [Authorize(Roles = "1, 2, 3")]
+        [HttpGet]
+        [Route("api/user/UserDetail")]
+        public IHttpActionResult getAccountDetail()
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            var identity = (ClaimsIdentity)User.Identity;
+            var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            var currentAccount = db.Users.Find(int.Parse(ID));
+            return Ok(currentAccount);
+        }
+
+        //Search User for admin
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        [Route("api/admin/userFinder/{userID}")]
+        public IHttpActionResult FindUser(int userID)
+        {
+            var searchedUser = db.Users.Find(userID);
+            return Ok(searchedUser);
+        }
+
+        //Update device Token
+        [Authorize(Roles = "1, 2, 3")]
+        [HttpPut]
+        [Route("api/managerToken/{deviceToken}")]
+        public void PutToken(string deviceToken)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            int id = int.Parse(identity.Claims.FirstOrDefault(c => c.Type == "ID").Value);
+            using (db)
             {
-                return NotFound();
+                var entity = db.Users.FirstOrDefault(e => e.userId == id);
+                entity.deviceToken = deviceToken;
+                db.SaveChanges();
             }
-
-            return Ok(user);
         }
+
+        //Send notify through deviceToken
+        [HttpPost]
+        [Route("api/test/Notification/{deviceID}")]
+        public IHttpActionResult SendNotify(int deviceID)
+        {
+            string deviceToken = "cAF8JeveS9av5pIdQtge0-:APA91bGvzkAno7ycM_fIzqwEjhIUTBy-la9u71_" +
+                "vYocHFhnnuGIO0PyfAMU2ph0cae6YuRGpYTAnbw9KtcKgN-aENmED3Bz4KLHnjrpU9HgfRHhBcTBP_" +
+                "gbd41-tcsMD4kC9Vl0dnHC2";
+            string now = DateTime.Now.ToString("H:mm");
+            string room = "AZ1";
+
+            string titleText = "Detect drowsiness!";
+            string bodyText = "There was a drowsiness in " + room + deviceID + " at " + now;
+            string randomNum = deviceID.ToString();
+
+            //Nhận intent thẳng vào activity nhưng không generate đc nhiều notify
+            //var data = new
+            //{
+            //    to = deviceToken,
+            //    data = new
+            //    {
+            //        title = titleText,
+            //        message = bodyText,
+            //        userId = randomNum,
+            //        status = true
+            //    }
+            //};
+            
+            //Phải qua app home page rồi ấn thêm lần nữa sẽ vào đc activity mong muốn.
+            var messageInformation = new Message()
+            {
+                notification = new Notification()
+                {
+                    title = titleText,
+                    body = bodyText
+                },
+                to = deviceToken
+            };
+            var serializer = new JavaScriptSerializer();
+            var json = serializer.Serialize(messageInformation);
+            byte[] byteArray = Encoding.UTF8.GetBytes(json);
+            FirebaseNotification firebaseNotification = new FirebaseNotification();
+            firebaseNotification.SendNotification(byteArray);
+            return Ok();
+        }
+
+
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
