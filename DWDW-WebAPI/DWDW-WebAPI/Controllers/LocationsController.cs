@@ -10,13 +10,13 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
+using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
+    [RoutePrefix("v1/Locations")]
     public class LocationsController : ApiController
     {
-        private DWDBContext db = new DWDBContext();
-
         //GET ALL Location for admin
         [Authorize(Roles = "1")]
         [HttpGet]
@@ -62,6 +62,65 @@ namespace DWDW_WebAPI.Controllers
             var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountID)).ToList();
             var searchLocation = locationList.FirstOrDefault(x => x.locationId == locationID);
             return Ok(searchLocation);
+        }
+        [Route("{id}/rooms")]
+        // GET: api/Locations/5
+        [ResponseType(typeof(Location))]
+        public IHttpActionResult GetRoomInLocation(int id)
+        {
+            IQueryable<Location> location = db.Locations.Where(l => l.locationId == id);
+            if (!location.Any())
+            {
+                return NotFound();
+            }
+            var rooms = db.Rooms.Where(r => r.locationId == id)
+                .Select(r => new RoomViewModel()
+                {
+                    roomId = r.roomId,
+                    roomCode = r.roomCode,
+                    locationId = r.locationId,
+                    isActive = r.isActive
+                }).ToList();
+            if (!rooms.Any())
+            {
+                return NotFound();
+            }
+            return Ok(rooms);
+        }
+        [Route("{id}/devices")]
+        // GET: api/Locations/5
+        [ResponseType(typeof(Location))]
+        public IHttpActionResult GetDeviceInLocation(int id)
+        {
+            IQueryable<Location> location = db.Locations.Where(l => l.locationId == id);
+            if (!location.Any())
+            {
+                return NotFound();
+            }
+            var rooms = db.Rooms.Where(r => r.locationId == id)
+                .Select(r => new RoomViewModel()
+                {
+                    roomId = r.roomId,
+                    roomCode = r.roomCode,
+                    locationId = r.locationId,
+                    isActive = r.isActive
+                }).ToList();
+            var devices = from d in db.Devices
+                         join rd in db.RoomDevices on d.deviceId equals rd.deviceId
+                         join r in db.Rooms on rd.roomId equals r.roomId
+                         where r.locationId == id
+                         select new
+                         {
+                             d.deviceId,
+                             d.deviceCode,
+                             d.deviceStatus,
+                             d.isActive
+                         };
+            if (!devices.Any())
+            {
+                return NotFound();
+            }
+            return Ok(devices);
         }
 
         // PUT: api/Locations/5
