@@ -14,6 +14,10 @@ namespace DWDW_WebAPI.Controllers
 {
     public class RolesController : ApiController
     {
+        public RolesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
         private DWDBContext db = new DWDBContext();
 
         // GET: api/Roles

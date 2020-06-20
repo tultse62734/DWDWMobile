@@ -14,6 +14,10 @@ namespace DWDW_WebAPI.Controllers
 {
     public class DevicesController : ApiController
     {
+        public DevicesController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
         private DWDBContext db = new DWDBContext();
 
         // GET: api/Devices
