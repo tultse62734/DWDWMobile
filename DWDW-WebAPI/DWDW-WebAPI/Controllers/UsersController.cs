@@ -13,6 +13,7 @@ using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
 using System.Text;
 using DWDW_WebAPI.Firebase;
+using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
@@ -28,7 +29,6 @@ namespace DWDW_WebAPI.Controllers
         // GET ALL User for admin
         [Authorize(Roles = "1")]
         [HttpGet]
-        [Route("api/admin/userList")]
         public IHttpActionResult GetUsers()
         {
             var userList = db.Users.ToList();
@@ -38,7 +38,7 @@ namespace DWDW_WebAPI.Controllers
         //Get user detail
         [Authorize(Roles = "1, 2, 3")]
         [HttpGet]
-        [Route("api/user/UserDetail")]
+        [Route("detail")]
         public IHttpActionResult getAccountDetail()
         {
             var identity = (ClaimsIdentity)User.Identity;

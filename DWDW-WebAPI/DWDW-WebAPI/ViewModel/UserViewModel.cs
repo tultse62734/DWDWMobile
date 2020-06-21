@@ -17,4 +17,10 @@ namespace DWDW_WebAPI.ViewModel
         public int? roleId { get; set; }
         public bool? isActive { get; set; }
     }
+
+    public class UserGetAPIViewMode
+    {
+        
+    }
+
 }

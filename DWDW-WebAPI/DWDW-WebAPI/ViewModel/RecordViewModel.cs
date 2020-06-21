@@ -14,4 +14,5 @@ namespace DWDW_WebAPI.ViewModel
         public int? recordStatus { get; set; }
         public bool? isActive { get; set; }
     }
+
 }

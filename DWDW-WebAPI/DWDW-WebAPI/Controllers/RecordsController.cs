@@ -9,11 +9,13 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
+using DWDW_WebAPI.Services;
 
 namespace DWDW_WebAPI.Controllers
 {
     public class RecordsController : ApiController
     {
+        private IRecordService rs = new RecordService();
         public RecordsController()
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -21,9 +23,10 @@ namespace DWDW_WebAPI.Controllers
         private DWDBContext db = new DWDBContext();
 
         // GET: api/Records
-        public IQueryable<Record> GetRecords()
+        public IHttpActionResult GetRecords()
         {
-            return db.Records;
+            
+            return Ok(db.Records);
         }
 
         // GET: api/Records/5

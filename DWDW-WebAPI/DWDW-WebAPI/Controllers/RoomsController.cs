@@ -118,5 +118,6 @@ namespace DWDW_WebAPI.Controllers
         {
             return db.Rooms.Count(e => e.roomId == id) > 0;
         }
+
     }
 }

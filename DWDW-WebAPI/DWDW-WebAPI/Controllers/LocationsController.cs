@@ -14,9 +14,14 @@ using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
-    [RoutePrefix("v1/Locations")]
+    [RoutePrefix("v1/api/Locations")]
     public class LocationsController : ApiController
     {
+        public LocationsController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
+        private DWDBContext db = new DWDBContext();
         //GET ALL Location for admin
         [Authorize(Roles = "1")]
         [HttpGet]
