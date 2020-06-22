@@ -15,7 +15,7 @@ namespace DWDW_WebAPI.Controllers
 {
     public class RecordsController : ApiController
     {
-        private IRecordService rs = new RecordService();
+        
         public RecordsController()
         {
             db.Configuration.ProxyCreationEnabled = false;

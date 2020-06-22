@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
 using DWDW_WebAPI.Models;
+using DWDW_WebAPI.Services;
 using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
@@ -17,120 +18,141 @@ namespace DWDW_WebAPI.Controllers
     [RoutePrefix("v1/api/Locations")]
     public class LocationsController : ApiController
     {
+        private ILocationService locationService;
+        private IRoomService roomService;
+        private IDeviceService deviceService;
+
         public LocationsController()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+            this.locationService = new LocationService(new DWDBContext());
+            this.roomService = new RoomService(new DWDBContext());
+            this.deviceService = new DeviceService(new DWDBContext());
         }
-        private DWDBContext db = new DWDBContext();
+        public LocationsController(ILocationService locationService, IRoomService roomService,
+            IDeviceService deviceService)
+        {
+            this.locationService = locationService;
+            this.roomService = roomService;
+            this.deviceService = deviceService;
+
+        }
         //GET ALL Location for admin
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         [HttpGet]
-        [Route("api/admin/locationList")]
+        [Route("")]
+        [ResponseType(typeof(LocationViewModel))]
         public IHttpActionResult GetLocations()
         {
-            var locationList = db.Locations.ToList();
-            return Ok(locationList);
+            try
+            {
+                var list = locationService.GetLocations();
+                if (!list.Any())
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(list);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         //Search Location for admin
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         [HttpGet]
-        [Route("api/admin/locationFinder/{locationID}")]
-        public IHttpActionResult FindLocations(int locationID)
+        [Route("{locationId}")]
+        [ResponseType(typeof(LocationViewModel))]
+        public IHttpActionResult GetLocations(int locationId)
         {
-            var searchedLocation = db.Locations.Find(locationID);
+            var searchedLocation = locationService.GetLocationById(locationId);
             return Ok(searchedLocation);
         }
 
         //Get assigned Location for manager and worker
-        [Authorize(Roles = "2, 3")]
+        //[Authorize(Roles = "2, 3")]
         [HttpGet]
-        [Route("api/subaccount/locationList")]
+        [Route("assigned")]
+        [ResponseType(typeof(LocationViewModel))]
         public IHttpActionResult GetAssignedLocations()
         {
             var identity = (ClaimsIdentity)User.Identity;
-            var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-            int accountID = Convert.ToInt32(ID);
-            var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountID)).ToList();
+            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            int accountId = Convert.ToInt32(Id);
+            var locationList = locationService.GetAssignedLocations(accountId);
             return Ok(locationList);
         }
 
         //Search Assigned Location for manager and worker
-        [Authorize(Roles = "2,3")]
+        //[Authorize(Roles = "2,3")]
         [HttpGet]
-        [Route("api/subaccount/locationFinder/{locationID}")]
-        public IHttpActionResult FindAssignedLocations(int locationID)
+        [Route("assigned/{locationId}")]
+        [ResponseType(typeof(LocationViewModel))]
+        public IHttpActionResult GetAssignedLocations(int locationId)
         {
             var identity = (ClaimsIdentity)User.Identity;
             var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-            int accountID = Convert.ToInt32(ID);
-            var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountID)).ToList();
-            var searchLocation = locationList.FirstOrDefault(x => x.locationId == locationID);
+            int accountId = Convert.ToInt32(ID);
+            var locationList = locationService.GetAssignedLocations(accountId);
+            var searchLocation = locationService.GetLocationById(locationId);
             return Ok(searchLocation);
         }
-        [Route("{id}/rooms")]
+        [Route("{locationId}/rooms")]
         // GET: api/Locations/5
-        [ResponseType(typeof(Location))]
-        public IHttpActionResult GetRoomInLocation(int id)
+        [ResponseType(typeof(RoomViewModel))]
+        public IHttpActionResult GetRoomsInLocation(int locationId)
         {
-            IQueryable<Location> location = db.Locations.Where(l => l.locationId == id);
-            if (!location.Any())
+            Location location = locationService.GetLocationById(locationId);
+            if (location == null)
             {
                 return NotFound();
             }
-            var rooms = db.Rooms.Where(r => r.locationId == id)
+            var rooms = roomService.GetRoomsByLocationId(locationId)
                 .Select(r => new RoomViewModel()
                 {
                     roomId = r.roomId,
                     roomCode = r.roomCode,
                     locationId = r.locationId,
                     isActive = r.isActive
-                }).ToList();
+                });
             if (!rooms.Any())
             {
                 return NotFound();
             }
             return Ok(rooms);
         }
-        [Route("{id}/devices")]
+        [Route("{locationId}/devices")]
         // GET: api/Locations/5
-        [ResponseType(typeof(Location))]
-        public IHttpActionResult GetDeviceInLocation(int id)
+        [ResponseType(typeof(DeviceViewModel))]
+        public IHttpActionResult GetDevicesInLocation(int locationId)
         {
-            IQueryable<Location> location = db.Locations.Where(l => l.locationId == id);
-            if (!location.Any())
+            try
             {
-                return NotFound();
-            }
-            var rooms = db.Rooms.Where(r => r.locationId == id)
-                .Select(r => new RoomViewModel()
+                var location = locationService.GetLocationById(locationId);
+                if (location == null)
                 {
-                    roomId = r.roomId,
-                    roomCode = r.roomCode,
-                    locationId = r.locationId,
-                    isActive = r.isActive
-                }).ToList();
-            var devices = from d in db.Devices
-                         join rd in db.RoomDevices on d.deviceId equals rd.deviceId
-                         join r in db.Rooms on rd.roomId equals r.roomId
-                         where r.locationId == id
-                         select new
-                         {
-                             d.deviceId,
-                             d.deviceCode,
-                             d.deviceStatus,
-                             d.isActive
-                         };
-            if (!devices.Any())
-            {
-                return NotFound();
+                    return NotFound();
+                }
+                var devices = deviceService.GetDevicesInLocation(locationId);
+                if (!devices.Any())
+                {
+                    return NotFound();
+                }
+                return Ok(devices);
             }
-            return Ok(devices);
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/Locations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutLocation(int id, Location location)
+        [Route("")]
+        public IHttpActionResult PutLocation(int id,Location location)
         {
             if (!ModelState.IsValid)
             {
@@ -139,31 +161,24 @@ namespace DWDW_WebAPI.Controllers
 
             if (id != location.locationId)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            db.Entry(location).State = EntityState.Modified;
+            locationService.UpdateLocation(location);
 
             try
             {
-                db.SaveChanges();
+                locationService.Save();
+                return Ok("Update succeed.");
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LocationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(HttpStatusCode.MethodNotAllowed);
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Locations
+        [Route("")]
         [ResponseType(typeof(Location))]
         public IHttpActionResult PostLocation(Location location)
         {
@@ -172,40 +187,43 @@ namespace DWDW_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Locations.Add(location);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = location.locationId }, location);
+            locationService.InsertLocation(location);
+            try
+            {
+                locationService.Save();
+                return CreatedAtRoute("DefaultApi", new { id = location.locationId }, location);
+            }
+            catch (Exception)
+            {
+                if (locationService.LocationExists(location.locationId))
+                {
+                    return Conflict();
+                }
+                return BadRequest("Insert failed.");
+            }
+            
         }
 
-        // DELETE: api/Locations/5
+        //DELETE: api/Locations/5
+        [Route("")]
         [ResponseType(typeof(Location))]
-        public IHttpActionResult DeleteLocation(int id)
+        public IHttpActionResult DeleteLocation(int locationId)
         {
-            Location location = db.Locations.Find(id);
+            var location = locationService.GetLocationById(locationId);
             if (location == null)
             {
                 return NotFound();
             }
-
-            db.Locations.Remove(location);
-            db.SaveChanges();
-
-            return Ok(location);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            locationService.DeactiveLocation(location);
+            try
             {
-                db.Dispose();
+                locationService.Save();
+                return Ok("Deactive succeed!");
             }
-            base.Dispose(disposing);
-        }
-
-        private bool LocationExists(int id)
-        {
-            return db.Locations.Count(e => e.locationId == id) > 0;
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.MethodNotAllowed);
+            }
         }
     }
 }

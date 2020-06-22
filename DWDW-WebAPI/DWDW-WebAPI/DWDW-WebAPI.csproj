@@ -327,11 +327,22 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AccountAuthorizationProvider.cs" />
-    <Compile Include="Services\RecordService.cs" />
+    <Compile Include="Services\DeviceService.cs" />
+    <Compile Include="Services\IDeviceService.cs" />
+    <Compile Include="Services\ILocationService.cs" />
+    <Compile Include="Services\IRoleService.cs" />
+    <Compile Include="Services\IRoomService.cs" />
+    <Compile Include="Services\IShiftService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LocationService.cs" />
+    <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\RoomService.cs" />
+    <Compile Include="Services\ShiftService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\UserSecurityService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\DeviceViewModel.cs" />
+    <Compile Include="ViewModel\LocationModifyViewModel.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\RecordViewModel.cs" />
     <Compile Include="ViewModel\RoleViewModel.cs" />

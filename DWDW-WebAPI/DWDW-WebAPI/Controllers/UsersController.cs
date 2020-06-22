@@ -27,7 +27,7 @@ namespace DWDW_WebAPI.Controllers
         private DWDBContext db = new DWDBContext();
 
         // GET ALL User for admin
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         [HttpGet]
         public IHttpActionResult GetUsers()
         {
@@ -36,10 +36,10 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get user detail
-        [Authorize(Roles = "1, 2, 3")]
+        //[Authorize(Roles = "1, 2, 3")]
         [HttpGet]
         [Route("detail")]
-        public IHttpActionResult getAccountDetail()
+        public IHttpActionResult GetAccountDetail()
         {
             var identity = (ClaimsIdentity)User.Identity;
             var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
@@ -48,7 +48,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search User for admin
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         [HttpGet]
         [Route("api/admin/userFinder/{userID}")]
         public IHttpActionResult FindUser(int userID)
@@ -58,7 +58,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Update device Token
-        [Authorize(Roles = "1, 2, 3")]
+        //[Authorize(Roles = "1, 2, 3")]
         [HttpPut]
         [Route("api/managerToken/{deviceToken}")]
         public void PutToken(string deviceToken)
@@ -119,57 +119,57 @@ namespace DWDW_WebAPI.Controllers
             return Ok();
         }
 
-        [Route("manager")]
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetManager()
-        {
-            IQueryable<User> managers = db.Users.Where(u => u.roleId == 2);
+        //[Route("manager")]
+        //[ResponseType(typeof(User))]
+        //public IHttpActionResult GetManager()
+        //{
+        //    IQueryable<User> managers = db.Users.Where(u => u.roleId == 2);
 
-            if (managers == null)
-            {
-                return NotFound();
-            }
-            var result = managers.Select(manager => new UserViewModel()
-            {
-                userId = manager.userId,
-                userName = manager.userName,
-                password = manager.password,
-                phone = manager.phone,
-                dateOfBirth = manager.dateOfBirth,
-                gender = manager.gender,
-                deviceToken = manager.deviceToken,
-                roleId = manager.roleId,
-                isActive = manager.isActive
-            }).ToList();
+        //    if (managers == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var result = managers.Select(manager => new UserViewModel()
+        //    {
+        //        userId = manager.userId,
+        //        userName = manager.userName,
+        //        password = manager.password,
+        //        phone = manager.phone,
+        //        dateOfBirth = manager.dateOfBirth,
+        //        gender = manager.gender,
+        //        deviceToken = manager.deviceToken,
+        //        roleId = manager.roleId,
+        //        isActive = manager.isActive
+        //    }).ToList();
 
-            return Ok(result);
-        }
-        [Route("managers/{id}/locations")]
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUserWithLocation(int id)
-        {
-            IQueryable<User> user = db.Users.Where(u => u.userId == id && u.roleId == 2);
-            if (!user.Any())
-            {
-                return NotFound();
-            }
-            var location = from l in db.Locations
-                        join ul in db.UserLocations on l.locationId equals ul.locationId
-                        where ul.userId == id
-                        select new
-                        {
-                            l.locationId,
-                            l.locationCode,
-                            l.isActive
-                        };
-            if (!location.Any())
-            {
-                return Ok("Location Empty!");
-            }
-            return Ok(location);
-        }
+        //    return Ok(result);
+        //}
+        //[Route("{id}/locations")]
+        //[ResponseType(typeof(User))]
+        //public IHttpActionResult GetUserWithLocation(int id)
+        //{
+        //    IQueryable<User> user = db.Users.Where(u => u.userId == id && u.roleId == 2);
+        //    if (!user.Any())
+        //    {
+        //        return NotFound();
+        //    }
+        //    var location = from l in db.Locations
+        //                join ul in db.UserLocations on l.locationId equals ul.locationId
+        //                where ul.userId == id
+        //                select new
+        //                {
+        //                    l.locationId,
+        //                    l.locationCode,
+        //                    l.isActive
+        //                };
+        //    if (!location.Any())
+        //    {
+        //        return Ok("Location Empty!");
+        //    }
+        //    return Ok(location);
+        //}
 
-        [Route("managers/locations")]
+        [Route("locations")]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetManagerLocation()
         {
