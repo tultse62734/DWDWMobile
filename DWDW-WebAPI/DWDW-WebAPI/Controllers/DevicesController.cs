@@ -6,12 +6,17 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DWDW_WebAPI.Contants;
 using DWDW_WebAPI.Models;
+using DWDW_WebAPI.Services;
+using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
+    [RoutePrefix("v1/api/Devices")]
     public class DevicesController : ApiController
     {
         public DevicesController()
@@ -19,104 +24,80 @@ namespace DWDW_WebAPI.Controllers
             db.Configuration.ProxyCreationEnabled = false;
         }
         private DWDBContext db = new DWDBContext();
+        private DeviceService ds = new DeviceService();
 
-        // GET: api/Devices
-        public IQueryable<Device> GetDevices()
+        //Get all device for admin
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpGet]
+        [Route("admin/Devices")]
+        public IHttpActionResult GetDevices()
         {
-            return db.Devices;
+            //var devices = ds.GetDevice();
+            var devices = db.Devices.ToList();
+            return Ok(devices);
         }
 
-        // GET: api/Devices/5
-        [ResponseType(typeof(Device))]
-        public IHttpActionResult GetDevice(int id)
+        //Search device for  admin
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpGet]
+        [Route("admin/Devices/{id}")]
+        public IHttpActionResult GetDevicesByID(int id)
         {
-            Device device = db.Devices.Find(id);
-            if (device == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(device);
+            //var devices = ds.GetIDDevice(id);
+            var devices = db.Devices.Find(id);
+            return Ok(devices);
         }
 
-        // PUT: api/Devices/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutDevice(int id, Device device)
+        //Create new device for admin
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpPost]
+        [Route("postDevices")]
+        public IHttpActionResult PostDevices(DevicePostPutModel dm)
         {
-            if (!ModelState.IsValid)
+            var devices = db.Devices;
+            var d = devices.Add(new Device()
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != device.deviceId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(device).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DeviceExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Devices
-        [ResponseType(typeof(Device))]
-        public IHttpActionResult PostDevice(Device device)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Devices.Add(device);
+                deviceCode = dm.deviceCode,
+                deviceStatus = dm.deviceStatus,
+                isActive = dm.isActive
+            });
+            //db.Devices.Add(dm);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = device.deviceId }, device);
+            return Ok();
         }
 
-        // DELETE: api/Devices/5
-        [ResponseType(typeof(Device))]
-        public IHttpActionResult DeleteDevice(int id)
+        //Update existing device for admin
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpPost]
+        [Route("putDevices/{id}")]
+        public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
         {
-            Device device = db.Devices.Find(id);
-            if (device == null)
-            {
-                return NotFound();
-            }
-
-            db.Devices.Remove(device);
+            var devices = db.Devices.FirstOrDefault(x => x.deviceId == id);
+            devices.deviceCode = dm.deviceCode;
+            devices.deviceStatus = dm.deviceStatus;
+            devices.isActive = dm.isActive;
             db.SaveChanges();
-
-            return Ok(device);
+            return Ok();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
-        private bool DeviceExists(int id)
-        {
-            return db.Devices.Count(e => e.deviceId == id) > 0;
-        }
+        //View assigned device of manager and worker account
+        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        //[HttpGet]
+        //[Route("sub/Devices")]
+        //public IHttpActionResult GetSubDevices()
+        //{
+        //    var identity = (ClaimsIdentity)User.Identity;
+        //    var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+        //    int accountID = Convert.ToInt32(ID);
+
+        //    var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountID)).ToList();
+        //    var devices = ds.GetDevice();
+        //    return Ok(devices);
+        //}
+
+
+
+
     }
 }

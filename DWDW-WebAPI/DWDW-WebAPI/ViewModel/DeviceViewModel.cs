@@ -12,4 +12,16 @@ namespace DWDW_WebAPI.ViewModel
         public int? deviceStatus { get; set; }
         public bool? isActive { get; set; }
     }
+
+    public class DevicePostPutModel
+    {
+        public string deviceCode { get; set; }
+        public int? deviceStatus { get; set; }
+        public bool? isActive { get; set; }
+    }
+
+    public class DeviceStatusModel
+    {
+        public bool? isActive { get; set; }
+    }
 }

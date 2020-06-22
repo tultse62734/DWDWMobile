@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DWDW_WebAPI.Contants;
 using DWDW_WebAPI.Models;
 using DWDW_WebAPI.ViewModel;
 
@@ -23,7 +24,7 @@ namespace DWDW_WebAPI.Controllers
         }
         private DWDBContext db = new DWDBContext();
         //GET ALL Location for admin
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("api/admin/locationList")]
         public IHttpActionResult GetLocations()
@@ -33,7 +34,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search Location for admin
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("api/admin/locationFinder/{locationID}")]
         public IHttpActionResult FindLocations(int locationID)
@@ -43,7 +44,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get assigned Location for manager and worker
-        [Authorize(Roles = "2, 3")]
+        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
         [Route("api/subaccount/locationList")]
         public IHttpActionResult GetAssignedLocations()
@@ -56,7 +57,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search Assigned Location for manager and worker
-        [Authorize(Roles = "2,3")]
+        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
         [Route("api/subaccount/locationFinder/{locationID}")]
         public IHttpActionResult FindAssignedLocations(int locationID)
