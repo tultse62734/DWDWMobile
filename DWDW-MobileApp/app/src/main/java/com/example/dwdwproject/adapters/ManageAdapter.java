@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
     private Context mContext;
     private List<Manager> mManagerList;
     private ArrayList<Integer> mSectionPositions;
-
+    private OnItemClickListener mListener;
     public ManageAdapter(Context mContext, List<Manager> mManagerList) {
         this.mContext = mContext;
         this.mManagerList = mManagerList;
@@ -37,18 +38,24 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WorkerViewHolder holder, final int position) {
         Picasso.get().load(mManagerList.get(position).getImageResourceId()).into(holder.ivProfile);
             holder.tvMobile.setText(mManagerList.get(position).getPhone());
             holder.tvName.setText(mManagerList.get(position).getName());
+            holder.mLnlnRootManager.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        mListener.onItemClick(position);
+                    }
+                }
+            });
     }
     @Override
     public int getItemCount() {
         return mManagerList.size();
 
     }
-
-
     @Override
     public Object[] getSections() {
         List<String> sections = new ArrayList<>();
@@ -77,13 +84,20 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
     public class WorkerViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProfile;
         TextView tvName;
+        LinearLayout mLnlnRootManager;
         TextView tvMobile;
         public WorkerViewHolder(View itemView) {
             super(itemView);
             ivProfile = (ImageView) itemView.findViewById(R.id.image_avata);
             tvName = (TextView) itemView.findViewById(R.id.txt_name_worker);
             tvMobile = (TextView) itemView.findViewById(R.id.txt_phone_worker);
+            mLnlnRootManager = itemView.findViewById(R.id.lnl_root_manage_manager);
         }
     }
-
+    public void OnItemClickListener(OnItemClickListener itemClickListener){
+        this.mListener = itemClickListener;
+    }
+    public  interface OnItemClickListener{
+        void onItemClick(int pos);
+    }
 }

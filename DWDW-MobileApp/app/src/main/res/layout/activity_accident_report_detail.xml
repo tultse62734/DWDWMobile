@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AccidentReportDetailActivity">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:tint="@color/colorOrange"
+                android:scaleType="fitXY"
+                android:src="@drawable/vector8"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp20"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <TextView
+                        android:layout_marginBottom="@dimen/dp20"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chi tiết báo cáo"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/dp25"
+                        android:layout_weight="4"/>
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:id="@+id/lnl_dismiss"
+                        android:layout_width="@dimen/dp0"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right|center">
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:tint="@color/colorWhite"
+                            android:id="@+id/img_product_image"
+                            android:layout_width="@dimen/dp30"
+                            android:layout_height="@dimen/dp30"
+                            android:src="@mipmap/ic_close"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/dp10"
+                        android:layout_margin="2dp">
+                        <ImageView
+                            android:id="@+id/image_product_detail"
+                            android:src="@drawable/bg_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="fitXY"
+                            >
+                        </ImageView>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp10"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:src="@mipmap/ic_emergency"
+                                android:layout_width="@dimen/dp40"
+                                android:layout_height="@dimen/dp40">
+                            </ImageView>
+                        </LinearLayout>
+                        <TextView
+                            android:text="Report 1"
+                            android:textSize="@dimen/sp18"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:layout_weight="8"
+                            android:textColor="@color/colorBlack"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/rounder_edit_text_1dp"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Phòng :"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Room 101"
+                                android:layout_weight="6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Thiết bị :"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Camera số 1"
+                                android:layout_weight="6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Thời gian:"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                            <TextView
+                                android:textColor="@color/colorRed"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="19-06-2020"
+                                android:layout_weight="6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Khu vực  :"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                            <TextView
+                                android:textColor="@color/colorOrange"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Khu A"
+                                android:layout_weight="6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textColor="@color/colorBlack"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Quản lý  :"
+                                android:layout_weight="4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                            <TextView
+                                android:textColor="@color/colorGreen"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp18"
+                                android:text="Nguyễn Văn A"
+                                android:layout_weight="6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

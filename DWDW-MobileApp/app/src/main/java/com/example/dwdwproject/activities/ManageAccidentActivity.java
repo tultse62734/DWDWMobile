@@ -50,6 +50,13 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
         if(mAccidentAdapter == null){
             mAccidentAdapter = new AccidentAdapter(ManageAccidentActivity.this,mAccidentList);
             mRecyclerView.setAdapter(mAccidentAdapter);
+            mAccidentAdapter.onItemClick(new AccidentAdapter.OnItemCkickListerner() {
+                @Override
+                public void onItemClick(int pos) {
+                    Intent intent = new Intent(ManageAccidentActivity.this,AccidentReportDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
         }else {
             mAccidentAdapter.notifyDataSetChanged();
         }

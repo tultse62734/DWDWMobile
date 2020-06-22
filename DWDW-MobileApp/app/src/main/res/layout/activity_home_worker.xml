@@ -150,7 +150,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý sự cố"
+                            android:text="Quản lý thiết bị"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -167,7 +167,7 @@
                     android:weightSum="10">
 
                     <LinearLayout
-                        android:id="@+id/lnl_profile_manage"
+                        android:id="@+id/lnl_profile_manage_account"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -234,142 +234,106 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_shift"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_worker_2"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Quản lý ca"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_accident_manager"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_emergency"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Quản lý sự cố "
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
             </LinearLayout>
             <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_marginBottom="@dimen/dp20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.michaldrabik.tapbarmenulib.TapBarMenu
-                    android:id="@+id/tapBarMenu_manage"
-                    android:layout_width="match_parent"
-                    app:tbm_iconClosed="@mipmap/ic_add"
-                    app:tbm_iconOpened="@mipmap/ic_close_1"
-                    android:layout_height="@dimen/dp100"
-                    app:tbm_backgroundColor="@color/colorWhite"
-                    app:tbm_menuAnchor="top"
-                    >
-                    <LinearLayout
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:id="@+id/tap_menu_1_manage"
-                        android:background="@drawable/radius_conner_grey"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp60">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:src="@mipmap/ic_collaboration"
-                            tools:visibility="visible"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:background="@drawable/radius_conner_grey"
-                        android:id="@+id/tap_menu_2_manage"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp60">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:src="@mipmap/ic_security_camera"
-                            tools:visibility="visible"
-                            />
-                    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lnl_info_profile_manager"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="@dimen/dp60">
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_architecture_city"
+                        android:id="@+id/tapBarMenu"
+                        android:layout_width="@dimen/dp60"
+                        android:layout_height="@dimen/dp60"
+                        >
+                    </ImageView>
+                </LinearLayout>
 
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        />
-                    <LinearLayout
-                        android:id="@+id/tap_menu_3_manage"
-                        android:background="@drawable/radius_conner_grey"
-
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp60">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:src="@mipmap/ic_worker"
-                            tools:visibility="visible"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:id="@+id/tap_menu_4_manage"
-                        android:background="@drawable/radius_conner_grey"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp60">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:src="@mipmap/ic_project_management"
-                            tools:visibility="visible"
-                            />
-                    </LinearLayout>
-
-                    <!--                        <ImageView-->
-                    <!--                            android:id="@+id/item2"-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="@dimen/dp80"-->
-                    <!--                            android:layout_weight="1"-->
-                    <!--                            android:paddingTop="10dp"-->
-                    <!--                            android:paddingBottom="10dp"-->
-                    <!--                            android:src="@mipmap/ic_project_management"-->
-                    <!--                            />-->
-
-                    <!--                        <Space-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_weight="1"-->
-                    <!--                            />-->
-                    <!--                        <ImageView-->
-                    <!--                            android:id="@+id/item3"-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="@dimen/dp80"-->
-                    <!--                            android:layout_weight="1"-->
-                    <!--                            android:paddingTop="10dp"-->
-                    <!--                            android:paddingBottom="10dp"-->
-                    <!--                            android:src="@mipmap/ic_worker"-->
-                    <!--                            />-->
-
-                    <!--                        <ImageView-->
-                    <!--                            android:id="@+id/item4"-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="@dimen/dp80"-->
-                    <!--                            android:layout_weight="1"-->
-                    <!--                            android:paddingTop="10dp"-->
-                    <!--                            android:paddingBottom="10dp"-->
-                    <!--                            android:src="@mipmap/ic_notification"-->
-                    <!--                            />-->
-
-                </com.michaldrabik.tapbarmenulib.TapBarMenu>
 
             </LinearLayout>
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import java.util.List;
 public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.AccidentViewHolder>{
     private Context mContext;
     private List<Accident> mAccidentList;
-
+    private OnItemCkickListerner mListerner;
     public AccidentAdapter(Context mContext, List<Accident> mAccidentList) {
         this.mContext = mContext;
         this.mAccidentList = mAccidentList;
@@ -33,7 +34,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AccidentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AccidentViewHolder holder, final int position) {
         int number = position + 1;
         holder.mTxtNumberReport.setText("Report "+ number);
         holder.mTxtNameReport.setText(mAccidentList.get(position).getAccidentName());
@@ -47,6 +48,14 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
             holder.mTxtStatusReport.setText("Không hoạt động");
             holder.mTxtStatusReport.setTextColor(Color.parseColor("#D81B21"));
         }
+        holder.mLnlRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mListerner!=null){
+                    mListerner.onItemClick(position);
+                }
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -55,6 +64,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
 
     public class  AccidentViewHolder extends RecyclerView.ViewHolder{
         private TextView mTxtNumberReport,mTxtNameReport,mTxtDateReport,mTxtLocationReport,mTxtRoomReport,mTxtStatusReport;
+        private LinearLayout mLnlRoot;
         public AccidentViewHolder(@NonNull View itemView) {
             super(itemView);
            mTxtNumberReport = itemView.findViewById(R.id.txt_number_accident);
@@ -63,6 +73,13 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
             mTxtLocationReport = itemView.findViewById(R.id.txt_location_accident);
             mTxtRoomReport = itemView.findViewById(R.id.txt_room_accident);
             mTxtStatusReport = itemView.findViewById(R.id.txt_status_accident);
+            mLnlRoot = itemView.findViewById(R.id.lnl_root_manage_accident);
         }
+    }
+    public void onItemClick(OnItemCkickListerner onItemCkickListerner){
+        this.mListerner = onItemCkickListerner;
+    }
+    public interface OnItemCkickListerner{
+        public void onItemClick(int pos);
     }
 }

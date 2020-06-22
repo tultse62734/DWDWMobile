@@ -1,6 +1,7 @@
 package com.example.dwdwproject.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -66,6 +67,13 @@ public class PageRoomFragment extends Fragment {
         if(mRoomAdapter == null){
             mRoomAdapter = new RoomAdapter(getContext(),mRoomList);
             mRecyclerView.setAdapter(mRoomAdapter);
+            mRoomAdapter.OnItemClickListerner(new RoomAdapter.OnItemClickListerner() {
+                @Override
+                public void onItemClick(int pos) {
+                    Intent intent = new Intent(getContext(),AdminRoomDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
         else {
             mRoomAdapter.notifyDataSetChanged();

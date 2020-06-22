@@ -26,7 +26,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/sp22"
                 android:textColor="@color/colorWhite"
-                android:text="Quản lý Manager"
+                android:text="Quản lý Worker"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 

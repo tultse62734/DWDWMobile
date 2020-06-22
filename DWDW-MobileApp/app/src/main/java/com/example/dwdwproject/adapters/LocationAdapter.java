@@ -83,7 +83,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
             mLnlDeteleLcation = itemView.findViewById(R.id.lnl_delete_location_admin);
         }
     }
-
     public void OnClickDeleteItemListener(OnClickDeleteItem mDeleteItem){
         this.mDeleteItem = mDeleteItem;
     }

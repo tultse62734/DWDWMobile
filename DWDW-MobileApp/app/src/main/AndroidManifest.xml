@@ -11,7 +11,22 @@
         android:roundIcon="@mipmap/ic_worker"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".activities.AdminCreateManagerActivity"></activity>
+        <activity android:name=".activities.ShiftDateFilterActivity"></activity>
+        <activity android:name=".activities.AdminAccidentManageActivity" />
+        <activity android:name=".activities.ManagerManageProfileActivity" />
+        <activity android:name=".activities.ManagerManageRoomActivity" />
+        <activity android:name=".activities.ManagerManageDeviceActivity" />
+        <activity android:name=".activities.ManagerManageWorkerActivity" />
+        <activity android:name=".activities.AccidentReportDetailActivity" />
+        <activity android:name=".activities.AdminWorkerDetailActivity" />
+        <activity android:name=".activities.AdminAccidentDetailActivity" />
+        <activity android:name=".activities.ManagerShiftViewActivity" />
+        <activity android:name=".activities.ManagerCreateShiftActivity" />
+        <activity android:name=".activities.AdminManagerDetailActivity" />
+        <activity android:name=".activities.AdminLocationDetailActivity" />
+        <activity android:name=".activities.AdminDeviceDetailActivity" />
+        <activity android:name=".activities.AdminRoomDetailActivity" />
+        <activity android:name=".activities.AdminCreateManagerActivity" />
         <activity android:name=".activities.AdminCreateLocationActivity" />
         <activity android:name=".activities.AdminCreateRoomActivity" />
         <activity android:name=".activities.AdminCreateDeviceActivity" />
@@ -22,10 +37,7 @@
         <activity android:name=".activities.ManageDeviceActivity" />
         <activity android:name=".activities.ProfileManageActivity" />
         <activity android:name=".activities.ManageManagerActivity" />
-        <activity android:name=".activities.HomeWorkerActivity" />
-        <activity
-            android:name=".activities.HomeAdminActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+        <activity android:name=".activities.HomeWorkerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,8 +45,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".activities.HomeAdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+
+        </activity>
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

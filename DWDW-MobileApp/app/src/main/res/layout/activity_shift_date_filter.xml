@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ShiftDateFilterActivity">
+    <LinearLayout
+        android:background="@drawable/bg_employee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <LinearLayout
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="8"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp22"
+                android:textColor="@color/colorWhite"
+                android:text="Chọn lọc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <LinearLayout
+                android:id="@+id/lnl_close_manage_shift_filter"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:tint="@color/colorWhite"
+                    android:src="@mipmap/ic_close"
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp30">
+
+                </ImageView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp16"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:text="Mốc thời gian"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrange"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp8"
+            android:background="@drawable/radius_conner_grey">
+
+            <RadioGroup
+                android:id="@+id/rdGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp8"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_marginRight="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp8"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rdToday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="@dimen/dp12"
+                    android:text="Hôm nay"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdbYesterday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="@dimen/dp12"
+                    android:text="Hôm qua"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdThis_Weekend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="@dimen/dp12"
+                    android:text="Tuần này"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdPreviousWeek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="@dimen/dp12"
+                    android:text="Tuần trước"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdThis_Month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="@dimen/dp12"
+                    android:text="Tháng này"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdPrevious_Month"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="12dp"
+                    android:text="Tháng trước"
+                    android:textSize="@dimen/sp16" />
+
+                <RadioButton
+                    android:id="@+id/rdOption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="@dimen/dp16"
+                    android:paddingTop="12dp"
+                    android:text="Tùy chọn ngày"
+                    android:textSize="@dimen/sp16" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_done"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:layout_marginBottom="@dimen/dp16"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@drawable/radius_conner_orange"
+        android:text="Xong"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sp14" />
+
+</LinearLayout>

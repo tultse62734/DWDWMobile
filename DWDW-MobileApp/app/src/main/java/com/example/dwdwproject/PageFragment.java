@@ -1,5 +1,6 @@
 package com.example.dwdwproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dwdwproject.activities.AdminDeviceDetailActivity;
 import com.example.dwdwproject.activities.ManageDeviceActivity;
 import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
@@ -39,14 +41,12 @@ public class PageFragment extends Fragment{
         mView =  inflater.inflate(R.layout.fragment_page, container, false);
         return mView;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
         initData();
     }
-
     // TODO: Rename method, update argument and hook method into UI event
     private void initView() {
         mRecyclerView = mView.findViewById(R.id.rcv_device);
@@ -72,6 +72,13 @@ public class PageFragment extends Fragment{
         if(mDeviceAdapter == null){
             mDeviceAdapter = new DeviceAdapter(getContext(),mDeviceList);
             mRecyclerView.setAdapter(mDeviceAdapter);
+            mDeviceAdapter.onItemClickListerner(new DeviceAdapter.OnItemClickListenner() {
+                @Override
+                public void onItemCLick(int pos) {
+                    Intent intent = new Intent(getContext(), AdminDeviceDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
         else {
             mDeviceAdapter.notifyDataSetChanged();

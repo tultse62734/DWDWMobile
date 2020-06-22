@@ -2,6 +2,7 @@ package com.example.dwdwproject.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -83,6 +84,13 @@ public class PageManagerFragment extends Fragment {
         if(manageAdapter ==null){
             manageAdapter = new ManageAdapter(getContext(), mManagerList);
             mRecyclerView.setAdapter(manageAdapter);
+            manageAdapter.OnItemClickListener(new ManageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int pos) {
+                    Intent intent = new Intent(getContext(),AdminManagerDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
 
         }else {
             manageAdapter.notifyDataSetChanged();

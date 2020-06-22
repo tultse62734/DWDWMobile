@@ -68,7 +68,8 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
                 @Override
                 public void OnClickItem(int position) {
-                    Toast.makeText(ManageLocationActivity.this,"Đã Click",Toast.LENGTH_LONG).show();
+                  Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+                  startActivity(intent);
                 }
             });
         }

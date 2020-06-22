@@ -74,11 +74,11 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
         }
     }
     private void intentToManageAccidentActivity(){
-        Intent intent = new Intent(HomeAdminActivity.this,ManageAccidentActivity.class);
+        Intent intent = new Intent(HomeAdminActivity.this,AdminAccidentManageActivity.class);
         startActivity(intent);
     }
     private void intentManageWorḳerActivity(){
-        Intent intent = new Intent(HomeAdminActivity.this, ManageManagerActivity.class);
+        Intent intent = new Intent(HomeAdminActivity.this, ManageWorkerActivity.class);
         startActivity(intent);
     }
     private void intentToLogOutActivity(){
