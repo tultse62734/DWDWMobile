@@ -9,10 +9,14 @@ namespace DWDW_WebAPI.Services
 {
     public interface IDeviceService
     {
-        DeviceViewModel GetDevice();
-        DeviceViewModel GetIDDevice(int id);
-        DevicePostPutModel PostDevice(DevicePostPutModel dm);
-        DeviceStatusModel UpdateStatusDevice(int id, int status);
+        List<DeviceViewModel> GetAdminAllDevice();
+        Device GetIDDevice(int id);
+        void CreateDevice(DevicePostPutModel dm);
+        void UpdateDevice(Device device, DevicePostPutModel dm);
+        void Save();
+        bool DeviceExists(int deviceID);
+        List<Device> getDeviceListFromSingleLocation(Location currentLocation);
+        void UpdateStatusDevice(Device device, DeviceStatusModel dm);
     }
     public class DeviceService : IDeviceService
     {
@@ -24,35 +28,71 @@ namespace DWDW_WebAPI.Services
 
         }
 
-        public DeviceViewModel GetDevice()
+        public List<DeviceViewModel> GetAdminAllDevice()
         {
-            var devices = db.Devices.Select(x => new DeviceViewModel
+            var devices = db.Devices;
+            var result = db.Devices.Select(x => new DeviceViewModel
             {
                 deviceId = x.deviceId,
                 deviceCode = x.deviceCode,
                 deviceStatus = x.deviceStatus,
                 isActive = x.isActive
             }).ToList();
-            throw new NotImplementedException();
+            return result;
         }
 
-        public DeviceViewModel GetIDDevice(int id)
+        public Device GetIDDevice(int id)
         {
-            var device = db.Devices.Find(id);
-            throw new NotImplementedException();
+            return db.Devices.Find(id);
         }
 
-        public DevicePostPutModel PostDevice(DevicePostPutModel dm)
+        public void CreateDevice(DevicePostPutModel dm)
         {
-            throw new NotImplementedException();
-
+            var devices = db.Devices;
+            var d = devices.Add(new Device()
+            {
+                deviceCode = dm.deviceCode,
+                deviceStatus = dm.deviceStatus,
+                isActive = dm.isActive
+            });
         }
 
-        public DeviceStatusModel UpdateStatusDevice(int id, int status)
+        public void UpdateDevice(Device device, DevicePostPutModel dm)
         {
-            var devices = db.Devices.FirstOrDefault(e => e.deviceId == id);
-            devices.deviceStatus = status;
-            throw new NotImplementedException();
+            device.deviceCode = dm.deviceCode;
+            device.deviceStatus = dm.deviceStatus;
+            device.isActive = dm.isActive;
+        }
+
+        public void Save()
+        {
+            db.SaveChanges();
+        }
+
+        public bool DeviceExists(int deviceID)
+        {
+            return db.Devices.Count(a => a.deviceId == deviceID) > 0;
+        }
+
+        public List<Device> getDeviceListFromSingleLocation(Location currentLocation)
+        {
+            var deviceTotal = db.Devices.Where(x => x.deviceId > 0).ToList();
+            deviceTotal.Clear();
+
+            var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
+            var roomCount = roomList.Count();
+            for (int y = 0; y < roomCount; y++)
+            {
+                var currentRoom = roomList.ElementAt(y);
+                var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId)).ToList();
+                deviceTotal.AddRange(devicee);
+            }
+            return deviceTotal;
+        }
+
+        public void UpdateStatusDevice(Device device, DeviceStatusModel dm)
+        {
+            device.isActive = dm.isActive;
         }
     }
 }

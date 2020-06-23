@@ -14,90 +14,203 @@ using DWDW_WebAPI.Models;
 using DWDW_WebAPI.Services;
 using DWDW_WebAPI.ViewModel;
 
+
 namespace DWDW_WebAPI.Controllers
 {
     [RoutePrefix("v1/api/Devices")]
     public class DevicesController : ApiController
     {
+        private DWDBContext db = new DWDBContext();
+        private IDeviceService deviceService;
         public DevicesController()
         {
             db.Configuration.ProxyCreationEnabled = false;
+            deviceService = new DeviceService();
         }
-        private DWDBContext db = new DWDBContext();
-        private DeviceService ds = new DeviceService();
+        
+        
 
         //Get all device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("admin/Devices")]
-        public IHttpActionResult GetDevices()
+        public IHttpActionResult GetAdminAllDevices()
         {
-            //var devices = ds.GetDevice();
-            var devices = db.Devices.ToList();
-            return Ok(devices);
+            try
+            {
+                var devices = deviceService.GetAdminAllDevice();
+                if (devices != null)
+                {
+                    return Ok(devices);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
+        //View assigned device of manager and worker account
+        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        [HttpGet]
+        [Route("sub/Devices")]
+        public IHttpActionResult GetSubDevices()
+        {
+            //Future list
+            var deviceTotal = db.Devices.Where(x => x.deviceId > 0).ToList();
+            deviceTotal.Clear();
+
+            try
+            {
+                //Get related location for user
+                int currentUserID = 3;
+                var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == currentUserID)).ToList();
+                if (locationList != null)
+                {
+                    int locationCount = locationList.Count();
+                    for (int i = 0; i < locationCount; i++)
+                    {
+                        var currentLocation = locationList.ElementAt(i);
+                        var devices = deviceService.getDeviceListFromSingleLocation(currentLocation);
+                        deviceTotal.AddRange(devices);
+                    }
+                }
+                else
+                {
+                    return NotFound();
+                }
+                
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            return Ok(deviceTotal);
+        }
+
+        //Get Device list from single location
+        [HttpGet]
+        [Route("sub/Devices/{id}")]
+        public IHttpActionResult GetDevicesFromLocation(int id)
+        {
+            //Future list
+            try
+            {
+                //replace bang location service check exist
+                var location = db.Locations.Find(id);
+                if (location != null)
+                {
+                    var roomList = deviceService.getDeviceListFromSingleLocation(location);
+                    return Ok(roomList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }            
+        }
+        //Get Device for subaccount such as Manager, Worker based on ID
+
         //Search device for  admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("admin/Devices/{id}")]
-        public IHttpActionResult GetDevicesByID(int id)
-        {
-            //var devices = ds.GetIDDevice(id);
-            var devices = db.Devices.Find(id);
-            return Ok(devices);
+        public IHttpActionResult GetDevicesByIDAdmin(int id)
+        {            
+            try
+            {
+                var devices = deviceService.GetIDDevice(id);
+                if (devices != null)
+                {
+                    return Ok(devices);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         //Create new device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPost]
         [Route("postDevices")]
         public IHttpActionResult PostDevices(DevicePostPutModel dm)
         {
-            var devices = db.Devices;
-            var d = devices.Add(new Device()
+            try
             {
-                deviceCode = dm.deviceCode,
-                deviceStatus = dm.deviceStatus,
-                isActive = dm.isActive
-            });
-            //db.Devices.Add(dm);
-            db.SaveChanges();
-            return Ok();
+                deviceService.CreateDevice(dm);
+                deviceService.Save();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }   
         }
 
-        //Update existing device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
-        [HttpPost]
+        //Update existing info device for admin
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpPut]
         [Route("putDevices/{id}")]
         public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
         {
-            var devices = db.Devices.FirstOrDefault(x => x.deviceId == id);
-            devices.deviceCode = dm.deviceCode;
-            devices.deviceStatus = dm.deviceStatus;
-            devices.isActive = dm.isActive;
-            db.SaveChanges();
-            return Ok();
+            try
+            {
+                var device = deviceService.GetIDDevice(id);
+                if (deviceService.DeviceExists(id))
+                {
+                    deviceService.UpdateDevice(device, dm);
+                    deviceService.Save();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
-
-        //View assigned device of manager and worker account
-        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
-        //[HttpGet]
-        //[Route("sub/Devices")]
-        //public IHttpActionResult GetSubDevices()
-        //{
-        //    var identity = (ClaimsIdentity)User.Identity;
-        //    var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-        //    int accountID = Convert.ToInt32(ID);
-
-        //    var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountID)).ToList();
-        //    var devices = ds.GetDevice();
-        //    return Ok(devices);
-        //}
-
-
-
+        //Change device active
+        [HttpPut]
+        [Route("putDevicesActive/{id}")]
+        public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
+        {
+            try
+            {
+                var devices = deviceService.GetIDDevice(id);
+                if (devices == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    deviceService.UpdateStatusDevice(devices, dm);
+                    deviceService.Save();
+                    return Ok();
+                }
+            }
+            catch(Exception e)
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }
