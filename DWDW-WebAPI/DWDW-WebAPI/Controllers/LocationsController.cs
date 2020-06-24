@@ -19,22 +19,14 @@ namespace DWDW_WebAPI.Controllers
     public class LocationsController : ApiController
     {
         private ILocationService locationService;
-        private IRoomService roomService;
-        private IDeviceService deviceService;
 
         public LocationsController()
         {
             this.locationService = new LocationService(new DWDBContext());
-            this.roomService = new RoomService(new DWDBContext());
-            this.deviceService = new DeviceService(new DWDBContext());
         }
-        public LocationsController(ILocationService locationService, IRoomService roomService,
-            IDeviceService deviceService)
+        public LocationsController(ILocationService locationService)
         {
             this.locationService = locationService;
-            this.roomService = roomService;
-            this.deviceService = deviceService;
-
         }
         //GET ALL Location for admin
         //[Authorize(Roles = "1")]
@@ -99,54 +91,6 @@ namespace DWDW_WebAPI.Controllers
             var locationList = locationService.GetAssignedLocations(accountId);
             var searchLocation = locationService.GetLocationById(locationId);
             return Ok(searchLocation);
-        }
-        [Route("{locationId}/rooms")]
-        // GET: api/Locations/5
-        [ResponseType(typeof(RoomViewModel))]
-        public IHttpActionResult GetRoomsInLocation(int locationId)
-        {
-            Location location = locationService.GetLocationById(locationId);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            var rooms = roomService.GetRoomsByLocationId(locationId)
-                .Select(r => new RoomViewModel()
-                {
-                    roomId = r.roomId,
-                    roomCode = r.roomCode,
-                    locationId = r.locationId,
-                    isActive = r.isActive
-                });
-            if (!rooms.Any())
-            {
-                return NotFound();
-            }
-            return Ok(rooms);
-        }
-        [Route("{locationId}/devices")]
-        // GET: api/Locations/5
-        [ResponseType(typeof(DeviceViewModel))]
-        public IHttpActionResult GetDevicesInLocation(int locationId)
-        {
-            try
-            {
-                var location = locationService.GetLocationById(locationId);
-                if (location == null)
-                {
-                    return NotFound();
-                }
-                var devices = deviceService.GetDevicesInLocation(locationId);
-                if (!devices.Any())
-                {
-                    return NotFound();
-                }
-                return Ok(devices);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
         }
 
         // PUT: api/Locations/5

@@ -6,6 +6,13 @@ using System.Web;
 
 namespace DWDW_WebAPI.Services
 {
+    public interface IUserService : IDisposable
+    {
+        IEnumerable<User> GetUsers();
+        User GetUserById(int userId);
+        void InsertUser(User user);
+
+    }
     public class UserService : IUserService, IDisposable
     {
 
