@@ -33,8 +33,8 @@ namespace DWDW_WebAPI.Controllers
         //Get all device for admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("admin/Devices")]
-        public IHttpActionResult GetAdminAllDevices()
+        [Route("admin/getAllDevices")]
+        public IHttpActionResult getAdminAllDevices()
         {
             try
             {
@@ -54,11 +54,35 @@ namespace DWDW_WebAPI.Controllers
             }
         }
 
+        //Search device for  admin
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpGet]
+        [Route("admin/getDevices/{id}")]
+        public IHttpActionResult getDevicesByIDAdmin(int id)
+        {
+            try
+            {
+                var devices = deviceService.GetIDDevice(id);
+                if (devices != null)
+                {
+                    return Ok(devices);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //View assigned device of manager and worker account
         //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
-        [Route("sub/Devices")]
-        public IHttpActionResult GetSubDevices()
+        [Route("subAccount/Devices")]
+        public IHttpActionResult getSubDevices()
         {
             //Future list
             var deviceTotal = db.Devices.Where(x => x.deviceId > 0).ToList();
@@ -94,8 +118,8 @@ namespace DWDW_WebAPI.Controllers
 
         //Get Device list from single location
         [HttpGet]
-        [Route("sub/Devices/{id}")]
-        public IHttpActionResult GetDevicesFromLocation(int id)
+        [Route("subAccount/Devices/{id}")]
+        public IHttpActionResult getDevicesFromLocation(int id)
         {
             //Future list
             try
@@ -117,37 +141,14 @@ namespace DWDW_WebAPI.Controllers
                 return BadRequest();
             }            
         }
-        //Get Device for subaccount such as Manager, Worker based on ID
 
-        //Search device for  admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
-        [HttpGet]
-        [Route("admin/Devices/{id}")]
-        public IHttpActionResult GetDevicesByIDAdmin(int id)
-        {            
-            try
-            {
-                var devices = deviceService.GetIDDevice(id);
-                if (devices != null)
-                {
-                    return Ok(devices);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
+        
 
         //Create new device for admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPost]
-        [Route("postDevices")]
-        public IHttpActionResult PostDevices(DevicePostPutModel dm)
+        [Route("admin/postDevices")]
+        public IHttpActionResult postDevices(DevicePostPutModel dm)
         {
             try
             {
@@ -164,8 +165,8 @@ namespace DWDW_WebAPI.Controllers
         //Update existing info device for admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
-        [Route("putDevices/{id}")]
-        public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
+        [Route("admin/putDevices/{id}")]
+        public IHttpActionResult putDevices(int id, DevicePostPutModel dm)
         {
             try
             {
@@ -189,8 +190,8 @@ namespace DWDW_WebAPI.Controllers
 
         //Change device active
         [HttpPut]
-        [Route("putDevicesActive/{id}")]
-        public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
+        [Route("adminManager/putDevicesActive/{id}")]
+        public IHttpActionResult putDevicesActive(int id, DeviceStatusModel dm)
         {
             try
             {
