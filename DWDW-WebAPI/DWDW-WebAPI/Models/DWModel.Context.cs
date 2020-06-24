@@ -18,6 +18,7 @@ namespace DWDW_WebAPI.Models
         public DWDBContext()
             : base("name=DWDBContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

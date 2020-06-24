@@ -148,3 +148,5 @@ D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\System.Memory.xml
 D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\System.Numerics.Vectors.xml
 D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\System.Threading.Tasks.Extensions.xml
+D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\Global.asax
+D:\Course\Do An\DWDW\DWDWMobile\DWDW-WebAPI\DWDW-WebAPI\bin\Global.asax.cs

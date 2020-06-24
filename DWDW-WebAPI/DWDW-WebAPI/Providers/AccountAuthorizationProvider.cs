@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using DWDW_WebAPI.Contants;
 using DWDW_WebAPI.Services;
 using Microsoft.Owin.Security.OAuth;
 
@@ -24,7 +25,7 @@ namespace DWDW_WebAPI.Providers
                 var user = _repo.ValidateUser(context.UserName, context.Password);
                 if (user == null)
                 {
-                    context.SetError("invalid_grant", "Provided username and password is incorrect");
+                    context.SetError(ErrorMessage.LOGIN_FAIL);
                     return;
                 }
                 //Mã hóa những dữ liệu cần có trong Bearer Token. Dùng để truy xuất xâu xa hơn về sau.

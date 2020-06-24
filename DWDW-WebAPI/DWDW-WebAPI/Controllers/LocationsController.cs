@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DWDW_WebAPI.Contants;
 using DWDW_WebAPI.Models;
 using DWDW_WebAPI.Services;
 using DWDW_WebAPI.ViewModel;
@@ -29,7 +30,7 @@ namespace DWDW_WebAPI.Controllers
             this.locationService = locationService;
         }
         //GET ALL Location for admin
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(LocationViewModel))]
@@ -54,7 +55,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search Location for admin
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("{locationId}")]
         [ResponseType(typeof(LocationViewModel))]
@@ -65,7 +66,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get assigned Location for manager and worker
-        //[Authorize(Roles = "2, 3")]
+        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
         [Route("assigned")]
         [ResponseType(typeof(LocationViewModel))]
@@ -79,7 +80,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search Assigned Location for manager and worker
-        //[Authorize(Roles = "2,3")]
+        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
         [Route("assigned/{locationId}")]
         [ResponseType(typeof(LocationViewModel))]
