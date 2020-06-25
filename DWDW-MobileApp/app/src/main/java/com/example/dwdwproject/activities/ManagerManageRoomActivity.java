@@ -37,6 +37,11 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
     private void initData(){
         mBtnClose.setOnClickListener(this);
         mRoomList = new ArrayList<>();
+        mRoomList.add(new Room(1,"100","12-11-2020",true));
+        mRoomList.add(new Room(2,"200","12-11-2020",true));
+        mRoomList.add(new Room(3,"300","12-11-2020",true));
+        mRoomList.add(new Room(4,"300","12-11-2020",true));
+        mRoomList.add(new Room(5,"400","12-11-2020",true));
         updateUI();
     }
     private void updateUI(){

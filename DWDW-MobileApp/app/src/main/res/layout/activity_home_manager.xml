@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".activities.HomeWorkerActivity">
+    tools:context=".activities.HomeManagerActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,17 +32,16 @@
                     android:layout_height="wrap_content">
                 </TextView>
                 <LinearLayout
-                    android:id="@+id/lnl_log_out_worker"
+                    android:id="@+id/lnl_log_out_manage"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_weight="2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
-
                     <ImageView
+                        android:src="@mipmap/ic_exit"
                         android:layout_width="@dimen/dp40"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/ic_exit">
+                        android:layout_height="@dimen/dp40">
 
                     </ImageView>
                 </LinearLayout>
@@ -70,11 +69,12 @@
             </TextView>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginTop="@dimen/dp200"
             android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:gravity="center"
             android:background="@drawable/radius_conner_white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +82,158 @@
                 android:layout_marginBottom="@dimen/dp20"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_worker"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_collaboration"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Quản lý nhân viên"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_device"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_security_camera"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Quản lý thiết bị"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <LinearLayout
+                        android:id="@+id/lnl_profile_manage_account"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_worker"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Thông tin"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_room"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_project_management"></ImageView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="Quản lý phòng"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="@dimen/dp20"
                     android:layout_width="match_parent"
@@ -91,7 +242,7 @@
                     android:weightSum="10">
 
                     <LinearLayout
-                        android:id="@+id/lnl_manage_shift_worker"
+                        android:id="@+id/lnl_manage_shift"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -115,7 +266,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Xem ca làm "
+                            android:text="Quản lý ca"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -124,58 +275,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/lnl_manage_account_worker"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_weight="5"
-                        android:background="@drawable/radius_conner_grey"
-                        android:gravity="center|top"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:scaleType="fitXY"
-                            android:layout_width="@dimen/dp80"
-                            android:layout_height="@dimen/dp80"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:src="@mipmap/ic_worker"></ImageView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:layout_marginBottom="@dimen/dp10"
-                            android:gravity="center"
-                            android:text="Thông tin"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp15"
-                            android:textStyle="bold">
-
-                        </TextView>
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp20"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/dp20"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="10">
-                    <LinearLayout
-                        android:id="@+id/lnl_manage_report_worker"
+                        android:id="@+id/lnl_manage_accident_manager"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -199,7 +299,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Lỗi"
+                            android:text="Quản lý sự cố "
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -211,7 +311,31 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/lnl_info_profile_manager"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="@dimen/dp60">
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_architecture_city"
+                        android:id="@+id/tapBarMenu"
+                        android:layout_width="@dimen/dp60"
+                        android:layout_height="@dimen/dp60"
+                        >
+                    </ImageView>
+                </LinearLayout>
 
+
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 

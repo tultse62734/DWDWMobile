@@ -20,7 +20,6 @@ import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 
 import java.util.Calendar;
-
 public class ShiftDateFilterActivity extends AppCompatActivity implements com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener{
     private RadioGroup mRadioGroup;
     private RadioButton mRadioButton;
@@ -109,7 +108,6 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
         DatePickerDialog datePickerDialog = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
         if (datePickerDialog != null) datePickerDialog.setOnDateSetListener(this);
     }
-
     private void doneClick() {
         int selectedId = mRadioGroup.getCheckedRadioButtonId();
         if (mRadioGroup.getCheckedRadioButtonId() == mRadioButtonOption.getId()) {
@@ -125,7 +123,6 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
             } else {
                 mFilterDate = SharePreferenceUtils.getStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE);
             }
-
         }
         if (mFilterDate.equalsIgnoreCase("Hôm nay")) {
             mFilterDate = DateManagement.getToday();

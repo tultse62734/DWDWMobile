@@ -1,11 +1,16 @@
 package com.example.dwdwproject.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 public class Location implements Serializable {
+    @SerializedName("locationId")
     private int locationId;
+    @SerializedName("locationCode")
     private String nameLocation;
     private String createDate;
+    @SerializedName("isActive")
     private boolean isStatus;
     private List<Room> roomList;
     public Location(int locationId, String nameLocation, String createDate, boolean isStatus) {

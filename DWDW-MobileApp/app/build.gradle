@@ -44,5 +44,7 @@ dependencies {
     //Optional: see how to use the utility.
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     implementation 'com.borax12.materialdaterangepicker:library:1.9'
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
 
 }

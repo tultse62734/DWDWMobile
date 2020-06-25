@@ -11,7 +11,16 @@
         android:roundIcon="@mipmap/ic_worker"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".activities.ShiftDateFilterActivity"></activity>
+        <activity android:name=".activities.WorkerReportActivity"></activity>
+        <activity android:name=".activities.WorkerShiftViewActivity" />
+        <activity android:name=".activities.HomeManagerActivity" >
+
+
+        </activity>
+
+        <activity android:name=".activities.WorkerShiftDetailActivity" />
+        <activity android:name=".activities.ShiftTaskDetailActivity" />
+        <activity android:name=".activities.ShiftDateFilterActivity" />
         <activity android:name=".activities.AdminAccidentManageActivity" />
         <activity android:name=".activities.ManagerManageProfileActivity" />
         <activity android:name=".activities.ManagerManageRoomActivity" />
@@ -37,20 +46,20 @@
         <activity android:name=".activities.ManageDeviceActivity" />
         <activity android:name=".activities.ProfileManageActivity" />
         <activity android:name=".activities.ManageManagerActivity" />
-        <activity android:name=".activities.HomeWorkerActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.HomeWorkerActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.HomeAdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.SignUpActivity"

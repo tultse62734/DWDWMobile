@@ -2,16 +2,23 @@ package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout mBtnSignIn,mBtnSignUp;
-
+    private String username,password;
+    private EditText mEdtUsername,mEdtPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +27,60 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             initData();
         }
     private void initView(){
+        mEdtUsername = findViewById(R.id.edt_username);
+        mEdtPassword = findViewById(R.id.edt_password);
         mBtnSignUp = findViewById(R.id.lnl_sign_up);
         mBtnSignIn = findViewById(R.id.lnl_sign_in);
     }private void initData(){
         mBtnSignUp.setOnClickListener(this);
         mBtnSignIn.setOnClickListener(this);
+
+    }
+    private void checkLogin(){
+        username  = mEdtUsername.getText().toString();
+        password = mEdtPassword.getText().toString();
+        if(username.length()== 0 && username.equalsIgnoreCase("")){
+            showErrorLoginDialog("Tài khoản không được để trống");
+        }
+        else if(password.length()==0 && password.equalsIgnoreCase("")){
+            showErrorLoginDialog("Mẩu khẩu không được để trống");
+        }
+        else {
+            if(username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")){
+                intentToHomeAdminActivtity();
+            }
+
+            else if(username.equalsIgnoreCase("worker") && password.equalsIgnoreCase("123")){
+                intentToHomeWorkerActivity();
+            }
+
+            else if(username.equalsIgnoreCase("manager") && password.equalsIgnoreCase("123")){
+                intentToHomeManageActivity();
+            }
+            else {
+                showErrorLoginDialog("Tài khoản hoặc mật khẩu không chính xác");
+            }
+        }
+
     }
 
+
+    private void showErrorLoginDialog(String message) {
+        final Dialog dialog = new Dialog(LoginActivity.this);
+        dialog.setContentView(R.layout.alert_layout_notify_change_day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button buttonOk = dialog.findViewById(R.id.btn_Ok_choose);
+        TextView mTxtNotify = dialog.findViewById(R.id.txt_notify_choose_error);
+        mTxtNotify.setText(message);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -36,9 +90,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.lnl_sign_in:
-                Intent intent1 = new Intent(LoginActivity.this,HomeAdminActivity.class);
-                startActivity(intent1);
+                checkLogin();
                 break;
         }
+
+    }
+    private void intentToHomeAdminActivtity(){
+        Intent intent = new Intent(LoginActivity.this,HomeAdminActivity.class);
+        startActivity(intent);
+
+    }
+    private void intentToHomeManageActivity(){
+        Intent intent = new Intent(LoginActivity.this,HomeManagerActivity.class);
+        startActivity(intent);
+
+    }
+    private void intentToHomeWorkerActivity(){
+        Intent intent = new Intent(LoginActivity.this,HomeWorkerActivity.class);
+        startActivity(intent);
+
     }
 }

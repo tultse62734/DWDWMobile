@@ -1,28 +1,24 @@
 package com.example.dwdwproject.activities;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.ParseException;
-import android.net.Uri;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.adapters.ShiftAdapter;
+import com.example.dwdwproject.adapters.ShiftWorkerAdapter;
 import com.example.dwdwproject.models.Shift;
+import com.example.dwdwproject.models.WorkerShift;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
@@ -34,74 +30,54 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
-public class PageShiftViewFragment extends Fragment {
+public class WorkerShiftViewActivity extends AppCompatActivity implements View.OnClickListener {
     private View mView;
-    private List<Shift> mShiftList;
+    private LinearLayout mBtnClose,mBtnFilter;
+    private List<WorkerShift> mWorkerShiftList;
     private RecyclerView mRecyclerView;
-    private ShiftAdapter mShiftAdapter;
+    private ShiftWorkerAdapter mWorkerAdapter;
     private CompactCalendarView compactCalendarView;
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("dd-M-yyyy hh:mm:ss a", Locale.getDefault());
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy", Locale.getDefault());
     private TextView mTxtTime;
     private Calendar currentCalender = Calendar.getInstance(Locale.getDefault());
 
-    public PageShiftViewFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_worker_shift_view);
+        initView();
+        initData();
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_page_shift_view, container, false);
-        return mView;
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initVieẉ();initData();
-    }
-
-    private void initVieẉ(){
-            mTxtTime = mView.findViewById(R.id.text_month_current);
-        mRecyclerView = mView.findViewById(R.id.rcv_shift);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
+    private void initView(){
+        mBtnFilter = findViewById(R.id.lnl_filter_shift_worker);
+        mTxtTime = findViewById(R.id.txt_shif_time_worker_time);
+        mBtnClose = findViewById(R.id.lnl_close_manage_shift_worker);
+        mRecyclerView = findViewById(R.id.rcv_shift_worker);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(WorkerShiftViewActivity.this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        mShiftList = new ArrayList<>();
-        mShiftList.add(new Shift(1,"Nhân Viên A","Khu A","Room 101"));
-        mShiftList.add(new Shift(2,"Nhân Viên B","Khu B","Room 102"));
-        mShiftList.add(new Shift(3,"Nhân Viên C","Khu C","Room 103"));
-        mShiftList.add(new Shift(4,"Nhân Viên D","Khu D","Room 104"));
-        mShiftList.add(new Shift(5,"Nhân Viên E","Khu E","Room 105"));
-        mShiftList.add(new Shift(6,"Nhân Viên F","Khu F","Room 106"));
-        mShiftList.add(new Shift(7,"Nhân Viên H","Khu H","Room 107"));
-        updateUI();
-        setDataCalendar();
+        mBtnClose.setOnClickListener(this);
+        mBtnFilter.setOnClickListener(this);
+            mWorkerShiftList = new ArrayList<>();
+            mWorkerShiftList.add(new WorkerShift("Ca sáng","101","Lê Văn A","Khu A","18-11-1997","Chưa điểm danh","7:00 AM","12:00 AM"));
+            mWorkerShiftList.add(new WorkerShift("Ca chiều","200","Lê Văn A","Khu B","18-11-1997","Chưa điểm danh","12:00 AM","17:00 AM"));
+            mWorkerShiftList.add(new WorkerShift("Ca Tối","300","Lê Văn A","Khu C","18-11-1997","Chưa điểm danh","17:00 AM","24:00 AM"));
+            updateUI();
+            setDataCalendar();
     }
     private void updateUI(){
-        if(mShiftAdapter == null){
-            mShiftAdapter = new ShiftAdapter(getContext(),mShiftList);
-            mRecyclerView.setAdapter(mShiftAdapter);
+        if(mWorkerAdapter == null){
+            mWorkerAdapter = new ShiftWorkerAdapter(WorkerShiftViewActivity.this,mWorkerShiftList);
+            mRecyclerView.setAdapter(mWorkerAdapter);
+        }else {
+            mWorkerAdapter.notifyDataSetChanged();
         }
-        else {
-            mShiftAdapter.notifyDataSetChanged();
-        }
-
     }
     public void setDataCalendar() {
-         compactCalendarView = (CompactCalendarView)mView.findViewById(R.id.compactcalendar_view);
-        // Set first day of week to Monday, defaults to Monday so calling setFirstDayOfWeek is not necessary
-        // Use constants provided by Java Calendar class
+        compactCalendarView = (CompactCalendarView)findViewById(R.id.compactcalendar_view_shift);
         mTxtTime.setText(dateFormatForMonth.format(compactCalendarView.getFirstDayOfCurrentMonth()));
         compactCalendarView.setUseThreeLetterAbbreviation(false);
         compactCalendarView.setIsRtl(false);
@@ -189,7 +165,7 @@ public class PageShiftViewFragment extends Fragment {
         calendar.set(Calendar.MILLISECOND, 0);
     }
     private void showFilterDateDialog(String message) {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog(WorkerShiftViewActivity.this);
         dialog.setContentView(R.layout.alert_layout_notify_change_day);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button buttonOk = dialog.findViewById(R.id.btn_Ok_choose);
@@ -204,5 +180,17 @@ public class PageShiftViewFragment extends Fragment {
 
         dialog.show();
     }
-
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.lnl_close_manage_shift_worker:
+                finish();
+                break;
+            case R.id.lnl_filter_shift_worker:
+                Intent intent = new Intent(WorkerShiftViewActivity.this,ShiftDateFilterActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }
