@@ -54,8 +54,9 @@ namespace DWDW_WebAPI.Controllers
         [ResponseType(typeof(LocationViewModel))]
         public IHttpActionResult GetLocation(int locationId)
         {
-            var searchedLocation = locationService.GetLocationById(locationId);
-            return Ok(searchedLocation);
+            var location = locationService.GetLocationById(locationId);
+            LocationViewModel viewModel = modelMapping.GetLocationMapping(location);
+            return Ok(viewModel);
         }
         #region hoang
         //Get assigned Location for manager and worker
