@@ -24,21 +24,18 @@ namespace DWDW_WebAPI.Controllers
         private IDeviceService deviceService;
         public DevicesController()
         {
-            db.Configuration.ProxyCreationEnabled = false;
             deviceService = new DeviceService();
         }
         
-        
-
         //Get all device for admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("GetAllDevices")]
-        public IHttpActionResult GetAdminAllDevices()
+        [Route("")]
+        public IHttpActionResult GetDevices()
         {
             try
             {
-                var devices = deviceService.GetAdminAllDevice();
+                var devices = deviceService.GetDevices();
                 if (devices != null)
                 {
                     return Ok(devices);
@@ -62,7 +59,7 @@ namespace DWDW_WebAPI.Controllers
         {
             try
             {
-                var devices = deviceService.GetIDDevice(id);
+                var devices = deviceService.GetDeviceByID(id);
                 if (devices != null)
                 {
                     return Ok(devices);
@@ -97,7 +94,7 @@ namespace DWDW_WebAPI.Controllers
                     for (int i = 0; i < locationCount; i++)
                     {
                         var currentLocation = locationList.ElementAt(i);
-                        deviceService.getDeviceListFromSingleLocation(currentLocation, deviceTotal);
+                        deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceTotal);
                         //deviceTotal.AddRange(devices);
                     }
                 }
@@ -127,7 +124,7 @@ namespace DWDW_WebAPI.Controllers
                 var location = db.Locations.Find(id);
                 if (location != null)
                 {
-                    deviceService.getDeviceListFromSingleLocation(location, deviceTotal);
+                    deviceService.GetDeviceListFromSingleLocation(location, deviceTotal);
                     return Ok(deviceTotal);
                 }
                 else
@@ -169,7 +166,7 @@ namespace DWDW_WebAPI.Controllers
         {
             try
             {
-                var device = deviceService.GetIDDevice(id);
+                var device = deviceService.GetDeviceByID(id);
                 if (deviceService.DeviceExists(id))
                 {
                     deviceService.UpdateDevice(device, dm);
@@ -194,7 +191,7 @@ namespace DWDW_WebAPI.Controllers
         {
             try
             {
-                var devices = deviceService.GetIDDevice(id);
+                var devices = deviceService.GetDeviceByID(id);
                 if (devices == null)
                 {
                     return NotFound();

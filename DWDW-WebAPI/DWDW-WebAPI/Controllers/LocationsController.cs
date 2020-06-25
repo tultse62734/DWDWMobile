@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Web.Http;
-using System.Web.Http.Description;
-using DWDW_WebAPI.Contants;
-using DWDW_WebAPI.Models;
+﻿using DWDW_WebAPI.Models;
 using DWDW_WebAPI.Services;
 using DWDW_WebAPI.ViewModel;
+using System;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace DWDW_WebAPI.Controllers
 {
@@ -20,17 +13,16 @@ namespace DWDW_WebAPI.Controllers
     public class LocationsController : ApiController
     {
         private ILocationService locationService;
+        private ModelMapping modelMapping;
 
         public LocationsController()
         {
             this.locationService = new LocationService(new DWDBContext());
+            this.modelMapping = new ModelMapping();
         }
-        public LocationsController(ILocationService locationService)
-        {
-            this.locationService = locationService;
-        }
+
         //GET ALL Location for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(LocationViewModel))]
@@ -54,121 +46,145 @@ namespace DWDW_WebAPI.Controllers
             }
         }
 
-        //Search Location for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //Get Location by Id
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("{locationId}")]
         [ResponseType(typeof(LocationViewModel))]
-        public IHttpActionResult GetLocations(int locationId)
+        public IHttpActionResult GetLocation(int locationId)
         {
             var searchedLocation = locationService.GetLocationById(locationId);
             return Ok(searchedLocation);
         }
-
+        #region hoang
         //Get assigned Location for manager and worker
-        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        //[HttpGet]
+        //[Route("assigned")]
+        //[ResponseType(typeof(LocationViewModel))]
+        //public IHttpActionResult GetAssignedLocations()
+        //{
+        //    var identity = (ClaimsIdentity)User.Identity;
+        //    var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+        //    int accountId = Convert.ToInt32(Id);
+        //    var locationList = locationService.GetAssignedLocations(accountId);
+        //    return Ok(locationList);
+        //}
+
+        //Search Assigned Location for manager and worker
+        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        //[HttpGet]
+        //[Route("assigned/{locationId}")]
+        //[ResponseType(typeof(LocationViewModel))]
+        //public IHttpActionResult GetAssignedLocation(int locationId)
+        //{
+        //    var identity = (ClaimsIdentity)User.Identity;
+        //    var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+        //    int accountId = Convert.ToInt32(ID);
+        //    var locationList = locationService.GetAssignedLocations(accountId);
+        //    var searchLocation = locationService.GetLocationById(locationId);
+        //    return Ok(searchLocation);
+        //}
+        #endregion hoang
+
+        
         [HttpGet]
         [Route("assigned")]
         [ResponseType(typeof(LocationViewModel))]
-        public IHttpActionResult GetAssignedLocations()
+        public IHttpActionResult GetAssignedLocations(int userId)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-            int accountId = Convert.ToInt32(Id);
-            var locationList = locationService.GetAssignedLocations(accountId);
-            return Ok(locationList);
-        }
-
-        //Search Assigned Location for manager and worker
-        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
-        [HttpGet]
-        [Route("assigned/{locationId}")]
-        [ResponseType(typeof(LocationViewModel))]
-        public IHttpActionResult GetAssignedLocations(int locationId)
-        {
-            var identity = (ClaimsIdentity)User.Identity;
-            var ID = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-            int accountId = Convert.ToInt32(ID);
-            var locationList = locationService.GetAssignedLocations(accountId);
-            var searchLocation = locationService.GetLocationById(locationId);
-            return Ok(searchLocation);
+            var locations = locationService.GetAssignedLocations(userId);
+            return Ok(locations);
         }
 
         // PUT: api/Locations/5
-        [ResponseType(typeof(void))]
+        [HttpPut]
         [Route("")]
-        public IHttpActionResult PutLocation(int id,Location location)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutLocation(int id, LocationViewModel locationViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != location.locationId)
-            {
-                return NotFound();
-            }
-
-            locationService.UpdateLocation(location);
-
             try
             {
-                locationService.Save();
-                return Ok("Update succeed.");
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                if (locationViewModel.locationId != id) return BadRequest();
+                Location location = locationService.GetLocationById(id);
+                if (location == null) return NotFound();
+                //mapping
+                modelMapping.UpdateLocationMapping(locationViewModel, location);
+                if (locationService.UpdateLocation(location))
+                {
+                    return Ok("Update succeed.");
+                }
+                else
+                {
+                    return BadRequest("Can not update Location.");
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
-                return StatusCode(HttpStatusCode.MethodNotAllowed);
+
+                return InternalServerError();
             }
         }
 
         // POST: api/Locations
+        [HttpPost]
         [Route("")]
         [ResponseType(typeof(Location))]
-        public IHttpActionResult PostLocation(Location location)
+        public IHttpActionResult PostLocation(LocationViewModel locationViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            locationService.InsertLocation(location);
             try
             {
-                locationService.Save();
-                return CreatedAtRoute("DefaultApi", new { id = location.locationId }, location);
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                //mapping
+                Location location = modelMapping.CreateLocationMapping(locationViewModel);
+                if (locationService.InsertLocation(location))
+                {
+                    return Ok("Insert succeed.");
+                }
+                else
+                {
+                    return BadRequest("Can not insert Location.");
+                }
             }
-            catch (Exception)
+            catch (DbUpdateConcurrencyException)
             {
-                if (locationService.LocationExists(location.locationId))
+                if (locationService.LocationExists(locationViewModel.locationId))
                 {
                     return Conflict();
                 }
-                return BadRequest("Insert failed.");
+                return InternalServerError();
             }
-            
         }
 
-        //DELETE: api/Locations/5
-        [Route("")]
-        [ResponseType(typeof(Location))]
-        public IHttpActionResult DeleteLocation(int locationId)
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        [Route("{locationId}/deactive")]
+        public IHttpActionResult PutLocationDeactive(int locationId)
         {
-            var location = locationService.GetLocationById(locationId);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            locationService.DeactiveLocation(location);
             try
             {
-                locationService.Save();
-                return Ok("Deactive succeed!");
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                Location location = locationService.GetLocationById(locationId);
+                if (location == null) return NotFound();
+                if (location.isActive.Equals(false))
+                {
+                    return BadRequest("Location already deactivated.");
+                }
+                if (locationService.DeactiveLocation(location))
+                {
+                    return Ok("Deactive succeed.");
+                }
+                else
+                {
+                    return BadRequest("Can not deactive Location.");
+                }
             }
-            catch (Exception)
+            catch (DbUpdateConcurrencyException)
             {
-                return StatusCode(HttpStatusCode.MethodNotAllowed);
+                return InternalServerError();
             }
         }
+
     }
 }
