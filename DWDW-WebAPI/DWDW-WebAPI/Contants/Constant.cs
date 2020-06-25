@@ -10,6 +10,10 @@ namespace DWDW_WebAPI.Contants
         public const string ADMIN_ROLE = "1";
         public const string MANAGER_ROLE = "2";
         public const string WORKER_ROLE = "3";
+
+
+        public const string SECRET_KEY = "ducdat123 thanhhang270397";
+        public const string URL = "https://localhost:44303/";
     }
     public class ErrorMessage
     {

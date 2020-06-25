@@ -15,17 +15,93 @@ using System.Text;
 using DWDW_WebAPI.Firebase;
 using DWDW_WebAPI.ViewModel;
 using DWDW_WebAPI.Contants;
+using DWDW_WebAPI.Services;
+using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace DWDW_WebAPI.Controllers
 {
     [RoutePrefix("v1/Users")]
-    public class UsersController : ApiController
+    public class UsersController : BaseController
     {
+        private DWDBContext db = new DWDBContext(); //delete pls
+        private IUserService uService;
+
         public UsersController()
         {
-            db.Configuration.ProxyCreationEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false; //delete pls
+            uService = new UserService();
         }
-        private DWDBContext db = new DWDBContext();
+
+        [Route("getAuthorizedUserInfo")]
+        [HttpGet]
+        [Authorize]
+        public IHttpActionResult getUser()
+        {
+            var user = this.GetIndentiy();
+            return Ok(user);
+        }
+
+        [Route("Login")]
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IHttpActionResult> Login(string username, string password)
+        {
+            string jwt_token = "";
+            try
+            {
+                var user = await uService.LoginAsync(username, password);
+                if (user != null)
+                {
+
+                    string key = Constant.SECRET_KEY; //Secret key which will be used later during validation    
+                    var issuer = Constant.URL;  //normally this will be your site URL   
+
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                    //Create a List of Claims, Keep claims name short    
+
+                    var permClaims = createClaims(user);
+
+                    //Create Security Token object by giving required parameters    
+                    var token = new JwtSecurityToken(issuer, //Issure    
+                                    issuer,  //Audience    
+                                    permClaims,
+                                    expires: DateTime.Now.AddDays(1),
+                                    signingCredentials: credentials);
+
+                    jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
+
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.ToString());
+            }
+
+            return Ok(new { data = jwt_token });
+
+
+
+        }
+
+        private List<Claim> createClaims(UserViewModel user)
+        {
+            var permClaims = new List<Claim>();
+            permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            permClaims.Add(new Claim("id", user.userId.ToString()));
+            permClaims.Add(new Claim("username", user.userName));
+            permClaims.Add(new Claim("roleId", user.roleId.ToString()));
+
+            return permClaims;
+        }
+
+
+        #region CRUD
 
         // GET ALL User for admin
         [Authorize(Roles = Constant.ADMIN_ROLE)]
@@ -236,5 +312,6 @@ namespace DWDW_WebAPI.Controllers
         {
             return db.Users.Count(e => e.userId == id) > 0;
         }
+        #endregion
     }
 }
