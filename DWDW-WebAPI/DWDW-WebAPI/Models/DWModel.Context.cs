@@ -27,12 +27,13 @@ namespace DWDW_WebAPI.Models
     
         public virtual DbSet<Device> Devices { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomDevice> RoomDevices { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserLocation> UserLocations { get; set; }
-        public virtual DbSet<Record> Records { get; set; }
     }
 }

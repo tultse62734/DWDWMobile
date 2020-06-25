@@ -1,4 +1,5 @@
 ﻿using DWDW_WebAPI.Models;
+using DWDW_WebAPI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace DWDW_WebAPI.Services
 {
     public interface IRoomService : IDisposable
     {
-        List<Room> GetRooms();
+        List<RoomViewModel> GetRooms();
         Room GetRoomById(int roomId);
         bool InsertRoom(Room room);
         bool UpdateRoom(Room room);
@@ -68,9 +69,17 @@ namespace DWDW_WebAPI.Services
             return context.Rooms.Find(roomId);
         }
 
-        public List<Room> GetRooms()
+        public List<RoomViewModel> GetRooms()
         {
-            return context.Rooms.ToList();
+            var list = context.Rooms.Where(r => r.isActive == true)
+                .Select(r => new RoomViewModel()
+                {
+                    roomId = r.roomId,
+                    roomCode = r.roomCode,
+                    locationId = r.locationId,
+                    isActive = r.isActive
+                }).ToList();
+            return list;
         }
 
         public bool InsertRoom(Room room)

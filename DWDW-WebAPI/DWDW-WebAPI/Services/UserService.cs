@@ -1,4 +1,5 @@
 ﻿using DWDW_WebAPI.Models;
+using DWDW_WebAPI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +11,7 @@ namespace DWDW_WebAPI.Services
 {
     public interface IUserService : IDisposable
     {
-        List<User> GetUsers();
+        List<UserViewModel> GetUsers();
         User GetUserById(int userId);
         bool InsertUser(User user);
         bool UpdateUser(User user);
@@ -70,9 +71,22 @@ namespace DWDW_WebAPI.Services
             return context.Users.Find(userId);
         }
 
-        public List<User> GetUsers()
+        public List<UserViewModel> GetUsers()
         {
-            return context.Users.ToList();
+            var list = context.Users.Where(u => u.isActive == true)
+                .Select(u => new UserViewModel()
+                {
+                    userId = u.userId,
+                    userName = u.userName,
+                    password = u.password,
+                    phone = u.phone,
+                    dateOfBirth = u.dateOfBirth,
+                    gender = u.gender,
+                    deviceToken = u.deviceToken,
+                    roleId = u.roleId,
+                    isActive = u.isActive
+                }).ToList();
+            return list;
         }
 
         public bool InsertUser(User user)

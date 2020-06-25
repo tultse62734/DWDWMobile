@@ -52,6 +52,7 @@ namespace DWDW_WebAPI.ViewModel
             model.roleId = viewModel.roleId;
             model.isActive = viewModel.isActive;
         }
+
         public Location CreateLocationMapping(LocationViewModel viewModel)
         {
             return new Location()

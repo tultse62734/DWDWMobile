@@ -17,8 +17,8 @@ namespace DWDW_WebAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Device()
         {
-            this.RoomDevices = new HashSet<RoomDevice>();
             this.Records = new HashSet<Record>();
+            this.RoomDevices = new HashSet<RoomDevice>();
         }
     
         public int deviceId { get; set; }
@@ -27,8 +27,8 @@ namespace DWDW_WebAPI.Models
         public Nullable<bool> isActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoomDevice> RoomDevices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Record> Records { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RoomDevice> RoomDevices { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace DWDW_WebAPI.Services
 {
     public interface ILocationService : IDisposable
     {
-        IEnumerable<Location> GetLocations();
+        List<LocationViewModel> GetLocations();
         Location GetLocationById(int locationId);
         bool InsertLocation(Location location);
         bool UpdateLocation(Location location);
@@ -50,9 +50,16 @@ namespace DWDW_WebAPI.Services
             return context.Locations.Find(locationId);
         }
 
-        public IEnumerable<Location> GetLocations()
+        public List<LocationViewModel> GetLocations()
         {
-            return context.Locations.Where(l => l.isActive == true).ToList();
+            var list = context.Locations.Where(l => l.isActive == true)
+                .Select(l => new LocationViewModel()
+                {
+                    locationId = l.locationId,
+                    locationCode = l.locationCode,
+                    isActive = l.isActive
+                }).ToList();
+            return list;
         }
 
         public bool InsertLocation(Location location)
