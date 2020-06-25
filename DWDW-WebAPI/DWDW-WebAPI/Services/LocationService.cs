@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 
 namespace DWDW_WebAPI.Services
@@ -12,10 +13,9 @@ namespace DWDW_WebAPI.Services
     {
         IEnumerable<Location> GetLocations();
         Location GetLocationById(int locationId);
-        void InsertLocation(Location location);
-        void UpdateLocation(Location location);
-        void DeactiveLocation(Location location);
-        void Save();
+        bool InsertLocation(Location location);
+        bool UpdateLocation(Location location);
+        bool DeactiveLocation(Location location);
         List<Location> GetAssignedLocations(int userId);
         bool LocationExists(int locationId);
     }
@@ -27,8 +27,6 @@ namespace DWDW_WebAPI.Services
         public LocationService(DWDBContext context)
         {
             this.context = context;
-            context.Configuration.ProxyCreationEnabled = false;
-
         }
         protected virtual void Dispose(bool disposing)
         {
@@ -57,21 +55,43 @@ namespace DWDW_WebAPI.Services
             return context.Locations.Where(l => l.isActive == true).ToList();
         }
 
-        public void InsertLocation(Location location)
+        public bool InsertLocation(Location location)
         {
-            context.Locations.Add(location);
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    context.Locations.Add(location);
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
 
-        public void DeactiveLocation(Location location)
+        public bool DeactiveLocation(Location location)
         {
-            location.isActive = false;
-            context.Entry(location).State = EntityState.Modified;
-           
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    location.isActive = false;
+                    context.Entry(location).State = EntityState.Modified;
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
 
         public List<Location> GetAssignedLocations(int userId)
@@ -81,9 +101,23 @@ namespace DWDW_WebAPI.Services
                 .ToList();
         }
 
-        public void UpdateLocation(Location location)
+        public bool UpdateLocation(Location location)
         {
-            context.Entry(location).State = EntityState.Modified;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    context.Entry(location).State = EntityState.Modified;
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
 
         public bool LocationExists(int locationId)

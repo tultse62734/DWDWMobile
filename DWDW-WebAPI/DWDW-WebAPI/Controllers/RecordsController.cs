@@ -15,11 +15,6 @@ namespace DWDW_WebAPI.Controllers
 {
     public class RecordsController : ApiController
     {
-        
-        public RecordsController()
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-        }
         private DWDBContext db = new DWDBContext();
 
         // GET: api/Records

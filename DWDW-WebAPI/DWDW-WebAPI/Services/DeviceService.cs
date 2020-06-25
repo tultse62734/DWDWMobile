@@ -9,13 +9,13 @@ namespace DWDW_WebAPI.Services
 {
     public interface IDeviceService
     {
-        List<DeviceViewModel> GetAdminAllDevice();
-        Device GetIDDevice(int id);
+        List<DeviceViewModel> GetDevices();
+        Device GetDeviceByID(int id);
         void CreateDevice(DevicePostPutModel dm);
         void UpdateDevice(Device device, DevicePostPutModel dm);
         void Save();
         bool DeviceExists(int deviceID);
-        void getDeviceListFromSingleLocation(Location currentLocation, List<Device> device);
+        void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device);
         void UpdateStatusDevice(Device device, DeviceStatusModel dm);
     }
     public class DeviceService : IDeviceService
@@ -28,7 +28,7 @@ namespace DWDW_WebAPI.Services
 
         }
 
-        public List<DeviceViewModel> GetAdminAllDevice()
+        public List<DeviceViewModel> GetDevices()
         {
             var devices = db.Devices;
             var result = db.Devices.Select(x => new DeviceViewModel
@@ -41,7 +41,7 @@ namespace DWDW_WebAPI.Services
             return result;
         }
 
-        public Device GetIDDevice(int id)
+        public Device GetDeviceByID(int id)
         {
             return db.Devices.Find(id);
         }
@@ -74,7 +74,7 @@ namespace DWDW_WebAPI.Services
             return db.Devices.Count(a => a.deviceId == deviceID) > 0;
         }
 
-        public void getDeviceListFromSingleLocation(Location currentLocation, List<Device> device)
+        public void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device)
         {
             var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
             var roomCount = roomList.Count();

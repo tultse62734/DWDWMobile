@@ -14,10 +14,6 @@ namespace DWDW_WebAPI.Controllers
 {
     public class ShiftsController : ApiController
     {
-        public ShiftsController()
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-        }
         private DWDBContext db = new DWDBContext();
 
         // GET: api/Shifts

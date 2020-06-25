@@ -1,33 +1,50 @@
 ﻿using DWDW_WebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 
 namespace DWDW_WebAPI.Services
 {
     public interface IRoomService : IDisposable
     {
-        IEnumerable<Room> GetRooms();
+        List<Room> GetRooms();
         Room GetRoomById(int roomId);
-        void InsertRoom(Room room);
-        void DeactiveRoom(int roomId);
-        void Save();
+        bool InsertRoom(Room room);
+        bool UpdateRoom(Room room);
+        bool DeactiveRoom(Room room);
         List<Room> GetRoomsByLocationId(int locationId);
+        bool RoomExists(int roomId);
     }
     public class RoomService : IRoomService, IDisposable
     {
-        private DWDBContext context;
+        private readonly DWDBContext context;
         private bool disposed = false;
 
         public RoomService(DWDBContext context)
         {
             this.context = context;
-            context.Configuration.ProxyCreationEnabled = false;
         }
-        public void DeactiveRoom(int roomId)
+        public bool DeactiveRoom(Room room)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    room.isActive = false;
+                    context.Entry(room).State = EntityState.Modified;
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
         protected virtual void Dispose(bool disposing)
         {
@@ -51,24 +68,59 @@ namespace DWDW_WebAPI.Services
             return context.Rooms.Find(roomId);
         }
 
-        public IEnumerable<Room> GetRooms()
+        public List<Room> GetRooms()
         {
-            return context.Rooms;
+            return context.Rooms.ToList();
         }
 
-        public void InsertRoom(Room room)
+        public bool InsertRoom(Room room)
         {
-            context.Rooms.Add(room);
+            if (context.Locations.Find(room.locationId) == null) return false;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    context.Rooms.Add(room);
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
         }
 
-        public void Save()
-        {
-            context.SaveChanges();
-        }
 
         public List<Room> GetRoomsByLocationId(int locationId)
         {
             return context.Rooms.Where(r => r.locationId == locationId).ToList();
+        }
+
+        public bool UpdateRoom(Room room)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    context.Entry(room).State = EntityState.Modified;
+                    context.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public bool RoomExists(int roomId)
+        {
+            return context.Rooms.Count(e => e.roomId == roomId) > 0;
         }
     }
 }
