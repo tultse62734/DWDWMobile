@@ -71,7 +71,7 @@ namespace DWDW_WebAPI.Services
 
         public List<RoomViewModel> GetRooms()
         {
-            var list = context.Rooms.Where(r => r.isActive == true)
+            var list = context.Rooms
                 .Select(r => new RoomViewModel()
                 {
                     roomId = r.roomId,
