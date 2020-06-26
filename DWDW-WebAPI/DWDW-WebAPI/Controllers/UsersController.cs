@@ -125,8 +125,7 @@ namespace DWDW_WebAPI.Controllers
             {
                 return NotFound();
             }
-            UserViewModel viewModel = modelMapping.GetUserMapping(user);
-            return Ok(viewModel);
+            return Ok(user);
         }
 
         //hoang

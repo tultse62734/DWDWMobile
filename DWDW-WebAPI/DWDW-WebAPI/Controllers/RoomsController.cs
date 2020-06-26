@@ -34,7 +34,6 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-
                     return Ok(list);
                 }
             }
@@ -55,8 +54,7 @@ namespace DWDW_WebAPI.Controllers
             {
                 return NotFound();
             }
-            RoomViewModel viewModel = modelMapping.GetRoomMapping(room);
-            return Ok(viewModel);
+            return Ok(room);
         }
 
         // PUT: api/Rooms/5

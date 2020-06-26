@@ -52,7 +52,7 @@ namespace DWDW_WebAPI.Services
 
         public List<LocationViewModel> GetLocations()
         {
-            var list = context.Locations
+            var list = context.Locations.Where(l => l.isActive == true)
                 .Select(l => new LocationViewModel()
                 {
                     locationId = l.locationId,

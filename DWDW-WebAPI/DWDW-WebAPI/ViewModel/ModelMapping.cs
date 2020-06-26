@@ -7,18 +7,7 @@ using System.Web;
 namespace DWDW_WebAPI.ViewModel
 {
     public class ModelMapping
-    {
-        public RoomViewModel GetRoomMapping(Room room)
-        {
-            RoomViewModel viewModel = new RoomViewModel()
-            {
-                roomId = room.roomId,
-                roomCode = room.roomCode,
-                locationId = room.locationId,
-                isActive = room.isActive
-            };
-            return viewModel;
-        }
+    { 
         public Room CreateRoomMapping(RoomViewModel viewModel)
         {
             return new Room()
@@ -35,22 +24,6 @@ namespace DWDW_WebAPI.ViewModel
             model.roomCode = viewModel.roomCode;
             model.locationId = viewModel.locationId;
             model.isActive = viewModel.isActive;
-        }
-        public UserViewModel GetUserMapping(User user)
-        {
-            UserViewModel viewModel = new UserViewModel()
-            {
-                userId = user.userId,
-                userName = user.userName,
-                password = user.password,
-                phone = user.phone,
-                dateOfBirth = user.dateOfBirth,
-                gender = user.gender,
-                deviceToken = user.deviceToken,
-                roleId = user.roleId,
-                isActive = user.isActive
-            };
-            return viewModel;
         }
         public User CreateUserMapping(UserViewModel viewModel)
         {
@@ -80,17 +53,6 @@ namespace DWDW_WebAPI.ViewModel
             model.isActive = viewModel.isActive;
         }
 
-        public LocationViewModel GetLocationMapping(Location location)
-        {
-            LocationViewModel viewModel = new LocationViewModel()
-            {
-                locationId = location.locationId,
-                locationCode = location.locationCode,
-                isActive = location.isActive
-            };
-            return viewModel;
-        }
-        
         public Location CreateLocationMapping(LocationViewModel viewModel)
         {
             return new Location()

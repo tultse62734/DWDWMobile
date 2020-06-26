@@ -74,7 +74,7 @@ namespace DWDW_WebAPI.Services
 
         public List<UserViewModel> GetUsers()
         {
-            var list = context.Users
+            var list = context.Users.Where(u => u.isActive == true)
                 .Select(u => new UserViewModel()
                 {
                     userId = u.userId,
