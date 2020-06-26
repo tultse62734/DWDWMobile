@@ -57,8 +57,8 @@ namespace DWDW_WebAPI.Controllers
         //Search device for  admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("GetDevices/{id}")]
-        public IHttpActionResult getDevicesByIDAdmin(int id)
+        [Route("GetDevices")]
+        public IHttpActionResult GetDevicesByIDAdmin(int id)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace DWDW_WebAPI.Controllers
 
         //Get Device list from single location
         [HttpGet]
-        [Route("GetDevicesFromLocation/{id}")]
+        [Route("GetDevicesFromLocation")]
         public IHttpActionResult GetDevicesFromLocation(int id)
         {
             //Future list
@@ -164,7 +164,7 @@ namespace DWDW_WebAPI.Controllers
         //Update existing info device for admin
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
-        [Route("PutDevices/{id}")]
+        [Route("PutDevices")]
         public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
         {
             try
@@ -189,7 +189,7 @@ namespace DWDW_WebAPI.Controllers
 
         //Change device active
         [HttpPut]
-        [Route("PutDevicesActive/{id}")]
+        [Route("PutDevicesActive")]
         public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
         {
             try
@@ -212,26 +212,27 @@ namespace DWDW_WebAPI.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("Test")]
-        //public IHttpActionResult TestXCXC()
-        //{
-        //    var deviceTotal = new List<Device>();
-        //    var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == 3)).ToList();
-        //    int locationCount = locationList.Count();
-        //    for (int i = 0; i < locationCount; i++)
-        //    {
-        //        var currentLocation = locationList.ElementAt(i);
-        //        var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
-        //        var roomCount = roomList.Count();
-        //        for (int y = 0; y < roomCount; y++)
-        //        {
-        //            var currentRoom = roomList.ElementAt(y);
-        //            var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId)).ToList();
-        //            deviceTotal.AddRange(devicee);
-        //        }
-        //    }
-        //    return Ok(deviceTotal);
-        //}
+        [HttpGet]
+        [Route("Test")]
+        public IHttpActionResult TestXCXC(int c)
+        {
+            //var deviceTotal = new List<Device>();
+            //var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == 3)).ToList();
+            //int locationCount = locationList.Count();
+            //for (int i = 0; i < locationCount; i++)
+            //{
+            //    var currentLocation = locationList.ElementAt(i);
+            //    var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
+            //    var roomCount = roomList.Count();
+            //    for (int y = 0; y < roomCount; y++)
+            //    {
+            //        var currentRoom = roomList.ElementAt(y);
+            //        var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId)).ToList();
+            //        deviceTotal.AddRange(devicee);
+            //    }
+            //}
+            //return Ok(deviceTotal); 
+            return Ok();
+        }
     }
 }

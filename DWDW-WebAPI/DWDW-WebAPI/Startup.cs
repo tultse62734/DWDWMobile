@@ -25,7 +25,7 @@ namespace DWDW_WebAPI
                 TokenEndpointPath = new PathString("/token"),
 
                 //Xét thời gian token hết hạn - 3 tiếng
-                AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(24),
 
                 //Validate người dùng
                 Provider = new AccountAuthorizationProvider()

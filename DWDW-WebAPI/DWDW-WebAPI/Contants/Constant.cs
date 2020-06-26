@@ -14,5 +14,11 @@ namespace DWDW_WebAPI.Contants
     public class ErrorMessage
     {
         public const string LOGIN_FAIL = "Invalid username password!";
+        public const string GET_LIST_FAIL = "Failed to get list!";
+        public const string SEARCH_FAIL = "Failed to search!";
+        public const string CREATE_FAIL = "Failed to create!";
+        public const string UPDATE_FAIL = "Failed to update!";
+        public const string DELETE_FAIL = "Failed to delete!";
+
     }
 }

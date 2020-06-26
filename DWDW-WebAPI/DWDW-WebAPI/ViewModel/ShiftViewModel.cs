@@ -15,4 +15,17 @@ namespace DWDW_WebAPI.ViewModel
         public int? shiftType { get; set; }
         public bool? isActive { get; set; }
     }
+    public class ShiftPostPutModel
+    {
+        public int? userLocationId { get; set; }
+        public DateTime? startDate { get; set; }
+        public DateTime? endDate { get; set; }
+        public int? roomId { get; set; }
+        public int? shiftType { get; set; }
+        public bool? isActive { get; set; }
+    }
+    public class ShiftisActive
+    {
+        public bool? isActive { get; set; }
+    }
 }

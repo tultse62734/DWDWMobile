@@ -25,7 +25,7 @@ namespace DWDW_WebAPI.Services
         public DeviceService()
         {
             this.db = new DWDBContext();
-
+            db.Configuration.ProxyCreationEnabled = false;
         }
 
         public List<DeviceViewModel> GetAdminAllDevice()

@@ -330,7 +330,9 @@
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\DeviceService.cs" />
     <Compile Include="Services\RecordService.cs" />
+    <Compile Include="Services\RoleService.cs" />
     <Compile Include="Services\RoomService.cs" />
+    <Compile Include="Services\ShiftService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\UserSecurityService.cs" />
     <Compile Include="Startup.cs" />

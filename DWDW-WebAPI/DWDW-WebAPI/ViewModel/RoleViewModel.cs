@@ -11,4 +11,13 @@ namespace DWDW_WebAPI.ViewModel
         public string roleName { get; set; }
         public bool? isActive { get; set; }
     }
+    public class RolePostPutModel
+    {
+        public string roleName { get; set; }
+        public bool? isActive { get; set; }
+    }
+    public class RoleisActive
+    {
+        public bool? isActive { get; set; }
+    }
 }
