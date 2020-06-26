@@ -96,7 +96,7 @@ namespace DWDW_WebAPI.Controllers
                     for (int i = 0; i < locationCount; i++)
                     {
                         var currentLocation = locationList.ElementAt(i);
-                        deviceService.getDeviceListFromSingleLocation(currentLocation, deviceTotal);
+                        deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceTotal);
                     }
                 }
                 else
