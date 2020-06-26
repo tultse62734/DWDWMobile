@@ -19,6 +19,6 @@ namespace DWDW_WebAPI.Contants
         public const string CREATE_FAIL = "Failed to create!";
         public const string UPDATE_FAIL = "Failed to update!";
         public const string DELETE_FAIL = "Failed to delete!";
-
+        public const string EMPTY_LIST = "EMPTY!!";
     }
 }

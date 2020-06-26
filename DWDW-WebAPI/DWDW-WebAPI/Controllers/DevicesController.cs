@@ -45,12 +45,12 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
         }
 
@@ -69,12 +69,12 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
         }
 
@@ -103,13 +103,13 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
                 
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
             return Ok(deviceTotal);
         }
@@ -132,12 +132,12 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }            
         }
 
@@ -157,7 +157,7 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.CREATE_FAIL);
             }   
         }
 
@@ -183,7 +183,7 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.UPDATE_FAIL);
             }
         }
 
@@ -197,7 +197,7 @@ namespace DWDW_WebAPI.Controllers
                 var devices = deviceService.GetIDDevice(id);
                 if (devices == null)
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
                 else
                 {
@@ -206,9 +206,9 @@ namespace DWDW_WebAPI.Controllers
                     return Ok();
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                return BadRequest();
+                return BadRequest(ErrorMessage.UPDATE_FAIL);
             }
         }
 
