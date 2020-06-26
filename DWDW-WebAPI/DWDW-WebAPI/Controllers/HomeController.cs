@@ -12,7 +12,7 @@ namespace DWDW_WebAPI.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return Redirect("/swagger/ui/index");
         }
     }
 }

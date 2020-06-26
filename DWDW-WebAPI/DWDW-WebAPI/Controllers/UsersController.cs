@@ -14,11 +14,13 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Web.Script.Serialization;
+using System.Collections.Generic;
+using DWDW_WebAPI.Contants;
 
 namespace DWDW_WebAPI.Controllers
 {
     [RoutePrefix("v1/api/Users")]
-    public class UsersController : ApiController
+    public class UsersController : BaseController
     {
         private IUserService userService;
         private ModelMapping modelMapping;
@@ -29,14 +31,14 @@ namespace DWDW_WebAPI.Controllers
             this.modelMapping = new ModelMapping();
         }
 
-        [Route("getAuthorizedUserInfo")]
-        [HttpGet]
-        [Authorize]
-        public IHttpActionResult getUser()
-        {
-            var user = this.GetIndentiy();
-            return Ok(user);
-        }
+        //[Route("getAuthorizedUserInfo")]
+        //[HttpGet]
+        //[Authorize]
+        //public IHttpActionResult getUser()
+        //{
+        //    var user = this.GetIndentiy();
+        //    return Ok(user);
+        //}
 
         [Route("Login")]
         [AllowAnonymous]

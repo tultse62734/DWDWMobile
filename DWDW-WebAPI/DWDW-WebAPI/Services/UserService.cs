@@ -26,9 +26,9 @@ namespace DWDW_WebAPI.Services
     {
         private DWDBContext context;
         private bool disposed = false;
-        public UserService()
+        public UserService(DWDBContext context)
         {
-            context = new DWDBContext();
+            this.context = context;
         }
         public bool DeactiveUser(User user)
         {
