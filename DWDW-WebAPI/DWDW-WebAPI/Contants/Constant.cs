@@ -10,6 +10,10 @@ namespace DWDW_WebAPI.Contants
         public const string ADMIN_ROLE = "1";
         public const string MANAGER_ROLE = "2";
         public const string WORKER_ROLE = "3";
+
+
+        public const string SECRET_KEY = "ducdat123 thanhhang270397";
+        public const string URL = "https://localhost:44303/";
     }
     public static class ErrorMessage
     {
@@ -29,5 +33,6 @@ namespace DWDW_WebAPI.Contants
         public const string UPDATE_SUCCESS = "Update succeed!";
         public const string INSERT_SUCCESS = "Insert succeed!";
         public const string DEACTIVE_SUCCESS = "Deactive succeed!";
+        public const string EMPTY_LIST = "EMPTY!!";
     }
 }

@@ -42,7 +42,7 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
@@ -66,7 +66,7 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
@@ -75,11 +75,11 @@ namespace DWDW_WebAPI.Controllers
             }
         }
 
-        //Get shift for account
-        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        //Get shift for manager
+        [Authorize(Roles = Constant.MANAGER_ROLE)]
         [HttpGet]
-        [Route("GetShiftSubaccount")]
-        public IHttpActionResult GetShiftSubaccount()
+        [Route("GetShiftManager")]
+        public IHttpActionResult GetShiftManager()
         {
             var listSubaccountShift = new List<Shift>();
             var identity = (ClaimsIdentity)User.Identity;
@@ -87,14 +87,14 @@ namespace DWDW_WebAPI.Controllers
             int accountId = Convert.ToInt32(Id);
             try
             {
-                listSubaccountShift = shiftService.GetSubaccountShift(accountId);
+                listSubaccountShift = shiftService.GetManagerShift(accountId);
                 if (listSubaccountShift != null)
                 {
                     return Ok(listSubaccountShift);
                 }
                 else
                 {
-                    return BadRequest(ErrorMessage.GET_LIST_FAIL);
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
@@ -102,11 +102,12 @@ namespace DWDW_WebAPI.Controllers
                 return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
         }
-        //Get shift for account
-        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+
+        //Get shift for worker
+        [Authorize(Roles = Constant.WORKER_ROLE)]
         [HttpGet]
-        [Route("GetShiftSubaccountByID")]
-        public IHttpActionResult GetShiftSubaccountByID(int shiftID)
+        [Route("GetShiftWorker")]
+        public IHttpActionResult GetShiftWorker()
         {
             var listSubaccountShift = new List<Shift>();
             var identity = (ClaimsIdentity)User.Identity;
@@ -114,7 +115,35 @@ namespace DWDW_WebAPI.Controllers
             int accountId = Convert.ToInt32(Id);
             try
             {
-                listSubaccountShift = shiftService.GetSubaccountShift(accountId);
+                listSubaccountShift = shiftService.GetWorkerShift(accountId);
+                if (listSubaccountShift != null)
+                {
+                    return Ok(listSubaccountShift);
+                }
+                else
+                {
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
+            }
+        }
+
+        //Get Search shift for manager
+        [Authorize(Roles = Constant.MANAGER_ROLE)]
+        [HttpGet]
+        [Route("GetShiftManagerByID")]
+        public IHttpActionResult GetShiftManagerByID(int shiftID)
+        {
+            var listSubaccountShift = new List<Shift>();
+            var identity = (ClaimsIdentity)User.Identity;
+            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            int accountId = Convert.ToInt32(Id);
+            try
+            {
+                listSubaccountShift = shiftService.GetManagerShift(accountId);
                 if (listSubaccountShift != null)
                 {
                     var shiftSearch = listSubaccountShift.FirstOrDefault(x => x.shiftId == shiftID);
@@ -122,7 +151,7 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest(ErrorMessage.GET_LIST_FAIL);
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
@@ -130,6 +159,36 @@ namespace DWDW_WebAPI.Controllers
                 return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
         }
+
+        //Get Search shift for worker
+        [Authorize(Roles = Constant.WORKER_ROLE)]
+        [HttpGet]
+        [Route("GetShiftWorkerByID/{shiftID}")]
+        public IHttpActionResult GetShiftWorkerByID(int shiftID)
+        {
+            var listSubaccountShift = new List<Shift>();
+            var identity = (ClaimsIdentity)User.Identity;
+            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            int accountId = Convert.ToInt32(Id);
+            try
+            {
+                listSubaccountShift = shiftService.GetWorkerShift(accountId);
+                if (listSubaccountShift != null)
+                {
+                    var searchShift = listSubaccountShift.FirstOrDefault(x => x.shiftId == shiftID);
+                    return Ok(searchShift);
+                }
+                else
+                {
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
+            }
+        }
+
 
         //Create new shift for manager
         [Authorize(Roles = Constant.MANAGER_ROLE)]
@@ -198,7 +257,7 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)
@@ -235,7 +294,7 @@ namespace DWDW_WebAPI.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.EMPTY_LIST);
                 }
             }
             catch (Exception)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace DWDW_WebAPI.Services
@@ -18,15 +19,16 @@ namespace DWDW_WebAPI.Services
         bool DeactiveUser(User user);
         void Save();
         bool UserExists(int userId);
+        Task<UserViewModel> LoginAsync(string username, string password);
 
     }
+       
     public class UserService : IUserService, IDisposable
     {
-        private readonly DWDBContext context;
-        private bool disposed = false;
-        public UserService(DWDBContext context)
+        private DWDBContext db;
+        public UserService()
         {
-            this.context = context;
+            db = new DWDBContext();
         }
         public bool DeactiveUser(User user)
         {
@@ -47,7 +49,6 @@ namespace DWDW_WebAPI.Services
                 throw;
             }
         }
-
         public void Dispose()
         {
             Dispose(true);
@@ -138,5 +139,25 @@ namespace DWDW_WebAPI.Services
             return context.Users.Count(e => e.userId == userId) > 0;
         }
 
+        public async Task<UserViewModel> LoginAsync(string username, string password)
+        {
+            //check validate fields
+
+            UserViewModel result = null;
+            //get User by username password
+            var user = await db.Users.FirstOrDefaultAsync(x => x.userName.Equals(username)
+            && x.password.Equals(password));
+
+            if(user != null)
+            {
+                result = new UserViewModel
+                {
+                    userId = user.userId,
+                    userName = user.userName,
+                    roleId = user.roleId,
+                };
+            }
+            return result;
+        }
     }
 }

@@ -13,7 +13,8 @@ namespace DWDW_WebAPI.Services
         Shift GetIDShift(int id);
         void CreateShift(ShiftPostPutModel sm);
         void UpdateShift(Shift shift, ShiftPostPutModel sm);
-        List<Shift> GetSubaccountShift(int accountID);
+        List<Shift> GetManagerShift(int accountID);
+        List<Shift> GetWorkerShift(int accountID);
         void Save();
         bool validateCreate(int userID, int? shiftUserLocationID);
         bool validateCreateRoom(int? roomID, int? userLocationID);
@@ -50,7 +51,7 @@ namespace DWDW_WebAPI.Services
             return db.Shifts.Find(id);
         }
 
-        public List<Shift> GetSubaccountShift(int accountID)
+        public List<Shift> GetManagerShift(int accountID)
         {
             var locationManager = db.UserLocations.Where(x => x.userId == accountID).ToList();
             List<int?> qualifyLocation = new List<int?>();
@@ -72,6 +73,19 @@ namespace DWDW_WebAPI.Services
             //var shiftAssigned = db.Shifts.Where(x => x.userLocationId.con)
             var shiftAssigned = db.Shifts.Where(x => qualifyUserLocation.Contains(x.userLocationId)).ToList();
             return shiftAssigned;
+        }
+
+        public List<Shift> GetWorkerShift(int accountID)
+        {
+            List<int?> qualifyUserLocation = new List<int?>();
+            var userLocation = db.UserLocations.Where(x => x.userId == accountID).ToList();
+            for (int i = 0; i < userLocation.Count; i++)
+            {
+                int? a = userLocation.ElementAt(i).userLocationId;
+                qualifyUserLocation.Add(a);
+            }
+            var workerShift = db.Shifts.Where(x => qualifyUserLocation.Contains(x.userLocationId)).ToList();
+            return workerShift;
         }
 
         public void CreateShift(ShiftPostPutModel sm)
