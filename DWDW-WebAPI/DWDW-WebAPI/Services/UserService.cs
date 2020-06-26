@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace DWDW_WebAPI.Services
 {
@@ -25,10 +24,11 @@ namespace DWDW_WebAPI.Services
        
     public class UserService : IUserService, IDisposable
     {
-        private DWDBContext db;
+        private DWDBContext context;
+        private bool disposed = false;
         public UserService()
         {
-            db = new DWDBContext();
+            context = new DWDBContext();
         }
         public bool DeactiveUser(User user)
         {
@@ -145,7 +145,7 @@ namespace DWDW_WebAPI.Services
 
             UserViewModel result = null;
             //get User by username password
-            var user = await db.Users.FirstOrDefaultAsync(x => x.userName.Equals(username)
+            var user = await context.Users.FirstOrDefaultAsync(x => x.userName.Equals(username)
             && x.password.Equals(password));
 
             if(user != null)

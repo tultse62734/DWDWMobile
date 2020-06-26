@@ -27,12 +27,13 @@ namespace DWDW_WebAPI.Contants
         public const string UPDATE_ERROR = "Update failed!";
         public const string INSERT_ERROR = "Insert failed!";
         public const string DEACTIVE_ERROR = "Deactive failed!";
+        public const string EMPTY_LIST = "EMPTY!!";
+
     }
     public static class SuccessMessage
     {
         public const string UPDATE_SUCCESS = "Update succeed!";
         public const string INSERT_SUCCESS = "Insert succeed!";
         public const string DEACTIVE_SUCCESS = "Deactive succeed!";
-        public const string EMPTY_LIST = "EMPTY!!";
     }
 }

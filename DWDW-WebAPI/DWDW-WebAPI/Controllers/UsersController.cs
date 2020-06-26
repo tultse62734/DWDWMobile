@@ -22,13 +22,11 @@ namespace DWDW_WebAPI.Controllers
     {
         private IUserService userService;
         private ModelMapping modelMapping;
-        private IUserService uService;
 
         public UsersController()
         {
             this.userService = new UserService(new DWDBContext());
             this.modelMapping = new ModelMapping();
-            uService = new UserService();
         }
 
         [Route("getAuthorizedUserInfo")]
@@ -48,7 +46,7 @@ namespace DWDW_WebAPI.Controllers
             string jwt_token = "";
             try
             {
-                var user = await uService.LoginAsync(username, password);
+                var user = await userService.LoginAsync(username, password);
                 if (user != null)
                 {
 
