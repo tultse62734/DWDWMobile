@@ -27,7 +27,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get all role for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetAllRoles")]
         public IHttpActionResult GetAdminAllRoles()
@@ -51,7 +51,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search device for  admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetRoles/{id}")]
         public IHttpActionResult GetRolesByIDAdmin(int id)
@@ -75,7 +75,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Create new role for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPost]
         [Route("PostRoles")]
         public IHttpActionResult PostDevices(RolePostPutModel rm)
@@ -93,7 +93,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Update-Edit existing role for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
         [Route("PutRoles/{id}")]
         public IHttpActionResult PutRoless(int id, RolePostPutModel rm)
@@ -119,7 +119,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Change role active for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
         [Route("PutRolesActive/{id}")]
         public IHttpActionResult PutRolesActive(int id, RoleisActive rm)
@@ -145,7 +145,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Delete role for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpDelete]
         [Route("DeleteRoles/{id}")]
         public IHttpActionResult DeleteRole(int id)

@@ -28,7 +28,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get all shift for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetAllShifts")]
         public IHttpActionResult GetAdminAllShifts()
@@ -52,7 +52,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search shift for  admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetShiftsByID")]
         public IHttpActionResult GetShiftsByIDAdmin(int id)

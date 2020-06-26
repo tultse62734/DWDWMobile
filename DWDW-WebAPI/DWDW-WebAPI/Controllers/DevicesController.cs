@@ -31,7 +31,7 @@ namespace DWDW_WebAPI.Controllers
         
 
         //Get all device for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetAllDevices")]
         public IHttpActionResult GetAdminAllDevices()
@@ -55,7 +55,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Search device for  admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetDevices")]
         public IHttpActionResult GetDevicesByIDAdmin(int id)
@@ -79,18 +79,20 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //View assigned device of manager and worker account
-        //[Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
+        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
         [HttpGet]
         [Route("GetSubAccountDevices")]
         public IHttpActionResult GetSubDevices()
         {
+            var identity = (ClaimsIdentity)User.Identity;
+            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
+            int accountId = Convert.ToInt32(Id);
             //Future list
             var deviceTotal = new List<Device>();
             try
             {
                 //Get related location for user
-                int currentUserID = 3;
-                var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == currentUserID)).ToList();
+                var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountId)).ToList();
                 if (locationList != null)
                 {
                     int locationCount = locationList.Count();
@@ -98,7 +100,6 @@ namespace DWDW_WebAPI.Controllers
                     {
                         var currentLocation = locationList.ElementAt(i);
                         deviceService.getDeviceListFromSingleLocation(currentLocation, deviceTotal);
-                        //deviceTotal.AddRange(devices);
                     }
                 }
                 else
@@ -115,6 +116,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get Device list from single location
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetDevicesFromLocation")]
         public IHttpActionResult GetDevicesFromLocation(int id)
@@ -144,7 +146,7 @@ namespace DWDW_WebAPI.Controllers
         
 
         //Create new device for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPost]
         [Route("PostDevices")]
         public IHttpActionResult PostDevices(DevicePostPutModel dm)
@@ -162,7 +164,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Update existing info device for admin
-        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
         [Route("PutDevices")]
         public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
@@ -188,6 +190,7 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Change device active
+        [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
         [Route("PutDevicesActive")]
         public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
