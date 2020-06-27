@@ -18,6 +18,7 @@ namespace DWDW_WebAPI.Services
         bool DeactiveLocation(Location location);
         List<Location> GetAssignedLocations(int userId);
         bool LocationExists(int locationId);
+        List<RoomViewModel> GetRoomsInLocation(int locationId);
     }
     public class LocationService : ILocationService, IDisposable
     {
@@ -130,6 +131,34 @@ namespace DWDW_WebAPI.Services
         public bool LocationExists(int locationId)
         {
             return context.Locations.Count(l => l.locationId == locationId) > 0;
+        }
+
+        public List<RoomViewModel> GetRoomsInLocation(int locationId)
+        {
+            List<RoomViewModel> rooms = new List<RoomViewModel>();
+            try
+            {
+                var location = context.Locations.Find(locationId);
+                if (location != null)
+                {
+                    rooms = context.Rooms
+                         .Where(r => r.locationId == locationId)
+                         .Select(r => new RoomViewModel()
+                         {
+                             roomId = r.roomId,
+                             roomCode = r.roomCode,
+                             locationId = r.locationId,
+                             isActive = r.isActive
+                         }).ToList();
+                }
+                return rooms;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

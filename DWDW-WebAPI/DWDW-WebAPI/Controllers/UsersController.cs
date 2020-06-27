@@ -31,14 +31,14 @@ namespace DWDW_WebAPI.Controllers
             this.modelMapping = new ModelMapping();
         }
 
-        //[Route("getAuthorizedUserInfo")]
-        //[HttpGet]
-        //[Authorize]
-        //public IHttpActionResult getUser()
-        //{
-        //    var user = this.GetIndentiy();
-        //    return Ok(user);
-        //}
+        [Route("getAuthorizedUserInfo")]
+        [HttpGet]
+        [Authorize]
+        public IHttpActionResult getUser()
+        {
+            var user = this.GetIndentiy();
+            return Ok(user);
+        }
 
         [Route("Login")]
         [AllowAnonymous]

@@ -54,8 +54,17 @@ namespace DWDW_WebAPI.Controllers
         [ResponseType(typeof(LocationViewModel))]
         public IHttpActionResult GetLocation(int locationId)
         {
-            var searchedLocation = locationService.GetLocationById(locationId);
-            return Ok(searchedLocation);
+            var location = locationService.GetLocationById(locationId);
+            return Ok(location);
+        }
+
+        [HttpGet]
+        [Route("{locationId}/rooms")]
+        [ResponseType(typeof(LocationViewModel))]
+        public IHttpActionResult GetRoomsInLocation(int locationId)
+        {
+            var location = locationService.GetRoomsInLocation(locationId);
+            return Ok(location);
         }
         #region hoang
         //Get assigned Location for manager and worker
@@ -88,7 +97,7 @@ namespace DWDW_WebAPI.Controllers
         //}
         #endregion hoang
 
-        
+
         [HttpGet]
         [Route("assigned")]
         [ResponseType(typeof(LocationViewModel))]
