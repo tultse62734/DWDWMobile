@@ -81,7 +81,7 @@ namespace DWDW_WebAPI.Services
             for (int y = 0; y < roomCount; y++)
             {
                 var currentRoom = roomList.ElementAt(y);
-                var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId)).ToList();
+                var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId && b.isActive == true)).ToList();
                 device.AddRange(devicee);
             }
         }

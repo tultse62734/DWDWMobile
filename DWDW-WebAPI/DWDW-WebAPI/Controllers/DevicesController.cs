@@ -18,7 +18,7 @@ using DWDW_WebAPI.ViewModel;
 namespace DWDW_WebAPI.Controllers
 {
     [RoutePrefix("v1/api/Devices")]
-    public class DevicesController : ApiController
+    public class DevicesController : BaseController
     {
         private DWDBContext db = new DWDBContext();
         private IDeviceService deviceService;
@@ -28,11 +28,12 @@ namespace DWDW_WebAPI.Controllers
         }
         
         //Get all device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize(Roles = "1")]
         [HttpGet]
         [Route("")]
         public IHttpActionResult GetDevices()
         {
+            var user = this.GetIndentiy();
             try
             {
                 var devices = deviceService.GetDevices();

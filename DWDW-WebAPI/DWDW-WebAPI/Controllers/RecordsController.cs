@@ -8,113 +8,123 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using DWDW_WebAPI.Contants;
 using DWDW_WebAPI.Models;
 using DWDW_WebAPI.Services;
+using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
     public class RecordsController : ApiController
     {
         private DWDBContext db = new DWDBContext();
-
-        // GET: api/Records
-        public IHttpActionResult GetRecords()
+        private IRecordService recordService;
+        public RecordsController()
         {
-            
-            return Ok(db.Records);
+            db.Configuration.ProxyCreationEnabled = false;
+            recordService = new RecordService();
         }
 
-        // GET: api/Records/5
-        [ResponseType(typeof(Record))]
-        public IHttpActionResult GetRecord(int id)
+        //Get all record for admin
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpGet]
+        [Route("GetAllRecords")]
+        public IHttpActionResult GetAdminAllRecords()
         {
-            Record record = db.Records.Find(id);
-            if (record == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(record);
-        }
-
-        // PUT: api/Records/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutRecord(int id, Record record)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != record.recordId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(record).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RecordExists(id))
+                var records = recordService.GetAllAdminRecords();
+                if (records != null)
                 {
-                    return NotFound();
+                    return Ok(records);
                 }
                 else
                 {
-                    throw;
+                    return NotFound();
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Records
-        [ResponseType(typeof(Record))]
-        public IHttpActionResult PostRecord(Record record)
-        {
-            if (!ModelState.IsValid)
+            catch (Exception)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
-
-            db.Records.Add(record);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = record.recordId }, record);
         }
 
-        // DELETE: api/Records/5
-        [ResponseType(typeof(Record))]
-        public IHttpActionResult DeleteRecord(int id)
+        //Get record for account
+        //[Authorize(Roles = Constant.MANAGER_ROLE)]
+        [HttpGet]
+        [Route("GetRecordsManager")]
+        public IHttpActionResult GetRecordManager(int managerId)
         {
-            Record record = db.Records.Find(id);
-            if (record == null)
+            var recordList = new List<RecordViewModel>();
+            try
             {
-                return NotFound();
+                var records = recordService.GetAllAdminRecords();
+                if (records != null)
+                {
+                    for (int i = 0; i < records.Count; i++)
+                    {
+                        bool checkRecord = recordService.validateRecord(managerId, records.ElementAt(i));
+                        if (checkRecord)
+                        {
+                            recordList.Add(records.ElementAt(i));
+                        }
+                    }
+                    return Ok(recordList);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-
-            db.Records.Remove(record);
-            db.SaveChanges();
-
-            return Ok(record);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (Exception)
             {
-                db.Dispose();
+                return BadRequest(ErrorMessage.GET_LIST_FAIL);
             }
-            base.Dispose(disposing);
         }
 
-        private bool RecordExists(int id)
+        //Search role for  admin
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [HttpGet]
+        [Route("GetRecords/{id}")]
+        public IHttpActionResult GetRecordsByIDAdmin(int id)
         {
-            return db.Records.Count(e => e.recordId == id) > 0;
+            try
+            {
+                var records = recordService.GetIDRecord(id);
+                if (records != null)
+                {
+                    return Ok(records);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(ErrorMessage.SEARCH_FAIL);
+            }
+        }
+
+
+        //Create new record
+        [HttpPost]
+        [Route("PostRecords/{deviceID}")]
+        public IHttpActionResult PostDevices(int deviceID, RecordPostModel rm)
+        {
+            try
+            {
+                rm.deviceId = deviceID;
+                rm.recordDate = DateTime.Now;
+                recordService.CreateRecord(rm);
+                recordService.Save();
+                recordService.sendNotify(deviceID);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest(ErrorMessage.CREATE_FAIL);
+            }
         }
     }
 }

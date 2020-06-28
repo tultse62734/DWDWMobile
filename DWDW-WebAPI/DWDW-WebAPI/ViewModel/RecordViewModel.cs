@@ -14,5 +14,12 @@ namespace DWDW_WebAPI.ViewModel
         public int? recordStatus { get; set; }
         public bool? isActive { get; set; }
     }
-
+    public class RecordPostModel
+    {
+        public int? deviceId { get; set; }
+        public DateTime? recordDate { get; set; }
+        public string image { get; set; }
+        public int? recordStatus { get; set; }
+        public bool? isActive { get; set; }
+    }
 }

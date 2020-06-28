@@ -50,7 +50,7 @@ namespace DWDW_WebAPI.Controllers
             }
         }
 
-        //Search device for  admin
+        //Search role for  admin
         [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
         [Route("GetRoles/{id}")]
