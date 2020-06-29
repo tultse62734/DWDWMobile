@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lnl_root_manage_accident"
+    android:layout_marginBottom="@dimen/dp5">
+    <LinearLayout
+        android:layout_marginLeft="@dimen/dp10"
+        android:background="@drawable/radius_conner_top_lelft_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txt_number_accident"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp15"
+            android:text=" Report 1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/radius_conner_grey"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginBottom="@dimen/dp5"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@drawable/radius_conner_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/ic_emergency"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="@dimen/dp60">
+
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txt_name_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="Accident 1"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <TextView
+                android:id="@+id/txt_date_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="Ngày 18-11-2020"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
+                android:id="@+id/txt_location_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="Khu A"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <TextView
+                android:id="@+id/txt_room_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="100"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <TextView
+                android:id="@+id/txt_status_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="Chưa xử lý"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginLeft="@dimen/dp20"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/radius_conner_top_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp30">
+                <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp15"
+                    android:text="Xem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

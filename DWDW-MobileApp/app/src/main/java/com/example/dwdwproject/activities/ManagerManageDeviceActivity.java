@@ -1,0 +1,80 @@
+package com.example.dwdwproject.activities;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.example.dwdwproject.R;
+import com.example.dwdwproject.adapters.DeviceAdapter;
+import com.example.dwdwproject.models.Device;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ManagerManageDeviceActivity extends AppCompatActivity implements View.OnClickListener {
+    private RecyclerView mRecyclerView;
+    private DeviceAdapter mDeviceAdapter;
+    private List<Device> mDeviceList;
+    private LinearLayout mBtnClose;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_manager_manage_device);
+        initView();
+        initData();
+    }
+    private void initView (){
+        mBtnClose = findViewById(R.id.lnl_close_manager_manage_device);
+        mRecyclerView = findViewById(R.id.rcv_manager_manage_device);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+    }
+    private void initData(){
+        mBtnClose.setOnClickListener(this);
+        mDeviceList = new ArrayList<>();
+        mDeviceList.add(new Device(1,"Camera 2MP","2020-11-20","Khu A"));
+        mDeviceList.add(new Device(2,"Camera 4MP","2020-11-20","Khu B"));
+        mDeviceList.add(new Device(3,"Camera 6MP","2020-11-20","Khu C"));
+        mDeviceList.add(new Device(4,"Camera 8MP","2020-11-20","Khu D"));
+        mDeviceList.add(new Device(5,"Camera 10MP","2020-11-20","Khu E"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+        updateUI();
+    }
+    private void updateUI(){
+        if(mDeviceAdapter == null){
+            mDeviceAdapter = new DeviceAdapter(ManagerManageDeviceActivity.this,mDeviceList);
+            mRecyclerView.setAdapter(mDeviceAdapter);
+            mDeviceAdapter.onItemClickListerner(new DeviceAdapter.OnItemClickListenner() {
+                @Override
+                public void onItemCLick(int pos) {
+                    Intent intent = new Intent(ManagerManageDeviceActivity.this, AdminDeviceDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            mDeviceAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.lnl_close_manager_manage_device:
+                finish();
+                break;
+        }
+    }
+}
