@@ -27,104 +27,114 @@ namespace DWDW_WebAPI.Controllers
             deviceService = new DeviceService();
         }
         
-        //Get all device for admin
-        [Authorize(Roles = "1")]
+        //Get device
+        //[Authorize(Roles = "1")]
+        [Authorize]
         [HttpGet]
         [Route("")]
         public IHttpActionResult GetDevices()
         {
             var user = this.GetIndentiy();
+            var deviceSubAccount = new List<Device>();
             try
             {
-                var devices = deviceService.GetDevices();
-                if (devices != null)
+                if (user.roleId == 1)
                 {
-                    return Ok(devices);
-                }
-                else
-                {
-                    return BadRequest(ErrorMessage.EMPTY_LIST);
-                }
-            }
-            catch (Exception)
-            {
-                return BadRequest(ErrorMessage.GET_LIST_FAIL);
-            }
-        }
-
-        //Search device for  admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
-        [HttpGet]
-        [Route("GetDevices")]
-        public IHttpActionResult GetDevicesByIDAdmin(int id)
-        {
-            try
-            {
-                var devices = deviceService.GetDeviceByID(id);
-                if (devices != null)
-                {
-                    return Ok(devices);
-                }
-                else
-                {
-                    return BadRequest(ErrorMessage.EMPTY_LIST);
-                }
-            }
-            catch (Exception)
-            {
-                return BadRequest(ErrorMessage.GET_LIST_FAIL);
-            }
-        }
-
-        //View assigned device of manager and worker account
-        [Authorize(Roles = Constant.MANAGER_ROLE + "," + Constant.WORKER_ROLE)]
-        [HttpGet]
-        [Route("GetSubAccountDevices")]
-        public IHttpActionResult GetSubDevices()
-        {
-            var identity = (ClaimsIdentity)User.Identity;
-            var Id = identity.Claims.FirstOrDefault(c => c.Type == "ID").Value;
-            int accountId = Convert.ToInt32(Id);
-            //Future list
-            var deviceTotal = new List<Device>();
-            try
-            {
-                //Get related location for user
-                var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == accountId)).ToList();
-                if (locationList != null)
-                {
-                    int locationCount = locationList.Count();
-                    for (int i = 0; i < locationCount; i++)
+                    var devices = deviceService.GetDevices();
+                    if (devices != null)
                     {
-                        var currentLocation = locationList.ElementAt(i);
-                        deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceTotal);
+                        return Ok(devices);
+                    }
+                    else
+                    {
+                        return BadRequest(ErrorMessage.EMPTY_LIST);
                     }
                 }
                 else
                 {
-                    return BadRequest(ErrorMessage.EMPTY_LIST);
-                }
-                
+                    var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == user.userId)).ToList();
+                    if (locationList != null)
+                    {
+                        int locationCount = locationList.Count();
+                        for (int i = 0; i < locationCount; i++)
+                        {
+                            var currentLocation = locationList.ElementAt(i);
+                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount);
+                        }
+                        return Ok(deviceSubAccount);
+                    }
+                    else
+                    {
+                        return BadRequest(ErrorMessage.EMPTY_LIST);
+                    }
+                }   
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.GET_LIST_FAIL);
+                throw new Exception();
             }
-            return Ok(deviceTotal);
+        }
+
+        //Search device
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize]
+        [HttpGet]
+        [Route("{id}")]
+        public IHttpActionResult GetDevicesByID(int id)
+        {
+            var user = this.GetIndentiy();
+            var deviceSubAccount = new List<Device>();
+            try
+            {
+                if (user.roleId == 1)
+                {
+                    var devices = deviceService.GetDeviceByID(id);
+                    if (devices != null)
+                    {
+                        return Ok(devices);
+                    }
+                    else
+                    {
+                        return BadRequest(ErrorMessage.EMPTY_LIST);
+                    }
+                }
+                else {
+                    var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == user.userId)).ToList();
+                    if (locationList != null)
+                    {
+                        int locationCount = locationList.Count();
+                        for (int i = 0; i < locationCount; i++)
+                        {
+                            var currentLocation = locationList.ElementAt(i);
+                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount);
+                        }
+                        var deviceSearch = deviceSubAccount.FirstOrDefault(x => x.deviceId == id); ;
+                        return Ok(deviceSearch);
+                    }
+                    else
+                    {
+                        return BadRequest(ErrorMessage.EMPTY_LIST);
+                    }
+                }                
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
         //Get Device list from single location
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("GetDevicesFromLocation")]
-        public IHttpActionResult GetDevicesFromLocation(int id)
+        [Route("FromLocation/{locationID}")]
+        public IHttpActionResult GetDevicesFromLocation(int locationID)
         {
             //Future list
             var deviceTotal = new List<Device>();
             try
             {
                 //replace bang location service check exist
-                var location = db.Locations.Find(id);
+                var location = db.Locations.Find(locationID);
                 if (location != null)
                 {
                     deviceService.GetDeviceListFromSingleLocation(location, deviceTotal);
@@ -137,79 +147,107 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.GET_LIST_FAIL);
-            }            
+                throw new Exception();
+            }
         }
 
-        
+
 
         //Create new device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize]
         [HttpPost]
-        [Route("PostDevices")]
+        [Route("")]
         public IHttpActionResult PostDevices(DevicePostPutModel dm)
         {
+            var user = this.GetIndentiy();
             try
             {
-                deviceService.CreateDevice(dm);
-                deviceService.Save();
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest(ErrorMessage.CREATE_FAIL);
-            }   
-        }
-
-        //Update existing info device for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
-        [HttpPut]
-        [Route("PutDevices")]
-        public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
-        {
-            try
-            {
-                var device = deviceService.GetDeviceByID(id);
-                if (deviceService.DeviceExists(id))
+                if (user.roleId == 1)
                 {
-                    deviceService.UpdateDevice(device, dm);
+                    deviceService.CreateDevice(dm);
                     deviceService.Save();
                     return Ok();
                 }
                 else
                 {
-                    return NotFound();
+                    return BadRequest(ErrorMessage.UNAUTHORIZED);
+                }            
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
+
+        //Update existing info device for admin
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize]
+        [HttpPut]
+        [Route("")]
+        public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
+        {
+            var user = this.GetIndentiy();
+            try
+            {
+                if (user.roleId == 1)
+                {
+                    var device = deviceService.GetDeviceByID(id);
+                    if (deviceService.DeviceExists(id))
+                    {
+                        deviceService.UpdateDevice(device, dm);
+                        deviceService.Save();
+                        return Ok();
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    return BadRequest(ErrorMessage.UNAUTHORIZED);
                 }
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.UPDATE_FAIL);
+                throw new Exception();
             }
         }
 
         //Change device active
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
+        [Authorize]
         [HttpPut]
-        [Route("PutDevicesActive")]
+        [Route("PutDevicesActive/{id}")]
         public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
         {
+            var user = this.GetIndentiy();
             try
             {
-                var devices = deviceService.GetDeviceByID(id);
-                if (devices == null)
+                if (user.roleId == 1)
                 {
-                    return BadRequest(ErrorMessage.EMPTY_LIST);
+                    var devices = deviceService.GetDeviceByID(id);
+                    if (devices == null)
+                    {
+                        return BadRequest(ErrorMessage.EMPTY_LIST);
+                    }
+                    else
+                    {
+                        deviceService.UpdateStatusDevice(devices, dm);
+                        deviceService.Save();
+                        return Ok();
+                    }
                 }
                 else
                 {
-                    deviceService.UpdateStatusDevice(devices, dm);
-                    deviceService.Save();
-                    return Ok();
+                    return BadRequest(ErrorMessage.UNAUTHORIZED);
                 }
+                
             }
             catch(Exception)
             {
-                return BadRequest(ErrorMessage.UPDATE_FAIL);
+                throw new Exception();
             }
         }
 
@@ -217,22 +255,6 @@ namespace DWDW_WebAPI.Controllers
         [Route("Test")]
         public IHttpActionResult TestXCXC(int c)
         {
-            //var deviceTotal = new List<Device>();
-            //var locationList = db.Locations.Where(a => a.UserLocations.Any(b => b.userId == 3)).ToList();
-            //int locationCount = locationList.Count();
-            //for (int i = 0; i < locationCount; i++)
-            //{
-            //    var currentLocation = locationList.ElementAt(i);
-            //    var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
-            //    var roomCount = roomList.Count();
-            //    for (int y = 0; y < roomCount; y++)
-            //    {
-            //        var currentRoom = roomList.ElementAt(y);
-            //        var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId)).ToList();
-            //        deviceTotal.AddRange(devicee);
-            //    }
-            //}
-            //return Ok(deviceTotal); 
             return Ok();
         }
     }

@@ -16,7 +16,7 @@ using DWDW_WebAPI.ViewModel;
 namespace DWDW_WebAPI.Controllers
 {
     [RoutePrefix("v1/api/Roles")]
-    public class RolesController : ApiController
+    public class RolesController : BaseController
     {
         private DWDBContext db = new DWDBContext();
         private IRoleService roleService;
@@ -27,9 +27,9 @@ namespace DWDW_WebAPI.Controllers
         }
 
         //Get all role for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("GetAllRoles")]
+        [Route("")]
         public IHttpActionResult GetAdminAllRoles()
         {
             try
@@ -46,14 +46,14 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.GET_LIST_FAIL);
+                throw new Exception();
             }
         }
 
         //Search role for  admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("GetRoles/{id}")]
+        [Route("{id}")]
         public IHttpActionResult GetRolesByIDAdmin(int id)
         {
             try
@@ -70,15 +70,15 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.SEARCH_FAIL);
+                throw new Exception();
             }
         }
 
         //Create new role for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPost]
-        [Route("PostRoles")]
-        public IHttpActionResult PostDevices(RolePostPutModel rm)
+        [Route("")]
+        public IHttpActionResult PostRole(RolePostPutModel rm)
         {
             try
             {
@@ -88,14 +88,14 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.CREATE_FAIL);
+                throw new Exception();
             }
         }
 
         //Update-Edit existing role for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
-        [Route("PutRoles/{id}")]
+        [Route("{id}")]
         public IHttpActionResult PutRoless(int id, RolePostPutModel rm)
         {
             try
@@ -114,12 +114,12 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.UPDATE_FAIL);
+                throw new Exception();
             }
         }
 
         //Change role active for admin
-        [Authorize(Roles = Constant.ADMIN_ROLE)]
+        //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpPut]
         [Route("PutRolesActive/{id}")]
         public IHttpActionResult PutRolesActive(int id, RoleisActive rm)
@@ -140,14 +140,14 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(ErrorMessage.UPDATE_FAIL);
+                throw new Exception();
             }
         }
 
         //Delete role for admin
         [Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpDelete]
-        [Route("DeleteRoles/{id}")]
+        [Route("{id}")]
         public IHttpActionResult DeleteRole(int id)
         {
             try
@@ -166,8 +166,8 @@ namespace DWDW_WebAPI.Controllers
             }
             catch (Exception)
             {
-                return BadRequest(ErrorMessage.DELETE_FAIL);
-            }       
+                throw new Exception();
+            }
         }
 
 

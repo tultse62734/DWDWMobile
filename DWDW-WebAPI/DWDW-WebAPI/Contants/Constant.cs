@@ -24,6 +24,8 @@ namespace DWDW_WebAPI.Contants
         public const string UPDATE_FAIL = "Failed to update!";
         public const string DELETE_FAIL = "Failed to delete!";
 
+        public const string UNAUTHORIZED = "You are not allowed to perform this taks!";
+
         public const string UPDATE_ERROR = "Update failed!";
         public const string INSERT_ERROR = "Insert failed!";
         public const string DEACTIVE_ERROR = "Deactive failed!";
