@@ -15,7 +15,7 @@ namespace DWDW_WebAPI.Services
         void UpdateDevice(Device device, DevicePostPutModel dm);
         void Save();
         bool DeviceExists(int deviceID);
-        void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device);
+        void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device, List<DeviceViewModel> deviceModel);
         void UpdateStatusDevice(Device device, DeviceStatusModel dm);
     }
     public class DeviceService : IDeviceService
@@ -74,7 +74,7 @@ namespace DWDW_WebAPI.Services
             return db.Devices.Count(a => a.deviceId == deviceID) > 0;
         }
 
-        public void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device)
+        public void GetDeviceListFromSingleLocation(Location currentLocation, List<Device> device, List<DeviceViewModel> deviceModel)
         {
             var roomList = db.Rooms.Where(x => x.locationId == currentLocation.locationId).ToList();
             var roomCount = roomList.Count();
@@ -84,6 +84,12 @@ namespace DWDW_WebAPI.Services
                 var devicee = db.Devices.Where(a => a.RoomDevices.Any(b => b.roomId == currentRoom.roomId && b.isActive == true)).ToList();
                 device.AddRange(devicee);
             }
+            deviceModel = device.Select(x => new DeviceViewModel
+            {
+                deviceId = x.deviceId,
+                deviceCode = x.deviceCode,
+                isActive = x.isActive
+            }).ToList();
         }
 
         public void UpdateStatusDevice(Device device, DeviceStatusModel dm)

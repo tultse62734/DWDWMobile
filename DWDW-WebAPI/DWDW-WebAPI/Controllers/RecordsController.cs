@@ -26,7 +26,7 @@ namespace DWDW_WebAPI.Controllers
             recordService = new RecordService();
         }
 
-        //Get all record for admin
+        //Get record
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]

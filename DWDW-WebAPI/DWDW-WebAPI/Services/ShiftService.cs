@@ -13,8 +13,8 @@ namespace DWDW_WebAPI.Services
         Shift GetIDShift(int id);
         void CreateShift(ShiftPostPutModel sm);
         void UpdateShift(Shift shift, ShiftPostPutModel sm);
-        List<Shift> GetManagerShift(int accountID);
-        List<Shift> GetWorkerShift(int accountID);
+        List<ShiftViewModel> GetManagerShift(int accountID);
+        List<ShiftViewModel> GetWorkerShift(int accountID);
         void Save();
         bool validateCreate(int userID, int? shiftUserLocationID);
         bool validateCreateRoom(int? roomID, int? userLocationID);
@@ -51,7 +51,7 @@ namespace DWDW_WebAPI.Services
             return db.Shifts.Find(id);
         }
 
-        public List<Shift> GetManagerShift(int accountID)
+        public List<ShiftViewModel> GetManagerShift(int accountID)
         {
             var locationManager = db.UserLocations.Where(x => x.userId == accountID).ToList();
             List<int?> qualifyLocation = new List<int?>();
@@ -72,10 +72,20 @@ namespace DWDW_WebAPI.Services
 
             //var shiftAssigned = db.Shifts.Where(x => x.userLocationId.con)
             var shiftAssigned = db.Shifts.Where(x => qualifyUserLocation.Contains(x.userLocationId)).ToList();
-            return shiftAssigned;
+            var shiftAssignedModel = shiftAssigned.Select(x => new ShiftViewModel
+            {
+                shiftId = x.shiftId,
+                userLocationId = x.userLocationId,
+                startDate = x.startDate,
+                endDate = x.endDate,
+                roomId = x.roomId,
+                shiftType = x.shiftType,
+                isActive = x.isActive
+            }).ToList();
+            return shiftAssignedModel;
         }
 
-        public List<Shift> GetWorkerShift(int accountID)
+        public List<ShiftViewModel> GetWorkerShift(int accountID)
         {
             List<int?> qualifyUserLocation = new List<int?>();
             var userLocation = db.UserLocations.Where(x => x.userId == accountID).ToList();
@@ -85,7 +95,17 @@ namespace DWDW_WebAPI.Services
                 qualifyUserLocation.Add(a);
             }
             var workerShift = db.Shifts.Where(x => qualifyUserLocation.Contains(x.userLocationId)).ToList();
-            return workerShift;
+            var workerShiftModel = workerShift.Select(x => new ShiftViewModel
+            {
+                shiftId = x.shiftId,
+                userLocationId = x.userLocationId,
+                startDate = x.startDate,
+                endDate = x.endDate,
+                roomId = x.roomId,
+                shiftType = x.shiftType,
+                isActive = x.isActive
+            }).ToList();
+            return workerShiftModel;
         }
 
         public void CreateShift(ShiftPostPutModel sm)

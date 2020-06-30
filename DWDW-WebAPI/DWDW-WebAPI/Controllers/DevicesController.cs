@@ -36,6 +36,7 @@ namespace DWDW_WebAPI.Controllers
         {
             var user = this.GetIndentiy();
             var deviceSubAccount = new List<Device>();
+            var deviceSubAccountModel = new List<DeviceViewModel>();
             try
             {
                 if (user.roleId == 1)
@@ -59,9 +60,9 @@ namespace DWDW_WebAPI.Controllers
                         for (int i = 0; i < locationCount; i++)
                         {
                             var currentLocation = locationList.ElementAt(i);
-                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount);
+                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount, deviceSubAccountModel);
                         }
-                        return Ok(deviceSubAccount);
+                        return Ok(deviceSubAccountModel);
                     }
                     else
                     {
@@ -84,6 +85,7 @@ namespace DWDW_WebAPI.Controllers
         {
             var user = this.GetIndentiy();
             var deviceSubAccount = new List<Device>();
+            var deviceSubAccountModel = new List<DeviceViewModel>();
             try
             {
                 if (user.roleId == 1)
@@ -106,9 +108,9 @@ namespace DWDW_WebAPI.Controllers
                         for (int i = 0; i < locationCount; i++)
                         {
                             var currentLocation = locationList.ElementAt(i);
-                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount);
+                            deviceService.GetDeviceListFromSingleLocation(currentLocation, deviceSubAccount, deviceSubAccountModel);
                         }
-                        var deviceSearch = deviceSubAccount.FirstOrDefault(x => x.deviceId == id); ;
+                        var deviceSearch = deviceSubAccountModel.FirstOrDefault(x => x.deviceId == id); ;
                         return Ok(deviceSearch);
                     }
                     else
@@ -131,14 +133,15 @@ namespace DWDW_WebAPI.Controllers
         {
             //Future list
             var deviceTotal = new List<Device>();
+            var deviceSubAccountModel = new List<DeviceViewModel>();
             try
             {
                 //replace bang location service check exist
                 var location = db.Locations.Find(locationID);
                 if (location != null)
                 {
-                    deviceService.GetDeviceListFromSingleLocation(location, deviceTotal);
-                    return Ok(deviceTotal);
+                    deviceService.GetDeviceListFromSingleLocation(location, deviceTotal, deviceSubAccountModel);
+                    return Ok(deviceSubAccountModel);
                 }
                 else
                 {

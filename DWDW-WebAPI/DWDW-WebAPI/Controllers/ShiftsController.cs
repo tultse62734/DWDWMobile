@@ -34,7 +34,7 @@ namespace DWDW_WebAPI.Controllers
         [Route("")]
         public IHttpActionResult GetShifts()
         {
-            var listSubaccountShift = new List<Shift>();
+            var listSubaccountShift = new List<ShiftViewModel>();
             var user = this.GetIndentiy();
             try
             {
@@ -89,7 +89,7 @@ namespace DWDW_WebAPI.Controllers
         [Route("{id}")]
         public IHttpActionResult GetShiftsByIDAdmin(int id)
         {
-            var listSubaccountShift = new List<Shift>();
+            var listSubaccountShift = new List<ShiftViewModel>();
             var user = this.GetIndentiy();
             try
             {
