@@ -15,6 +15,7 @@ using DWDW_WebAPI.ViewModel;
 
 namespace DWDW_WebAPI.Controllers
 {
+    [RoutePrefix("v1/api/Records")]
     public class RecordsController : BaseController
     {
         private DWDBContext db = new DWDBContext();
