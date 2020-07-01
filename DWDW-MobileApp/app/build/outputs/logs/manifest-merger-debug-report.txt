@@ -1,65 +1,74 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
 MERGED from [com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.92] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8fa2b928618c3b56f877df1457751843\jetified-AlphabetIndex-Fast-Scroll-RecyclerView-1.0.92\AndroidManifest.xml:2:1-17:12
 MERGED from [io.github.yavski:fab-speed-dial:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2124af75d69acf11594efcc89e3ce953\jetified-fab-speed-dial-1.0.6\AndroidManifest.xml:17:1-28:12
 MERGED from [com.github.michaldrabik:TapBarMenu:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\55538eebbeceffcf5d3095bc9d4456e0\TapBarMenu-1.0.6\AndroidManifest.xml:2:1-17:12
+MERGED from [com.github.sundeepk:compact-calendar-view:3.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\788d775fd4c13de5286cbb9c599a64a5\jetified-compact-calendar-view-3.0.0\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\cb634fe4b4d1fdfcd5255e485d30a0c1\material-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.wnafee:vector-compat:1.0.5] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\decb283c8f5d2a7de6b5d1698fbf880b\jetified-vector-compat-1.0.5\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.wear:wear:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9c69c3cfae028b3016af07e857fcff66\wear-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8392647ca9531c13a8f0d6b7ad086e7e\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
+MERGED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.19] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a1a5f277b08b617f66486fa8b8eabe08\jetified-android-gif-drawable-1.2.19\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2bf200c3ed6f794fd90e7a7e5e0ea6de\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:2:1-14:12
+MERGED from [androidx.room:room-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\95b9e89bfcbff550782b12406562017e\room-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\bc3ae6e10b9658bcd1ffef343c6758aa\circleimageview-3.1.0\AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.ogaclejapan.smarttablayout:library:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\7fda03cfbc9f3ba7ab96ede16fdf7bef\jetified-library-1.6.1\AndroidManifest.xml:2:1-12:12
+MERGED from [com.ogaclejapan.smarttablayout:utils-v4:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\fd2d4a6e46b5026bb2da66f3ae914c1a\jetified-utils-v4-1.6.1\AndroidManifest.xml:2:1-12:12
+MERGED from [com.kaopiz:kprogresshud:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f8caf5d8c7d1f691f62a44061df52160\kprogresshud-1.1.0\AndroidManifest.xml:2:1-15:12
 MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\d382ba9b8c9ea9d7b43a9cfaea0ecdf4\vectordrawable-animated-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\abc680e55824c418c024460e31034ed4\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ba2af06f417607d7ef1ca9f201a0d139\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\04087833f388d5ffa97a080d757646c2\coordinatorlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\34085af895daa23049fd0af188e6a001\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\eb11c4797d5d5b24d5dcbbebe26babf4\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\740a70a0c89c8c085b6e012b4bd7790e\customview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c9c8616d74aa0ab3eb457d24b669c685\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\aa91d8d2653c363bbd5da9d9892260d3\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ae8b971b40c132101f87c0e7d5e73037\exifinterface-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ccc4f60e4549c263b614feec2a027fa2\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite-framework:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\869d6ba878bdc768e0bd5fd0f8b61183\sqlite-framework-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ef3b36fd0dd45d89f1f4e2618b54ba86\sqlite-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9093771a98b01557e81860f4122d7892\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\7ec682ca46f5c90ea9a9e0cba0c0310a\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\85b59553d84ac8d04663d7d81848664c\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\d4ef17d609918d2a5f5a86d1ea02678f\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [pl.droidsonroids:relinker:1.3.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\e635ddfba2060037e979a6f0f2f7286f\relinker-1.3.1\AndroidManifest.xml:2:1-7:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
 	package
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:3:5-38
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-40:12
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:1-73:12
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:2:11-69
@@ -68,7 +77,7 @@ ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\
 	android:name
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:7:5-38:19
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:7:5-71:19
 MERGED from [com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.92] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8fa2b928618c3b56f877df1457751843\jetified-AlphabetIndex-Fast-Scroll-RecyclerView-1.0.92\AndroidManifest.xml:11:5-15:19
 MERGED from [com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.92] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8fa2b928618c3b56f877df1457751843\jetified-AlphabetIndex-Fast-Scroll-RecyclerView-1.0.92\AndroidManifest.xml:11:5-15:19
 MERGED from [io.github.yavski:fab-speed-dial:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2124af75d69acf11594efcc89e3ce953\jetified-fab-speed-dial-1.0.6\AndroidManifest.xml:26:5-20
@@ -79,10 +88,14 @@ MERGED from [com.google.android.material:material:1.0.0] C:\Users\Le Tuan Tu\.gr
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\cb634fe4b4d1fdfcd5255e485d30a0c1\material-1.0.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8392647ca9531c13a8f0d6b7ad086e7e\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8392647ca9531c13a8f0d6b7ad086e7e\constraintlayout-1.1.3\AndroidManifest.xml:9:5-20
+MERGED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:28:5-20
+MERGED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:28:5-20
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:7:5-12:19
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:7:5-12:19
 MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\bc3ae6e10b9658bcd1ffef343c6758aa\circleimageview-3.1.0\AndroidManifest.xml:9:5-20
 MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\bc3ae6e10b9658bcd1ffef343c6758aa\circleimageview-3.1.0\AndroidManifest.xml:9:5-20
+MERGED from [com.kaopiz:kprogresshud:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f8caf5d8c7d1f691f62a44061df52160\kprogresshud-1.1.0\AndroidManifest.xml:11:5-13:38
+MERGED from [com.kaopiz:kprogresshud:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f8caf5d8c7d1f691f62a44061df52160\kprogresshud-1.1.0\AndroidManifest.xml:11:5-13:38
 MERGED from [androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c9c8616d74aa0ab3eb457d24b669c685\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
@@ -101,64 +114,172 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Le
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:13:9-76
-activity#com.example.dwdwproject.activities.NewsAdminActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:9-75
+activity#com.example.dwdwproject.activities.WorkerReportActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:9-78
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:19-63
-activity#com.example.dwdwproject.activities.ManageDeviceActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:9-69
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:14:19-66
+activity#com.example.dwdwproject.activities.WorkerShiftViewActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:9-72
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:19-66
-activity#com.example.dwdwproject.activities.ProfileManageActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:9-70
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:15:19-69
+activity#com.example.dwdwproject.activities.HomeManagerActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:9-19:20
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:19-67
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:16:19-65
+activity#com.example.dwdwproject.activities.WorkerShiftDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:21:9-74
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:21:19-71
+activity#com.example.dwdwproject.activities.ShiftTaskDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:22:9-72
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:22:19-69
+activity#com.example.dwdwproject.activities.ShiftDateFilterActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:23:9-72
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:23:19-69
+activity#com.example.dwdwproject.activities.AdminAccidentManageActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:24:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:24:19-73
+activity#com.example.dwdwproject.activities.ManagerManageProfileActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:25:9-77
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:25:19-74
+activity#com.example.dwdwproject.activities.ManagerManageRoomActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:9-74
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:19-71
+activity#com.example.dwdwproject.activities.ManagerManageDeviceActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:27:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:27:19-73
+activity#com.example.dwdwproject.activities.ManagerManageWorkerActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:19-73
+activity#com.example.dwdwproject.activities.AccidentReportDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:29:9-77
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:29:19-74
+activity#com.example.dwdwproject.activities.AdminWorkerDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:30:9-74
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:30:19-71
+activity#com.example.dwdwproject.activities.AdminAccidentDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:31:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:31:19-73
+activity#com.example.dwdwproject.activities.ManagerShiftViewActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:32:9-73
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:32:19-70
+activity#com.example.dwdwproject.activities.ManagerCreateShiftActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:33:9-75
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:33:19-72
+activity#com.example.dwdwproject.activities.AdminManagerDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:34:9-75
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:34:19-72
+activity#com.example.dwdwproject.activities.AdminLocationDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:35:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:35:19-73
+activity#com.example.dwdwproject.activities.AdminDeviceDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:36:9-74
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:36:19-71
+activity#com.example.dwdwproject.activities.AdminRoomDetailActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:9-72
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:19-69
+activity#com.example.dwdwproject.activities.AdminCreateManagerActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:38:9-75
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:38:19-72
+activity#com.example.dwdwproject.activities.AdminCreateLocationActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:39:9-76
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:39:19-73
+activity#com.example.dwdwproject.activities.AdminCreateRoomActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:40:9-72
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:40:19-69
+activity#com.example.dwdwproject.activities.AdminCreateDeviceActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:41:9-74
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:41:19-71
+activity#com.example.dwdwproject.activities.ManageAccidentActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:42:9-71
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:42:19-68
+activity#com.example.dwdwproject.activities.ManageRoomActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:43:9-67
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:43:19-64
 activity#com.example.dwdwproject.activities.ManageWorkerActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:17:9-69
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:44:9-69
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:17:19-66
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:44:19-66
+activity#com.example.dwdwproject.activities.ManageLocationActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:45:9-71
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:45:19-68
+activity#com.example.dwdwproject.activities.ManageDeviceActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:46:9-69
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:46:19-66
+activity#com.example.dwdwproject.activities.ProfileManageActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:47:9-70
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:47:19-67
+activity#com.example.dwdwproject.activities.ManageManagerActivity
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:48:9-70
+	android:name
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:48:19-67
 activity#com.example.dwdwproject.activities.HomeWorkerActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:18:9-67
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:49:9-51:20
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:18:19-64
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:49:19-64
 activity#com.example.dwdwproject.activities.HomeAdminActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:19:9-21:83
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:52:9-54:83
 	android:theme
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:21:13-80
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:54:13-80
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:20:13-57
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:53:13-57
 activity#com.example.dwdwproject.activities.SplashActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:22:9-30:20
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:55:9-63:20
 	android:theme
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:24:13-80
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:57:13-80
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:23:13-54
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:56:13-54
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:25:13-29:29
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:58:13-62:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:59:17-69
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:59:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:17-77
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:61:17-77
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:28:27-74
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:61:27-74
 activity#com.example.dwdwproject.activities.SignUpActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:31:9-33:83
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:64:9-66:83
 	android:theme
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:33:13-80
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:66:13-80
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:32:13-54
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:65:13-54
 activity#com.example.dwdwproject.activities.LoginActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:34:9-36:83
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:67:9-69:83
 	android:theme
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:36:13-80
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:69:13-80
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:35:13-53
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:68:13-53
 activity#com.example.dwdwproject.MainActivity
-ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:9-50
+ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:70:9-50
 	android:name
-		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:37:19-47
+		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml:70:19-47
 uses-sdk
 INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
@@ -169,24 +290,38 @@ MERGED from [io.github.yavski:fab-speed-dial:1.0.6] C:\Users\Le Tuan Tu\.gradle\
 MERGED from [io.github.yavski:fab-speed-dial:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2124af75d69acf11594efcc89e3ce953\jetified-fab-speed-dial-1.0.6\AndroidManifest.xml:22:5-24:41
 MERGED from [com.github.michaldrabik:TapBarMenu:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\55538eebbeceffcf5d3095bc9d4456e0\TapBarMenu-1.0.6\AndroidManifest.xml:7:5-9:41
 MERGED from [com.github.michaldrabik:TapBarMenu:1.0.6] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\55538eebbeceffcf5d3095bc9d4456e0\TapBarMenu-1.0.6\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.sundeepk:compact-calendar-view:3.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\788d775fd4c13de5286cbb9c599a64a5\jetified-compact-calendar-view-3.0.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.sundeepk:compact-calendar-view:3.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\788d775fd4c13de5286cbb9c599a64a5\jetified-compact-calendar-view-3.0.0\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\cb634fe4b4d1fdfcd5255e485d30a0c1\material-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\cb634fe4b4d1fdfcd5255e485d30a0c1\material-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.wnafee:vector-compat:1.0.5] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\decb283c8f5d2a7de6b5d1698fbf880b\jetified-vector-compat-1.0.5\AndroidManifest.xml:7:5-9:41
 MERGED from [com.wnafee:vector-compat:1.0.5] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\decb283c8f5d2a7de6b5d1698fbf880b\jetified-vector-compat-1.0.5\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.wear:wear:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9c69c3cfae028b3016af07e857fcff66\wear-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.wear:wear:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9c69c3cfae028b3016af07e857fcff66\wear-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8392647ca9531c13a8f0d6b7ad086e7e\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8392647ca9531c13a8f0d6b7ad086e7e\constraintlayout-1.1.3\AndroidManifest.xml:5:5-7:41
+MERGED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:22:5-24:41
+MERGED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:22:5-24:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.19] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a1a5f277b08b617f66486fa8b8eabe08\jetified-android-gif-drawable-1.2.19\AndroidManifest.xml:5:5-7:41
 MERGED from [pl.droidsonroids.gif:android-gif-drawable:1.2.19] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a1a5f277b08b617f66486fa8b8eabe08\jetified-android-gif-drawable-1.2.19\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2bf200c3ed6f794fd90e7a7e5e0ea6de\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\2bf200c3ed6f794fd90e7a7e5e0ea6de\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:5:5-44
 MERGED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:5:5-44
+MERGED from [androidx.room:room-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\95b9e89bfcbff550782b12406562017e\room-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\95b9e89bfcbff550782b12406562017e\room-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\bc3ae6e10b9658bcd1ffef343c6758aa\circleimageview-3.1.0\AndroidManifest.xml:5:5-7:41
 MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\bc3ae6e10b9658bcd1ffef343c6758aa\circleimageview-3.1.0\AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\1964611a1907e3ea07b40ce4c516c284\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.ogaclejapan.smarttablayout:library:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\7fda03cfbc9f3ba7ab96ede16fdf7bef\jetified-library-1.6.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.ogaclejapan.smarttablayout:library:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\7fda03cfbc9f3ba7ab96ede16fdf7bef\jetified-library-1.6.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.ogaclejapan.smarttablayout:utils-v4:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\fd2d4a6e46b5026bb2da66f3ae914c1a\jetified-utils-v4-1.6.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.ogaclejapan.smarttablayout:utils-v4:1.6.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\fd2d4a6e46b5026bb2da66f3ae914c1a\jetified-utils-v4-1.6.1\AndroidManifest.xml:8:5-10:41
+MERGED from [com.kaopiz:kprogresshud:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f8caf5d8c7d1f691f62a44061df52160\kprogresshud-1.1.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.kaopiz:kprogresshud:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f8caf5d8c7d1f691f62a44061df52160\kprogresshud-1.1.0\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\d382ba9b8c9ea9d7b43a9cfaea0ecdf4\vectordrawable-animated-1.0.0\AndroidManifest.xml:20:5-44
@@ -197,6 +332,8 @@ MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Le Tuan T
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ba2af06f417607d7ef1ca9f201a0d139\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\04087833f388d5ffa97a080d757646c2\coordinatorlayout-1.0.0\AndroidManifest.xml:20:5-44
@@ -209,14 +346,12 @@ MERGED from [androidx.customview:customview:1.0.0] C:\Users\Le Tuan Tu\.gradle\c
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\740a70a0c89c8c085b6e012b4bd7790e\customview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\a6ce3afbff3f1ae3fa1fe13048b173d9\media-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\402e2fb3baa5e6ca3b4a0d7ccbd7cd5b\transition-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\c9c8616d74aa0ab3eb457d24b669c685\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -227,6 +362,16 @@ MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\Le Tuan Tu\.gr
 MERGED from [androidx.exifinterface:exifinterface:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ae8b971b40c132101f87c0e7d5e73037\exifinterface-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ccc4f60e4549c263b614feec2a027fa2\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ccc4f60e4549c263b614feec2a027fa2\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\869d6ba878bdc768e0bd5fd0f8b61183\sqlite-framework-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\869d6ba878bdc768e0bd5fd0f8b61183\sqlite-framework-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ef3b36fd0dd45d89f1f4e2618b54ba86\sqlite-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\ef3b36fd0dd45d89f1f4e2618b54ba86\sqlite-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\9093771a98b01557e81860f4122d7892\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
@@ -239,12 +384,6 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Le Tuan Tu\.grad
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\d4ef17d609918d2a5f5a86d1ea02678f\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [pl.droidsonroids:relinker:1.3.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\e635ddfba2060037e979a6f0f2f7286f\relinker-1.3.1\AndroidManifest.xml:5:5-43
 MERGED from [pl.droidsonroids:relinker:1.3.1] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\e635ddfba2060037e979a6f0f2f7286f\relinker-1.3.1\AndroidManifest.xml:5:5-43
 INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
@@ -257,6 +396,10 @@ INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\ma
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 		ADDED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Le Tuan Tu\Documents\DWDWMobile\DWDW-MobileApp\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.VIBRATE
+ADDED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:26:5-66
+	android:name
+		ADDED from [com.borax12.materialdaterangepicker:library:1.9] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\b39bdb63f59f7e8a172ebeb166e0781e\jetified-library-1.9\AndroidManifest.xml:26:22-63
 provider#com.squareup.picasso.PicassoProvider
 ADDED from [com.squareup.picasso:picasso:2.71828] C:\Users\Le Tuan Tu\.gradle\caches\transforms-2\files-2.1\3262b90fbbb9287902e922c93456dd5d\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
 	android:authorities

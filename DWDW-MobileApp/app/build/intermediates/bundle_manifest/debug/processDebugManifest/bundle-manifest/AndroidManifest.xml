@@ -9,6 +9,7 @@
         android:targetSdkVersion="29" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -18,13 +19,41 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_worker"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
-        <activity android:name="com.example.dwdwproject.activities.NewsAdminActivity" />
+        <activity android:name="com.example.dwdwproject.activities.WorkerReportActivity" />
+        <activity android:name="com.example.dwdwproject.activities.WorkerShiftViewActivity" />
+        <activity android:name="com.example.dwdwproject.activities.HomeManagerActivity" >
+        </activity>
+        <activity android:name="com.example.dwdwproject.activities.WorkerShiftDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ShiftTaskDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ShiftDateFilterActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminAccidentManageActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerManageProfileActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerManageRoomActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerManageDeviceActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerManageWorkerActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AccidentReportDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminWorkerDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminAccidentDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerShiftViewActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManagerCreateShiftActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminManagerDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminLocationDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminDeviceDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminRoomDetailActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminCreateManagerActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminCreateLocationActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminCreateRoomActivity" />
+        <activity android:name="com.example.dwdwproject.activities.AdminCreateDeviceActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManageAccidentActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManageRoomActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManageWorkerActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManageLocationActivity" />
         <activity android:name="com.example.dwdwproject.activities.ManageDeviceActivity" />
         <activity android:name="com.example.dwdwproject.activities.ProfileManageActivity" />
-        <activity android:name="com.example.dwdwproject.activities.ManageWorkerActivity" />
-        <activity android:name="com.example.dwdwproject.activities.HomeWorkerActivity" />
+        <activity android:name="com.example.dwdwproject.activities.ManageManagerActivity" />
+        <activity android:name="com.example.dwdwproject.activities.HomeWorkerActivity" >
+        </activity>
         <activity
             android:name="com.example.dwdwproject.activities.HomeAdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

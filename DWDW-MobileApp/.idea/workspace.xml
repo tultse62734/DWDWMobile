@@ -11,49 +11,93 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="356bcf65-bdcb-4883-9953-76f53bc75994" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/HomeAdminActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/HomeWorkerActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/LoginActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/ManageDeviceActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/ManageWorkerActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/NewsAdminActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/ProfileManageActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/SignUpActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/SplashActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/adapters/WorkerAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/models/Worker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/move.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_employee.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_login.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_profile.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/radius_conner_grey.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/radius_conner_white.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounder_edit_text_1dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tenor.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tenor_1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/tenor_3.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_admin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_worker.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_manage_device.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_manage_worker.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_news_admin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_manage.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_item_worker.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_home_admin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_phone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_collaboration.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_notification.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_project_management.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_worker.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values/dimentions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/androidTest/debug/com/example/dwdwproject/test/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/androidTest/debug/com/example/dwdwproject/test/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/dwdwproject/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/dwdwproject/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/.vs/DWDW-WebAPI/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/../DWDW-WebAPI/.vs/DWDW-WebAPI/config/applicationhost.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/.vs/DWDW-WebAPI/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../DWDW-WebAPI/.vs/DWDW-WebAPI/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/App_Start/FilterConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/App_Start/RouteConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/App_Start/SwaggerConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/App_Start/WebApiConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Contants/Constant.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/BaseController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/DevicesController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/HomeController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/LocationsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/RecordsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/RolesController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/RoomsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/ShiftsController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Controllers/UsersController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/DWDW-WebAPI.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/DWDW-WebAPI.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/DWDW-WebAPI.csproj.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Firebase/FirebaseNotification.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Firebase/Message.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Firebase/Notification.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Global.asax.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.Context.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.Context.tt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.edmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/DWModel.tt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Device.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Location.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Record.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Role.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Room.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/RoomDevice.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/Shift.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/UserLocation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Models/sysdiagram.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Properties/AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Properties/PublishProfiles/DWDW-WebAPI - Web Deploy.pubxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/DeviceService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/LocationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/RecordService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/RoleService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/RoomService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/ShiftService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/UserSecurityService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Services/UserService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Startup.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/DeviceViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/LocationModifyViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/LocationViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/ModelMapping.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/RecordViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/RoleViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/RoomDeviceViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/RoomViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/ShiftViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/UserLocationListViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/ViewModel/UserViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Web.Debug.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Web.Release.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/Web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/obj/Debug/DWDW-WebAPI.csproj.FileListAbsolute.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/obj/Debug/TempPE/Models.DWModel.Context.cs.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/obj/Debug/TempPE/Models.DWModel.Designer.cs.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/obj/Debug/TempPE/Models.DWModel.cs.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DWDW-WebAPI/DWDW-WebAPI/packages.config" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +108,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="R58M45LGAPD" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -86,29 +129,18 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_admin.xml">
-          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="245" column="55" selection-start-line="245" selection-start-column="55" selection-end-line="245" selection-end-column="55" />
-              <folding>
-                <element signature="e#11636#11649#0" expanded="true" />
-                <element signature="e#12166#12180#0" expanded="true" />
-                <element signature="e#12637#12650#0" expanded="true" />
-                <element signature="e#13176#13976#0" />
-                <element signature="e#13462#13475#0" expanded="true" />
-                <element signature="e#14001#14801#0" />
-                <element signature="e#14524#14537#0" expanded="true" />
-                <element signature="e#14826#15626#0" />
-                <element signature="e#15349#15362#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="255" column="21" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/HomeAdminActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
+            <state relative-caret-position="425">
               <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -180,6 +212,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
+      <pane id="AndroidView" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -354,14 +388,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="R58M45LGAPD" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-31T19:12:13.292Z" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -476,6 +509,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="1" />
@@ -488,7 +522,7 @@
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.3289689" />
       <window_info anchor="bottom" id="TODO" order="1" />
-      <window_info anchor="bottom" id="Android Profiler" order="2" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
@@ -537,8 +571,8 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor" />
@@ -557,7 +591,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="164" column="16" selection-start-line="164" selection-start-column="16" selection-end-line="164" selection-end-column="16" />
@@ -600,6 +633,7 @@
           </folding>
         </state>
       </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/SignUpActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -630,8 +664,8 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_worker.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/HomeWorkerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -684,7 +718,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_item_worker.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
@@ -707,6 +740,7 @@
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -740,7 +774,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manage_worker.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
@@ -749,6 +782,7 @@
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimentions.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -758,7 +792,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
@@ -767,14 +800,15 @@
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
           <caret line="73" column="65" selection-start-line="73" selection-start-column="65" selection-end-line="73" selection-end-column="65" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -806,8 +840,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manage_device.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/ManageDeviceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -816,24 +850,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/NewsAdminActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/NewsAdminActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_news_admin.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profile_manage.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
           <caret line="93" column="61" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/ProfileManageActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -843,12 +871,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_home_admin.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/adapters/WorkerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -867,31 +895,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_admin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="255" column="21" selection-start-line="255" selection-start-column="21" selection-end-line="255" selection-end-column="21" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dwdwproject/activities/HomeAdminActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="425">
           <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_admin.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="245" column="55" selection-start-line="245" selection-start-column="55" selection-end-line="245" selection-end-column="55" />
-          <folding>
-            <element signature="e#11636#11649#0" expanded="true" />
-            <element signature="e#12166#12180#0" expanded="true" />
-            <element signature="e#12637#12650#0" expanded="true" />
-            <element signature="e#13176#13976#0" />
-            <element signature="e#13462#13475#0" expanded="true" />
-            <element signature="e#14001#14801#0" />
-            <element signature="e#14524#14537#0" expanded="true" />
-            <element signature="e#14826#15626#0" />
-            <element signature="e#15349#15362#0" expanded="true" />
           </folding>
         </state>
       </provider>
