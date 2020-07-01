@@ -31,7 +31,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]
-        [Route("")]
+        [Route("GetShifts")]
         public IHttpActionResult GetShifts()
         {
             var listSubaccountShift = new List<ShiftViewModel>();
@@ -86,7 +86,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]
-        [Route("{id}")]
+        [Route("SearchShifts")]
         public IHttpActionResult GetShiftsByIDAdmin(int id)
         {
             var listSubaccountShift = new List<ShiftViewModel>();
@@ -143,7 +143,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.MANAGER_ROLE)]
         [Authorize]
         [HttpPost]
-        [Route("")]
+        [Route("CreateShift")]
         public IHttpActionResult PostShift(ShiftPostPutModel sm)
         {
             var user = this.GetIndentiy();
@@ -183,7 +183,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.MANAGER_ROLE)]
         [Authorize]
         [HttpPut]
-        [Route("{id}")]
+        [Route("UpdateShift")]
         public IHttpActionResult PutShift(int id, ShiftPostPutModel sm)
         {
             var user = this.GetIndentiy();
@@ -232,7 +232,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.MANAGER_ROLE)]
         [Authorize]
         [HttpDelete]
-        [Route("")]
+        [Route("DeleteShifts")]
         public IHttpActionResult DeleteShift(int id)
         {
             var user = this.GetIndentiy();

@@ -31,7 +31,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = "1")]
         [Authorize]
         [HttpGet]
-        [Route("")]
+        [Route("GetDevices")]
         public IHttpActionResult GetDevices()
         {
             var user = this.GetIndentiy();
@@ -80,7 +80,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]
-        [Route("{id}")]
+        [Route("SearchDevices")]
         public IHttpActionResult GetDevicesByID(int id)
         {
             var user = this.GetIndentiy();
@@ -128,7 +128,7 @@ namespace DWDW_WebAPI.Controllers
         //Get Device list from single location
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [HttpGet]
-        [Route("FromLocation/{locationID}")]
+        [Route("FromLocation")]
         public IHttpActionResult GetDevicesFromLocation(int locationID)
         {
             //Future list
@@ -160,7 +160,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpPost]
-        [Route("")]
+        [Route("CreateDevices")]
         public IHttpActionResult PostDevices(DevicePostPutModel dm)
         {
             var user = this.GetIndentiy();
@@ -187,7 +187,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpPut]
-        [Route("")]
+        [Route("UpdateDevices")]
         public IHttpActionResult PutDevices(int id, DevicePostPutModel dm)
         {
             var user = this.GetIndentiy();
@@ -222,7 +222,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpPut]
-        [Route("PutDevicesActive/{id}")]
+        [Route("UpdateDevicesActive")]
         public IHttpActionResult PutDevicesActive(int id, DeviceStatusModel dm)
         {
             var user = this.GetIndentiy();

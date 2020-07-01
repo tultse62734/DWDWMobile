@@ -30,7 +30,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]
-        [Route("")]
+        [Route("GetRecords")]
         public IHttpActionResult GetRecords()
         {
             var user = this.GetIndentiy();
@@ -83,7 +83,7 @@ namespace DWDW_WebAPI.Controllers
         //[Authorize(Roles = Constant.ADMIN_ROLE)]
         [Authorize]
         [HttpGet]
-        [Route("{id}")]
+        [Route("SearchRecords")]
         public IHttpActionResult GetRecordsByID(int id)
         {
             var user = this.GetIndentiy();
@@ -135,12 +135,11 @@ namespace DWDW_WebAPI.Controllers
 
         //Create new record
         [HttpPost]
-        [Route("{id}")]
-        public IHttpActionResult PostDevices(int id, RecordPostModel rm)
+        [Route("CreateRecords")]
+        public IHttpActionResult PostDevices( RecordPostModel rm)
         {
             try
             {
-                rm.deviceId = id;
                 rm.recordDate = DateTime.Now;
                 recordService.CreateRecord(rm);
                 recordService.Save();
