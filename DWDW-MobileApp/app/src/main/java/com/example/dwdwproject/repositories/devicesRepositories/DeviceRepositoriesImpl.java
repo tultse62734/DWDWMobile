@@ -2,6 +2,7 @@ package com.example.dwdwproject.repositories.devicesRepositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
@@ -26,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 public class DeviceRepositoriesImpl implements DeviceRepositories {
     @Override
-    public void getAllDeviceList(final Context mContext, final CallBackData<List<Device>> mCallBackData) {
+    public void getAllDeviceList(final Context mContext, final CallBackData<List<DeviceDTO>> mCallBackData) {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getAllDevice();
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
@@ -38,11 +39,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<List<Device>>() {
+                        Type type = new TypeToken<List<DeviceDTO>>() {
 
                         }.getType();
                         //call response to get value data
-                        List<Device>mDeviceList = new Gson().fromJson(result, type);
+                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
                         mCallBackData.onSucess(mDeviceList);
 
                     } catch (IOException e) {
@@ -62,7 +63,7 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void getAllDeviceById(final Context mContext, int deviceId,final CallBackData<Device> callBackData) {
+    public void getAllDeviceById(final Context mContext, int deviceId,final CallBackData<DeviceDTO> callBackData) {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceById(deviceId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
@@ -74,11 +75,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Device>() {
+                        Type type = new TypeToken<DeviceDTO>() {
 
                         }.getType();
                         //call response to get value data
-                        Device mDevice = new Gson().fromJson(result, type);
+                        DeviceDTO mDevice = new Gson().fromJson(result, type);
                         callBackData.onSucess(mDevice);
 
                     } catch (IOException e) {
@@ -98,7 +99,7 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void createDevice(final Context mContext, Device mDevice, final CallBackData<String> callBackData) {
+    public void createDevice(final Context mContext, DeviceDTO mDevice, final CallBackData<String> callBackData) {
 //        String hearder = "Bearer " + accessToken;
 //        Map<String, String> map = new HashMap<>();
 //        map.put("Authorization", hearder);
@@ -148,7 +149,7 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void updateDevice(final Context mContext, int deviceId,Device mDevice, final CallBackData<String> callBackData) {
+    public void updateDevice(final Context mContext, int deviceId,DeviceDTO mDevice, final CallBackData<String> callBackData) {
         ClientApi clientApi = new ClientApi();
         JSONObject data = new JSONObject();
 
@@ -195,7 +196,7 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void getAllDeviceFromLocation(final Context mContext, int locationId, final CallBackData<List<Device>> mCallBackData) {
+    public void getAllDeviceFromLocation(final Context mContext, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
@@ -207,11 +208,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<List<Device>>() {
+                        Type type = new TypeToken<List<DeviceDTO>>() {
 
                         }.getType();
                         //call response to get value data
-                        List<Device>mDeviceList = new Gson().fromJson(result, type);
+                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
                         mCallBackData.onSucess(mDeviceList);
                     } catch (IOException e) {
                         e.printStackTrace();

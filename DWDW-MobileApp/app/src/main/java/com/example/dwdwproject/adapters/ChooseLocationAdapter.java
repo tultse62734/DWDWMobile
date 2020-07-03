@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,14 +19,17 @@ import com.example.dwdwproject.models.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAdapter.ChooseLocationViewHolder>{
+public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAdapter.ChooseLocationViewHolder>  implements Filterable {
     private Context mContext;
     private List<Location> mLocationList;
+    private List<Location> mLocationListFull;
+
     private OnClickItem mOnClickItem;
 
     public ChooseLocationAdapter(Context mContext, List<Location> mLocationList) {
         this.mContext = mContext;
         this.mLocationList = mLocationList;
+        mLocationListFull = new ArrayList<>(mLocationList);
     }
 
     @NonNull
@@ -62,6 +67,36 @@ public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAd
     public void OnClickItemListener(OnClickItem mOnClickItem){
         this.mOnClickItem = mOnClickItem;
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Location> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mLocationListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Location item : mLocationListFull) {
+                    if (item.getNameLocation().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mLocationList.clear();
+            mLocationList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
     public class ChooseLocationViewHolder extends RecyclerView.ViewHolder {
         TextView mTxtNameLocation,mTxtCreateDateLocation,mTxtStatusLocation;
         LinearLayout mLnlRootLocation;
