@@ -4,6 +4,8 @@ public class ConfigAPI {
     public interface Api {
         //User
         String LOGIN = "";
+        String GETUSERINFOR="";
+        String UPDATEINFOR ="";
         //Device
         String GETALLDEVICE = "";
         String GETDEVICEBYID ="";
@@ -16,5 +18,18 @@ public class ConfigAPI {
         String GETLOCATIONBYID ="";
         String CREATELOCATION ="";
         String UPDATELOCATION = "";
+        //Room
+        String GETALLROOM = "";
+        String GETROOMBYID ="";
+        String CREATEROOM ="";
+        String UPDATEROOM = "";
+        String GETROOMFROMLOCATION="";
+        //Users
+        String GETALLUSER  = "";
+        String GETALLUSERBYADMIN = "";
+        String GETALLUSERBYMANAGER = "";
+        String CREATEUSER="";
+        String UPDATEUSER="";
+        String DELETEUSER ="";
     }
 }

@@ -8,9 +8,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.presenters.roomLocalPresenter.GetUserToRoomPresenter;
+import com.example.dwdwproject.rooms.entities.UserItemEntities;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
-public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener, GetInfoUserView {
     private LinearLayout mLnlWorker,mLnlDevice,mBtnClose;
+    private GetUserToRoomPresenter mGetUserToRoomPresenter;
+    private String token;
+    private UserDTO mUserDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +35,8 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
+        mGetUserToRoomPresenter = new GetUserToRoomPresenter(ProfileManageActivity.this,getApplication(),this);
+        mGetUserToRoomPresenter.getAccessToken();
     }
 
     @Override
@@ -51,5 +61,14 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private void intentToManageDeviceActivity(){
         Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
+        token = mUserItemEntities.getToken();
+        mUserDTO = mUserItemEntities.getmUserDTO();
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Không lấy được dữ liệu");
     }
 }

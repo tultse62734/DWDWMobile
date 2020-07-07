@@ -66,6 +66,7 @@
             android:name=".activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

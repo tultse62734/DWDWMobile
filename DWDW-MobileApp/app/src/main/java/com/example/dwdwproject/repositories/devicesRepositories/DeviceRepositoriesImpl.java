@@ -27,9 +27,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 public class DeviceRepositoriesImpl implements DeviceRepositories {
     @Override
-    public void getAllDeviceList(final Context mContext, final CallBackData<List<DeviceDTO>> mCallBackData) {
+    public void getAllDeviceList(final Context mContext,String token, final CallBackData<List<DeviceDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getAllDevice();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getAllDevice(map);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -63,9 +66,12 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void getAllDeviceById(final Context mContext, int deviceId,final CallBackData<DeviceDTO> callBackData) {
+    public void getAllDeviceById(final Context mContext,String token, int deviceId,final CallBackData<DeviceDTO> callBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceById(deviceId);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceById(map,deviceId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -99,23 +105,15 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void createDevice(final Context mContext, DeviceDTO mDevice, final CallBackData<String> callBackData) {
-//        String hearder = "Bearer " + accessToken;
-//        Map<String, String> map = new HashMap<>();
-//        map.put("Authorization", hearder);
+    public void createDevice(final Context mContext, String token,DeviceDTO mDevice, final CallBackData<DeviceDTO> callBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        JSONObject data = new JSONObject();
-
-        try {
-            data.put("deviceCode", mDevice.getNameDevice());
-            data.put("deviceStatus", mDevice.getDeviceStatus());
-            data.put("isActive", mDevice.isActive());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().createDevice(body);
+        Gson gson =new Gson();
+        String requestBody = gson.toJson(mDevice);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().createDevice(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -124,12 +122,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Integer>() {
+                        Type type = new TypeToken<DeviceDTO>() {
 
                         }.getType();
                         //call response to get value data
-                        Integer reuslt = new Gson().fromJson(result, type);
-                        callBackData.onSucess("Tạo thiết bị thành công");
+                        DeviceDTO mDevice = new Gson().fromJson(result, type);
+                        callBackData.onSucess(mDevice);
+
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -149,20 +148,15 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
     }
 
     @Override
-    public void updateDevice(final Context mContext, int deviceId,DeviceDTO mDevice, final CallBackData<String> callBackData) {
+    public void updateDevice(final Context mContext,String token,DeviceDTO mDevice, final CallBackData<DeviceDTO> callBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        JSONObject data = new JSONObject();
-
-        try {
-            data.put("deviceCode", mDevice.getNameDevice());
-            data.put("deviceStatus", mDevice.getDeviceStatus());
-            data.put("isActive", mDevice.isActive());
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().updateDevice(deviceId,body);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(mDevice);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().updateDevice(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -171,12 +165,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Integer>() {
+                        Type type = new TypeToken<DeviceDTO>() {
 
                         }.getType();
                         //call response to get value data
-                        Integer reuslt = new Gson().fromJson(result, type);
-                        callBackData.onSucess("Cập nhật thiết bị thành công");
+                        DeviceDTO mDevice = new Gson().fromJson(result, type);
+                        callBackData.onSucess(mDevice);
+
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -194,11 +189,50 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         });
 
     }
-
     @Override
-    public void getAllDeviceFromLocation(final Context mContext, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
+    public void getAllDeviceFromLocationByAdmin(final Context mContext,String token, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(locationId);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(map,locationId);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<List<DeviceDTO>>() {
+
+                        }.getType();
+                        //call response to get value data
+                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(mDeviceList);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+    @Override
+    public void getAllDeviceFromLocationByManager(final Context mContext,String token, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {

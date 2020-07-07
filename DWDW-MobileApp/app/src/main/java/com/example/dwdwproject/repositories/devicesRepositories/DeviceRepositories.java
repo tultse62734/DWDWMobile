@@ -8,9 +8,10 @@ import com.example.dwdwproject.utils.CallBackData;
 
 import java.util.List;
 public interface DeviceRepositories {
-    void getAllDeviceList(Context mContext, CallBackData<List<DeviceDTO>>mCallBackData);
-    void getAllDeviceById(Context mContext,int deviceId,CallBackData<DeviceDTO>callBackData);
-    void createDevice(Context mContext,DeviceDTO mDevice,CallBackData<String> callBackData);
-    void updateDevice(Context mContext,int deviceId,DeviceDTO mDevice,CallBackData<String> callBackData);
-    void getAllDeviceFromLocation(Context mContext,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
+    void getAllDeviceList(Context mContext,String token, CallBackData<List<DeviceDTO>>mCallBackData);
+    void getAllDeviceById(Context mContext,String token,int deviceId,CallBackData<DeviceDTO>callBackData);
+    void createDevice(Context mContext,String token,DeviceDTO mDevice,CallBackData<DeviceDTO> callBackData);
+    void updateDevice(Context mContext,String token,DeviceDTO mDevice,CallBackData<DeviceDTO> callBackData);
+    void getAllDeviceFromLocationByAdmin(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
+    void getAllDeviceFromLocationByManager(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
 }

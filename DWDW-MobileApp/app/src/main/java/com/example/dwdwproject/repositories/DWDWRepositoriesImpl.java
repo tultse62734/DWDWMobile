@@ -2,6 +2,8 @@ package com.example.dwdwproject.repositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.LoginDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.ReponseDTO;
 import com.example.dwdwproject.models.User;
@@ -14,8 +16,11 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,9 +28,13 @@ import retrofit2.Response;
 
 public class DWDWRepositoriesImpl implements DWDWRepositories {
     @Override
-    public void Login(final Context mContext, String username, String password, final CallBackData<ReponseDTO> callBackData) {
+    public void Login(final Context mContext, LoginDTO mLoginDTO, final CallBackData<ReponseDTO> callBackData) {
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.Services().login(username,password);
+        Gson gson = new Gson();
+        String requestBody = gson.toJson(mLoginDTO);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),requestBody);
+
+        Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -54,6 +63,42 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
                 callBackData.onFail(t.getMessage());
+            }
+        });
+    }
+    @Override
+    public void GetUsetInfor(final Context context, String token, final CallBackData<UserDTO> mCallBackData) {
+        ClientApi clientApi = new ClientApi();
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        Call<ResponseBody> mBodyCall = clientApi.Services().getUserInfor(map);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<UserDTO>() {
+
+                        }.getType();
+                        //call response to get value data
+                        UserDTO userDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(userDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
     }
