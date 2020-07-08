@@ -148,6 +148,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void addUserSuccesṣ̣(UserItemEntities mUserItemEntities) {
-           intentToHomeActivityByRole(mUserItemEntities.getmUserDTO().getRoleId());
+           intentToHomeActivityByRole(mUserItemEntities.getUser().getRoleId());
     }
 }

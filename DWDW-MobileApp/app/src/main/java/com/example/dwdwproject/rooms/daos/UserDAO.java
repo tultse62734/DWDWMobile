@@ -2,13 +2,14 @@ package com.example.dwdwproject.rooms.daos;
 
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
-
+@Dao
 public interface UserDAO {
     @Insert
     void insertAccount(UserItemEntities... userItemEntities);

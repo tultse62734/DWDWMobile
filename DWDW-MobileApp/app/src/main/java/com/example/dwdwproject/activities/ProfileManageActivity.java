@@ -65,7 +65,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     @Override
     public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
         token = mUserItemEntities.getToken();
-        mUserDTO = mUserItemEntities.getmUserDTO();
+        mUserDTO = mUserItemEntities.getUser();
     }
     @Override
     public void showError(String message) {

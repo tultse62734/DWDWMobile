@@ -16,27 +16,27 @@ public class UserItemEntities implements Serializable,Cloneable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "uuid")
     @NonNull
-    private String accountItemId;
+    private int accountItemId;
     @TypeConverters(DataConvert.class)
     @SerializedName("user")
-    private UserDTO mUserDTO;
+    private UserDTO user;
     @SerializedName("token")
     private String token;
-    @NonNull
-    public String getAccountItemId() {
+
+    public int getAccountItemId() {
         return accountItemId;
     }
 
-    public void setAccountItemId(@NonNull String accountItemId) {
+    public void setAccountItemId(int accountItemId) {
         this.accountItemId = accountItemId;
     }
 
-    public UserDTO getmUserDTO() {
-        return mUserDTO;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setmUserDTO(UserDTO mUserDTO) {
-        this.mUserDTO = mUserDTO;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     public String getToken() {
@@ -45,13 +45,5 @@ public class UserItemEntities implements Serializable,Cloneable {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public Object clone() {
-        UserItemEntities userItemEntities = new UserItemEntities();
-        userItemEntities.setAccountItemId(accountItemId);
-        userItemEntities.setmUserDTO(mUserDTO);
-        userItemEntities.setToken(token);
-        return userItemEntities;
     }
 }
