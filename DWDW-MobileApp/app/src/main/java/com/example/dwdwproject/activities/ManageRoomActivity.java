@@ -52,7 +52,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
         for (int i = 0; i <locationList.size(); i++) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(BundleString.LOCATION_INFO,locationList.get(i));
+            bundle.putSerializable(BundleString.LOCATIONID,locationList.get(i));
             creator.add(locationList.get(i).getNameLocation(), PageRoomFragment.class, bundle);
         }
         mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),

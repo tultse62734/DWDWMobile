@@ -22,7 +22,6 @@ public interface ServiceDevice {
     @GET(ConfigAPI.Api.GETDEVICEBYID)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getDeviceById(@HeaderMap Map<String, String> map,@Path("id") int id);
-
     @GET(ConfigAPI.Api.GETALLDEVICEFROMLOCATION)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Path("id") int id);

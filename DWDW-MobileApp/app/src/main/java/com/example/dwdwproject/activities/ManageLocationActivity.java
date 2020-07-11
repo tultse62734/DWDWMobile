@@ -124,7 +124,6 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageLocationActivity.this,"Can't show data");
         }
-
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList!=null){

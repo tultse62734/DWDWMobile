@@ -13,10 +13,14 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.presenters.devicesPresenters.GetAllDevicePresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -24,7 +28,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageDeviceActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageDeviceActivity extends AppCompatActivity implements View.OnClickListener{
     LinearLayout mBtnClose,mBtnAdđeviceAdmin;
     private FragmentPagerItemAdapter mAdapter;
     private ViewPager mViewPager;
@@ -63,6 +67,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
         mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
         mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
         getCategoryData(mLocationList);
+
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());

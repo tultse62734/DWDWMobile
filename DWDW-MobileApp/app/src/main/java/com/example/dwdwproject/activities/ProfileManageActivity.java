@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.GetUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
-public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener, GetInfoUserView {
+public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetInfoUserView {
     private LinearLayout mLnlWorker,mLnlDevice,mBtnClose;
-    private GetUserToRoomPresenter mGetUserToRoomPresenter;
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO mUserDTO;
+    private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +55,8 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
-        mGetUserToRoomPresenter = new GetUserToRoomPresenter(ProfileManageActivity.this,getApplication(),this);
-        mGetUserToRoomPresenter.getAccessToken();
+        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,getApplication(), (GetUserInforTokenView) this);
+        mGetUserInforTokenPresenter.getInfor();
     }
     @Override
     public void onClick(View v) {
@@ -79,13 +81,14 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
         startActivity(intent);
     }
+
     @Override
     public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
-        token = mUserItemEntities.getToken();
-        mUserDTO = mUserItemEntities.getUser();
+
     }
+
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Không lấy được dữ liệu");
+
     }
 }
