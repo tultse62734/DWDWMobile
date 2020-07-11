@@ -16,6 +16,7 @@ import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -57,7 +58,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
         for (int i = 0; i <locationList.size(); i++) {
             Bundle bundle = new Bundle();
-            bundle.putInt(BundleString.LOCATION_INFO,locationList.get(i).getLocationId());
+            bundle.putInt(BundleString.LOCATIONID,locationList.get(i).getLocationId());
             creator.add(locationList.get(i).getNameLocation(), PageManagerFragment.class, bundle);
         }
         mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
@@ -131,6 +132,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void showError(String message) {
-
+        DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,"Data");
     }
 }

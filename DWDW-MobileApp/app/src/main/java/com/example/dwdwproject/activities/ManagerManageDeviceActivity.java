@@ -15,6 +15,9 @@ import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForManagerPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
     private List<Device> mDeviceList;
     private GetDeviceForManagerPresenter deviceForManagerPresenter;
     private LinearLayout mBtnClose;
+    private int locationId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
         initData();
     }
     private void initView (){
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageDeviceActivity.this, BundleString.LOCATIONID);
         mBtnClose = findViewById(R.id.lnl_close_manager_manage_device);
         mRecyclerView = findViewById(R.id.rcv_manager_manage_device);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -55,6 +60,8 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        updateUI();
+        deviceForManagerPresenter = new GetDeviceForManagerPresenter(ManagerManageDeviceActivity.this,getApplication(),this);
+        deviceForManagerPresenter.getDeviceFromLocationToken(locationId);
     }
     private void updateUI(){
         if(mDeviceAdapter == null){
@@ -97,6 +104,6 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
     }
     @Override
     public void showError(String message) {
-
+        DialogNotifyError.showErrorLoginDialog(ManagerManageDeviceActivity.this,"Data is error");
     }
 }

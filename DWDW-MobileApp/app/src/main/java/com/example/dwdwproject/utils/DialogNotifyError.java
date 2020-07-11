@@ -2,6 +2,7 @@ package com.example.dwdwproject.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,8 +15,8 @@ import com.example.dwdwproject.activities.LoginActivity;
 
 public class DialogNotifyError {
 
-    public static void showErrorLoginDialog(final Activity activity, String message) {
-        final Dialog dialog = new Dialog(activity.getApplicationContext());
+    public static void showErrorLoginDialog(final Context context, String message) {
+        final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_layout_notify_change_day);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button buttonOk = dialog.findViewById(R.id.btn_Ok_choose);

@@ -27,7 +27,6 @@ import com.example.dwdwproject.utils.DateManagement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 public class AdminCreateDeviceActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener  {
     LinearLayout mBtnClose;
     TextView mEdtChoooseLocation,mEdtChoooseRoom,mEdtChooseTime;

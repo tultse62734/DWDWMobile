@@ -16,23 +16,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.RoomDTO;
 import com.example.dwdwproject.adapters.RoomAdapter;
 import com.example.dwdwproject.models.Room;
+import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageRoomFragment extends Fragment {
+public class PageRoomFragment extends Fragment implements GetListRoomView {
     private View mView;
     private List<Room> mRoomList;
     private RecyclerView mRecyclerView;
+    private GetAllRoomFromLocationPresenter mRoomFromLocationPresenter;
     private RoomAdapter mRoomAdapter;
+    private int locationId;
     public PageRoomFragment() {
         // Required empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locationId = getArguments().getInt(BundleString.LOCATIONID);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,14 +62,16 @@ public class PageRoomFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        mRoomList = new ArrayList<>();
-        mRoomList.add(new Room(1,"100","12-12-2020",true));
-        mRoomList.add(new Room(2,"200","12-12-2020",false));
-        mRoomList.add(new Room(3,"300","12-12-2020",false));
-        mRoomList.add(new Room(4,"400","12-12-2020",true));
-        mRoomList.add(new Room(5,"500","12-12-2020",true));
-        mRoomList.add(new Room(6,"600","12-12-2020",true));
-        updateUI();
+//        mRoomList = new ArrayList<>();
+//        mRoomList.add(new Room(1,"100","12-12-2020",true));
+//        mRoomList.add(new Room(2,"200","12-12-2020",false));
+//        mRoomList.add(new Room(3,"300","12-12-2020",false));
+//        mRoomList.add(new Room(4,"400","12-12-2020",true));
+//        mRoomList.add(new Room(5,"500","12-12-2020",true));
+//        mRoomList.add(new Room(6,"600","12-12-2020",true));
+//        updateUI();
+        mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),getActivity().getApplication(),this);
+        mRoomFromLocationPresenter.getAllRoomFromLocation(locationId);
     }
     private void updateUI(){
         if(mRoomAdapter == null){
@@ -71,6 +81,9 @@ public class PageRoomFragment extends Fragment {
                 @Override
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AdminRoomDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.ROOMDETAIL,mRoomList.get(pos));
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });
@@ -79,5 +92,23 @@ public class PageRoomFragment extends Fragment {
             mRoomAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    @Override
+    public void getListRoomSuccess(List<RoomDTO> mRoomDTOList) {
+        if(mRoomDTOList!=null){
+            this.mRoomList = new ArrayList<>();
+            for (int i = 0; i <mRoomDTOList.size() ; i++) {
+                int roomId = mRoomDTOList.get(i).getRoomId();
+                String roomCode = mRoomDTOList.get(i).getRoomCode();
+                boolean isActive = mRoomDTOList.get(i).isActive();
+                mRoomList.add(new Room(roomId,roomCode,"12-12-2020",isActive));
+            }
+            updateUI();
+        }
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");
     }
 }

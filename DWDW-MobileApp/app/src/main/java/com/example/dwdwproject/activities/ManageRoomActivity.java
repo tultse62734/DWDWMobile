@@ -10,9 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Status;
+import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -20,10 +24,11 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageRoomActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageRoomActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
     LinearLayout mBtnClose,mBtnAddRoomAdmin;
     private FragmentPagerItemAdapter mAdapter;
     private ViewPager mViewPager;
+    private GetAllLocationPresenter mGetAllLocationPresenter;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
     @Override
@@ -40,13 +45,13 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     private void initData(){
         mBtnClose.setOnClickListener(this);
         mBtnAddRoomAdmin.setOnClickListener(this);
-        mLocationList = new ArrayList<>();
-
-        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
-        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
-        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
-        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
-        getCategoryData(mLocationList);
+//        mLocationList = new ArrayList<>();
+//        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
+//        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
+//        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
+//        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
+        mGetAllLocationPresenter = new GetAllLocationPresenter(ManageRoomActivity.this,getApplication(),this);
+        mGetAllLocationPresenter.getTokenGetAllLocation();
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
@@ -109,5 +114,21 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+        mLocationList = new ArrayList<>();
+        for (int i = 0; i <mLocationDTOList.size() ; i++) {
+            int id = mLocationDTOList.get(i).getLocationId();
+            String name = mLocationDTOList.get(i).getLocationCode();
+            boolean isActive = mLocationDTOList.get(i).isActive();
+            mLocationList.add(new Location(id,name, isActive));
+        }
+        getCategoryData(mLocationList);
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(ManageRoomActivity.this,"Data is error");
     }
 }

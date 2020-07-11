@@ -44,7 +44,6 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
         mBtnAddLocation = findViewById(R.id.lnl_add_location_admin);
          RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);

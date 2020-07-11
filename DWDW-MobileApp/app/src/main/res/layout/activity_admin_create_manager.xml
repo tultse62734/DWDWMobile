@@ -187,7 +187,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_marginBottom="@dimen/dp20"
-                android:id="@+id/lnl_submit_add_device_admin"
+                android:id="@+id/lnl_submit_create_manager"
                 android:layout_marginRight="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginLeft="@dimen/dp20"

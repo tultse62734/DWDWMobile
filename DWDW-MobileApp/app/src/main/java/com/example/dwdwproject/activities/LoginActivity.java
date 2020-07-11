@@ -25,7 +25,6 @@ import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.LoginView;
 import com.example.dwdwproject.views.roomLocalViews.AddUserToRoomView;
 import com.google.firebase.iid.FirebaseInstanceId;
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginView, AddUserToRoomView {
     private LinearLayout mBtnSignIn,mBtnSignUp;
     private String username,password;

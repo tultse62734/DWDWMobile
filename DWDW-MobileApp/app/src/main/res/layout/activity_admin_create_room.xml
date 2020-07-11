@@ -73,6 +73,7 @@
 
                 </TextView>
                 <EditText
+                    android:id="@+id/edit_create_input_room_code"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -134,7 +135,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_marginBottom="@dimen/dp20"
-                android:id="@+id/lnl_submit_add_device_admin"
+                android:id="@+id/lnl_submit_add_room_admin"
                 android:layout_marginRight="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginLeft="@dimen/dp20"

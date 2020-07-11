@@ -1,6 +1,8 @@
 package com.example.dwdwproject.models;
 
-public class Manager {
+import java.io.Serializable;
+
+public class Manager  implements Serializable {
     private String  imageResourceId;
     private  String name;
     private  String phone;

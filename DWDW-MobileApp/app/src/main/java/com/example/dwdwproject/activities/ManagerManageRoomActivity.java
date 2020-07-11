@@ -15,6 +15,7 @@ import com.example.dwdwproject.adapters.RoomAdapter;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
@@ -98,6 +99,6 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
 
     @Override
     public void showError(String message) {
-
+        DialogNotifyError.showErrorLoginDialog(ManagerManageRoomActivity.this,"Data is error");
     }
 }
