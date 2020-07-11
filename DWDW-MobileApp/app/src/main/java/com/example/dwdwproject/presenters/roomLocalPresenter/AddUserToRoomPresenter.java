@@ -29,7 +29,7 @@ public class AddUserToRoomPresenter {
             @Override
             public void onSucess(UserDTO userDTO) {
                 UserItemEntities mUserItemEntities = new UserItemEntities();
-                mUserItemEntities.setmUserDTO(userDTO);
+                mUserItemEntities.setUser(userDTO);
                 mUserItemEntities.setToken(token);
                 addToRoom(mUserItemEntities);
             }

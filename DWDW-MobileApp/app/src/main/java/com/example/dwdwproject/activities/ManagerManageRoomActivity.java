@@ -10,17 +10,24 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.RoomDTO;
 import com.example.dwdwproject.adapters.RoomAdapter;
 import com.example.dwdwproject.models.Room;
+import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerManageRoomActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManagerManageRoomActivity extends AppCompatActivity implements View.OnClickListener, GetListRoomView {
     private RecyclerView mRecyclerView;
     private RoomAdapter mRoomAdapter;
     private List<Room> mRoomList;
     private LinearLayout mBtnClose;
+    private GetAllRoomFromLocationPresenter mGetAllRoomFromLocationPresenter;
+    private int locationId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +43,16 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
-        mRoomList = new ArrayList<>();
-        mRoomList.add(new Room(1,"100","12-11-2020",true));
-        mRoomList.add(new Room(2,"200","12-11-2020",true));
-        mRoomList.add(new Room(3,"300","12-11-2020",true));
-        mRoomList.add(new Room(4,"300","12-11-2020",true));
-        mRoomList.add(new Room(5,"400","12-11-2020",true));
-        updateUI();
+//        mRoomList = new ArrayList<>();
+//        mRoomList.add(new Room(1,"100","12-11-2020",true));
+//        mRoomList.add(new Room(2,"200","12-11-2020",true));
+//        mRoomList.add(new Room(3,"300","12-11-2020",true));
+//        mRoomList.add(new Room(4,"300","12-11-2020",true));
+//        mRoomList.add(new Room(5,"400","12-11-2020",true));
+//        updateUI();
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageRoomActivity.this, BundleString.LOCATIONID);
+        mGetAllRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(ManagerManageRoomActivity.this,getApplication(),this);
+        mGetAllRoomFromLocationPresenter.getAllRoomFromLocation(locationId);
     }
     private void updateUI(){
         if(mRoomAdapter == null){
@@ -69,5 +79,25 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void getListRoomSuccess(List<RoomDTO> mRoomDTOList) {
+        if(mRoomDTOList!=null){
+            mRoomList = new ArrayList<>();
+            for (int i = 0; i < mRoomDTOList.size(); i++) {
+
+                int roomId = mRoomDTOList.get(i).getRoomId();
+                String roomName = mRoomDTOList.get(i).getRoomCode();
+                boolean isActive = mRoomDTOList.get(i).isActive();
+                mRoomList.add(new Room(roomId,roomName,isActive));
+            }
+            updateUI();
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }

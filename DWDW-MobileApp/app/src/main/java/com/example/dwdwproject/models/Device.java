@@ -22,6 +22,13 @@ public class Device implements Serializable {
         this.createDate = createDate;
         this.locationDevice = locationDevice;
     }
+
+    public Device(int deviceId, String nameDevice, boolean isActive) {
+        this.deviceId = deviceId;
+        this.nameDevice = nameDevice;
+        this.isActive = isActive;
+    }
+
     public int getDeviceId() {
         return deviceId;
     }

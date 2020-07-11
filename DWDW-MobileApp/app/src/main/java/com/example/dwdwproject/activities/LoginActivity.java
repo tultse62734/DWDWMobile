@@ -24,6 +24,7 @@ import com.example.dwdwproject.rooms.entities.UserItemEntities;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.LoginView;
 import com.example.dwdwproject.views.roomLocalViews.AddUserToRoomView;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginView, AddUserToRoomView {
     private LinearLayout mBtnSignIn,mBtnSignUp;
@@ -119,14 +120,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(LoginActivity.this,HomeWorkerActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void loginSuccessString̣̣̣(String token) {
+        mAddUserToRoomPresenter = new AddUserToRoomPresenter(LoginActivity.this,getApplication(),this);
+        mAddUserToRoomPresenter.getUserInfor(token);
+    }
+
     @Override
     public void loginSuccess(ReponseDTO mReponseDTO) {
-        if(mReponseDTO!=null){
-           String token =  mReponseDTO.getToken();
-            mAddUserToRoomPresenter = new AddUserToRoomPresenter(LoginActivity.this,getApplication(),this);
-            mAddUserToRoomPresenter.getUserInfor(token);
+//        if(mReponseDTO!=null){ String deviveToken = FirebaseInstanceId.getInstance().getToken();
+//           String token =  mReponseDTO.getToken();
+
         }
-    }
+
     @Override
     public void showError(String message) {
         showErrorLoginDialog("Đăng nhập không thành công");
@@ -135,11 +142,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(role ==1){
                 intentToHomeAdminActivtity();
             }
-
-            else if(role ==2){
+            else if(role ==3){
                 intentToHomeWorkerActivity();
             }
-            else if(role ==3){
+            else if(role ==2){
                 intentToHomeManageActivity();
             }
             else {
@@ -148,6 +154,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void addUserSuccesṣ̣(UserItemEntities mUserItemEntities) {
-           intentToHomeActivityByRole(mUserItemEntities.getmUserDTO().getRoleId());
+           intentToHomeActivityByRole(mUserItemEntities.getUser().getRoleId());
     }
 }

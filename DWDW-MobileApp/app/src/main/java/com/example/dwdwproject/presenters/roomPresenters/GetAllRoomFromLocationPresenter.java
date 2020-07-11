@@ -1,10 +1,12 @@
 package com.example.dwdwproject.presenters.roomPresenters;
 
+import android.app.Application;
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.RoomDTO;
 import com.example.dwdwproject.repositories.roomRepositories.RoomRepositories;
 import com.example.dwdwproject.repositories.roomRepositories.RoomRepositoriesImpl;
+import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
@@ -13,12 +15,14 @@ import java.util.List;
 public class GetAllRoomFromLocationPresenter {
     private Context mContext;
     private GetListRoomView mGetListRoomView;
+    private DWDWManagement dwdwManagement;
     private RoomRepositories mRoomRepositories;
 
-    public GetAllRoomFromLocationPresenter(Context mContext, GetListRoomView mGetListRoomView) {
+    public GetAllRoomFromLocationPresenter(Context mContext, Application mApplication,GetListRoomView mGetListRoomView) {
         this.mContext = mContext;
         this.mGetListRoomView = mGetListRoomView;
         this.mRoomRepositories = new RoomRepositoriesImpl();
+        this.dwdwManagement = new DWDWManagement(mApplication);
 
     }
     public void getAllRoomFromLocation(String token,int locationId){
@@ -31,6 +35,19 @@ public class GetAllRoomFromLocationPresenter {
             @Override
             public void onFail(String message) {
                 mGetListRoomView.showError(message);
+            }
+        });
+    }
+    public void getAllRoomFromLocation(final int locationId){
+        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
+            @Override
+            public void onDataSuccess(String accessToken) {
+                getAllRoomFromLocation(accessToken,locationId);
+            }
+
+            @Override
+            public void onDataFail() {
+
             }
         });
     }

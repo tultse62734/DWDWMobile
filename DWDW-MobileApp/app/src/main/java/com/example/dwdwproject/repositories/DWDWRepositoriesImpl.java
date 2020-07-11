@@ -11,8 +11,12 @@ import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -30,9 +34,15 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
     @Override
     public void Login(final Context mContext, LoginDTO mLoginDTO, final CallBackData<ReponseDTO> callBackData) {
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mLoginDTO);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),requestBody);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("username",mLoginDTO.getUsername());
+            jsonObject.put("password",mLoginDTO.getPassword());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
 
         Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
@@ -66,6 +76,48 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             }
         });
     }
+
+    @Override
+    public void Login2(final Context mContext, LoginDTO mLoginDTO,final CallBackData<String> callBackData) {
+        ClientApi clientApi = new ClientApi();
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("username",mLoginDTO.getUsername());
+            jsonObject.put("password",mLoginDTO.getPassword());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
+
+        Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        callBackData.onSucess(result);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    callBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                callBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
     @Override
     public void GetUsetInfor(final Context context, String token, final CallBackData<UserDTO> mCallBackData) {
         ClientApi clientApi = new ClientApi();

@@ -11,10 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -24,7 +26,7 @@ import java.util.List;
 
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
-public class ManageManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageManagerActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
     private FragmentPagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
@@ -44,18 +46,18 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     private void  initData(){
         mBtnClose.setOnClickListener(this);
         mBtnAddManagerAdmin.setOnClickListener(this);
-        mLocationList = new ArrayList<>();
-        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
-        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
-        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
-        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
-        getCategoryData(mLocationList);
+//        mLocationList = new ArrayList<>();
+//        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
+//        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
+//        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
+//        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
+//        getCategoryData(mLocationList);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
         for (int i = 0; i <locationList.size(); i++) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(BundleString.LOCATION_INFO,locationList.get(i));
+            bundle.putInt(BundleString.LOCATION_INFO,locationList.get(i).getLocationId());
             creator.add(locationList.get(i).getNameLocation(), PageManagerFragment.class, bundle);
         }
         mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
@@ -111,5 +113,24 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+        if(mLocationDTOList !=null){
+            this.mLocationList = new ArrayList<>();
+            for (int i = 0; i <mLocationDTOList.size() ; i++) {
+                int locationId  = mLocationDTOList.get(i).getLocationId();
+                String locationName = mLocationDTOList.get(i).getLocationCode();
+                boolean isactive = mLocationDTOList.get(i).isActive();
+                this.mLocationList.add(new Location(locationId,locationName,isactive));
+            }
+            getCategoryData(mLocationList);
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+
     }
 }

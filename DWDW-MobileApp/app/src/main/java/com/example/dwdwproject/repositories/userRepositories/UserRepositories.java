@@ -6,7 +6,6 @@ import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.utils.CallBackData;
 
 import java.util.List;
-
 public interface UserRepositories {
     void getAll(Context context, String token, CallBackData<List<UserDTO>>mCallBackData);
     void getAllUserFromLocationByAdmin(Context context,String token,int locationId,CallBackData<List<UserDTO>>mCallBackData);

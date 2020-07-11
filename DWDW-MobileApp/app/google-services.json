@@ -1,0 +1,135 @@
+{
+  "project_info": {
+    "project_number": "935732626257",
+    "firebase_url": "https://fir-demo-f5083.firebaseio.com",
+    "project_id": "fir-demo-f5083",
+    "storage_bucket": "fir-demo-f5083.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935732626257:android:a47818ad8735e89573c970",
+        "android_client_info": {
+          "package_name": "com.example.dwdwproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARa1aKCJ1gQH9ZYsFFjuqK9YH4tVvSCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935732626257:android:53680c0c789b93ce73c970",
+        "android_client_info": {
+          "package_name": "day10.silverboy.demofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935732626257-5lts8ta8uoikbfepip7jri6hulrbdfg4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "day10.silverboy.demofirebase",
+            "certificate_hash": "80acbaa28a54cff44230718705503c23d25fb9c4"
+          }
+        },
+        {
+          "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARa1aKCJ1gQH9ZYsFFjuqK9YH4tVvSCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935732626257:android:931e0049967afa3673c970",
+        "android_client_info": {
+          "package_name": "day10.silverboy.firebasenotify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARa1aKCJ1gQH9ZYsFFjuqK9YH4tVvSCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935732626257:android:c17faa7c468e53a073c970",
+        "android_client_info": {
+          "package_name": "day10.silverboy.freshdevice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARa1aKCJ1gQH9ZYsFFjuqK9YH4tVvSCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935732626257-8h12f1i7b2q1ll5ieu55m7rqjnbtvtp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

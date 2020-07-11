@@ -10,16 +10,21 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
+import com.example.dwdwproject.models.Room;
+import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForManagerPresenter;
+import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagerManageDeviceActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManagerManageDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllDeviceView {
     private RecyclerView mRecyclerView;
     private DeviceAdapter mDeviceAdapter;
     private List<Device> mDeviceList;
+    private GetDeviceForManagerPresenter deviceForManagerPresenter;
     private LinearLayout mBtnClose;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +42,19 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
-        mDeviceList = new ArrayList<>();
-        mDeviceList.add(new Device(1,"Camera 2MP","2020-11-20","Khu A"));
-        mDeviceList.add(new Device(2,"Camera 4MP","2020-11-20","Khu B"));
-        mDeviceList.add(new Device(3,"Camera 6MP","2020-11-20","Khu C"));
-        mDeviceList.add(new Device(4,"Camera 8MP","2020-11-20","Khu D"));
-        mDeviceList.add(new Device(5,"Camera 10MP","2020-11-20","Khu E"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
-        updateUI();
+//        mDeviceList = new ArrayList<>();
+//        mDeviceList.add(new Device(1,"Camera 2MP","2020-11-20","Khu A"));
+//        mDeviceList.add(new Device(2,"Camera 4MP","2020-11-20","Khu B"));
+//        mDeviceList.add(new Device(3,"Camera 6MP","2020-11-20","Khu C"));
+//        mDeviceList.add(new Device(4,"Camera 8MP","2020-11-20","Khu D"));
+//        mDeviceList.add(new Device(5,"Camera 10MP","2020-11-20","Khu E"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
+//        updateUI();
     }
     private void updateUI(){
         if(mDeviceAdapter == null){
@@ -76,5 +81,22 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
                 finish();
                 break;
         }
+    }
+    @Override
+    public void getAllDeviceSuccess(List<DeviceDTO> mDeviceDTOList) {
+        if(mDeviceDTOList!=null){
+            mDeviceList = new ArrayList<>();
+            for (int i = 0; i < mDeviceDTOList.size(); i++) {
+                int deviceId = mDeviceDTOList.get(i).getDeviceId();
+                String deviceName = mDeviceDTOList.get(i).getDeviceCode();
+                boolean isActive = mDeviceDTOList.get(i).isActive();
+                mDeviceList.add(new Device(deviceId,deviceName,isActive));
+            }
+            updateUI();
+        }
+    }
+    @Override
+    public void showError(String message) {
+
     }
 }

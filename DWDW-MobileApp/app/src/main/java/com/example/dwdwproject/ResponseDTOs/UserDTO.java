@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class UserDTO implements Serializable {
+public class UserDTO implements Serializable,Cloneable {
     @SerializedName("userId")
     private int userId;
     @SerializedName("userName")

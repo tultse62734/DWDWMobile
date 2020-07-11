@@ -20,17 +20,20 @@ import android.view.ViewGroup;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Manager;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
-public class PageManagerFragment extends Fragment {
+public class PageManagerFragment extends Fragment   {
     private View mView;
     private List<Manager> mManagerList;
     private IndexFastScrollRecyclerView mRecyclerView;
     private ManageAdapter manageAdapter;
+    private int locationId;
     public PageManagerFragment() {
     }
         @Override
@@ -49,6 +52,8 @@ public class PageManagerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        Bundle bundle = savedInstanceState;
+        locationId = bundle.getInt(BundleString.LOCATION_INFO);
         initData();
     }
 

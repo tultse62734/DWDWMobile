@@ -19,6 +19,13 @@ public class Location implements Serializable {
         this.createDate = createDate;
         this.isStatus = isStatus;
     }
+
+    public Location(int locationId, String nameLocation, boolean isStatus) {
+        this.locationId = locationId;
+        this.nameLocation = nameLocation;
+        this.isStatus = isStatus;
+    }
+
     public int getLocationId() {
         return locationId;
     }

@@ -9,6 +9,7 @@
         android:icon="@mipmap/ic_worker"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_worker"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         <activity android:name=".activities.ManagerChooseLocationActivity"

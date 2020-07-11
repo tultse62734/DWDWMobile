@@ -9,7 +9,6 @@ public class LoginDTO implements Serializable {
     private String username;
     @SerializedName("password")
     private String password;
-
     public String getUsername() {
         return username;
     }

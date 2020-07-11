@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.Location;

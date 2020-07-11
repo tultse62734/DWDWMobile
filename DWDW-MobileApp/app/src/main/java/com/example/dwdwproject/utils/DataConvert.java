@@ -6,9 +6,10 @@ import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 
-public class DataConvert {
+public class DataConvert implements Serializable {
     @TypeConverter // note this annotation
     public String fromUserList(UserDTO userDTO) {
         if (userDTO == null) {

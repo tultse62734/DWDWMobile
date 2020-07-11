@@ -3,7 +3,6 @@ package com.example.dwdwproject.ResponseDTOs;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
 public class RoomDTO implements Serializable {
     @SerializedName("roomId")
     private int roomId;

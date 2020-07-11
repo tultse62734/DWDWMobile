@@ -77,7 +77,6 @@ public class DWDWManagement {
             this.userDAO = userDAO;
             this.mListener = mListener;
         }
-
         @Override
         protected Void doInBackground(UserItemEntities... orderItem) {
             try{
@@ -85,10 +84,8 @@ public class DWDWManagement {
             }catch (SQLiteConstraintException e){
                 mListener.onDataFail(e.getMessage());
             }
-
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -186,7 +183,6 @@ public class DWDWManagement {
             this.userDAO = mUserDAO;
             this.mListener = mListener;
         }
-
 
         @Override
         protected Void doInBackground(UserItemEntities... userItemEntities) {

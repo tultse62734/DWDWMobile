@@ -1,10 +1,10 @@
 package com.example.dwdwproject.utils;
 public class ConfigAPI {
-    public  static final String BASE_URL = "";
+    public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
-        String LOGIN = "";
-        String GETUSERINFOR="";
+        String LOGIN = "User/LoginAsync";
+        String GETUSERINFOR="User/GetUserInfoToken";
         String UPDATEINFOR ="";
         //Device
         String GETALLDEVICE = "";

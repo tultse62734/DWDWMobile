@@ -42,7 +42,6 @@ public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAd
     @Override
     public void onBindViewHolder(@NonNull ChooseLocationViewHolder holder, final int position) {
         holder.mTxtNameLocation.setText(mLocationList.get(position).getNameLocation());
-        holder.mTxtCreateDateLocation.setText(mLocationList.get(position).getCreateDate());
         if(mLocationList.get(position).isStatus()){
             holder.mTxtStatusLocation.setText("Đang hoạt động");
             holder.mTxtStatusLocation.setTextColor(Color.parseColor("#4CAF50"));

@@ -5,12 +5,11 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import static com.example.dwdwproject.rooms.databases.DWDWDatabase.DATABASE_VERSION;
 
 import com.example.dwdwproject.rooms.daos.UserDAO;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
 
-@Database(entities ={ UserItemEntities.class}, exportSchema = false, version = DATABASE_VERSION)
+@Database(entities ={ UserItemEntities.class}, exportSchema = false, version = 1)
 public  abstract class DWDWDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "dwdw-database";
     public static final int DATABASE_VERSION = 1;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
@@ -18,6 +19,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private LinearLayout mLnlWorker,mLnlDevice,mBtnClose;
     private GetUserToRoomPresenter mGetUserToRoomPresenter;
     private String token;
+    private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO mUserDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +32,30 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mLnlWorker = findViewById(R.id.lnl_profile_admin_worker);
         mLnlDevice = findViewById(R.id.lnl_profile_admin_device);
         mBtnClose = findViewById(R.id.lnl_close_manage_profile);
+        mTxtNameProfile = findViewById(R.id.txt_name_profile);
+        mTxtBirthDayProfile = findViewById(R.id.txt_email_profile);
+        mTxtPhoneProfile = findViewById(R.id.txt_phone_profile);
+        mTxtRoleProfile = findViewById(R.id.txt_role_profile);
     }
     private void initData(){
+        mTxtNameProfile.setText(mUserDTO.getUserName()+"");
+        mTxtBirthDayProfile.setText(mUserDTO.getDateOfBirth()+"");
+        mTxtPhoneProfile.setText(mUserDTO.getPhone()+"");
+        if(mUserDTO.getRoleId() == 1){
+            mTxtRoleProfile.setText("Admin");
+        }
+        if(mUserDTO.getRoleId() == 2){
+            mTxtRoleProfile.setText("Manager");
+        }
+        if(mUserDTO.getRoleId() == 3){
+            mTxtRoleProfile.setText("Worker");
+        }
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
         mGetUserToRoomPresenter = new GetUserToRoomPresenter(ProfileManageActivity.this,getApplication(),this);
         mGetUserToRoomPresenter.getAccessToken();
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -65,7 +82,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     @Override
     public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
         token = mUserItemEntities.getToken();
-        mUserDTO = mUserItemEntities.getmUserDTO();
+        mUserDTO = mUserItemEntities.getUser();
     }
     @Override
     public void showError(String message) {

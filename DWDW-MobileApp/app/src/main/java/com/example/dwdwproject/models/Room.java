@@ -15,6 +15,12 @@ public class Room implements Serializable {
         this.isStatus = isStatus;
     }
 
+    public Room(int roomId, String roomName, boolean isStatus) {
+        this.roomId = roomId;
+        this.roomName = roomName;
+        this.isStatus = isStatus;
+    }
+
     public int getRoomId() {
         return roomId;
     }
