@@ -26,6 +26,7 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
     private RecyclerView mRecyclerView;
     private RoomAdapter mRoomAdapter;
     private List<Room> mRoomList;
+    private String token;
     private LinearLayout mBtnClose;
     private GetAllRoomFromLocationPresenter mGetAllRoomFromLocationPresenter;
     private int locationId;
@@ -51,9 +52,10 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
 //        mRoomList.add(new Room(4,"300","12-11-2020",true));
 //        mRoomList.add(new Room(5,"400","12-11-2020",true));
 //        updateUI();
+        token = SharePreferenceUtils.getStringSharedPreference(ManagerManageRoomActivity.this,BundleString.TOKEN);
         locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageRoomActivity.this, BundleString.LOCATIONID);
         mGetAllRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(ManagerManageRoomActivity.this,getApplication(),this);
-        mGetAllRoomFromLocationPresenter.getAllRoomFromLocation(locationId);
+        mGetAllRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
     }
     private void updateUI(){
         if(mRoomAdapter == null){

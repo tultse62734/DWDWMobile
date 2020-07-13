@@ -16,6 +16,7 @@ import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -30,6 +31,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     private ViewPager mViewPager;
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private List<Location> mLocationList;
+    private String token ;
     private SmartTabLayout mViewPagerTab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,9 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
 //        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
 //        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
 //        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
-        mGetAllLocationPresenter = new GetAllLocationPresenter(ManageRoomActivity.this,getApplication(),this);
-        mGetAllLocationPresenter.getTokenGetAllLocation();
+       token =  SharePreferenceUtils.getStringSharedPreference(ManageRoomActivity.this,BundleString.TOKEN);
+        mGetAllLocationPresenter = new GetAllLocationPresenter(ManageRoomActivity.this,this);
+        mGetAllLocationPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());

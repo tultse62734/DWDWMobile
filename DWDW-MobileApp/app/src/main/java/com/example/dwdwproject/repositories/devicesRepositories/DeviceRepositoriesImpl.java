@@ -187,7 +187,6 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 callBackData.onFail(t.getMessage());
             }
         });
-
     }
     @Override
     public void getAllDeviceFromLocationByAdmin(final Context mContext,String token, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
@@ -197,7 +196,6 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

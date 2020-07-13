@@ -36,7 +36,6 @@ public class LocationRepositoriesImpl implements LocationRepositories {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesLocation().getAllLocation(map);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -66,7 +65,6 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             }
         });
     }
-
     @Override
     public void getAllLocationById(final Context mContext,String token, int locationId,final CallBackData<LocationDTO> callBackData) {
         String hearder = "Bearer " + token;

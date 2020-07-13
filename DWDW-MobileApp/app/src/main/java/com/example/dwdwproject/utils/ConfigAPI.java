@@ -1,19 +1,19 @@
 package com.example.dwdwproject.utils;
 public class ConfigAPI {
-    public  static final String BASE_URL = "https://172.16.3.48:45460/api/";
+    public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
         String LOGIN = "User/LoginAsync";
         String GETUSERINFOR="User/GetUserInfoToken";
         String UPDATEINFOR ="";
         //Device
-        String GETALLDEVICE = "";
+        String GETALLDEVICE = "Device/GetAllDevice";
         String GETDEVICEBYID ="";
         String CREATEDEVICE ="";
         String UPDATEDEVICE = "";
-        String GETALLDEVICEFROMLOCATION = "";
+        String ADMIMGETALLDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationAdmin";
         //Location
-        String GETALLLOCATION = "";
+        String GETALLLOCATION = "Location/GetLocations";
         String GETLOCATIONBYID ="";
         String CREATELOCATION ="";
         String UPDATELOCATION = "";

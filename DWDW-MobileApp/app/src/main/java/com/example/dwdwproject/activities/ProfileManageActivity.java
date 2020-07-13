@@ -13,7 +13,9 @@ import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.GetUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
@@ -22,13 +24,13 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO mUserDTO;
+
     private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_manage);
-        initView();
-        initData();
+        getDateServer();
     }
     private void initView(){
         mLnlWorker = findViewById(R.id.lnl_profile_admin_worker);
@@ -38,6 +40,11 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mTxtBirthDayProfile = findViewById(R.id.txt_email_profile);
         mTxtPhoneProfile = findViewById(R.id.txt_phone_profile);
         mTxtRoleProfile = findViewById(R.id.txt_role_profile);
+    }
+    private void getDateServer(){
+        token = SharePreferenceUtils.getStringSharedPreference(ProfileManageActivity.this, BundleString.TOKEN);
+        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this, (GetUserInforTokenView) this);
+        mGetUserInforTokenPresenter.getInforToken(token);
     }
     private void initData(){
         mTxtNameProfile.setText(mUserDTO.getUserName()+"");
@@ -55,8 +62,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
-        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,getApplication(), (GetUserInforTokenView) this);
-        mGetUserInforTokenPresenter.getInfor();
+
     }
     @Override
     public void onClick(View v) {
@@ -84,11 +90,13 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
-
+        mUserDTO = mUserItemEntities.getUser();
+        initView();
+        initData();
     }
 
     @Override
     public void showError(String message) {
-
+        DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Data fail");
     }
 }

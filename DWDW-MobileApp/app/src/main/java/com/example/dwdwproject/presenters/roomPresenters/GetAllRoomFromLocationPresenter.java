@@ -38,17 +38,5 @@ public class GetAllRoomFromLocationPresenter {
             }
         });
     }
-    public void getAllRoomFromLocation(final int locationId){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllRoomFromLocation(accessToken,locationId);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

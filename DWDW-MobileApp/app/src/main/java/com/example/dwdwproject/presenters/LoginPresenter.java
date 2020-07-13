@@ -40,7 +40,7 @@ public class LoginPresenter {
 
             @Override
             public void onFail(String message) {
-
+            mLoginView.showError(message);
             }
         });
     }

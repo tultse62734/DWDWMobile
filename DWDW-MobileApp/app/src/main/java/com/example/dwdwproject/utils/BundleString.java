@@ -12,8 +12,11 @@ public class BundleString {
     public static final String RECORDDETAIL = "RECORDDETAIL";
     public static final String MANAGERDETAIL = "MANAGERDETAIL";
     public static final String SHIFTDETAIL = "SHIFTDETAIL";
+    public static final String TOKEN = "TOKEN";
+
     public static String getSelectedDate(Context context){
         return SharePreferenceUtils.getStringSharedPreference(context, BundleString.FILTER_DATE_IS_SELECTE);
     }
+
 
 }

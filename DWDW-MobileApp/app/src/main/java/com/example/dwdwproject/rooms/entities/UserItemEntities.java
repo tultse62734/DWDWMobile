@@ -17,7 +17,6 @@ public class UserItemEntities implements Serializable,Cloneable {
     @NonNull
     private int accountItemId;
     @TypeConverters(DataConvert.class)
-
     @ColumnInfo(name = "user")
     private UserDTO user;
     @ColumnInfo(name = "token")
@@ -34,7 +33,6 @@ public class UserItemEntities implements Serializable,Cloneable {
     public void setUser(UserDTO user) {
         this.user = user;
     }
-
     public void setAccountItemId(int accountItemId) {
         this.accountItemId = accountItemId;
     }

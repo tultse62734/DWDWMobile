@@ -38,16 +38,5 @@ public class GetDeviceForAdminPresenter {
             }
         });
     }
-    public void getDeviceFromLocationForAd(final int locationId){
-            dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-                @Override
-                public void onDataSuccess(String accessToken) {
-                    getDeviceFromLocationForAd(accessToken,locationId);
-                }
-                @Override
-                public void onDataFail() {
 
-                }
-            });
-    }
 }

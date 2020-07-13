@@ -21,6 +21,8 @@ import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.LoginPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.AddUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.LoginView;
 import com.example.dwdwproject.views.roomLocalViews.AddUserToRoomView;
@@ -122,17 +124,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void loginSuccessString̣̣̣(String token) {
+        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.TOKEN,token);
         mAddUserToRoomPresenter = new AddUserToRoomPresenter(LoginActivity.this,getApplication(),this);
         mAddUserToRoomPresenter.getUserInfor(token);
     }
-
     @Override
     public void loginSuccess(ReponseDTO mReponseDTO) {
 //        if(mReponseDTO!=null){ String deviveToken = FirebaseInstanceId.getInstance().getToken();
 //           String token =  mReponseDTO.getToken();
-
         }
-
     @Override
     public void showError(String message) {
         showErrorLoginDialog("Đăng nhập không thành công");

@@ -20,7 +20,9 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.userPresenters.CreateUserPresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.userViews.GetUserView;
 
@@ -30,6 +32,7 @@ import java.util.List;
 public class AdminCreateManagerActivity extends AppCompatActivity implements View.OnClickListener, GetUserView, GetAllLocatonView {
     private LinearLayout mBtnClose,mBtnCreateManager;
     EditText mEdtChoooseLocation;
+    private String token;
     private List<Location> mLocationList;
     private RecyclerView mRecyclerView;
     private int posLocation;
@@ -45,8 +48,9 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
     private  void initView(){
         mBtnClose = findViewById(R.id.lnl_close_admin_add_manager);
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_add__manager_admin);
-        getAllLocationPresenter = new GetAllLocationPresenter(AdminCreateManagerActivity.this,getApplication(),this);
-        getAllLocationPresenter.getTokenGetAllLocation();
+        token = SharePreferenceUtils.getStringSharedPreference(AdminCreateManagerActivity.this, BundleString.TOKEN);
+        getAllLocationPresenter = new GetAllLocationPresenter(AdminCreateManagerActivity.this,this);
+        getAllLocationPresenter.getAllLocation(token);
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);

@@ -9,6 +9,9 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
+
+import java.util.List;
+
 @Dao
 public interface UserDAO {
     @Insert
@@ -22,11 +25,8 @@ public interface UserDAO {
 
     @Query("select * from accounts")
     LiveData<UserItemEntities> getAccount();
-
-    //get access token of customer
     @Query("select token from accounts")
-    String getAccessToken();
-
+    List<String> getAccessToken();
     @Query("select * from accounts")
     UserItemEntities getAccountEntities();
 

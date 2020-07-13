@@ -48,6 +48,7 @@ public class DWDWManagement {
     private class AddUserItemAsyn extends AsyncTask<UserItemEntities, Void, Void> {
         private UserDAO userDAO;
         private OnDataCallBackUserData mListener;
+        private UserItemEntities mItemEntities;
 
         public AddUserItemAsyn(UserDAO userDAO, OnDataCallBackUserData mListener) {
             this.userDAO = userDAO;
@@ -57,6 +58,7 @@ public class DWDWManagement {
         protected Void doInBackground(UserItemEntities... orderItem) {
             try{
                 userDAO.insertAccount(orderItem);
+                mItemEntities = orderItem[0];
             }catch (SQLiteConstraintException e){
                 mListener.onDataFail(e.getMessage());
             }
@@ -66,12 +68,13 @@ public class DWDWManagement {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mListener.onDataSuccess(null);
+            mListener.onDataSuccess(mItemEntities);
         }
     }
     private class UpdateUserItemAsyn extends AsyncTask<UserItemEntities, Void, Void> {
         private UserDAO userDAO;
         private OnDataCallBackUserData mListener;
+        private UserItemEntities itemEntities;
 
         public UpdateUserItemAsyn(UserDAO userDAO, OnDataCallBackUserData mListener) {
             this.userDAO = userDAO;
@@ -81,6 +84,7 @@ public class DWDWManagement {
         protected Void doInBackground(UserItemEntities... orderItem) {
             try{
                 userDAO.updateAccount(orderItem);
+                itemEntities = orderItem[0];
             }catch (SQLiteConstraintException e){
                 mListener.onDataFail(e.getMessage());
             }
@@ -89,10 +93,9 @@ public class DWDWManagement {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mListener.onDataSuccess(null);
+            mListener.onDataSuccess(itemEntities);
         }
     }
-
     private class DeleteUserItemAsyn extends AsyncTask<UserItemEntities, Void, Void> {
         private UserDAO userDAO;
         private OnDataCallBackUserData mListener;
@@ -131,6 +134,8 @@ public class DWDWManagement {
         protected Void doInBackground(Void... voids) {
             try{
                 userDAO.deleleAllAccount();
+                mListener.onDataSuccess(null);
+
             }catch (SQLiteConstraintException e){
                  mListener.onDataFail(e.getMessage());
             }
@@ -144,7 +149,6 @@ public class DWDWManagement {
             mListener.onDataSuccess(null);
         }
     }
-
     private class GetAllUserItemAsync extends AsyncTask<UserItemEntities, Void, Void>{
         private UserDAO userDAO;
         private UserItemEntities itemEntities;
@@ -183,12 +187,14 @@ public class DWDWManagement {
             this.userDAO = mUserDAO;
             this.mListener = mListener;
         }
-
         @Override
         protected Void doInBackground(UserItemEntities... userItemEntities) {
             try {
-                mAccessToken = userDAO.getAccessToken();
+                mAccessToken = userDAO.getAccessToken().get(0);
+                mListener.onDataSuccess(mAccessToken);
+
             } catch (SQLiteConstraintException e) {
+                mListener.onDataFail();
 
             }
 

@@ -22,6 +22,7 @@ import com.example.dwdwproject.presenters.devicesPresenters.GetAllDevicePresente
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -38,6 +39,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
     private List<Location> mLocationList;
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private SmartTabLayout mViewPagerTab;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,9 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
 //        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
 //        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
 //        getCategoryData(mLocationList);
-
+        token = SharePreferenceUtils.getStringSharedPreference(ManageDeviceActivity.this,BundleString.TOKEN);
+        mGetAllLocationPresenter  = new GetAllLocationPresenter(ManageDeviceActivity.this,this);
+        mGetAllLocationPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());

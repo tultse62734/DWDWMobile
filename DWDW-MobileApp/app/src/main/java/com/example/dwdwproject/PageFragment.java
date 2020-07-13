@@ -21,6 +21,7 @@ import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForAdminPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     private RecyclerView mRecyclerView;
     private List<Device> mDeviceList;
     private DeviceAdapter mDeviceAdapter;
+    private String token;
     private int locationId;
     private GetDeviceForAdminPresenter mDeviceForAdminPresenter;
     public PageFragment() {
@@ -74,8 +76,9 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        updateUI();
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
         mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),getActivity().getApplication(),this);
-        mDeviceForAdminPresenter.getDeviceFromLocationForAd(locationId);
+        mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);
     }
     private void updateUI(){
         if(mDeviceAdapter == null){
@@ -95,7 +98,6 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
         else {
             mDeviceAdapter.notifyDataSetChanged();
         }
-
     }
     @Override
     public void getAllDeviceSuccess(List<DeviceDTO> mDeviceDTOList) {
@@ -112,7 +114,6 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
 
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");
     }
 }
 

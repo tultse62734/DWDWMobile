@@ -13,12 +13,10 @@ import com.example.dwdwproject.views.GetUserInforTokenView;
 public class GetUserInforTokenPresenter {
     private Context mContext;
     private GetUserInforTokenView mGetUserInforTokenView;
-    private DWDWManagement dwdwManagement;
     private DWDWRepositories mDwdwRepositories;
-    public GetUserInforTokenPresenter(Context mContext, Application mApplication,GetUserInforTokenView mGetUserInforTokenView) {
+    public GetUserInforTokenPresenter(Context mContext,GetUserInforTokenView mGetUserInforTokenView) {
         this.mContext = mContext;
         this.mGetUserInforTokenView = mGetUserInforTokenView;
-        dwdwManagement = new DWDWManagement(mApplication);
         this.mDwdwRepositories = new DWDWRepositoriesImpl();
     }
     public void getInforToken(String token){
@@ -33,16 +31,5 @@ public class GetUserInforTokenPresenter {
             }
         });
     }
-    public void getInfor(){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getInforToken(accessToken);
-            }
-            @Override
-            public void onDataFail() {
 
-            }
-        });
-    }
 }

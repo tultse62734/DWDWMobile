@@ -15,13 +15,11 @@ import java.util.List;
 public class GetAllLocationPresenter {
     private Context mContext;
     private GetAllLocatonView mGetAllLocatonView;
-    private DWDWManagement dwdwManagement;
     private LocationRepositories mLocationRepositories;
-    public GetAllLocationPresenter(Context mContext, Application mApplication,GetAllLocatonView mGetAllLocatonView) {
+    public GetAllLocationPresenter(Context mContext,GetAllLocatonView mGetAllLocatonView) {
         this.mContext = mContext;
         this.mGetAllLocatonView = mGetAllLocatonView;
         this.mLocationRepositories = new LocationRepositoriesImpl();
-        this.dwdwManagement = new DWDWManagement(mApplication);
     }
     public void getAllLocation(String token){
         this.mLocationRepositories.getAllLocationList(mContext, token, new CallBackData<List<LocationDTO>>() {
@@ -36,17 +34,5 @@ public class GetAllLocationPresenter {
             }
         });
     }
-    public void getTokenGetAllLocation(){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllLocation(accessToken);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

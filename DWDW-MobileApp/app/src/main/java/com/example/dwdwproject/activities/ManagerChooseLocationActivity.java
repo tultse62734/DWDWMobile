@@ -32,6 +32,7 @@ public class ManagerChooseLocationActivity extends AppCompatActivity implements 
     private List<Location> mLocationList;
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private ChooseLocationAdapter mChooseLocationAdapter;
+    private String token ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +75,9 @@ public class ManagerChooseLocationActivity extends AppCompatActivity implements 
 //        mLocationList.add(new Location(3, "Khu C", "1-10-2019", true));
 //        mLocationList.add(new Location(4, "Khu D", "1-10-2019", true));
 //        updateUI();
-        mGetAllLocationPresenter = new GetAllLocationPresenter(ManagerChooseLocationActivity.this,getApplication(),this);
-        mGetAllLocationPresenter.getTokenGetAllLocation();
+        token = SharePreferenceUtils.getStringSharedPreference(ManagerChooseLocationActivity.this,BundleString.TOKEN);
+        mGetAllLocationPresenter = new GetAllLocationPresenter(ManagerChooseLocationActivity.this,this);
+        mGetAllLocationPresenter.getAllLocation(token);
     }
     private void updateUI(){
         if(mChooseLocationAdapter == null){

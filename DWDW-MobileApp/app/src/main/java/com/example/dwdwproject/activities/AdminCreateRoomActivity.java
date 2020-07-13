@@ -23,7 +23,9 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.roomPresenters.CreateRoomPresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.roomViews.GetRoomView;
 
@@ -42,6 +44,7 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private CreateRoomPresenter mCreateRoomPresenter;
     private int posStatus;
+    private String token ;
     private ChooseLocationAdapter mLocationAdapter;
     private ChooseStatusAdapter mChooseStatusAdapter;
     @Override
@@ -75,8 +78,9 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
 //        mLocationList.add(new Location(4,"Khu D","1-10-2019",true));
         mStatusList.add(new Status("Đang hoạt động",true));
         mStatusList.add(new Status("Không hoạt động",false));
-        mGetAllLocationPresenter = new GetAllLocationPresenter(AdminCreateRoomActivity.this,getApplication(),this);
-        mGetAllLocationPresenter.getTokenGetAllLocation();
+        token = SharePreferenceUtils.getStringSharedPreference(AdminCreateRoomActivity.this, BundleString.TOKEN);
+        mGetAllLocationPresenter = new GetAllLocationPresenter(AdminCreateRoomActivity.this,this);
+        mGetAllLocationPresenter.getAllLocation(token);
     }
     @Override
     public void onClick(View v) {

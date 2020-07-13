@@ -22,6 +22,7 @@ import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
     private GetAllRoomFromLocationPresenter mRoomFromLocationPresenter;
     private RoomAdapter mRoomAdapter;
     private int locationId;
+    private String token ;
     public PageRoomFragment() {
         // Required empty public constructor
     }
@@ -70,8 +72,9 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
 //        mRoomList.add(new Room(5,"500","12-12-2020",true));
 //        mRoomList.add(new Room(6,"600","12-12-2020",true));
 //        updateUI();
+        SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
         mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),getActivity().getApplication(),this);
-        mRoomFromLocationPresenter.getAllRoomFromLocation(locationId);
+        mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
     }
     private void updateUI(){
         if(mRoomAdapter == null){

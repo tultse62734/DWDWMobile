@@ -11,11 +11,16 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.presenters.roomLocalPresenter.DeleteUserToRoomPresenter;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.roomLocalViews.DeleteUserView;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
-public class HomeAdminActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeAdminActivity extends AppCompatActivity implements View.OnClickListener,DeleteUserView {
     private LinearLayout mBtnMManageWorker,mBtnLogout,mBtnProfile,mBtnLocation,mBtnDevice;
     private LinearLayout mBtnManageRoom,mBtnManageAccident,mBtnManageProfile;
+    private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
+    private DeleteUserView deleteUserView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,7 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
         mBtnManageProfile = findViewById(R.id.lnl_manage_profile);
     }
     private void initData(){
+        mDeleteUserToRoomPresenter= new DeleteUserToRoomPresenter(getApplication(),this);
         mBtnManageProfile.setOnClickListener(this);
         mBtnMManageWorker.setOnClickListener(this);
         mBtnLogout.setOnClickListener(this);
@@ -110,8 +116,8 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intentToLogOutActivity();
-
+                dialog.dismiss();
+                mDeleteUserToRoomPresenter.deleteUserTomRoom();
             }
         });
         buttonNo.setOnClickListener(new View.OnClickListener() {
@@ -121,8 +127,13 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
             }
         });
         dialog.show();
-
     }
-
-
+    @Override
+    public void deleteUserToRoomSucces() {
+        intentToLogOutActivity();
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(HomeAdminActivity.this,"Log out don't success");
+    }
 }

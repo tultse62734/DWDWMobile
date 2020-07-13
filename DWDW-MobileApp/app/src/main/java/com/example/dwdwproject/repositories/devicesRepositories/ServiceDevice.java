@@ -14,6 +14,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceDevice {
     @GET(ConfigAPI.Api.GETALLDEVICE)
@@ -21,10 +22,11 @@ public interface ServiceDevice {
 
     @GET(ConfigAPI.Api.GETDEVICEBYID)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getDeviceById(@HeaderMap Map<String, String> map,@Path("id") int id);
-    @GET(ConfigAPI.Api.GETALLDEVICEFROMLOCATION)
+    Call<ResponseBody> getDeviceById(@HeaderMap Map<String, String> map,@Query("id") int id);
+
+    @GET(ConfigAPI.Api.ADMIMGETALLDEVICEFROMLOCATION)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Path("id") int id);
+    Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Query("id") int id);
 
     @POST(ConfigAPI.Api.CREATEDEVICE)
     @Headers({"Content-Type: application/json"})

@@ -19,7 +19,9 @@ import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
 
@@ -30,6 +32,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
     private GetAllLocationPresenter getAllLocationPresenter;
+    private String token;
     private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +62,9 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
 //        mLocationList.add(new Location(6,"Khu F","1-10-2019",true));
 //
 //        updateUI();
-        getAllLocationPresenter = new GetAllLocationPresenter(ManageLocationActivity.this,getApplication(),this);
-        getAllLocationPresenter.getTokenGetAllLocation();
+        token = SharePreferenceUtils.getStringSharedPreference(ManageLocationActivity.this, BundleString.TOKEN);
+        getAllLocationPresenter = new GetAllLocationPresenter(ManageLocationActivity.this,this);
+        getAllLocationPresenter.getAllLocation(token);
     }
     private void updateUI(){
         if(mLocationAdapter == null){

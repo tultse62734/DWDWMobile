@@ -14,6 +14,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceLocation {
     @GET(ConfigAPI.Api.GETALLLOCATION)
@@ -21,7 +22,7 @@ public interface ServiceLocation {
 
     @GET(ConfigAPI.Api.GETLOCATIONBYID)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getLocationById(@HeaderMap Map<String, String> map,@Path("id") int id);
+    Call<ResponseBody> getLocationById(@HeaderMap Map<String, String> map,@Query("id") int id);
 
     @POST(ConfigAPI.Api.CREATELOCATION)
     @Headers({"Content-Type: application/json"})
