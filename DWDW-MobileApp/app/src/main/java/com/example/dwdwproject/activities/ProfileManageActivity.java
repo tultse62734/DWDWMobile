@@ -19,12 +19,12 @@ import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
-public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetInfoUserView {
+public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetUserInforTokenView {
     private LinearLayout mLnlWorker,mLnlDevice,mBtnClose;
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
-    private UserDTO mUserDTO;
-
+    private UserDTO userDTO;
+    private GetUserInforTokenView mInforTokenView;
     private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +40,30 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mTxtBirthDayProfile = findViewById(R.id.txt_email_profile);
         mTxtPhoneProfile = findViewById(R.id.txt_phone_profile);
         mTxtRoleProfile = findViewById(R.id.txt_role_profile);
+
     }
     private void getDateServer(){
         token = SharePreferenceUtils.getStringSharedPreference(ProfileManageActivity.this, BundleString.TOKEN);
-        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this, (GetUserInforTokenView) this);
+        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,mInforTokenView);
         mGetUserInforTokenPresenter.getInforToken(token);
     }
     private void initData(){
-        mTxtNameProfile.setText(mUserDTO.getUserName()+"");
-        mTxtBirthDayProfile.setText(mUserDTO.getDateOfBirth()+"");
-        mTxtPhoneProfile.setText(mUserDTO.getPhone()+"");
-        if(mUserDTO.getRoleId() == 1){
+        mTxtNameProfile.setText(userDTO.getUserName()+"");
+        mTxtBirthDayProfile.setText(userDTO.getDateOfBirth()+"");
+        mTxtPhoneProfile.setText(userDTO.getPhone()+"");
+        if(userDTO.getRoleId() == 1){
             mTxtRoleProfile.setText("Admin");
         }
-        if(mUserDTO.getRoleId() == 2){
+        if(userDTO.getRoleId() == 2){
             mTxtRoleProfile.setText("Manager");
         }
-        if(mUserDTO.getRoleId() == 3){
+        if(userDTO.getRoleId() == 3){
             mTxtRoleProfile.setText("Worker");
         }
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
+
 
     }
     @Override
@@ -88,15 +90,17 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         startActivity(intent);
     }
 
-    @Override
-    public void getInforUserSuccess(UserItemEntities mUserItemEntities) {
-        mUserDTO = mUserItemEntities.getUser();
-        initView();
-        initData();
-    }
+
 
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Data fail");
+    }
+
+    @Override
+    public void getInforSuccess(UserDTO mUserDTO) {
+        userDTO = mUserDTO;
+        initView();
+        initData();
     }
 }

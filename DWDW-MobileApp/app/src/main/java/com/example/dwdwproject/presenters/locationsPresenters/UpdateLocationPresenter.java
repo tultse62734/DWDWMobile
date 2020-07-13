@@ -9,41 +9,30 @@ import com.example.dwdwproject.repositories.locationRepositories.LocationReposit
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
+import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
 public class UpdateLocationPresenter {
     private Context mContext;
-    private GetLocationView mGetLocationView;
-    private DWDWManagement dwdwManagement ;
+    private UpdateLocatonView mUpdateLocationView;
     private LocationRepositories mLocationRepositories;
-    public UpdateLocationPresenter(Context mContext, Application mApplication, GetLocationView mGetLocationView) {
+    public UpdateLocationPresenter(Context mContext, UpdateLocatonView mUpdateLocationView) {
         this.mContext = mContext;
-        this.mGetLocationView = mGetLocationView;
+        this.mUpdateLocationView = mUpdateLocationView;
         this.mLocationRepositories = new LocationRepositoriesImpl();
     }
     public void updateLocation(String token, LocationDTO mLocationDTO){
         this.mLocationRepositories.updateLocation(mContext, token, mLocationDTO, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mGetLocationView.getLocationSuccess(locationDTO);
+                mUpdateLocationView.updateLocationSuccess();
             }
 
             @Override
             public void onFail(String message) {
-                mGetLocationView.showError(message);
+                mUpdateLocationView.showError(message);
             }
         });
     }
-    public void updateLocationToken(final LocationDTO mLocationDTO){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                updateLocation(accessToken,mLocationDTO);
-            }
 
-            @Override
-            public void onDataFail() {
 
-            }
-        });
-    }
 }

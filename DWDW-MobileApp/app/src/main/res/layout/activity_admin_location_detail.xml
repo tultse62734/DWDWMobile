@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content">
 
                 </TextView>
-                <TextView
+                <EditText
                     android:gravity="center|left"
                     android:id="@+id/edt_name_location_update_location_admin"
                     android:textSize="@dimen/sp18"
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp60">
 
-                </TextView>
+                </EditText>
                 <TextView
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
@@ -121,7 +121,7 @@
                 </TextView>
                 <TextView
                     android:gravity="center|left"
-                    android:id="@+id/edt_choose_status_update_location_admin_detal"
+                    android:id="@+id/edt_choose_status_update_location_admin_deta"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -161,7 +161,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_marginBottom="@dimen/dp20"
-                android:id="@+id/lnl_submit_add_device_admin"
+                android:id="@+id/lnl_submit_update_location_admin"
                 android:layout_marginRight="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginLeft="@dimen/dp20"

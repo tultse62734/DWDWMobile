@@ -14,9 +14,9 @@ public class GetUserInforTokenPresenter {
     private Context mContext;
     private GetUserInforTokenView mGetUserInforTokenView;
     private DWDWRepositories mDwdwRepositories;
-    public GetUserInforTokenPresenter(Context mContext,GetUserInforTokenView mGetUserInforTokenView) {
+    public GetUserInforTokenPresenter(Context mContext,GetUserInforTokenView mInforTokenView) {
         this.mContext = mContext;
-        this.mGetUserInforTokenView = mGetUserInforTokenView;
+        this.mGetUserInforTokenView = mInforTokenView;
         this.mDwdwRepositories = new DWDWRepositoriesImpl();
     }
     public void getInforToken(String token){
@@ -25,6 +25,7 @@ public class GetUserInforTokenPresenter {
             public void onSucess(UserDTO userDTO) {
                 mGetUserInforTokenView.getInforSuccess(userDTO);
             }
+
             @Override
             public void onFail(String message) {
                 mGetUserInforTokenView.showError(message);

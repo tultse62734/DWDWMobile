@@ -8,17 +8,17 @@ import com.example.dwdwproject.repositories.locationRepositories.LocationReposit
 import com.example.dwdwproject.repositories.locationRepositories.LocationRepositoriesImpl;
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
-import com.example.dwdwproject.views.locationsViews.GetLocationView;
+import com.example.dwdwproject.views.locationsViews.CreateLocatonView;
 
 public class CreateLocationPresenter {
     private Context mContext;
-    private GetLocationView mGetLocationView;
+    private CreateLocatonView mCreateLocationView;
     private DWDWManagement dwdwManagement;
     private LocationRepositories mLocationRepositories;
 
-    public CreateLocationPresenter(Context mContext, Application mApplication, GetLocationView mGetLocationView) {
+    public CreateLocationPresenter(Context mContext, Application mApplication, CreateLocatonView mCreateLocationView) {
         this.mContext = mContext;
-        this.mGetLocationView = mGetLocationView;
+        this.mCreateLocationView = mCreateLocationView;
         this.dwdwManagement = new DWDWManagement(mApplication);
         this.mLocationRepositories = new LocationRepositoriesImpl();
 
@@ -27,26 +27,14 @@ public class CreateLocationPresenter {
         this.mLocationRepositories.createLocation(mContext, token, mLocationDTO, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mGetLocationView.getLocationSuccess(locationDTO);
+                mCreateLocationView.createLocationSuccess();
             }
 
             @Override
             public void onFail(String message) {
-                mGetLocationView.showError(message);
+                mCreateLocationView.showError(message);
             }
         });
     }
-    public void createLocationToken(final LocationDTO mLocationDTO){
-        this.dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                createLocation(accessToken,mLocationDTO);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

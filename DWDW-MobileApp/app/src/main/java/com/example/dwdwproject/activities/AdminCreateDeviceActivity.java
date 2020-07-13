@@ -69,7 +69,6 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
         datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
-
     }
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {

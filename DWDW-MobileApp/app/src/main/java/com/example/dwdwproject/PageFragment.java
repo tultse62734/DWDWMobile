@@ -31,6 +31,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     private View mView;
     private RecyclerView mRecyclerView;
     private List<Device> mDeviceList;
+    private List<DeviceDTO> mDeviceDTOS;
     private DeviceAdapter mDeviceAdapter;
     private String token;
     private int locationId;
@@ -89,7 +90,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
                 public void onItemCLick(int pos) {
                     Intent intent = new Intent(getContext(), AdminDeviceDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(BundleString.DEVICEDETAIL,mDeviceList.get(pos));
+                    bundle.putSerializable(BundleString.DEVICEDETAIL,mDeviceDTOS.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -103,6 +104,8 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     public void getAllDeviceSuccess(List<DeviceDTO> mDeviceDTOList) {
         if(mDeviceDTOList!=null){
             this.mDeviceList = new ArrayList<>();
+            this.mDeviceDTOS = new ArrayList<>();
+            this.mDeviceDTOS = mDeviceDTOList;
             for (int i = 0; i <mDeviceDTOList.size() ; i++) {
                 int deviceId = mDeviceDTOList.get(i).getDeviceId();
                 String deviceCode = mDeviceDTOList.get(i).getDeviceCode();

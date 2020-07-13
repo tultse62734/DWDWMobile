@@ -12,27 +12,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dwdwproject.MainActivity;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.presenters.locationsPresenters.CreateLocationPresenter;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.presenters.locationsPresenters.UpdateLocationPresenter;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
+import com.example.dwdwproject.views.locationsViews.CreateLocatonView;
+import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
+public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView, CreateLocatonView, UpdateLocatonView {
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
     private GetAllLocationPresenter getAllLocationPresenter;
     private String token;
+    private List<LocationDTO> mLocationDTOS;
     private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +69,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
 //        mLocationList.add(new Location(6,"Khu F","1-10-2019",true));
 //
 //        updateUI();
-        token = SharePreferenceUtils.getStringSharedPreference(ManageLocationActivity.this, BundleString.TOKEN);
+        token =  SharePreferenceUtils.getStringSharedPreference(ManageLocationActivity.this,BundleString.TOKEN);
         getAllLocationPresenter = new GetAllLocationPresenter(ManageLocationActivity.this,this);
         getAllLocationPresenter.getAllLocation(token);
     }
@@ -73,13 +80,16 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             mLocationAdapter.OnClickDeleteItemListener(new LocationAdapter.OnClickDeleteItem() {
                 @Override
                 public void OnClickDeleteItem(int position) {
-                    showLogoutDialog();
+                    showLogoutDialog("Do want to delete this location ? ");
                 }
             });
             mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
                 @Override
                 public void OnClickItem(int position) {
                   Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+                  Bundle bundle = new Bundle();
+                  bundle.putSerializable(BundleString.LOCATIONDETAIL,mLocationDTOS.get(position));
+                  intent.putExtras(bundle);
                   startActivity(intent);
                 }
             });
@@ -101,12 +111,14 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
-    private void showLogoutDialog() {
+    private void showLogoutDialog(String message) {
         final Dialog dialog = new Dialog(ManageLocationActivity.this);
         dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button buttonOk = dialog.findViewById(R.id.btn_yes);
         Button buttonNo = dialog.findViewById(R.id.btn_no);
+        TextView  textView = dialog.findViewById(R.id.txt_dia);
+        textView.setText(message);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,9 +132,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             }
         });
         dialog.show();
-
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageLocationActivity.this,"Can't show data");
@@ -130,6 +140,8 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList!=null){
+            this.mLocationDTOS = new ArrayList<>();
+            this.mLocationDTOS = mLocationDTOList;
             this.mLocationList = new ArrayList<>();
             for (int i = 0; i <mLocationDTOList.size() ; i++) {
                 int locationId  = mLocationDTOList.get(i).getLocationId();
@@ -139,5 +151,15 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             }
             updateUI();
         }
+    }
+    @Override
+    public void createLocationSuccess(){
+        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    public void updateLocationSuccess(){
+        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+        startActivity(intent);
     }
 }

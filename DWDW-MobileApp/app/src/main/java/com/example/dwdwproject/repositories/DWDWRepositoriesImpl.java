@@ -138,6 +138,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                         }.getType();
                         //call response to get value data
                         UserDTO userDTO = new Gson().fromJson(result, type);
+                        System.out.println(userDTO.getUserName().toString());
                         mCallBackData.onSucess(userDTO);
 
                     } catch (IOException e) {
@@ -150,6 +151,8 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
 
             }
         });

@@ -31,4 +31,8 @@ public interface ServiceLocation {
     @PUT(ConfigAPI.Api.UPDATELOCATION)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateLocation(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
+    @PUT(ConfigAPI.Api.DEACTIVELOCATION)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> deactiveLocation(@HeaderMap Map<String, String> map,@Path("id") int id);
 }

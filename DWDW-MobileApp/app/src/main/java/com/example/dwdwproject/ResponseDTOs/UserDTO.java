@@ -19,7 +19,6 @@ public class UserDTO implements Serializable,Cloneable {
     private int roleId;
     @SerializedName("isActive")
     private boolean isActive;
-
     public int getUserId() {
         return userId;
     }
