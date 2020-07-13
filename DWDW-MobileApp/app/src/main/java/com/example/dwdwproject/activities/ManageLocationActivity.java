@@ -152,13 +152,13 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void createLocationSuccess(LocationDTO mLocationDTO){
+    public void createLocationSuccess(){
         Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void updateLocationSuccess(LocationDTO mLocationDTO){
+    public void updateLocationSuccess(){
         Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
         startActivity(intent);
     }

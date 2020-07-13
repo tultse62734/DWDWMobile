@@ -25,7 +25,7 @@ public class DeactiveLocationPresenter {
         this.mLocationRepositories.deactiveLocation(mContext, token, locationId, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mDeactiveLocationView.deactiveLocationSuccess(locationDTO);
+                mDeactiveLocationView.deactiveLocationSuccess();
             }
 
             @Override

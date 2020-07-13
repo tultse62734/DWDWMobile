@@ -27,7 +27,7 @@ public class CreateLocationPresenter {
         this.mLocationRepositories.createLocation(mContext, token, mLocationDTO, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mCreateLocationView.createLocationSuccess(locationDTO);
+                mCreateLocationView.createLocationSuccess();
             }
 
             @Override

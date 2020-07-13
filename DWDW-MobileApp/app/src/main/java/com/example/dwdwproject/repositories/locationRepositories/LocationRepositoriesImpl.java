@@ -190,12 +190,42 @@ public class LocationRepositoriesImpl implements LocationRepositories {
     }
 
     @Override
-    public void deactiveLocation(Context mContext, String token, int locationId, CallBackData<LocationDTO> callBackData) {
+    public void deactiveLocation(final Context mContext,String token, int locationId,final CallBackData<LocationDTO> callBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesLocation().deactiveLocation(map,locationId);
+
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<Location>() {
+
+                        }.getType();
+                        //call response to get value data
+                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
+                        callBackData.onSucess(mLocationDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    callBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                callBackData.onFail(t.getMessage());
+            }
+        });
     }
 
 

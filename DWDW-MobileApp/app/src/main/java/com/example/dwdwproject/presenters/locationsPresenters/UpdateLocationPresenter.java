@@ -25,7 +25,7 @@ public class UpdateLocationPresenter {
         this.mLocationRepositories.updateLocation(mContext, token, mLocationDTO, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mUpdateLocationView.updateLocationSuccess(locationDTO);
+                mUpdateLocationView.updateLocationSuccess();
             }
 
             @Override

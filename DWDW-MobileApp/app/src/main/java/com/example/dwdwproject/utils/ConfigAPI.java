@@ -31,5 +31,12 @@ public class ConfigAPI {
         String CREATEUSER="";
         String UPDATEUSER="";
         String DELETEUSER ="";
+        //Shift
+        String GETALLSHIFT = "Shift/GetAllShift";
+        String GETSHIFTOFMANAGER = "Shift/GetShiftManager";
+        String GETSHIFTOFWORKER = "Shift/GetShiftWorker";
+        String CREATESHIFT = "Shift/CreateShift";
+        String UPDATESHIFT = "Shift/UpdateShift";
+        String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
     }
 }
