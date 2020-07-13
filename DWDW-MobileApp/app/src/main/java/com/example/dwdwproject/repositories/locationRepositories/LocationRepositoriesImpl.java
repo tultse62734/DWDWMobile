@@ -187,6 +187,16 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                 callBackData.onFail(t.getMessage());
             }
         });
-
     }
+
+    @Override
+    public void deactiveLocation(Context mContext, String token, int locationId, CallBackData<LocationDTO> callBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesLocation().deactiveLocation(map,locationId);
+    }
+
+
 }

@@ -13,4 +13,5 @@ public interface LocationRepositories {
     void getAllLocationById(Context mContext,String token,int lcationId,CallBackData<LocationDTO>callBackData);
     void createLocation(Context mContext,String token,LocationDTO mLocation,CallBackData<LocationDTO> callBackData);
     void updateLocation(Context mContext,String token,LocationDTO mLocation,CallBackData<LocationDTO> callBackData);
+    void deactiveLocation(Context mContext, String token, int locationId, CallBackData<LocationDTO> callBackData);
 }

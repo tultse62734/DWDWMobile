@@ -17,6 +17,7 @@ public class ConfigAPI {
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";
+        String DEACTIVELOCATION = "Location/DeactiveLocation";
         //Room
         String GETALLROOM = "";
         String GETROOMBYID ="";

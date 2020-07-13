@@ -14,22 +14,29 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.dwdwproject.MainActivity;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.presenters.locationsPresenters.CreateLocationPresenter;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.locationsPresenters.UpdateLocationPresenter;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
+import com.example.dwdwproject.views.locationsViews.CreateLocatonView;
+import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
+public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView, CreateLocatonView, UpdateLocatonView {
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
     private GetAllLocationPresenter getAllLocationPresenter;
+    private CreateLocationPresenter createLocationPresenter;
+    private UpdateLocationPresenter updateLocationPresenter;
     private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,13 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
 //        updateUI();
         getAllLocationPresenter = new GetAllLocationPresenter(ManageLocationActivity.this,getApplication(),this);
         getAllLocationPresenter.getTokenGetAllLocation();
+
+        createLocationPresenter = new CreateLocationPresenter(ManageLocationActivity.this,getApplication(), this);
+        createLocationPresenter.createLocationToken(new LocationDTO());
+
+        updateLocationPresenter = new UpdateLocationPresenter(ManageLocationActivity.this,getApplication(), this);
+        updateLocationPresenter.updateLocationToken(new LocationDTO());
+
     }
     private void updateUI(){
         if(mLocationAdapter == null){
@@ -135,5 +149,17 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             }
             updateUI();
         }
+    }
+
+    @Override
+    public void createLocationSuccess(LocationDTO mLocationDTO){
+        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void updateLocationSuccess(LocationDTO mLocationDTO){
+        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
+        startActivity(intent);
     }
 }

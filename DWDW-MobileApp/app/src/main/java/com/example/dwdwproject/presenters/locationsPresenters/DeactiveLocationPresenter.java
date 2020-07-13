@@ -8,37 +8,37 @@ import com.example.dwdwproject.repositories.locationRepositories.LocationReposit
 import com.example.dwdwproject.repositories.locationRepositories.LocationRepositoriesImpl;
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
-import com.example.dwdwproject.views.locationsViews.GetLocationView;
+import com.example.dwdwproject.views.locationsViews.DeactiveLocatonView;
 import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
-public class UpdateLocationPresenter {
+public class DeactiveLocationPresenter {
     private Context mContext;
-    private UpdateLocatonView mUpdateLocationView;
+    private DeactiveLocatonView mDeactiveLocationView;
     private DWDWManagement dwdwManagement ;
     private LocationRepositories mLocationRepositories;
-    public UpdateLocationPresenter(Context mContext, Application mApplication, UpdateLocatonView mUpdateLocationView) {
+    public DeactiveLocationPresenter(Context mContext, Application mApplication, DeactiveLocatonView mDeactiveLocationView) {
         this.mContext = mContext;
-        this.mUpdateLocationView = mUpdateLocationView;
+        this.mDeactiveLocationView = mDeactiveLocationView;
         this.mLocationRepositories = new LocationRepositoriesImpl();
     }
-    public void updateLocation(String token, LocationDTO mLocationDTO){
-        this.mLocationRepositories.updateLocation(mContext, token, mLocationDTO, new CallBackData<LocationDTO>() {
+    public void deactiveLocation(String token,int locationId){
+        this.mLocationRepositories.deactiveLocation(mContext, token, locationId, new CallBackData<LocationDTO>() {
             @Override
             public void onSucess(LocationDTO locationDTO) {
-                mUpdateLocationView.updateLocationSuccess(locationDTO);
+                mDeactiveLocationView.deactiveLocationSuccess(locationDTO);
             }
 
             @Override
             public void onFail(String message) {
-                mUpdateLocationView.showError(message);
+                mDeactiveLocationView.showError(message);
             }
         });
     }
-    public void updateLocationToken(final LocationDTO mLocationDTO){
+    public void deactiveLocationToken(final int locationId){
         dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
             @Override
             public void onDataSuccess(String accessToken) {
-                updateLocation(accessToken,mLocationDTO);
+                deactiveLocation(accessToken,locationId);
             }
 
             @Override
