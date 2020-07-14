@@ -3,268 +3,143 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_height="match_parent"
     tools:context=".activities.AdminDashboardActivity">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:background="@color/colorOrange"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@color/colorOrange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:weightSum="10"
+                            android:layout_marginTop="@dimen/dp40"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_weight="8"
+                                android:textSize="@dimen/sp22"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorWhite"
+                                android:text="Welcome Admin"
+                                android:layout_marginRight="@dimen/dp10"
+                                android:layout_marginLeft="@dimen/dp10"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+                            </TextView>
+                            <LinearLayout
+                                android:id="@+id/lnl_log_out_dashboard"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:layout_weight="2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:src="@mipmap/ic_exit"
+                                    android:layout_width="@dimen/dp40"
+                                    android:layout_height="@dimen/dp40">
+                                </ImageView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <TextView
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:text="31/05/2020"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                        <TextView
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:text="Trang chủ"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginTop="@dimen/dp20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_marginBottom="@dimen/dp20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:id="@+id/rcv_item_dashboard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/radius_conner_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="1000dp">
+
+                        <ListView
+                            android:id="@+id/listView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"></ListView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
             <LinearLayout
-                android:weightSum="10"
-                android:layout_marginTop="@dimen/dp40"
-                android:orientation="horizontal"
+
+                android:layout_gravity="bottom"
+                android:gravity="center|right"
+                android:layout_marginBottom="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="8"
-                    android:textSize="@dimen/sp22"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:text="Welcome Admin"
-                    android:layout_marginRight="@dimen/dp10"
-                    android:layout_marginLeft="@dimen/dp10"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                </TextView>
                 <LinearLayout
-                    android:id="@+id/lnl_log_out"
+                    android:background="@drawable/radius_conner_orange"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/lnl_filter_dashboarđ"
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="@dimen/dp60">
                     <ImageView
-                        android:src="@mipmap/ic_exit"
+                        android:tint="@color/colorWhite"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_filter"
+                        android:id="@+id/tapBarMenu"
                         android:layout_width="@dimen/dp40"
-                        android:layout_height="@dimen/dp40">
+                        android:layout_height="@dimen/dp40"
+                        >
                     </ImageView>
                 </LinearLayout>
-            </LinearLayout>
-            <TextView
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhite"
-                android:text="31/05/2020"
-                android:layout_marginRight="@dimen/dp10"
-                android:layout_marginLeft="@dimen/dp10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TextView>
-            <TextView
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhite"
-                android:text="Trang chủ"
-                android:layout_marginRight="@dimen/dp10"
-                android:layout_marginLeft="@dimen/dp10"
-                android:layout_marginTop="@dimen/dp20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </TextView>
-        </LinearLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:background="@drawable/radius_conner_white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ListView
-                android:id="@+id/listView1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </ListView>
-        </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:gravity="center"
-        android:background="@drawable/radius_conner_white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp20"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_marginBottom="@dimen/dp20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:id="@+id/lnl_manage_location_home"
-                    android:layout_width="23dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp5"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:layout_weight="2"
-                    android:background="@drawable/radius_conner_grey"
-                    android:gravity="center|top"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp60"
-                        android:layout_height="@dimen/dp60"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_project_management"></ImageView>
-
-                    <TextView
-                        android:layout_width="66dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:layout_marginBottom="@dimen/dp10"
-                        android:gravity="center"
-                        android:text="6 Locations"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp15"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lnl_managa_device_home"
-                    android:layout_width="23dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp5"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:layout_weight="2"
-                    android:background="@drawable/radius_conner_grey"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp60"
-                        android:layout_height="59dp"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:src="@mipmap/ic_security_camera"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:layout_marginBottom="@dimen/dp10"
-                        android:gravity="center"
-                        android:text="12 Devices"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp15"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lnl_manage_profile"
-                    android:layout_width="23dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp5"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:layout_weight="2"
-                    android:background="@drawable/radius_conner_grey"
-                    android:gravity="center|top"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp60"
-                        android:layout_height="@dimen/dp60"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:src="@mipmap/ic_worker"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:layout_marginBottom="@dimen/dp10"
-                        android:gravity="center"
-                        android:text="3 Manager"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp15"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/lnl_manage_room_admin"
-                    android:layout_width="23dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dp5"
-                    android:layout_marginRight="@dimen/dp5"
-                    android:layout_weight="2"
-                    android:background="@drawable/radius_conner_grey"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/dp60"
-                        android:layout_height="@dimen/dp60"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:src="@mipmap/ic_search_home"></ImageView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:layout_marginBottom="@dimen/dp10"
-                        android:gravity="center"
-                        android:text="16 Rooms"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp15"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/dp10"
-            android:layout_marginLeft="@dimen/dp10"
-            android:layout_marginBottom="@dimen/dp20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/lnl_profile"
-                android:orientation="vertical"
-                android:layout_width="@dimen/dp60"
-                android:layout_height="@dimen/dp60">
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_architecture_city"
-                    android:id="@+id/tapBarMenu"
-                    android:layout_width="@dimen/dp60"
-                    android:layout_height="@dimen/dp60"
-                    >
-                </ImageView>
-            </LinearLayout>
+        </FrameLayout>
 
 
-        </LinearLayout>
-    </LinearLayout>
-    </FrameLayout>
 </LinearLayout>

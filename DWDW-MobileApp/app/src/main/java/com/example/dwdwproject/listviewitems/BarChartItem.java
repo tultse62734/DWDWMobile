@@ -14,12 +14,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.ChartData;
 
 public class BarChartItem extends ChartItem {
-    private final Typeface mTf;
 
     public BarChartItem(ChartData<?> cd, Context c) {
         super(cd);
 
-        mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
     }
     @Override
     public int getItemType()  {
@@ -54,23 +52,18 @@ public class BarChartItem extends ChartItem {
 
         XAxis xAxis = holder.chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTypeface(mTf);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
 
         YAxis leftAxis = holder.chart.getAxisLeft();
-        leftAxis.setTypeface(mTf);
         leftAxis.setLabelCount(5, false);
         leftAxis.setSpaceTop(20f);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
         YAxis rightAxis = holder.chart.getAxisRight();
-        rightAxis.setTypeface(mTf);
         rightAxis.setLabelCount(5, false);
         rightAxis.setSpaceTop(20f);
         rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-
-        mChartData.setValueTypeface(mTf);
 
         // set data
         holder.chart.setData((BarData) mChartData);

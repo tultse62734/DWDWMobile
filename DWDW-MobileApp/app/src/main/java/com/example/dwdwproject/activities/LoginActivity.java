@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void intentToHomeAdminActivtity(){
-        Intent intent = new Intent(LoginActivity.this,HomeAdminActivity.class);
+        Intent intent = new Intent(LoginActivity.this,AdminDashboardActivity.class);
         startActivity(intent);
     }
     private void intentToHomeManageActivity(){

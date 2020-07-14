@@ -2,20 +2,32 @@ package com.example.dwdwproject.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.adapters.DashboardAdapter;
 import com.example.dwdwproject.listviewitems.BarChartItem;
 import com.example.dwdwproject.listviewitems.ChartItem;
 import com.example.dwdwproject.listviewitems.LineChartItem;
 import com.example.dwdwproject.listviewitems.PieChartItem;
+import com.example.dwdwproject.models.ItemDashBoard;
+import com.example.dwdwproject.presenters.roomLocalPresenter.DeleteUserToRoomPresenter;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.views.roomLocalViews.DeleteUserView;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -27,31 +39,65 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
 import java.util.ArrayList;
 import java.util.List;
-
-public class AdminDashboardActivity extends AppCompatActivity {
-
+public class AdminDashboardActivity extends AppCompatActivity  implements View.OnClickListener, DeleteUserView {
+    private RecyclerView mRecyclerView;
+    private ListView mListView;
+    private ArrayList<ChartItem> list;
+    private List<ItemDashBoard> itemDashBoards;
+    private LinearLayout mBtnLogout,mBtnFilter;
+    private DashboardAdapter mDashboardAdapter;
+    private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
-
-        setTitle("ListViewMultiChartActivity");
-        ListView lv = findViewById(R.id.listView1);
-
-        ArrayList<ChartItem> list = new ArrayList<>();
-
-        // 3 items
-         list.add(new LineChartItem(generateDataLine(), getApplicationContext()));
-         list.add(new BarChartItem(generateDataBar(), getApplicationContext()));
-         list.add(new PieChartItem(generateDataPie(), getApplicationContext()));
-
-        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
-        lv.setAdapter(cda);
+        initView();
+        initData();
     }
-
+    private void initView(){
+        setTitle("ListViewMultiChartActivity");
+        mListView  = findViewById(R.id.listView1);
+        mBtnLogout = findViewById(R.id.lnl_log_out_dashboard);
+        mRecyclerView = findViewById(R.id.rcv_item_dashboard);
+        mBtnFilter = findViewById(R.id.lnl_filter_dashboarđ);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdminDashboardActivity.this,LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+    }
+    private void initData(){
+        mDeleteUserToRoomPresenter = new DeleteUserToRoomPresenter(getApplication(),this);
+        mBtnLogout.setOnClickListener(this);
+        mBtnFilter.setOnClickListener(this);
+        list  = new ArrayList<>();;
+        list.add(new LineChartItem(generateDataLine(), getApplicationContext()));
+        list.add(new BarChartItem(generateDataBar(), getApplicationContext()));
+        list.add(new PieChartItem(generateDataPie(), getApplicationContext()));
+        itemDashBoards = new ArrayList<>();
+        itemDashBoards.add(new ItemDashBoard("Profile",R.mipmap.ic_worker));
+        itemDashBoards.add(new ItemDashBoard("18 Locations",R.mipmap.ic_project_management));
+        itemDashBoards.add(new ItemDashBoard("17 Devices",R.mipmap.ic_security_camera));
+        itemDashBoards.add(new ItemDashBoard("30 Workers",R.mipmap.ic_collaboration));
+        itemDashBoards.add(new ItemDashBoard("15 Rooms",R.mipmap.ic_search_home));
+        itemDashBoards.add(new ItemDashBoard("5 Record",R.mipmap.ic_emergency));
+        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
+        mListView.setAdapter(cda);
+        update();
+    }
+    private void update(){
+        if(mDashboardAdapter == null){
+            mDashboardAdapter = new DashboardAdapter(AdminDashboardActivity.this,itemDashBoards);
+            mRecyclerView.setAdapter(mDashboardAdapter);
+            mDashboardAdapter.OnItemClick(new DashboardAdapter.OnItemClickListenr() {
+                @Override
+                public void onItemClickListerner(int pos) {
+                intentToActivity(pos);
+                }
+            });
+        }else {
+            mDashboardAdapter.notifyDataSetChanged();
+        }
+    }
     private PieData generateDataPie() {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
@@ -159,7 +205,26 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         return new LineData(sets);
     }
-
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.lnl_log_out_dashboard:
+                showLogoutDialog();
+                break;
+            case R.id.lnl_filter_dashboarđ:
+                intentToFilterActivity();
+                break;
+        }
+    }
+    @Override
+    public void deleteUserToRoomSucces() {
+        intentToLogOutActivity();
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminDashboardActivity.this,"Logout Failed");
+    }
     /** adapter that supports 3 different item types */
     private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
         public ChartDataAdapter(Context context, List<ChartItem> objects) {
@@ -183,5 +248,83 @@ public class AdminDashboardActivity extends AppCompatActivity {
         public int getViewTypeCount() {
             return 3; // we have 3 different item-types
         }
+    }
+    private void intentToActivity(int pos){
+        int id = pos;
+        switch (id) {
+            case 0:
+                intentToProfileActivity();
+                break;
+            case 1:
+                intentToLocationActivity();
+                break;
+            case 2:
+                intentToManagaDeviceActivity();
+                break;
+            case 3:
+                intentManageWorḳerActivity();
+                break;
+            case 4:
+                intentToManagerRoomActivity();
+                break;
+            case 5:
+                intentToManageAccidentActivity();
+                break;
+        }
+
+    }
+    private void intentToManageAccidentActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,AdminAccidentManageActivity.class);
+        startActivity(intent);
+    }
+    private void intentToFilterActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,ShiftDateFilterActivity.class);
+        startActivity(intent);
+    }
+    private void intentManageWorḳerActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this, ManageWorkerActivity.class);
+        startActivity(intent);
+    }
+    private void intentToLogOutActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,LoginActivity.class);
+        finish();
+        startActivity(intent);
+    }
+    private void intentToProfileActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,ProfileManageActivity.class);
+        startActivity(intent);
+    }
+    private void intentToManagerRoomActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,ManageRoomActivity.class);
+        startActivity(intent);
+    }
+    private void intentToLocationActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this, ManageLocationActivity.class);
+        startActivity(intent);
+    }
+    private void intentToManagaDeviceActivity(){
+        Intent intent = new Intent(AdminDashboardActivity.this,ManageDeviceActivity.class);
+        startActivity(intent);
+    }
+    private void showLogoutDialog() {
+        final Dialog dialog = new Dialog(AdminDashboardActivity.this);
+        dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button buttonOk = dialog.findViewById(R.id.btn_yes);
+        Button buttonNo = dialog.findViewById(R.id.btn_no);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                mDeleteUserToRoomPresenter.deleteUserTomRoom();
+            }
+        });
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

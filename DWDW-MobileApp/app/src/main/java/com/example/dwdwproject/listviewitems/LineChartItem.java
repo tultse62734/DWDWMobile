@@ -15,12 +15,10 @@ import com.github.mikephil.charting.data.LineData;
 
 public class LineChartItem extends ChartItem {
 
-    private final Typeface mTf;
 
     public LineChartItem(ChartData<?> cd, Context c) {
         super(cd);
 
-        mTf = Typeface.createFromAsset(c.getAssets(), "OpenSans-Regular.ttf");
     }
     @Override
     public int getItemType() {
@@ -55,17 +53,14 @@ public class LineChartItem extends ChartItem {
 
         XAxis xAxis = holder.chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTypeface(mTf);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
 
         YAxis leftAxis = holder.chart.getAxisLeft();
-        leftAxis.setTypeface(mTf);
         leftAxis.setLabelCount(5, false);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
         YAxis rightAxis = holder.chart.getAxisRight();
-        rightAxis.setTypeface(mTf);
         rightAxis.setLabelCount(5, false);
         rightAxis.setDrawGridLines(false);
         rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
