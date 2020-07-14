@@ -9,6 +9,8 @@ public class LoginDTO implements Serializable {
     private String username;
     @SerializedName("password")
     private String password;
+    @SerializedName("deviceToken")
+    private String deviceToken;
     public String getUsername() {
         return username;
     }
@@ -23,5 +25,11 @@ public class LoginDTO implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
     }
 }

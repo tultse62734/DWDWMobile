@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEdtUsername,mEdtPassword;
     private LoginPresenter mLoginPresenter;
     private AddUserToRoomPresenter mAddUserToRoomPresenter;
+    private String deviveToken;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +77,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                showErrorLoginDialog("Tài khoản hoặc mật khẩu không chính xác");
 //            }
             mLoginPresenter = new LoginPresenter(LoginActivity.this,this);
+            deviveToken = FirebaseInstanceId.getInstance().getToken();
             LoginDTO mLoginDTO = new LoginDTO();
             mLoginDTO.setUsername(username);
             mLoginDTO.setPassword(password);
+            mLoginDTO.setDeviceToken(deviveToken);
             mLoginPresenter.login(mLoginDTO);
         }
     }
@@ -124,15 +128,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void loginSuccessString̣̣̣(String token) {
-        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.TOKEN,token);
-        mAddUserToRoomPresenter = new AddUserToRoomPresenter(LoginActivity.this,getApplication(),this);
-        mAddUserToRoomPresenter.getUserInfor(token);
+
     }
     @Override
     public void loginSuccess(ReponseDTO mReponseDTO) {
-//        if(mReponseDTO!=null){ String deviveToken = FirebaseInstanceId.getInstance().getToken();
-//           String token =  mReponseDTO.getToken();
+        if(mReponseDTO!=null){
+            token = mReponseDTO.getToken();
+            SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.TOKEN,token);
+            mAddUserToRoomPresenter = new AddUserToRoomPresenter(LoginActivity.this,getApplication(),this);
+            mAddUserToRoomPresenter.getUserInfor(token);
         }
+    }
     @Override
     public void showError(String message) {
         showErrorLoginDialog("Đăng nhập không thành công");

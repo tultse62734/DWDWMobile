@@ -55,7 +55,6 @@
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-
         </activity>
         <activity
             android:name=".activities.SignUpActivity"

@@ -4,9 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 public class ReponseDTO implements Serializable {
-    @SerializedName("data")
+    @SerializedName("accessToken")
     private String token;
-
     public String getToken() {
         return token;
     }

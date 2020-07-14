@@ -21,27 +21,26 @@ public class LoginPresenter {
         this.mDwdwRepositories = new DWDWRepositoriesImpl();
     }
     public void login(LoginDTO mLoginDTO){
-//        this.mDwdwRepositories.Login(mContext, mLoginDTO, new CallBackData<ReponseDTO>() {
+        this.mDwdwRepositories.Login(mContext, mLoginDTO, new CallBackData<ReponseDTO>() {
+            @Override
+            public void onSucess(ReponseDTO reponseDTO) {
+                mLoginView.loginSuccess(reponseDTO);
+            }
+            @Override
+            public void onFail(String message) {
+                mLoginView.showError(message);
+            }
+        });
+//        this.mDwdwRepositories.Login2(mContext, mLoginDTO, new CallBackData<String>() {
 //            @Override
-//            public void onSucess(ReponseDTO reponseDTO) {
-//                mLoginView.loginSuccess(reponseDTO);
+//            public void onSucess(String s) {
+//                mLoginView.loginSuccessString̣̣̣(s);
 //            }
 //
 //            @Override
 //            public void onFail(String message) {
-//                mLoginView.showError(message);
+//            mLoginView.showError(message);
 //            }
 //        });
-        this.mDwdwRepositories.Login2(mContext, mLoginDTO, new CallBackData<String>() {
-            @Override
-            public void onSucess(String s) {
-                mLoginView.loginSuccessString̣̣̣(s);
-            }
-
-            @Override
-            public void onFail(String message) {
-            mLoginView.showError(message);
-            }
-        });
     }
 }

@@ -38,7 +38,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
         try {
             jsonObject.put("username",mLoginDTO.getUsername());
             jsonObject.put("password",mLoginDTO.getPassword());
-
+            jsonObject.put("deviceToken",mLoginDTO.getDeviceToken());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,6 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             }
         });
     }
-
     @Override
     public void Login2(final Context mContext, LoginDTO mLoginDTO,final CallBackData<String> callBackData) {
         ClientApi clientApi = new ClientApi();
@@ -84,6 +83,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
         try {
             jsonObject.put("username",mLoginDTO.getUsername());
             jsonObject.put("password",mLoginDTO.getPassword());
+            jsonObject.put("deviceToken",mLoginDTO.getDeviceToken());
 
         } catch (JSONException e) {
             e.printStackTrace();
