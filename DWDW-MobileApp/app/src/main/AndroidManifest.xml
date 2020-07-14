@@ -9,16 +9,16 @@
         android:icon="@mipmap/ic_worker"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_worker"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        <activity android:name=".activities.ManagerChooseLocationActivity"
-            android:theme="@style/AppTheme">
-
-        </activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activities.AdminDashboardActivity"></activity>
+        <activity
+            android:name=".activities.ManagerChooseLocationActivity"
+            android:theme="@style/AppTheme"></activity>
         <activity android:name=".activities.WorkerReportActivity" />
         <activity android:name=".activities.WorkerShiftViewActivity" />
-        <activity android:name=".activities.HomeManagerActivity"></activity>
+        <activity android:name=".activities.HomeManagerActivity" />
         <activity android:name=".activities.WorkerShiftDetailActivity" />
         <activity android:name=".activities.ShiftTaskDetailActivity" />
         <activity android:name=".activities.ShiftDateFilterActivity" />
@@ -47,7 +47,7 @@
         <activity android:name=".activities.ManageDeviceActivity" />
         <activity android:name=".activities.ProfileManageActivity" />
         <activity android:name=".activities.ManageManagerActivity" />
-        <activity android:name=".activities.HomeWorkerActivity"></activity>
+        <activity android:name=".activities.HomeWorkerActivity" />
         <activity
             android:name=".activities.HomeAdminActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
@@ -67,7 +67,6 @@
             android:name=".activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".MainActivity" />
-
     </application>
 
 </manifest>
