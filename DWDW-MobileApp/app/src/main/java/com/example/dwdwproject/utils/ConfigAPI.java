@@ -1,7 +1,7 @@
 package com.example.dwdwproject.utils;
 public class ConfigAPI {
 
-    public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
+    public  static final String BASE_URL = "https://dwdw-api.conveyor.cloud/api/";
     public interface Api {
         //User
         String LOGIN = "User/LoginAsync";
@@ -15,11 +15,12 @@ public class ConfigAPI {
         String ADMIMGETALLDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationAdmin";
         //Location
         String GETALLLOCATION = "Location/GetLocations";
-
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";
         String DEACTIVELOCATION = "Location/DeactiveLocation";
+
+        String GETMANAGERLOCATION = "Location/GetLocationsByManager";
         //Room
         String GETALLROOM = "";
         String GETROOMBYID ="";

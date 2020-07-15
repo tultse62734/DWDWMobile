@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.AdminDashboardActivity">
-        </activity>
+        <activity android:name=".activities.ManagerLocationActivity"></activity>
+        <activity android:name=".activities.AdminDashboardActivity"></activity>
         <activity
             android:name=".activities.ManagerChooseLocationActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".activities.WorkerReportActivity" />
         <activity android:name=".activities.WorkerShiftViewActivity" />
         <activity android:name=".activities.HomeManagerActivity" />
@@ -54,19 +54,20 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>
+
 </manifest>
