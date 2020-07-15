@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
             </TextView>
             <LinearLayout
-                android:id="@+id/lnl_close_manage_location"
+                android:id="@+id/lnl_close_manager_location"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_weight="2"
@@ -71,7 +71,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_location"
+                android:id="@+id/rcv_manager_location"
                 android:layout_marginBottom="@dimen/dp20"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"

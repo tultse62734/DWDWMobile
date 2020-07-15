@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".activities.AdminLocationDetailActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/colorOrange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:weightSum="10"
+                android:layout_marginTop="@dimen/dp40"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="8"
+                    android:textSize="@dimen/sp22"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="Location Detail"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <LinearLayout
+                    android:id="@+id/lnl_close_manager_location_detail"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:tint="@color/colorWhite"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_close"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp100"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:background="@drawable/radius_conner_bottom_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp20"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
+                    android:text="Tên khu vực :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <EditText
+                    android:gravity="center|left"
+                    android:id="@+id/edt_name_location_update_location_manager"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_height="@dimen/dp60">
+
+                </EditText>
+                <TextView
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
+                    android:text="Trạng thái :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <TextView
+                    android:gravity="center|left"
+                    android:id="@+id/edt_choose_status_update_location_manager_deta"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60">
+                    android:focusable="false"
+                    android:clickable="false"
+
+                </TextView>
+                <TextView
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
+                    android:text="Ngày tạo :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <TextView
+                    android:gravity="center|left"
+                    android:id="@+id/txt_time_create_date_update_location_manager"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:hint="18-11-1997"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60">
+
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

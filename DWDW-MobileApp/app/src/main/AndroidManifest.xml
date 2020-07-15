@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ManagerLocationActivity"></activity>
-        <activity android:name=".activities.AdminDashboardActivity"></activity>
+        <activity android:name=".activities.ManagerLocationDetailActivity"></activity>
+        <activity android:name=".activities.ManagerLocationActivity" />
+        <activity android:name=".activities.AdminDashboardActivity" />
         <activity
             android:name=".activities.ManagerChooseLocationActivity"
             android:theme="@style/AppTheme" />
@@ -54,7 +55,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

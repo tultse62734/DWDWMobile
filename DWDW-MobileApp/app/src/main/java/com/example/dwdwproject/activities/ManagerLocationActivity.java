@@ -44,14 +44,13 @@ public class ManagerLocationActivity extends AppCompatActivity implements GetMan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_admin);
+        setContentView(R.layout.activity_manager_view_location);
         initView();
         initData();
     }
     private void initView(){
-        mRecyclerView = findViewById(R.id.rcv_location);
-        mBtnClose = findViewById(R.id.lnl_close_manage_location);
-        mBtnAddLocation = findViewById(R.id.lnl_add_location_admin);
+        mRecyclerView = findViewById(R.id.rcv_manager_location);
+        mBtnClose = findViewById(R.id.lnl_close_manager_location);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
@@ -61,7 +60,23 @@ public class ManagerLocationActivity extends AppCompatActivity implements GetMan
         getManagerLocationPresenter.getManagerLocation(token);
     }
     private void updateUI(){
-        mLocationAdapter.notifyDataSetChanged();
+        if(mLocationAdapter == null){
+            mLocationAdapter = new LocationAdapter(ManagerLocationActivity.this,mLocationList);
+            mRecyclerView.setAdapter(mLocationAdapter);
+            mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
+                @Override
+                public void OnClickItem(int position) {
+                    Intent intent  = new Intent(ManagerLocationActivity.this,ManagerLocationDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.LOCATIONDETAIL,mLocationDTOS.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            mLocationAdapter.notifyDataSetChanged();
+        }
     }
 
     private void showLogoutDialog(String message) {
