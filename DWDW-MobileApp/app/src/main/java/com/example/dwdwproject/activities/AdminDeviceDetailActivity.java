@@ -5,28 +5,36 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.ChooseRoomAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Room;
+import com.example.dwdwproject.presenters.devicesPresenters.UpdateDevicePresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.devicesViews.GetDeviceIDView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AdminDeviceDetailActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener   {
-    LinearLayout mBtnClose;
+public class AdminDeviceDetailActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener, GetDeviceIDView {
+    LinearLayout mBtnClose,mBtnUpdateDevice;
     TextView mEdtChoooseLocation,mEdtChoooseRoom,mEdtChooseTime;
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
@@ -34,6 +42,10 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
     private ChooseLocationAdapter mLocationAdapter;
     private ChooseRoomAdapter mChooseRoomAdapter;
     private int posLocation;
+    private EditText mEdtDeviceCode;
+    private String token ;
+    private DeviceDTO mDeviceDTO;
+    private UpdateDevicePresenter mUpdateDevicePresenter;
     private List<Room> mRoomList;
     private List<Room> mRoomListFromLocation;
     private int posRoom;
@@ -50,13 +62,20 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_update_admin);
         mEdtChoooseRoom = findViewById(R.id.edt_choose_room_update_admin);
         mEdtChooseTime = findViewById(R.id.edt_choose_time_update_admin);
+        mBtnUpdateDevice = findViewById(R.id.lnl_submit_update_device_admin);
+        mEdtDeviceCode = findViewById(R.id.edit_device_code_update);
     }
     private void initDatạ(){
+        Bundle bundle = getIntent().getExtras();
+        mDeviceDTO = (DeviceDTO) bundle.getSerializable(BundleString.DEVICEDETAIL);
+        mEdtDeviceCode.setText(mDeviceDTO.getDeviceCode()+"");
+         mUpdateDevicePresenter = new UpdateDevicePresenter(AdminDeviceDetailActivity.this,this);
         getDataLocation();
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChoooseRoom.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
+        mBtnUpdateDevice.setOnClickListener(this);
     }
     public void clickOnRdOption() {
         Calendar calendar = Calendar.getInstance();
@@ -110,9 +129,16 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
             case R.id.edt_choose_time_update_admin:
                 clickOnRdOption();
                 break;
+            case R.id.lnl_submit_update_device_admin:
+                updateDevice();
+                break;
         }
     }
-
+    public void updateDevice(){
+        token = SharePreferenceUtils.getStringSharedPreference(AdminDeviceDetailActivity.this, BundleString.TOKEN);
+        mDeviceDTO.setDeviceCode(mEdtDeviceCode.getText().toString());
+        mUpdateDevicePresenter.updateDevice(token,mDeviceDTO);
+    }
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {
         String starDay = DateManagement.fortmatIntToDate(day) + "/" + DateManagement.fortmatIntToDate((++month)) + "/" + year;
@@ -124,7 +150,8 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
         } else {
             showFilterDateDialog("Vui lòng chọn lại ngày!!!");
         }
-    }    private void getDataLocation(){
+    }
+    private void getDataLocation(){
         mBtnClose.setOnClickListener(this);
         mLocationList = new ArrayList<>();
         mRoomListFromLocation = new ArrayList<>();
@@ -197,6 +224,18 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
         });
 
         dialog.show();
+
+    }
+
+    @Override
+    public void getDeviceView(DeviceDTO mDeviceDTO) {
+        Intent intent = new Intent(AdminDeviceDetailActivity.this,ManageDeviceActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
+    @Override
+    public void showError(String message) {
 
     }
 }

@@ -95,6 +95,7 @@
 
                 </TextView>
                 <EditText
+                    android:id="@+id/edit_room_code_update"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -180,7 +181,7 @@
 
             <LinearLayout
                 android:layout_marginBottom="@dimen/dp20"
-                android:id="@+id/lnl_submit_update_device_admin"
+                android:id="@+id/lnl_submit_update_room_admin"
                 android:layout_marginRight="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginLeft="@dimen/dp20"

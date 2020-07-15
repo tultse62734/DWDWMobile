@@ -35,17 +35,5 @@ public class CreateRoomPresenter {
             }
         });
     }
-    public void createRoomToken(final RoomDTO roomDTO){
-        this.dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                createRoom(accessToken,roomDTO);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

@@ -103,16 +103,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             }
         });
     }
-
     @Override
     public void createDevice(final Context mContext, String token,DeviceDTO mDevice, final CallBackData<DeviceDTO> callBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson =new Gson();
-        String requestBody = gson.toJson(mDevice);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("deviceCode",mDevice.getDeviceCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().createDevice(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -146,16 +149,21 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         });
 
     }
-
     @Override
     public void updateDevice(final Context mContext,String token,DeviceDTO mDevice, final CallBackData<DeviceDTO> callBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mDevice);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("deviceId",mDevice.getDeviceId());
+
+            data.put("deviceCode",mDevice.getDeviceCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().updateDevice(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {

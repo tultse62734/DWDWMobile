@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,15 +15,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.LocationDTO;
+import com.example.dwdwproject.ResponseDTOs.RoomDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.ChooseStatusAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Status;
+import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.roomPresenters.UpdateRoomPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
+import com.example.dwdwproject.views.roomViews.GetRoomView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminRoomDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminRoomDetailActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView, GetRoomView {
     LinearLayout mBtnClose;
     TextView mEdtChoooseLocation,mEdtStatusRoom;
     private List<Location> mLocationList;
@@ -30,35 +40,54 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
     private RecyclerView mRecyclerView,mRecyclerView1;
     private int posLocation;
     private int posStatus;
+    private String token;
+    private RoomDTO mRoomDTO;
+    private EditText mEdtRoomCode;
+    private int locationId;
     private ChooseLocationAdapter mLocationAdapter;
+    private GetAllLocationPresenter mAllLocationPresenter;
     private ChooseStatusAdapter mChooseStatusAdapter;
+    private UpdateRoomPresenter mUpdateRoomPresenter;
+    private LinearLayout mBtnUpdateRoom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_room_detail);
-        initView();
-        initData();
+        getDataServer();
     }
-
+    private void getDataServer(){
+        token = SharePreferenceUtils.getStringSharedPreference(AdminRoomDetailActivity.this,BundleString.TOKEN);
+        mAllLocationPresenter = new GetAllLocationPresenter(AdminRoomDetailActivity.this,this);
+        mAllLocationPresenter.getAllLocation(token);
+    }
     private void initView(){
+        Bundle bundle = getIntent().getExtras();
+        mRoomDTO  = (RoomDTO) bundle.getSerializable(BundleString.ROOMDETAIL);
         mBtnClose = findViewById(R.id.lnl_close_admin_room_detail);
+        mEdtRoomCode = findViewById(R.id.edit_room_code_update);
+        mBtnUpdateRoom = findViewById(R.id.lnl_submit_update_room_admin);
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_update_room_admin);
         mEdtStatusRoom = findViewById(R.id.edt_choose_status_update_room_admin);
+        mEdtRoomCode.setText(mRoomDTO.getRoomCode());
+        locationId = mRoomDTO.getLocationId();
+        for (int i = 0; i <mLocationList.size() ; i++) {
+                if(locationId == mLocationList.get(i).getLocationId()){
+                    mEdtChoooseLocation.setText(mLocationList.get(i).getNameLocation()+"");
+                }
+        }
+        mEdtStatusRoom.setText("Đang hoạt động");
     }
     private void initData(){
         getDataLocation();
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtStatusRoom.setOnClickListener(this);
+        mBtnUpdateRoom.setOnClickListener(this);
+
     }
     private void getDataLocation(){
         mBtnClose.setOnClickListener(this);
-        mLocationList = new ArrayList<>();
         mStatusList = new ArrayList<>();
-        mLocationList.add(new Location(1,"Khu A","20-11-2020",true));
-        mLocationList.add(new Location(2,"Khu B","12-10-2019",false));
-        mLocationList.add(new Location(3,"Khu C","1-10-2019",true));
-        mLocationList.add(new Location(4,"Khu D","1-10-2019",true));
         mStatusList.add(new Status("Đang hoạt động",true));
         mStatusList.add(new Status("Không hoạt động",false));
     }
@@ -74,6 +103,9 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.edt_choose_status_update_room_admin:
                 showChooseStatusRoomDialog();
+                break;
+            case R.id.lnl_submit_update_room_admin:
+                updateRoom();
                 break;
         }
 
@@ -132,6 +164,37 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
         });
 
         dialog.show();
+    }
+    @Override
+    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+        if(mLocationDTOList!=null){
+            this.mLocationList = new ArrayList<>();
+            for (int i = 0; i <mLocationDTOList.size() ; i++) {
+                int locationId  = mLocationDTOList.get(i).getLocationId();
+                String locationName = mLocationDTOList.get(i).getLocationCode();
+                boolean isactive = mLocationDTOList.get(i).isActive();
+                this.mLocationList.add(new Location(locationId,locationName,isactive));
+            }
+            initView();
+            initData();
+        }
+    }
+    private void updateRoom(){
+        token = SharePreferenceUtils.getStringSharedPreference(AdminRoomDetailActivity.this,BundleString.TOKEN);
+        mUpdateRoomPresenter = new UpdateRoomPresenter(AdminRoomDetailActivity.this,this);
+        mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString());
+        mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
+        mUpdateRoomPresenter.updateRoom(token,mRoomDTO);
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminRoomDetailActivity.this,"Update Room Fail");
+    }
 
+    @Override
+    public void getRoomSuccess(RoomDTO mRoomDTO) {
+        Intent intent = new Intent(AdminRoomDetailActivity.this,ManageRoomActivity.class);
+        finish();
+        startActivity(intent);
     }
 }

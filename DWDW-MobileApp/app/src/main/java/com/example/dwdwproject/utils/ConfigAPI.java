@@ -25,7 +25,7 @@ public class ConfigAPI {
         String GETROOMBYID ="";
         String CREATEROOM ="Room/CreateRoom";
         String UPDATEROOM = "Room/UpdateRoom";
-        String GETROOMFROMLOCATION="Room/GetRoomsFromLocation";
+        String GETROOMFROMLOCATION="Room/GetRoomsFromLocation/{locationId}";
         //Users
         String GETALLUSER  = "";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";

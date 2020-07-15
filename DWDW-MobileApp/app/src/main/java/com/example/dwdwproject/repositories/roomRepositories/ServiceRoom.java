@@ -14,24 +14,25 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceRoom {
-    @GET(ConfigAPI.Api.GETALLLOCATION)
+    @GET(ConfigAPI.Api.GETALLROOM)
     Call<ResponseBody> getAllRoom(@HeaderMap Map<String, String> map);
 
-    @GET(ConfigAPI.Api.GETLOCATIONBYID)
+    @GET(ConfigAPI.Api.GETALLROOM)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getRoomById(@HeaderMap Map<String, String> map,@Path("id") int id);
 
     @GET(ConfigAPI.Api.GETROOMFROMLOCATION)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getRoomByLocationId(@HeaderMap Map<String, String> map,@Path("locationId ") int id);
+    Call<ResponseBody> getRoomByLocationId(@HeaderMap Map<String, String> map,@Path("locationId") int id);
 
-    @POST(ConfigAPI.Api.CREATELOCATION)
+    @POST(ConfigAPI.Api.CREATEROOM)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> createRoom(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 
-    @PUT(ConfigAPI.Api.UPDATELOCATION)
+    @PUT(ConfigAPI.Api.UPDATEROOM)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateRoom(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 }

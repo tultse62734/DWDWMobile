@@ -33,8 +33,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     @Override
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, final int position) {
         holder.mTxtNameDevice.setText(mDeviceList.get(position).getNameDevice());
-        holder.mTxtCreateDateDevice.setText(mDeviceList.get(position).getCreateDate());
-        holder.mTxtLocationDevice.setText(mDeviceList.get(position).getLocationDevice());
+        if(mDeviceList.get(position).isActive()){
+            holder.mTxtCreateDateDevice.setText("Đang hoạt động");
+        }else {
+            holder.mTxtCreateDateDevice.setText("Không hoạt động");
+        }
+
         holder.mLnlRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

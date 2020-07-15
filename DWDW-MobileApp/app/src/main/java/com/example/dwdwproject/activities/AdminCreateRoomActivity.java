@@ -69,6 +69,7 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
         mBtnAddCreateRoom.setOnClickListener(this);
     }
     private void getDataLocation(){
+        mCreateRoomPresenter = new CreateRoomPresenter(AdminCreateRoomActivity.this,getApplication(),this);
         mBtnClose.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
         mStatusList = new ArrayList<>();
@@ -99,7 +100,6 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
                 createRoom();
                 break;
         }
-
     }
     private void showChooseStatusRoomDialog(){
         final Dialog dialog = new Dialog(AdminCreateRoomActivity.this);
@@ -155,13 +155,12 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
         dialog.show();
 
     }
-
     @Override
     public void getRoomSuccess(RoomDTO mRoomDTO) {
         Intent intent = new Intent(AdminCreateRoomActivity.this,ManageRoomActivity.class);
+        finish();
         startActivity(intent);
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Don't create Room successfully");
@@ -177,15 +176,13 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
                     boolean isactive = mLocationDTOList.get(i).isActive();
                     this.mLocationList.add(new Location(locationId,locationName,isactive));
                 }
-                getDataLocation();
             }
     }
     private void createRoom(){
-        mCreateRoomPresenter = new CreateRoomPresenter(AdminCreateRoomActivity.this,getApplication(),this);
         RoomDTO mRoomDTO = new RoomDTO();
         mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
         mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString()+ "");
         mRoomDTO.setActive(mStatusList.get(posStatus).isStatus());
-        mCreateRoomPresenter.createRoomToken(mRoomDTO);
+        mCreateRoomPresenter.createRoom(token,mRoomDTO);
     }
 }

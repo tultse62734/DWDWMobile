@@ -13,12 +13,10 @@ import com.example.dwdwproject.views.roomViews.GetRoomView;
 public class UpdateRoomPresenter {
     private Context mContext;
     private GetRoomView mGetRoomView;
-    private DWDWManagement dwdwManagement;
     private RoomRepositories mRoomRepositories;
 
-    public UpdateRoomPresenter(Context mContext, Application mApplication, GetRoomView mGetRoomView) {
+    public UpdateRoomPresenter(Context mContext,GetRoomView mGetRoomView) {
         this.mContext = mContext;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mGetRoomView = mGetRoomView;
         this.mRoomRepositories = new RoomRepositoriesImpl();
     }
@@ -35,17 +33,5 @@ public class UpdateRoomPresenter {
             }
         });
     }
-    private void updateRoomToken(final RoomDTO roomDTO){
-        this.dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-         updateRoom(accessToken,roomDTO);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

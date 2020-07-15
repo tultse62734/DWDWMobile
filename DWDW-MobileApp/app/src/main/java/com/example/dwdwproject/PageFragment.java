@@ -109,14 +109,15 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
             for (int i = 0; i <mDeviceDTOList.size() ; i++) {
                 int deviceId = mDeviceDTOList.get(i).getDeviceId();
                 String deviceCode = mDeviceDTOList.get(i).getDeviceCode();
-                mDeviceList.add(new Device(deviceId,deviceCode,"2020-11-20","Khu A"));
+                boolean isActive = mDeviceDTOList.get(i).isActive();
+                mDeviceList.add(new Device(deviceId,deviceCode,isActive));
                 }
             updateUI();
         }
     }
-
     @Override
     public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(getContext(),"Data Fail");
     }
 }
 

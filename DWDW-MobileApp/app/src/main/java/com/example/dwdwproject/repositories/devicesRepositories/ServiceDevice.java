@@ -19,19 +19,15 @@ import retrofit2.http.Query;
 public interface ServiceDevice {
     @GET(ConfigAPI.Api.GETALLDEVICE)
     Call<ResponseBody> getAllDevice(@HeaderMap Map<String, String> map);
-
     @GET(ConfigAPI.Api.GETDEVICEBYID)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getDeviceById(@HeaderMap Map<String, String> map,@Query("id") int id);
-
     @GET(ConfigAPI.Api.ADMIMGETALLDEVICEFROMLOCATION)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Query("id") int id);
-
+    Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Query("locationId") int id);
     @POST(ConfigAPI.Api.CREATEDEVICE)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> createDevice(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
-
     @PUT(ConfigAPI.Api.UPDATEDEVICE)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateDevice(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

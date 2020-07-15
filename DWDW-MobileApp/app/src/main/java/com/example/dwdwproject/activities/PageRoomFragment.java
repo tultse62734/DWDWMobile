@@ -36,6 +36,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
     private RoomAdapter mRoomAdapter;
     private int locationId;
     private String token ;
+    private List<RoomDTO> mRoomDTOS;
     public PageRoomFragment() {
         // Required empty public constructor
     }
@@ -72,7 +73,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
 //        mRoomList.add(new Room(5,"500","12-12-2020",true));
 //        mRoomList.add(new Room(6,"600","12-12-2020",true));
 //        updateUI();
-        SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
+        token =  SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
         mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),getActivity().getApplication(),this);
         mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
     }
@@ -85,7 +86,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AdminRoomDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(BundleString.ROOMDETAIL,mRoomList.get(pos));
+                    bundle.putSerializable(BundleString.ROOMDETAIL,mRoomDTOS.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -96,11 +97,12 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
         }
 
     }
-
     @Override
     public void getListRoomSuccess(List<RoomDTO> mRoomDTOList) {
         if(mRoomDTOList!=null){
             this.mRoomList = new ArrayList<>();
+            this.mRoomDTOS = new ArrayList<>();
+            this.mRoomDTOS = mRoomDTOList;
             for (int i = 0; i <mRoomDTOList.size() ; i++) {
                 int roomId = mRoomDTOList.get(i).getRoomId();
                 String roomCode = mRoomDTOList.get(i).getRoomCode();

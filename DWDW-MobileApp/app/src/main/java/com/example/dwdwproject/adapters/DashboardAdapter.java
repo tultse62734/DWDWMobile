@@ -7,20 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.ItemDashBoard;
-
 import java.util.List;
-
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ViewHolder>{
     private Context mContext;
     private List<ItemDashBoard> mItemDashBoardList;
     private OnItemClickListenr mOnItemClickListenr;
-
     public DashboardAdapter(Context mContext, List<ItemDashBoard> mItemDashBoardList) {
         this.mContext = mContext;
         this.mItemDashBoardList = mItemDashBoardList;
@@ -49,12 +44,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     public int getItemCount() {
         return mItemDashBoardList.size();
     }
-
     public class  ViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout mLnlRoot;
         private TextView mTxtNameItem;
         private ImageView mImgItem;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mLnlRoot = itemView.findViewById(R.id.lnl_root_item);

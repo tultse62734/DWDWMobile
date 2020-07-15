@@ -24,7 +24,6 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO userDTO;
-    private GetUserInforTokenView mInforTokenView;
     private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     }
     private void getDateServer(){
         token = SharePreferenceUtils.getStringSharedPreference(ProfileManageActivity.this, BundleString.TOKEN);
-        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,mInforTokenView);
+        mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,this);
         mGetUserInforTokenPresenter.getInforToken(token);
     }
     private void initData(){
@@ -88,11 +87,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private void intentToManageDeviceActivity(){
         Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
         startActivity(intent);
-    }
-
-
-
-    @Override
+    }@Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Data fail");
     }

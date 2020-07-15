@@ -44,7 +44,6 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                     try {
                         String result = response.body().string();
                         Type type = new TypeToken<List<LocationDTO>>() {
-
                         }.getType();
                         //call response to get value data
                         List<LocationDTO>mDeviceList = new Gson().fromJson(result, type);
@@ -110,9 +109,12 @@ public class LocationRepositoriesImpl implements LocationRepositories {
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
         JSONObject data = new JSONObject();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mLocation);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        try {
+            data.put("locationCode",mLocation.getLocationCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesLocation().createLocation(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -122,7 +124,7 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Location>() {
+                        Type type = new TypeToken<LocationDTO>() {
 
                         }.getType();
                         //call response to get value data
@@ -136,7 +138,6 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                     callBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
@@ -145,7 +146,6 @@ public class LocationRepositoriesImpl implements LocationRepositories {
         });
 
     }
-
     @Override
     public void updateLocation(final Context mContext,String token,LocationDTO mLocation,final CallBackData<LocationDTO> callBackData) {
         String hearder = "Bearer " + token;

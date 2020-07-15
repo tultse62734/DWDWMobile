@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,18 +18,25 @@ import android.widget.Toast;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.ChooseRoomAdapter;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Room;
+import com.example.dwdwproject.presenters.devicesPresenters.CreateDevivePresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.devicesViews.CreateDeviceView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-public class AdminCreateDeviceActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener  {
-    LinearLayout mBtnClose;
+public class AdminCreateDeviceActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener , CreateDeviceView {
+    LinearLayout mBtnClose,mBtnAddDevice;
+    private EditText mEdtDeviceCode;
     TextView mEdtChoooseLocation,mEdtChoooseRoom,mEdtChooseTime;
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
@@ -39,7 +47,10 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
     private List<Room> mRoomList;
     private List<Room> mRoomListFromLocation;
     private int posRoom;
+    private DeviceDTO mDeviceDTO;
     private String startTime,endTime;
+    private String token ;
+    private CreateDevivePresenter mCreateDevivePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +63,17 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_add_admin);
         mEdtChoooseRoom = findViewById(R.id.edt_choose_room_add_admin);
         mEdtChooseTime = findViewById(R.id.edt_choose_time_add_admin);
+        mBtnAddDevice = findViewById(R.id.lnl_submit_add_device_admin);
+        mEdtDeviceCode = findViewById(R.id.edit_create_device_code);
     }
     private void initData(){
+        mCreateDevivePresenter = new CreateDevivePresenter(AdminCreateDeviceActivity.this,this);
         getDataLocation();
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChoooseRoom.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
+        mBtnAddDevice.setOnClickListener(this);
     }
     public void clickOnRdOption() {
         Calendar calendar = Calendar.getInstance();
@@ -124,9 +139,18 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
             case R.id.edt_choose_time_add_admin:
                 clickOnRdOption();
                 break;
+            case R.id.lnl_submit_add_device_admin:
+                createDevice();
+                break;
             }
         }
-
+    private void createDevice(){
+        String deviceCode = mEdtDeviceCode.getText().toString();
+        mDeviceDTO = new DeviceDTO();
+        mDeviceDTO.setDeviceCode(deviceCode);
+        token = SharePreferenceUtils.getStringSharedPreference(AdminCreateDeviceActivity.this, BundleString.TOKEN);
+        mCreateDevivePresenter.createDevice(token,mDeviceDTO);
+    }
     private void getDataLocation(){
         mBtnClose.setOnClickListener(this);
         mLocationList = new ArrayList<>();
@@ -201,5 +225,16 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
 
         dialog.show();
 
+    }
+
+    @Override
+    public void createDeviceSuccess(DeviceDTO mDeviceDTO) {
+        Intent intent = new Intent(AdminCreateDeviceActivity.this,ManageDeviceActivity.class);
+        finish();
+        startActivity(intent);
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminCreateDeviceActivity.this,message);
     }
 }

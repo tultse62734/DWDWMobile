@@ -11,6 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -61,9 +64,6 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             }
         });
             }
-
-
-
     @Override
     public void getAllRoom(final Context context, String token, final CallBackData<List<RoomDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
@@ -108,10 +108,16 @@ public class RoomRepositoriesImpl implements RoomRepositories {
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(roomDTO);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
-        Call<ResponseBody> mBodyCall = clientApi.ServicesRoom().updateRoom(map,body);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("roomCode",roomDTO.getRoomCode());
+            jsonObject.put("locationId",roomDTO.getLocationId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesRoom().createRoom(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -120,7 +126,7 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<List<RoomDTO>>() {
+                        Type type = new TypeToken<RoomDTO>() {
 
                         }.getType();
                         //call response to get value data
@@ -142,16 +148,22 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             }
         });
     }
-
     @Override
     public void updateRoomById(final Context context, String token, RoomDTO mRoomDTO,final CallBackData<RoomDTO> mCallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mRoomDTO);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("roomId",mRoomDTO.getRoomId());
+            jsonObject.put("roomCode",mRoomDTO.getRoomCode());
+            jsonObject.put("locationId",mRoomDTO.getLocationId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesRoom().updateRoom(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -161,7 +173,7 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<List<RoomDTO>>() {
+                        Type type = new TypeToken<RoomDTO>() {
 
                         }.getType();
                         //call response to get value data
@@ -175,7 +187,6 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                     mCallBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);

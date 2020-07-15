@@ -26,7 +26,7 @@ public class GetDeviceByIdPresenter {
         this.mDeviceRepositories.getAllDeviceById(mContext, token, deviceId, new CallBackData<DeviceDTO>() {
             @Override
             public void onSucess(DeviceDTO deviceDTO) {
-                mGetDeviceIDView.getDeviceById(deviceDTO);
+                mGetDeviceIDView.getDeviceView(deviceDTO);
             }
 
             @Override
