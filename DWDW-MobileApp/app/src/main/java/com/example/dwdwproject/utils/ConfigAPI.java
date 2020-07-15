@@ -13,6 +13,10 @@ public class ConfigAPI {
         String CREATEDEVICE ="Device/CreateDevice";
         String UPDATEDEVICE = "Device/UpdateDevice";
         String ADMIMGETALLDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationAdmin";
+        String MANAGERGETDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationManager";
+        String ADMINGETALLDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomAdmin";
+        String MANAGERGETDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomManager";
+
         //Location
         String GETALLLOCATION = "Location/GetLocations";
         String GETLOCATIONBYID ="Location/GetLocationById";
