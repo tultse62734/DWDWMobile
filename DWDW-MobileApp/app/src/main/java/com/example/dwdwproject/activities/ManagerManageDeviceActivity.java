@@ -29,6 +29,7 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
     private List<Device> mDeviceList;
     private GetDeviceForManagerPresenter deviceForManagerPresenter;
     private LinearLayout mBtnClose;
+    private String token ;
     private int locationId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,6 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
         initData();
     }
     private void initView (){
-        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageDeviceActivity.this, BundleString.LOCATIONID);
         mBtnClose = findViewById(R.id.lnl_close_manager_manage_device);
         mRecyclerView = findViewById(R.id.rcv_manager_manage_device);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -46,6 +46,7 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
 
     }
     private void initData(){
+        deviceForManagerPresenter = new GetDeviceForManagerPresenter(ManagerManageDeviceActivity.this,this);
         mBtnClose.setOnClickListener(this);
 //        mDeviceList = new ArrayList<>();
 //        mDeviceList.add(new Device(1,"Camera 2MP","2020-11-20","Khu A"));
@@ -60,8 +61,10 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        updateUI();
-        deviceForManagerPresenter = new GetDeviceForManagerPresenter(ManagerManageDeviceActivity.this,getApplication(),this);
-        deviceForManagerPresenter.getDeviceFromLocationToken(locationId);
+    // từ từ để t chỉnh cái
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageDeviceActivity.this, BundleString.LOCATIONID);
+        token = SharePreferenceUtils.getStringSharedPreference(ManagerManageDeviceActivity.this,BundleString.TOKEN);
+        deviceForManagerPresenter.getDeviceFromLocationForManager(token,locationId);
     }
     private void updateUI(){
         if(mDeviceAdapter == null){

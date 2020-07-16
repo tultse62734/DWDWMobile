@@ -13,5 +13,5 @@ public interface DeviceRepositories {
     void createDevice(Context mContext,String token,DeviceDTO mDevice,CallBackData<DeviceDTO> callBackData);
     void updateDevice(Context mContext,String token,DeviceDTO mDevice,CallBackData<DeviceDTO> callBackData);
     void getAllDeviceFromLocationByAdmin(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
-    void getAllDeviceFromLocationByManager(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
+    void getActiveDeviceFromLocationByManager(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
 }

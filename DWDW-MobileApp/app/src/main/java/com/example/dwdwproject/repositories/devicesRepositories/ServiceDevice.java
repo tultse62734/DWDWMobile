@@ -25,6 +25,9 @@ public interface ServiceDevice {
     @GET(ConfigAPI.Api.ADMIMGETALLDEVICEFROMLOCATION)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getDeviceByLocationId(@HeaderMap Map<String, String> map,@Query("locationId") int id);
+    @GET(ConfigAPI.Api.MANAGERGETDEVICEFROMLOCATION)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getActiveDeviceByLocationManager(@HeaderMap Map<String, String> map,@Query("locationId") int id);
     @POST(ConfigAPI.Api.CREATEDEVICE)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> createDevice(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

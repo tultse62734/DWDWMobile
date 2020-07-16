@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.AdminAssignUserActivity"></activity>
+
         <activity android:name=".activities.AdminCreateDeviceActivity" />
         <activity android:name=".activities.ManagerLocationDetailActivity"></activity>
         <activity android:name=".activities.ManagerLocationActivity" />

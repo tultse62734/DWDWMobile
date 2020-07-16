@@ -233,12 +233,12 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         });
     }
     @Override
-    public void getAllDeviceFromLocationByManager(final Context mContext,String token, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
+    public void getActiveDeviceFromLocationByManager(final Context mContext,String token, int locationId, final CallBackData<List<DeviceDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getDeviceByLocationId(map,locationId);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().getActiveDeviceByLocationManager(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {
