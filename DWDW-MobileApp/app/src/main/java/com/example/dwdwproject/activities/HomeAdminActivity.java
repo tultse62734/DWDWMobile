@@ -84,7 +84,7 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
     private void intentManageWorḳerActivity(){
-        Intent intent = new Intent(HomeAdminActivity.this, ManageWorkerActivity.class);
+        Intent intent = new Intent(HomeAdminActivity.this, ManageManagerActivity.class);
         startActivity(intent);
     }
     private void intentToLogOutActivity(){

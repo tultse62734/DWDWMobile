@@ -14,28 +14,13 @@ import java.util.List;
 
 public class GetAllWorkerFromLocationByManagerPresenter {
     private Context mContext;
-    private DWDWManagement dwdwManagement;
     private UserRepositories mUserRepositories;
     private GetAllListUserView mGetAllListUserView;
 
-    public GetAllWorkerFromLocationByManagerPresenter(Context mContext, Application mApplication, GetAllListUserView mGetAllListUserView) {
+    public GetAllWorkerFromLocationByManagerPresenter(Context mContext, GetAllListUserView mGetAllListUserView) {
         this.mContext = mContext;
         this.mGetAllListUserView = mGetAllListUserView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mUserRepositories = new UserRepositotiesImpl();
-    }
-    public void ManagerGetAllWorkerfromLocationToken(final int locationId){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllWorker(accessToken,locationId);
-            }
-
-            @Override
-            public void onDataFail() {
-
-            }
-        });
     }
     public void getAllWorker(String token,int locationId){
         mUserRepositories.getAllWorkerFromLocationByManager(mContext, token, locationId, new CallBackData<List<UserDTO>>() {

@@ -72,7 +72,7 @@ public class UserRepositotiesImpl implements UserRepositories {
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUser(map);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUserByAdmin(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -111,7 +111,7 @@ public class UserRepositotiesImpl implements UserRepositories {
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUser(map);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUserByManager(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
 
         mBodyCall.enqueue(new Callback<ResponseBody>() {

@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.AdminAssignUserActivity"></activity>
+        <activity android:name=".activities.AdminCreateDeviceActivity" />
         <activity android:name=".activities.ManagerLocationDetailActivity"></activity>
         <activity android:name=".activities.ManagerLocationActivity" />
+
         <activity android:name=".activities.AdminDashboardActivity" />
         <activity
             android:name=".activities.ManagerChooseLocationActivity"
@@ -41,7 +44,7 @@
         <activity android:name=".activities.AdminCreateManagerActivity" />
         <activity android:name=".activities.AdminCreateLocationActivity" />
         <activity android:name=".activities.AdminCreateRoomActivity" />
-        <activity android:name=".activities.AdminCreateDeviceActivity" />
+        <activity android:name=".activities.AdminAssignDevicesActivity" />
         <activity android:name=".activities.ManageAccidentActivity" />
         <activity android:name=".activities.ManageRoomActivity" />
         <activity android:name=".activities.ManageWorkerActivity" />

@@ -33,12 +33,11 @@ import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ManagerLocationActivity extends AppCompatActivity implements GetManagerLocatonView {
+public class ManagerLocationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
-    private GetManagerLocationPresenter getManagerLocationPresenter;
-    private String token;
+
     private List<LocationDTO> mLocationDTOS;
     private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
@@ -55,9 +54,7 @@ public class ManagerLocationActivity extends AppCompatActivity implements GetMan
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        token =  SharePreferenceUtils.getStringSharedPreference(ManagerLocationActivity.this,BundleString.TOKEN);
-        getManagerLocationPresenter = new GetManagerLocationPresenter(ManagerLocationActivity.this,this);
-        getManagerLocationPresenter.getManagerLocation(token);
+
     }
     private void updateUI(){
         if(mLocationAdapter == null){
@@ -101,23 +98,5 @@ public class ManagerLocationActivity extends AppCompatActivity implements GetMan
         });
         dialog.show();
     }
-    @Override
-    public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ManagerLocationActivity.this,"Can't show data");
-    }
-    @Override
-    public void getManagerLocationSuccess(List<LocationDTO> mLocationDTOList) {
-        if(mLocationDTOList!=null){
-            this.mLocationDTOS = new ArrayList<>();
-            this.mLocationDTOS = mLocationDTOList;
-            this.mLocationList = new ArrayList<>();
-            for (int i = 0; i <mLocationDTOList.size() ; i++) {
-                int locationId  = mLocationDTOList.get(i).getLocationId();
-                String locationName = mLocationDTOList.get(i).getLocationCode();
-                boolean isactive = mLocationDTOList.get(i).isActive();
-                this.mLocationList.add(new Location(locationId,locationName,isactive));
-            }
-            updateUI();
-        }
-    }
+
 }

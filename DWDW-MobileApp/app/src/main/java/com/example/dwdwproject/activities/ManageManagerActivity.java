@@ -45,8 +45,8 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         mBtnAddManagerAdmin = findViewById(R.id.lnl_add_manager_admin);
     }
     private void  initData(){
-        mBtnClose.setOnClickListener(this);
         mBtnAddManagerAdmin.setOnClickListener(this);
+        mBtnClose.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
 //        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
 //        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));

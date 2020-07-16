@@ -76,14 +76,13 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         }
     }
     private void intentToManageWorker(){
-        Intent intent = new Intent(HomeManagerActivity.this,ManageManagerActivity.class);
+        Intent intent = new Intent(HomeManagerActivity.this,ManageWorkerActivity.class);
         startActivity(intent);
     }
     private void intentToManageDevice(){
         Intent intent = new Intent(HomeManagerActivity.this,ManagerManageDeviceActivity.class);
         startActivity(intent);
     }
-
     private void intentToProfileActivity(){
         Intent intent = new Intent(HomeManagerActivity.this,ProfileManageActivity.class);
         startActivity(intent);

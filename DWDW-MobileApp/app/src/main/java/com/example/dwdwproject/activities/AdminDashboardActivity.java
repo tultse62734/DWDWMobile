@@ -282,7 +282,7 @@ public class AdminDashboardActivity extends AppCompatActivity  implements View.O
         startActivity(intent);
     }
     private void intentManageWorḳerActivity(){
-        Intent intent = new Intent(AdminDashboardActivity.this, ManageWorkerActivity.class);
+        Intent intent = new Intent(AdminDashboardActivity.this, ManageManagerActivity.class);
         startActivity(intent);
     }
     private void intentToLogOutActivity(){
