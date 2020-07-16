@@ -14,6 +14,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceUsers {
     @GET(ConfigAPI.Api.GETALLUSER)
@@ -21,11 +22,11 @@ public interface ServiceUsers {
 
     @GET(ConfigAPI.Api.GETALLUSERBYADMIN)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getAllUserByAdmin(@HeaderMap Map<String, String> map,@Path("locationid") int id);
+    Call<ResponseBody> getAllUserByAdmin(@HeaderMap Map<String, String> map,@Query("locationId") int id);
 
     @GET(ConfigAPI.Api.GETALLUSERBYMANAGER)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getAllUserByManager(@HeaderMap Map<String, String> map,@Path("locationid") int id);
+    Call<ResponseBody> getAllUserByManager(@HeaderMap Map<String, String> map,@Query("locationId") int id);
 
     @POST(ConfigAPI.Api.CREATEUSER)
     @Headers({"Content-Type: application/json"})
@@ -37,5 +38,5 @@ public interface ServiceUsers {
 
     @PUT(ConfigAPI.Api.DELETEUSER)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> deleteUser(@HeaderMap Map<String, String> map,@Path("locationid") int id);
+    Call<ResponseBody> deleteUser(@HeaderMap Map<String, String> map,@Path("locationId") int id);
 }

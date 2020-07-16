@@ -49,8 +49,8 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         mBtnAddManagerAdmin = findViewById(R.id.lnl_add_manager_admin);
     }
     private void  initData(){
-        mBtnClose.setOnClickListener(this);
         mBtnAddManagerAdmin.setOnClickListener(this);
+        mBtnClose.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
 //        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
 //        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
@@ -94,6 +94,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             }
         });
     }
+
     //set color for tab
     private void setColorForTab(int position) {
         int count = mAdapter.getCount();
@@ -107,6 +108,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
         view.setTextColor(getResources().getColor(R.color.colorWhite));
     }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -120,6 +122,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList !=null){
@@ -133,6 +136,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             getCategoryData(mLocationList);
         }
     }
+
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,message);

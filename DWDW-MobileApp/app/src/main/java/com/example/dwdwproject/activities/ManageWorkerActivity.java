@@ -10,19 +10,28 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
+import com.example.dwdwproject.presenters.userPresenters.GetAllWorkerFromLocationByManagerPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.userViews.GetAllListUserView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageWorkerActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageWorkerActivity extends AppCompatActivity implements View.OnClickListener, GetAllListUserView {
     private List<Manager> mManagerList;
     private ManageAdapter manageAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayout mBtnLose,mBtnAdd;
+    private int locationId;
+    private GetAllWorkerFromLocationByManagerPresenter managerPresenter;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +47,27 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        managerPresenter = new GetAllWorkerFromLocationByManagerPresenter(ManageWorkerActivity.this,this);
         mBtnAdd.setOnClickListener(this);
         mBtnLose.setOnClickListener(this);
-        mManagerList = new ArrayList<>();
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","A","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","B","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","C","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","D","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","E","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","M","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","N","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","T","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","U","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","V","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Y","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Z","01224959623","tultse62734@fpt.edu.vn"));
-        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","K","01224959623","tultse62734@fpt.edu.vn"));
-        updateUI();
+//        mManagerList = new ArrayList<>();
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","A","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","B","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","C","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","D","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","E","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","M","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","N","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","T","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","U","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","V","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Y","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Z","01224959623","tultse62734@fpt.edu.vn"));
+//        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","K","01224959623","tultse62734@fpt.edu.vn"));
+//        updateUI();
+        token = SharePreferenceUtils.getStringSharedPreference(ManageWorkerActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManageWorkerActivity.this,BundleString.LOCATIONID);
+        managerPresenter.getAllWorker(token,locationId);
     }
     private void updateUI(){
         if(manageAdapter ==null){
@@ -92,4 +105,23 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
         startActivity(intent);
     }
 
+    @Override
+    public void getAllUserSuccess(List<UserDTO> userDTOList) {
+        if(userDTOList!=null){
+            this.mManagerList = new ArrayList<>();
+            for (int i = 0; i <userDTOList.size() ; i++) {
+                String image = "https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg";
+                String name  = userDTOList.get(i).getUserName();
+                String phone = userDTOList.get(i).getPhone();
+                String dateOfBirth = userDTOList.get(i).getDateOfBirth();
+                mManagerList.add(new Manager(image,name,phone,dateOfBirth));
+            }
+            updateUI();
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(ManageWorkerActivity.this,message);
+    }
 }

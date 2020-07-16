@@ -39,7 +39,7 @@ import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 public class PageManagerFragment extends Fragment implements GetAllListUserView {
     private View mView;
     private List<Manager> mManagerList;
-    private IndexFastScrollRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private ManageAdapter manageAdapter;
     private GetAllUserFromLocationByAdPresenter mAdPresenter;
     private int locationId;
@@ -67,10 +67,6 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
     // TODO: Rename method, update argument and hook method into UI event
     private void initView(){
         mRecyclerView = mView.findViewById(R.id.fast_scroller_recycler);
-        mRecyclerView.setIndexBarCornerRadius(3);
-        mRecyclerView.setIndexBarTransparentValue((float) 0.4);
-        mRecyclerView.setIndexbarMargin(4);
-        mRecyclerView.setIndexBarColor("#FF9800");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
 

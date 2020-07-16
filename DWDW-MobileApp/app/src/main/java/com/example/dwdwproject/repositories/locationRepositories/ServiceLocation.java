@@ -35,4 +35,7 @@ public interface ServiceLocation {
     @PUT(ConfigAPI.Api.DEACTIVELOCATION)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> deactiveLocation(@HeaderMap Map<String, String> map,@Path("id") int id);
+
+    @GET(ConfigAPI.Api.GETMANAGERLOCATION)
+    Call<ResponseBody> getManagerLocation(@HeaderMap Map<String, String> map);
 }

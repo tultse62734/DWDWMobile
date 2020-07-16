@@ -19,20 +19,21 @@ import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.locationsPresenters.GetManagerLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
+import com.example.dwdwproject.views.locationsViews.GetManagerLocatonView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class ManagerChooseLocationActivity extends AppCompatActivity implements GetAllLocatonView {
+public class ManagerChooseLocationActivity extends AppCompatActivity  implements GetManagerLocatonView {
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
-    private GetAllLocationPresenter mGetAllLocationPresenter;
+    private GetManagerLocationPresenter getManagerLocationPresenter;
+    private String token;
     private ChooseLocationAdapter mChooseLocationAdapter;
-    private String token ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +76,9 @@ public class ManagerChooseLocationActivity extends AppCompatActivity implements 
 //        mLocationList.add(new Location(3, "Khu C", "1-10-2019", true));
 //        mLocationList.add(new Location(4, "Khu D", "1-10-2019", true));
 //        updateUI();
-        token = SharePreferenceUtils.getStringSharedPreference(ManagerChooseLocationActivity.this,BundleString.TOKEN);
-        mGetAllLocationPresenter = new GetAllLocationPresenter(ManagerChooseLocationActivity.this,this);
-        mGetAllLocationPresenter.getAllLocation(token);
+        token =  SharePreferenceUtils.getStringSharedPreference(ManagerChooseLocationActivity.this,BundleString.TOKEN);
+        getManagerLocationPresenter = new GetManagerLocationPresenter(ManagerChooseLocationActivity.this,this);
+        getManagerLocationPresenter.getManagerLocation(token);
     }
     private void updateUI(){
         if(mChooseLocationAdapter == null){
@@ -98,7 +99,7 @@ public class ManagerChooseLocationActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+    public void getManagerLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList!=null){
             this.mLocationList = new ArrayList<>();
             for (int i = 0; i <mLocationDTOList.size() ; i++) {
@@ -113,6 +114,6 @@ public class ManagerChooseLocationActivity extends AppCompatActivity implements 
 
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ManagerChooseLocationActivity.this,"Can't not getData");
+        DialogNotifyError.showErrorLoginDialog(ManagerChooseLocationActivity.this,message);
     }
 }
