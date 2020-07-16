@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".activities.AdminAssignDevicesActivity">
-
+    tools:context=".activities.AdminCreateDeviceActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,14 +25,14 @@
                     android:textSize="@dimen/sp22"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
-                    android:text="Add Device"
+                    android:text="Assign Device"
                     android:layout_marginRight="@dimen/dp10"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                 </TextView>
                 <LinearLayout
-                    android:id="@+id/lnl_close_admin_add_device"
+                    android:id="@+id/lnl_close_admin_assign_device"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_weight="2"
@@ -62,32 +61,85 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
+                    android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Device Code"
+                    android:text="Location :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                 </TextView>
-                <EditText
-                    android:id="@+id/edit_create_device_code"
+                <TextView
+                    android:gravity="center|left"
+                    android:id="@+id/edt_choose_location_assign_admin"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
+                    android:layout_gravity="center"
                     android:background="@drawable/rounder_edit_text_1dp"
-                    android:hint="Input Device Code"
                     android:textColorHighlight="@color/colorGreyDark"
+                    android:hint="Choose Location"
                     android:textColorHint="@color/colorGrey"
                     android:textColor="@color/colorYellowOrange"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp60">
-                </EditText>
-
+                </TextView>
+                <TextView
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
+                    android:text="Room :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:gravity="center|left"
+                    android:layout_gravity="center"
+                    android:id="@+id/edt_choose_room_assign_admin"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:hint="Choose Room"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60">
+                </TextView>
+                <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
+                    android:text="Thời gian  :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </TextView>
+                <TextView
+                    android:visibility="gone"
+                    android:gravity="center|left"
+                    android:layout_gravity="center"
+                    android:id="@+id/edt_choose_time_add_admin"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:hint="---- Chọn ngày ----"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60">
+                </TextView>
                 <LinearLayout
                     android:layout_marginBottom="@dimen/dp20"
-                    android:id="@+id/lnl_submit_add_device_admin"
+                    android:id="@+id/lnl_submit_assign_device_admin"
                     android:layout_marginRight="@dimen/dp20"
                     android:layout_marginTop="@dimen/dp20"
                     android:layout_marginLeft="@dimen/dp20"
@@ -99,7 +151,7 @@
                         android:textColor="@color/colorWhite"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Create"
+                        android:text="Assign"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

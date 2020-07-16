@@ -15,7 +15,6 @@ public class ConfigAPI {
         String ADMIMGETALLDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationAdmin";
         //Location
         String GETALLLOCATION = "Location/GetLocations";
-
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";

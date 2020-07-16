@@ -1,8 +1,6 @@
 package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -13,17 +11,12 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
-import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
-import com.example.dwdwproject.adapters.DeviceAdapter;
-import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Location;
-import com.example.dwdwproject.presenters.devicesPresenters.GetAllDevicePresenter;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
-import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -55,7 +48,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.lnl_add_device_admin:
-                Intent intent = new Intent(ManageDeviceActivity.this,AdminCreateDeviceActivity.class);
+                Intent intent = new Intent(ManageDeviceActivity.this, AdminCreateDeviceActivity.class);
                 startActivity(intent);
                 break;
         }
