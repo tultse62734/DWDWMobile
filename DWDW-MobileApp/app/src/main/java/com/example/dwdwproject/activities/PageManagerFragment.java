@@ -26,7 +26,6 @@ import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPres
 import com.example.dwdwproject.presenters.userPresenters.GetAllUserFromLocationByAdPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
-import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 import com.example.dwdwproject.views.userViews.GetAllListUserView;
@@ -43,7 +42,6 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
     private ManageAdapter manageAdapter;
     private GetAllUserFromLocationByAdPresenter mAdPresenter;
     private int locationId;
-    private String token;
     public PageManagerFragment() {
     }
         @Override
@@ -58,12 +56,14 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
         mView =  inflater.inflate(R.layout.fragment_page_manager, container, false);
         return  mView;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
         initData();
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     private void initView(){
         mRecyclerView = mView.findViewById(R.id.fast_scroller_recycler);
@@ -91,9 +91,8 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
 //        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Z","01224959623","tultse62734@fpt.edu.vn"));
 //        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","K","01224959623","tultse62734@fpt.edu.vn"));
 //        updateUI();
-        token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
-        mAdPresenter = new GetAllUserFromLocationByAdPresenter(getContext(),this);
-        mAdPresenter.getAllUser(token,locationId);
+        mAdPresenter = new GetAllUserFromLocationByAdPresenter(getContext(),getActivity().getApplication(),this);
+        mAdPresenter.AdminGetAllUserfromLocationToken(locationId);
     }
     private void updateUI(){
         if(manageAdapter ==null){
@@ -129,9 +128,10 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
             updateUI();
         }
     }
+
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(getContext(),message);
+        DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");
     }
 
 }

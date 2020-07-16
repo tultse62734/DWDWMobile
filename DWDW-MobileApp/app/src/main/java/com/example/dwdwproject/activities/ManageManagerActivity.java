@@ -15,10 +15,8 @@ import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
-import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
-import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -34,8 +32,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
-    private String token ;
-    private GetAllLocationPresenter mGetAllLocationPresenter;
     private LinearLayout mBtnClose,mBtnAddManagerAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +53,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
 //        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
 //        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
 //        getCategoryData(mLocationList);
-        token = SharePreferenceUtils.getStringSharedPreference(ManageManagerActivity.this,BundleString.TOKEN);
-        mGetAllLocationPresenter = new GetAllLocationPresenter(ManageManagerActivity.this,this);
-        mGetAllLocationPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
@@ -94,6 +87,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             }
         });
     }
+
     //set color for tab
     private void setColorForTab(int position) {
         int count = mAdapter.getCount();
@@ -107,6 +101,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
         view.setTextColor(getResources().getColor(R.color.colorWhite));
     }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -120,6 +115,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
+
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList !=null){
@@ -133,8 +129,9 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             getCategoryData(mLocationList);
         }
     }
+
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,message);
+        DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,"Data");
     }
 }
