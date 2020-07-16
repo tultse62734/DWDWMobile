@@ -40,5 +40,6 @@ public class ConfigAPI {
         String CREATESHIFT = "Shift/CreateShift";
         String UPDATESHIFT = "Shift/UpdateShift";
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
+
     }
 }

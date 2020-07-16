@@ -19,14 +19,24 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.LocationDTO;
+import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.adapters.DashboardAdapter;
 import com.example.dwdwproject.listviewitems.BarChartItem;
 import com.example.dwdwproject.listviewitems.ChartItem;
 import com.example.dwdwproject.listviewitems.LineChartItem;
 import com.example.dwdwproject.listviewitems.PieChartItem;
 import com.example.dwdwproject.models.ItemDashBoard;
+import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdAndTimePresenter;
+import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.DeleteUserToRoomPresenter;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
+import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 import com.example.dwdwproject.views.roomLocalViews.DeleteUserView;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -41,7 +51,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
-public class AdminDashboardActivity extends AppCompatActivity  implements View.OnClickListener, DeleteUserView {
+public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener, DeleteUserView, GetAllRecordsView, GetAllLocatonView {
     private RecyclerView mRecyclerView;
     private ListView mListView;
     private ArrayList<ChartItem> list;
@@ -49,6 +59,12 @@ public class AdminDashboardActivity extends AppCompatActivity  implements View.O
     private LinearLayout mBtnLogout,mBtnFilter;
     private DashboardAdapter mDashboardAdapter;
     private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
+    private GetAllLocationPresenter mGetAllLocationPresenter;
+    private GetRecordsByLocationIdAndTimePresenter mGetRecordsByLocationIdAndTimePresenterd;
+    private String token;
+    private List<LocationDTO> mLocationDTOS;
+    private List<Location> mLocationList;
+    private List<RecordDTO> mRecordDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,13 +114,23 @@ public class AdminDashboardActivity extends AppCompatActivity  implements View.O
             mDashboardAdapter.notifyDataSetChanged();
         }
     }
+    private void getData(){
+        token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
+
+        mGetAllLocationPresenter = new GetAllLocationPresenter(AdminDashboardActivity.this, this);
+
+        int locationID = 1;
+        String start = "14-07-2020", end = "17-07-2020";
+        mGetRecordsByLocationIdAndTimePresenterd = new GetRecordsByLocationIdAndTimePresenter
+                (AdminDashboardActivity.this, getApplication(),this);
+        mGetRecordsByLocationIdAndTimePresenterd.getRecordsByLocationIdAndTime(token, locationID, start, end);
+
+    }
     private PieData generateDataPie() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-
         for (int i = 0; i < 4; i++) {
             entries.add(new PieEntry((float) ((Math.random() * 70) + 30), "Location " + (i+1)));
         }
-
         PieDataSet d = new PieDataSet(entries, "Accident Reports");
 
         // space between slices
@@ -225,6 +251,17 @@ public class AdminDashboardActivity extends AppCompatActivity  implements View.O
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminDashboardActivity.this,"Logout Failed");
     }
+
+    @Override
+    public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
+//chua xong
+    }
+
+    @Override
+    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+//chua xong
+    }
+
     /** adapter that supports 3 different item types */
     private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
         public ChartDataAdapter(Context context, List<ChartItem> objects) {
