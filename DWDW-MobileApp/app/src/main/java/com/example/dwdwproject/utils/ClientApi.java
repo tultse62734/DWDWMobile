@@ -4,6 +4,7 @@ package com.example.dwdwproject.utils;
 import com.example.dwdwproject.repositories.Service;
 import com.example.dwdwproject.repositories.devicesRepositories.ServiceDevice;
 import com.example.dwdwproject.repositories.locationRepositories.ServiceLocation;
+import com.example.dwdwproject.repositories.recordRepositories.ServiceRecord;
 import com.example.dwdwproject.repositories.roomRepositories.ServiceRoom;
 import com.example.dwdwproject.repositories.shiftRepositories.ServiceShift;
 import com.example.dwdwproject.repositories.userRepositories.ServiceUsers;
@@ -29,5 +30,8 @@ public class ClientApi extends  BaseApi {
 
     public ServiceUsers ServicesUsers(){
         return this.getService(ServiceUsers.class,ConfigAPI.BASE_URL);
+    }
+    public ServiceRecord ServiceRecord(){
+        return this.getService(ServiceRecord.class,ConfigAPI.BASE_URL);
     }
 }
