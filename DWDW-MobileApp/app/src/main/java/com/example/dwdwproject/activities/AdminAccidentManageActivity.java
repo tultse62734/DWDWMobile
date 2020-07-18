@@ -10,8 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -19,12 +24,14 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminAccidentManageActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminAccidentManageActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
     LinearLayout mBtnClose;
     private FragmentPagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
+    private GetAllLocationPresenter mGetAllLocationPresenter;
+    private  String token ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,22 +41,19 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
     }
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_manage_accident_admin);
-
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
-        mLocationList = new ArrayList<>();
-        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
-        mLocationList.add(new Location(2,"Khu B","18-11-2019",true));
-        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
-        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
-        getCategoryData(mLocationList);
+        token = SharePreferenceUtils.getStringSharedPreference(AdminAccidentManageActivity.this,BundleString.TOKEN);
+        mGetAllLocationPresenter = new GetAllLocationPresenter(AdminAccidentManageActivity.this,this);
+        mGetAllLocationPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
         for (int i = 0; i <locationList.size(); i++) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(BundleString.LOCATION_INFO,locationList.get(i));
+            bundle.putInt(BundleString.LOCATIONID,locationList.get(i).getLocationId());
+            bundle.putString(BundleString.LOCATIONNAME,locationList.get(i).getNameLocation());
             creator.add(locationList.get(i).getNameLocation(), PageAccidentFragment.class, bundle);
         }
         mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
@@ -79,7 +83,6 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
             }
         });
     }
-
     //set color for tab
     private void setColorForTab(int position) {
         int count = mAdapter.getCount();
@@ -87,7 +90,6 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
             TextView view = (TextView) mViewPagerTab.getTabAt(i);
             view.setBackground(getResources().getDrawable(R.color.colorWhite));
             view.setTextColor(getResources().getColor(R.color.colorOrange));
-
         }
         TextView view = (TextView) mViewPagerTab.getTabAt(position);
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
@@ -102,5 +104,22 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
                 break;
 
         }
+    }
+    @Override
+    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
+        if(mLocationDTOList!=null){
+            this.mLocationList = new ArrayList<>();
+            for (int i = 0; i <mLocationDTOList.size() ; i++) {
+                int locationId  = mLocationDTOList.get(i).getLocationId();
+                String locationName = mLocationDTOList.get(i).getLocationCode();
+                boolean isactive = mLocationDTOList.get(i).isActive();
+                this.mLocationList.add(new Location(locationId,locationName,isactive));
+            }
+            getCategoryData(mLocationList);
+        }
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminAccidentManageActivity.this,message);
     }
 }

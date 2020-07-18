@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,21 +16,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> {
+public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> implements Filterable {
     private Context mContext;
     private List<Location> mLocationList;
+    private List<Location> mLocationListFull;
     private OnClickDeleteItem mDeleteItem;
     private OnClickItem mOnClickItem;
-
     public LocationAdapter(Context mContext, List<Location> mLocationList) {
         this.mContext = mContext;
         this.mLocationList = mLocationList;
+        this.mLocationListFull = new ArrayList<>(mLocationList);
     }
-
     @NonNull
     @Override
     public LocationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -70,6 +74,37 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     public int getItemCount() {
         return mLocationList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Location> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mLocationListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Location item : mLocationListFull){
+                    if (item.getNameLocation().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mLocationList.clear();
+            mLocationList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public class LocationViewHolder extends RecyclerView.ViewHolder {
         TextView mTxtNameLocation,mTxtCreateDateLocation,mTxtStatusLocation;
         LinearLayout mLnlRootLocation,mLnlDeteleLcation;

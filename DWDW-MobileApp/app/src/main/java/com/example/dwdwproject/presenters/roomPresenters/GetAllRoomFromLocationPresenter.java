@@ -15,14 +15,12 @@ import java.util.List;
 public class GetAllRoomFromLocationPresenter {
     private Context mContext;
     private GetListRoomView mGetListRoomView;
-    private DWDWManagement dwdwManagement;
     private RoomRepositories mRoomRepositories;
 
-    public GetAllRoomFromLocationPresenter(Context mContext, Application mApplication,GetListRoomView mGetListRoomView) {
+    public GetAllRoomFromLocationPresenter(Context mContext,GetListRoomView mGetListRoomView) {
         this.mContext = mContext;
         this.mGetListRoomView = mGetListRoomView;
         this.mRoomRepositories = new RoomRepositoriesImpl();
-        this.dwdwManagement = new DWDWManagement(mApplication);
 
     }
     public void getAllRoomFromLocation(String token,int locationId){

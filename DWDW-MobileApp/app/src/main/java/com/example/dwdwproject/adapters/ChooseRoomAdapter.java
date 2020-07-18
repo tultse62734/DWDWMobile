@@ -17,13 +17,15 @@ import com.example.dwdwproject.models.Room;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.ChooseRoomViewHolder>{
+public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.ChooseRoomViewHolder>  {
     private Context mContext;
     private List<Room> mRoomList;
+    private List<Room> mRoomListFull;
     private OnClickItem mOnClickItem;
     public ChooseRoomAdapter(Context mContext, List<Room> mRoomList) {
         this.mContext = mContext;
         this.mRoomList = mRoomList;
+        this.mRoomListFull = new ArrayList<>(mRoomList);
     }
 
     @NonNull

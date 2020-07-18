@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
@@ -13,20 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerViewHolder>implements SectionIndexer {
+public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerViewHolder> implements Filterable {
     private Context mContext;
     private List<Manager> mManagerList;
-    private ArrayList<Integer> mSectionPositions;
+    private List<Manager> mManagerListFull;
     private OnItemClickListener mListener;
     public ManageAdapter(Context mContext, List<Manager> mManagerList) {
         this.mContext = mContext;
         this.mManagerList = mManagerList;
+        this.mManagerListFull = new ArrayList<>(mManagerList);
     }
     @NonNull
     @Override
@@ -54,33 +58,36 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
     @Override
     public int getItemCount() {
         return mManagerList.size();
-
     }
     @Override
-    public Object[] getSections() {
-        List<String> sections = new ArrayList<>();
-        mSectionPositions = new ArrayList<>();
-        for (int i = 0, size = mManagerList.size(); i < size; i++) {
-            String section = String.valueOf(mManagerList.get(i).getName().charAt(0)).toUpperCase();
-            if (!sections.contains(section)) {
-                sections.add(section);
-                mSectionPositions.add(i);
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Manager> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mManagerListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Manager item : mManagerListFull){
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
             }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
         }
-        return sections.toArray(new String[0]);
-    }
-
-    @Override
-    public int getPositionForSection(int sectionIndex) {
-        return mSectionPositions.get(sectionIndex);
-
-    }
-
-    @Override
-    public int getSectionForPosition(int position) {
-        return 0;
-    }
-
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mManagerList.clear();
+            mManagerList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
     public class WorkerViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProfile;
         TextView tvName;

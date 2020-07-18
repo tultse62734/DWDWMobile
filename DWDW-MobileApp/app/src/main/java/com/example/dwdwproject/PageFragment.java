@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     private RecyclerView mRecyclerView;
     private List<Device> mDeviceList;
     private List<DeviceDTO> mDeviceDTOS;
+    private SearchView mSearchView;
     private DeviceAdapter mDeviceAdapter;
     private String token;
     private int locationId;
@@ -43,7 +45,6 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
         super.onCreate(savedInstanceState);
         locationId = getArguments().getInt(BundleString.LOCATIONID);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     }
     // TODO: Rename method, update argument and hook method into UI event
     private void initView() {
+        mSearchView = mView.findViewById(R.id.searchView_page_device);
         mRecyclerView = mView.findViewById(R.id.rcv_device);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -77,6 +79,18 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        mDeviceList.add(new Device(6,"Camera 12MP","2020-11-20","Khu F"));
 //        updateUI();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(mDeviceAdapter!=null){
+                    mDeviceAdapter.getFilter().filter(newText.toString());
+                }
+                return false;            }
+        });
         token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
         mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),getActivity().getApplication(),this);
         mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);

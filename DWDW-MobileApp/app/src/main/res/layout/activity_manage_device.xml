@@ -25,7 +25,7 @@
                     android:textSize="@dimen/sp22"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
-                    android:text="Quản lý thiết bị"
+                    android:text="Manage Device"
                     android:layout_marginRight="@dimen/dp10"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_width="0dp"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/colorRed"
-                    android:text="Thiết bị"
+                    android:text="List"
                     android:textStyle="bold"
                     android:textSize="@dimen/sp22"
                     android:layout_weight="7"

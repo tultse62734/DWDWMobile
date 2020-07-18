@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">DWDWProject</string>
-    <string name="button_sign_up">Đăng ký</string>
-    <string name="button_sign_in">Đăng nhập</string>
-    <string name="button_forgot_password">Quên mật khẩu ?</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="button_sign_in">Sign In</string>
+    <string name="button_forgot_password">Forgot Password ?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

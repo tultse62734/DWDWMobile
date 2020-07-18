@@ -14,28 +14,14 @@ import java.util.List;
 
 public class GetAllUserFromLocationByAdPresenter {
     private Context mContext;
-    private DWDWManagement dwdwManagement;
     private UserRepositories mUserRepositories;
     private GetAllListUserView mGetAllListUserView;
 
-    public GetAllUserFromLocationByAdPresenter(Context mContext, Application mApplication, GetAllListUserView mGetAllListUserView) {
+    public GetAllUserFromLocationByAdPresenter(Context mContext, GetAllListUserView mGetAllListUserView) {
         this.mContext = mContext;
         this.mGetAllListUserView = mGetAllListUserView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
+
         this.mUserRepositories = new UserRepositotiesImpl();
-    }
-    public void AdminGetAllUserfromLocationToken(final int locationId){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllUser(accessToken,locationId);
-            }
-
-            @Override
-            public void onDataFail() {
-
-            }
-        });
     }
     public void getAllUser(String token,int locationId){
         mUserRepositories.getAllUserFromLocationByAdmin(mContext, token, locationId, new CallBackData<List<UserDTO>>() {

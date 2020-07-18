@@ -1,5 +1,4 @@
 package com.example.dwdwproject.activities;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +27,6 @@ import com.example.dwdwproject.views.roomViews.GetListRoomView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class PageRoomFragment extends Fragment implements GetListRoomView {
     private View mView;
     private List<Room> mRoomList;
@@ -35,10 +34,10 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
     private GetAllRoomFromLocationPresenter mRoomFromLocationPresenter;
     private RoomAdapter mRoomAdapter;
     private int locationId;
+    private SearchView mSearchView;
     private String token ;
     private List<RoomDTO> mRoomDTOS;
     public PageRoomFragment() {
-        // Required empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,8 +57,8 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
         initView();
         initData();
     }
-
     private void initView(){
+        mSearchView = mView.findViewById(R.id.search_view_page_room);
         mRecyclerView = mView.findViewById(R.id.rcv_room);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -73,8 +72,22 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
 //        mRoomList.add(new Room(5,"500","12-12-2020",true));
 //        mRoomList.add(new Room(6,"600","12-12-2020",true));
 //        updateUI();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(mRoomAdapter!=null){
+                    mRoomAdapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
         token =  SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
-        mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),getActivity().getApplication(),this);
+        mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),this);
         mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
     }
     private void updateUI(){

@@ -27,13 +27,11 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
         if(remoteMessage.getData().size() > 0){
             showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
         }
-
         //Handle when receive notification
         if(remoteMessage.getNotification() != null){
             showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
         }
     }
-
     //Cách hiển thị Notification
     public void showNotification(String title, String message){
         //Khi ấn vào notify sẽ gửi trả về Intent này

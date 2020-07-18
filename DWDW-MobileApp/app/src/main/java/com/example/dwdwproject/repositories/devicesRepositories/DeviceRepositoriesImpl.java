@@ -2,6 +2,7 @@ package com.example.dwdwproject.repositories.devicesRepositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.AssignDeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.utils.CallBackData;
@@ -254,6 +255,58 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                         //call response to get value data
                         List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
                         mCallBackData.onSucess(mDeviceList);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void assginDeviceIntoRoom(final Context mContext, String token, AssignDeviceDTO mAssignDeviceDTO, final CallBackData<AssignDeviceDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("roomId",mAssignDeviceDTO.getDeviceId());
+
+            data.put("deviceId",mAssignDeviceDTO.getRoomId());
+
+            data.put("startDate",mAssignDeviceDTO.getDeviceId());
+
+            data.put("endDate",mAssignDeviceDTO.getRoomId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().assginDevice(map,body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<AssignDeviceDTO>() {
+
+                        }.getType();
+                        //call response to get value data
+                       AssignDeviceDTO  assignDeviceDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(assignDeviceDTO);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -16,7 +16,7 @@ public class ConfigAPI {
         String MANAGERGETDEVICEFROMLOCATION = "Device/GetActiveDeviceFromLocationManager";
         String ADMINGETALLDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomAdmin";
         String MANAGERGETDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomManager";
-
+        String ASSIGNDEVICEINTOROOM = "Device/AssignDeviceToRoom";
         //Location
         String GETALLLOCATION = "Location/GetLocations";
         String GETLOCATIONBYID ="Location/GetLocationById";
@@ -46,6 +46,7 @@ public class ConfigAPI {
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
         //Record
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationIdAndTime";
-
+        String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
+        String GETLOCATIONRECORD = "Location/GetLocationsRecord";
     }
 }

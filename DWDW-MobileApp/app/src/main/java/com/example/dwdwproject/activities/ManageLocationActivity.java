@@ -1,6 +1,7 @@
 package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private LocationAdapter mLocationAdapter;
     private GetAllLocationPresenter getAllLocationPresenter;
     private String token;
+    private SearchView mSearchView;
     private List<LocationDTO> mLocationDTOS;
     private LinearLayout mBtnClose,mBtnAddLocation;
     @Override
@@ -50,6 +52,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     }
     private void initView(){
         mRecyclerView = findViewById(R.id.rcv_location);
+        mSearchView  =findViewById(R.id.search_view_admin_manage_location);
         mBtnClose = findViewById(R.id.lnl_close_manage_location);
         mBtnAddLocation = findViewById(R.id.lnl_add_location_admin);
          RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
@@ -58,6 +61,19 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private void initData(){
         mBtnClose.setOnClickListener(this);
         mBtnAddLocation.setOnClickListener(this);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(mLocationAdapter!=null){
+                    mLocationAdapter.getFilter().filter(newText.toString());
+                }
+                return false;
+            }
+        });
 //        mLocationList = new ArrayList<>();
 //        mLocationList.add(new Location(1,"Khu A","20-11-2020",true));
 //        mLocationList.add(new Location(2,"Khu B","12-10-2019",false));

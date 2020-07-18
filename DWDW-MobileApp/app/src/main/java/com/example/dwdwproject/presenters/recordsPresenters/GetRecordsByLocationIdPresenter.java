@@ -14,21 +14,17 @@ import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 
 import java.util.List;
-
 public class GetRecordsByLocationIdPresenter {
     private Context mContext;
     private GetAllRecordsView mGetAllRecordsView;
-    private DWDWManagement dwdwManagement;
     private RecordRepositories mRecordRepositories;
-
-    public GetRecordsByLocationIdPresenter(Context mContext, Application mApplication, GetAllRecordsView mGetAllRecordsView) {
+    public GetRecordsByLocationIdPresenter(Context mContext, GetAllRecordsView mGetAllRecordsView) {
         this.mContext = mContext;
         this.mGetAllRecordsView = mGetAllRecordsView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mRecordRepositories = new RecordRepositoriesImpl();
     }
     public void getRecordsByLocationId(String token, int locationID){
-        this.mRecordRepositories.getRecordsByLocationId(mContext, token, locationID, new CallBackData<List<RecordDTO>>() {
+        this.mRecordRepositories.getRecordByLocationId(mContext, token, locationID, new CallBackData<List<RecordDTO>>() {
             @Override
             public void onSucess(List<RecordDTO> recordDTOS) {
                 mGetAllRecordsView.getAllRecordSuccess(recordDTOS);

@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,17 +14,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Room;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder>{
+public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder> implements Filterable {
     private Context mContext;
     private List<Room> mRoomList;
+    private List<Room> mRoomListFull;
     private OnItemClickListerner mListerner;
     public RoomAdapter(Context mContext, List<Room> mRoomList) {
         this.mContext = mContext;
         this.mRoomList = mRoomList;
+        this.mRoomListFull = new ArrayList<>(mRoomList);
     }
 
     @NonNull
@@ -56,6 +62,37 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     public int getItemCount() {
         return mRoomList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Room> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mRoomListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Room item : mRoomListFull){
+                    if (item.getRoomName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mRoomList.clear();
+            mRoomList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public class RoomViewHolder extends RecyclerView.ViewHolder {
         TextView mTxtNameRoom,mTxtCreateDateRoom,mTxtStatusRoom;
         LinearLayout mLnlRootRoom;

@@ -25,7 +25,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/sp22"
                 android:textColor="@color/colorWhite"
-                android:text="Chọn lọc"
+                android:text="Filter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
@@ -62,7 +62,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
         <TextView
-            android:text="Mốc thời gian"
+            android:text="Time"
             android:textSize="@dimen/sp18"
             android:textStyle="bold"
             android:textColor="@color/colorOrange"
@@ -96,7 +96,7 @@
                     android:paddingBottom="@dimen/dp12"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="@dimen/dp12"
-                    android:text="Hôm nay"
+                    android:text="Today"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -106,7 +106,7 @@
                     android:paddingBottom="@dimen/dp12"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="@dimen/dp12"
-                    android:text="Hôm qua"
+                    android:text="Yesterday"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -116,7 +116,7 @@
                     android:paddingBottom="@dimen/dp12"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="@dimen/dp12"
-                    android:text="Tuần này"
+                    android:text="This week"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -126,7 +126,7 @@
                     android:paddingBottom="@dimen/dp12"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="@dimen/dp12"
-                    android:text="Tuần trước"
+                    android:text="Last Week"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -136,7 +136,7 @@
                     android:paddingBottom="@dimen/dp12"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="@dimen/dp12"
-                    android:text="Tháng này"
+                    android:text="This month"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -146,7 +146,7 @@
                     android:paddingBottom="12dp"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="12dp"
-                    android:text="Tháng trước"
+                    android:text="Last month"
                     android:textSize="@dimen/sp16" />
 
                 <RadioButton
@@ -156,7 +156,7 @@
                     android:paddingBottom="12dp"
                     android:paddingLeft="@dimen/dp16"
                     android:paddingTop="12dp"
-                    android:text="Tùy chọn ngày"
+                    android:text="Option"
                     android:textSize="@dimen/sp16" />
             </RadioGroup>
         </LinearLayout>
@@ -173,7 +173,7 @@
         android:layout_marginRight="@dimen/dp16"
         android:layout_marginTop="@dimen/dp10"
         android:background="@drawable/radius_conner_orange"
-        android:text="Xong"
+        android:text="Done"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sp14" />
 

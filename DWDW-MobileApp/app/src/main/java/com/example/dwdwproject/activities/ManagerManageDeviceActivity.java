@@ -22,7 +22,6 @@ import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class ManagerManageDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllDeviceView {
     private RecyclerView mRecyclerView;
     private DeviceAdapter mDeviceAdapter;
@@ -43,7 +42,6 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
         mRecyclerView = findViewById(R.id.rcv_manager_manage_device);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
     private void initData(){
         deviceForManagerPresenter = new GetDeviceForManagerPresenter(ManagerManageDeviceActivity.this,this);

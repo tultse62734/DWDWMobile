@@ -15,13 +15,10 @@ import java.util.List;
 public class GetAllDevicePresenter {
     private Context mContext;
     private GetAllDeviceView mGetAllDeviceView;
-    private DWDWManagement dwdwManagement;
     private DeviceRepositories mDeviceRepositories;
-
-    public GetAllDevicePresenter(Context mContext, Application mApplication, GetAllDeviceView mGetAllDeviceView) {
+    public GetAllDevicePresenter(Context mContext, GetAllDeviceView mGetAllDeviceView) {
         this.mContext = mContext;
         this.mGetAllDeviceView = mGetAllDeviceView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mDeviceRepositories = new DeviceRepositoriesImpl();
     }
     public void getAllDevice(String token){
@@ -32,21 +29,9 @@ public class GetAllDevicePresenter {
             }
             @Override
             public void onFail(String message) {
-                mGetAllDeviceView.showError("Lấy dữ liệu không thành công");
+                mGetAllDeviceView.showError(message);
             }
         });
     }
-    public  void getAllDeviceToken(){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllDevice(accessToken);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

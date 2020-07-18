@@ -2,6 +2,7 @@ package com.example.dwdwproject.repositories.devicesRepositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.AssignDeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.utils.CallBackData;
@@ -14,4 +15,5 @@ public interface DeviceRepositories {
     void updateDevice(Context mContext,String token,DeviceDTO mDevice,CallBackData<DeviceDTO> callBackData);
     void getAllDeviceFromLocationByAdmin(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
     void getActiveDeviceFromLocationByManager(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
+    void assginDeviceIntoRoom(Context mContext, String token, AssignDeviceDTO mAssignDeviceDTO,CallBackData<AssignDeviceDTO> mCallBackData);
 }

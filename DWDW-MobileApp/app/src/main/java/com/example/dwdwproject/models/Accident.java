@@ -1,21 +1,21 @@
 package com.example.dwdwproject.models;
 
 import java.io.Serializable;
-
 public class Accident implements Serializable {
     private int accidentId;
     private String accidentName;
     private String accidentDate;
     private String locationAccident;
+    private String image;
     private String roomAccident;
     private boolean isStatus;
 
-    public Accident(int accidentId, String accidentName, String accidentDate, String locationAccident, String roomAccident, boolean isStatus) {
+    public Accident(int accidentId, String accidentName, String accidentDate, String locationAccident, String image, boolean isStatus) {
         this.accidentId = accidentId;
         this.accidentName = accidentName;
         this.accidentDate = accidentDate;
         this.locationAccident = locationAccident;
-        this.roomAccident = roomAccident;
+        this.image = image;
         this.isStatus = isStatus;
     }
 
@@ -65,5 +65,13 @@ public class Accident implements Serializable {
 
     public void setRoomAccident(String roomAccident) {
         this.roomAccident = roomAccident;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

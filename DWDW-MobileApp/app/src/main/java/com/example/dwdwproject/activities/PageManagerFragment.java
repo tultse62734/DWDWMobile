@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPres
 import com.example.dwdwproject.presenters.userPresenters.GetAllUserFromLocationByAdPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 import com.example.dwdwproject.views.userViews.GetAllListUserView;
@@ -42,6 +44,8 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
     private ManageAdapter manageAdapter;
     private GetAllUserFromLocationByAdPresenter mAdPresenter;
     private int locationId;
+    private String token;
+    private SearchView mSearchView;
     public PageManagerFragment() {
     }
         @Override
@@ -66,10 +70,10 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
 
     // TODO: Rename method, update argument and hook method into UI event
     private void initView(){
+        mSearchView = mView.findViewById(R.id.search_view_page_manager);
         mRecyclerView = mView.findViewById(R.id.fast_scroller_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
     private void initData(){
 //        mManagerList = new ArrayList<>();
@@ -87,8 +91,23 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
 //        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","Z","01224959623","tultse62734@fpt.edu.vn"));
 //        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","K","01224959623","tultse62734@fpt.edu.vn"));
 //        updateUI();
-        mAdPresenter = new GetAllUserFromLocationByAdPresenter(getContext(),getActivity().getApplication(),this);
-        mAdPresenter.AdminGetAllUserfromLocationToken(locationId);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(manageAdapter!=null){
+                    manageAdapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
+        mAdPresenter = new GetAllUserFromLocationByAdPresenter(getContext(),this);
+        mAdPresenter.getAllUser(token,locationId);
     }
     private void updateUI(){
         if(manageAdapter ==null){

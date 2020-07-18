@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ManagerDeviceDetailActivity"></activity>
+        <activity android:name=".activities.AdminAssignUserActivity"></activity>
+        <activity android:name=".activities.AdminGetAllDeviceActivity" />
+        <activity android:name=".activities.AdminAssignDeviceActivity" />
+        <activity android:name=".activities.ManagerManageDeviceDetailActivity" />
+        <activity android:name=".activities.ManagerDeviceDetailActivity" />
         <activity android:name=".activities.AdminCreateDeviceActivity" />
         <activity android:name=".activities.ManagerLocationDetailActivity" />
         <activity android:name=".activities.ManagerLocationActivity" />
@@ -71,9 +75,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
         <service android:name=".FirebaseMessageReceiver">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

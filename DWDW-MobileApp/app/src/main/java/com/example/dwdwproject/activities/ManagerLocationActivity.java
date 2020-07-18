@@ -54,7 +54,6 @@ public class ManagerLocationActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-
     }
     private void updateUI(){
         if(mLocationAdapter == null){

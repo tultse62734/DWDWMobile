@@ -21,14 +21,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </ImageView>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:alpha="0.45"
                     android:background="@color/colorYellowOrange"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </LinearLayout>
+                    android:gravity="center"
+                    android:orientation="vertical"></LinearLayout>
             </FrameLayout>
         </LinearLayout>
             <LinearLayout
@@ -47,15 +47,16 @@
                 android:background="@color/colorBlue"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp60">
+
                 <TextView
-                    android:textSize="@dimen/sp15"
-                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/button_sign_up"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold">
 
                 </TextView>
             </LinearLayout>

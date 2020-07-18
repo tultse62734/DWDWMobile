@@ -7,6 +7,17 @@
     tools:context=".activities.PageRoomFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <androidx.appcompat.widget.SearchView
+        android:background="@drawable/radius_conner_grey"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp30"
+        android:layout_marginLeft="@dimen/dp30"
+        android:id="@+id/search_view_page_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.SearchView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_room"
         android:layout_marginBottom="@dimen/dp20"

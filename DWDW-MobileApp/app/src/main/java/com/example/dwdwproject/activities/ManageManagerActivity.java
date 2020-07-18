@@ -15,9 +15,13 @@ import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
+import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.locationsPresenters.GetLocationByIdPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
+import com.example.dwdwproject.views.locationsViews.GetLocationView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -32,7 +36,9 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
+    private String token;
     private LinearLayout mBtnClose,mBtnAddManagerAdmin;
+    private GetAllLocationPresenter mGetLocationByIdPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,8 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         mBtnAddManagerAdmin = findViewById(R.id.lnl_add_manager_admin);
     }
     private void  initData(){
+        token = SharePreferenceUtils.getStringSharedPreference(ManageManagerActivity.this,BundleString.TOKEN);
+        mGetLocationByIdPresenter  = new GetAllLocationPresenter(ManageManagerActivity.this,this);
         mBtnAddManagerAdmin.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
@@ -53,6 +61,8 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
 //        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
 //        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
 //        getCategoryData(mLocationList);
+
+        mGetLocationByIdPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());

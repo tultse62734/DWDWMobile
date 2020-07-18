@@ -10,16 +10,25 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.adapters.AccidentAdapter;
 import com.example.dwdwproject.models.Accident;
+import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ManageAccidentActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageAccidentActivity extends AppCompatActivity implements View.OnClickListener, GetAllRecordsView {
     private List<Accident> mAccidentList;
     private RecyclerView mRecyclerView;
     private AccidentAdapter mAccidentAdapter;
     private LinearLayout mBtnClose;
+    private String token,locationName;
+    private int locationId;
+    private GetRecordsByLocationIdPresenter mGetRecordsByLocationIdPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +44,11 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
-        mAccidentList = new ArrayList<>();
-        mAccidentList.add(new Accident(1,"Accident1","18-11-2020","Khu A","100",true));
-        mAccidentList.add(new Accident(2,"Accident2","18-11-2020","Khu B","200",false));
-        mAccidentList.add(new Accident(3,"Accident3","18-11-2020","Khu C","300",true));
-        mAccidentList.add(new Accident(4,"Accident4","18-11-2020","Khu D","400",false));
-        mAccidentList.add(new Accident(5,"Accident5","18-11-2020","Khu B","200",true));
-        mAccidentList.add(new Accident(6,"Accident6","18-11-2020","Khu A","100",false));
-        mAccidentList.add(new Accident(7,"Accident7","18-11-2020","Khu C","300",true));
-        updateUI();
+        token = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONID);
+        locationName  = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONNAME);
+        mGetRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(ManageAccidentActivity.this,this);
+        mGetRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
         }
         private void updateUI(){
             if(mAccidentAdapter == null){
@@ -69,5 +74,27 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
+        if(mRecordDTOList!=null){
+            mAccidentList = new ArrayList<>();
+            for (int i = 0; i <mRecordDTOList.size() ; i++) {
+                int recordId= mRecordDTOList.get(i).getRecordId();
+                String image  =mRecordDTOList.get(i).getImage();
+                String locationname = locationName;
+                String recordDate = mRecordDTOList.get(i).getRecordDateTime();
+                String recordName = "Accident" +i;
+                boolean isActive = true;
+                mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,isActive));
+            }
+            updateUI();
+        }
+    }
+
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(ManageAccidentActivity.this,message);
     }
 }

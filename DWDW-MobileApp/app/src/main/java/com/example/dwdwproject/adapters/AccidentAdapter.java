@@ -40,7 +40,6 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
         holder.mTxtNameReport.setText(mAccidentList.get(position).getAccidentName());
         holder.mTxtDateReport.setText(mAccidentList.get(position).getAccidentDate());
         holder.mTxtLocationReport.setText(mAccidentList.get(position).getLocationAccident());
-        holder.mTxtRoomReport.setText(mAccidentList.get(position).getRoomAccident());
         if(mAccidentList.get(position).isStatus()){
             holder.mTxtStatusReport.setText("Đang hoạt động");
             holder.mTxtStatusReport.setTextColor(Color.parseColor("#4CAF50"));

@@ -6,6 +6,17 @@
     android:orientation="vertical"
     tools:context=".PageFragment">
     <!-- TODO: Update blank fragment layout -->
+    <androidx.appcompat.widget.SearchView
+        android:layout_marginBottom="@dimen/dp10"
+        android:background="@drawable/radius_conner_grey"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp30"
+        android:layout_marginLeft="@dimen/dp30"
+        android:id="@+id/searchView_page_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.SearchView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_device"
         android:layout_marginBottom="@dimen/dp20"

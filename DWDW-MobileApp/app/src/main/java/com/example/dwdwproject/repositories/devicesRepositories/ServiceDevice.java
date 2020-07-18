@@ -34,4 +34,8 @@ public interface ServiceDevice {
     @PUT(ConfigAPI.Api.UPDATEDEVICE)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateDevice(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
+    @POST(ConfigAPI.Api.ASSIGNDEVICEINTOROOM)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> assginDevice(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 }

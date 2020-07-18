@@ -1,5 +1,4 @@
 package com.example.dwdwproject.activities;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,27 +16,35 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.adapters.AccidentAdapter;
 import com.example.dwdwproject.models.Accident;
+import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class PageAccidentFragment extends Fragment {
+public class PageAccidentFragment extends Fragment implements GetAllRecordsView {
     private View mView;
     private List<Accident> mAccidentList;
     private RecyclerView mRecyclerView;
     private AccidentAdapter mAccidentAdapter;
+    private GetRecordsByLocationIdPresenter mRecordsByLocationIdPresenter;
+    private int locationId;
+    private String locationName;
+    private String token;
     public PageAccidentFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        locationId = getArguments().getInt(BundleString.LOCATIONID);
+        locationName = getArguments().getString(BundleString.LOCATIONNAME);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +52,6 @@ public class PageAccidentFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_page_accident, container, false);
         return mView;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -53,22 +59,15 @@ public class PageAccidentFragment extends Fragment {
         initData();
     }
     // TODO: Rename method, update argument and hook method into UI event
-
     private void initView(){
         mRecyclerView = mView.findViewById(R.id.rcv_accident_admin);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        mAccidentList = new ArrayList<>();
-        mAccidentList.add(new Accident(1,"Accident1","18-11-2020","Khu A","100",true));
-        mAccidentList.add(new Accident(2,"Accident2","18-11-2020","Khu B","200",false));
-        mAccidentList.add(new Accident(3,"Accident3","18-11-2020","Khu C","300",true));
-        mAccidentList.add(new Accident(4,"Accident4","18-11-2020","Khu D","400",false));
-        mAccidentList.add(new Accident(5,"Accident5","18-11-2020","Khu B","200",true));
-        mAccidentList.add(new Accident(6,"Accident6","18-11-2020","Khu A","100",false));
-        mAccidentList.add(new Accident(7,"Accident7","18-11-2020","Khu C","300",true));
-        updateUI();
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(), BundleString.TOKEN);
+        mRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(getContext(),this);
+        mRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
     }
     private void updateUI(){
         if(mAccidentAdapter == null){
@@ -86,4 +85,24 @@ public class PageAccidentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
+            if(mRecordDTOList!=null){
+                mAccidentList = new ArrayList<>();
+                for (int i = 0; i <mRecordDTOList.size() ; i++) {
+                        int recordId= mRecordDTOList.get(i).getRecordId();
+                        String image  =mRecordDTOList.get(i).getImage();
+                        String locationname = locationName;
+                        String recordDate = mRecordDTOList.get(i).getRecordDateTime();
+                        String recordName = "Accident" +i;
+                        boolean isActive = true;
+                        mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,isActive));
+                }
+                updateUI();
+            }
+    }
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(getContext(),message);
+    }
 }

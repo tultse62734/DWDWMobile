@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,16 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.Device;
+import com.example.dwdwproject.models.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>{
+public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> implements Filterable {
     private Context mContext;
     private List<Device> mDeviceList;
+    private List<Device> mLDeviceListFull;
     private OnItemClickListenner mListenner;
     public DeviceAdapter(Context mContext, List<Device> mDeviceList) {
         this.mContext = mContext;
         this.mDeviceList = mDeviceList;
+        this.mLDeviceListFull = new ArrayList<>(mDeviceList);
     }
     @NonNull
     @Override
@@ -51,6 +57,35 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     @Override
     public int getItemCount() {
         return mDeviceList.size();
+    }
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Device> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mLDeviceListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Device item : mLDeviceListFull) {
+                    if (item.getNameDevice().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mDeviceList.clear();
+            mDeviceList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
     }
 
     public class DeviceViewHolder extends RecyclerView.ViewHolder {

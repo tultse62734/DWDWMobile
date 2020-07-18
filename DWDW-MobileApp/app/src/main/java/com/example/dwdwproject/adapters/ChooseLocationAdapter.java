@@ -18,14 +18,11 @@ import com.example.dwdwproject.models.Location;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAdapter.ChooseLocationViewHolder>  implements Filterable {
     private Context mContext;
     private List<Location> mLocationList;
     private List<Location> mLocationListFull;
-
     private OnClickItem mOnClickItem;
-
     public ChooseLocationAdapter(Context mContext, List<Location> mLocationList) {
         this.mContext = mContext;
         this.mLocationList = mLocationList;
@@ -38,7 +35,6 @@ public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAd
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_choose_location, parent,false);
         ChooseLocationViewHolder viewHolder = new ChooseLocationViewHolder(view);
         return viewHolder;    }
-
     @Override
     public void onBindViewHolder(@NonNull ChooseLocationViewHolder holder, final int position) {
         holder.mTxtNameLocation.setText(mLocationList.get(position).getNameLocation());
@@ -66,7 +62,6 @@ public class ChooseLocationAdapter extends RecyclerView.Adapter<ChooseLocationAd
     public void OnClickItemListener(OnClickItem mOnClickItem){
         this.mOnClickItem = mOnClickItem;
     }
-
     @Override
     public Filter getFilter() {
         return exampleFilter;

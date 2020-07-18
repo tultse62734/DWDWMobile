@@ -1,5 +1,4 @@
 package com.example.dwdwproject.utils;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,7 +31,6 @@ public class DateManagement {
         }
         return convert;
     }
-
     public static String fortmatIntToDate(int date) {
         String day = "";
         if (date < 10) {
@@ -42,18 +40,15 @@ public class DateManagement {
         }
         return day;
     }
-
     public static Date yesterday() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
         return cal.getTime();
     }
-
     public static String getYesterdayDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(yesterday());
     }
-
     public static String getTodayDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(today());
@@ -82,14 +77,12 @@ public class DateManagement {
         cal.add(Calendar.DATE, 0);
         return cal.getTime();
     }
-
     public static Date getStartPreviosMonth() {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, -1);
         return cal.getTime();
     }
-
     public static Date getEndPreviosMonth() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -1);
@@ -97,7 +90,6 @@ public class DateManagement {
         cal.set(Calendar.DATE, dayOfPreviosMonth);
         return cal.getTime();
     }
-
     public static String getStartPreviosMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(getStartPreviosMonth());

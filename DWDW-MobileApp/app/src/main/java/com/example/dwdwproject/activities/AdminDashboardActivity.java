@@ -20,6 +20,7 @@ import android.widget.ListView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
+import com.example.dwdwproject.ResponseDTOs.LocationRecord;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.adapters.DashboardAdapter;
 import com.example.dwdwproject.listviewitems.BarChartItem;
@@ -29,6 +30,7 @@ import com.example.dwdwproject.listviewitems.PieChartItem;
 import com.example.dwdwproject.models.ItemDashBoard;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.recordsPresenters.GetLocationRecordPresenter;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdAndTimePresenter;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.DeleteUserToRoomPresenter;
@@ -37,6 +39,7 @@ import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
+import com.example.dwdwproject.views.recordsViews.GetLocationRecordView;
 import com.example.dwdwproject.views.roomLocalViews.DeleteUserView;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -51,7 +54,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
-public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener, DeleteUserView, GetAllRecordsView, GetAllLocatonView {
+public class AdminDashboardActivity extends AppCompatActivity implements View.OnClickListener, DeleteUserView, GetLocationRecordView {
     private RecyclerView mRecyclerView;
     private ListView mListView;
     private ArrayList<ChartItem> list;
@@ -59,12 +62,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     private LinearLayout mBtnLogout,mBtnFilter;
     private DashboardAdapter mDashboardAdapter;
     private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
-    private GetAllLocationPresenter mGetAllLocationPresenter;
-    private GetRecordsByLocationIdAndTimePresenter mGetRecordsByLocationIdAndTimePresenterd;
+    private GetLocationRecordPresenter mRecordPresenter;
     private String token;
-    private List<LocationDTO> mLocationDTOS;
-    private List<Location> mLocationList;
-    private List<RecordDTO> mRecordDTO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +82,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     }
     private void initData(){
         mDeleteUserToRoomPresenter = new DeleteUserToRoomPresenter(getApplication(),this);
+        mRecordPresenter = new GetLocationRecordPresenter(AdminDashboardActivity.this,this);
+
         mBtnLogout.setOnClickListener(this);
         mBtnFilter.setOnClickListener(this);
-        list  = new ArrayList<>();;
-        list.add(new LineChartItem(generateDataLine(), getApplicationContext()));
-        list.add(new BarChartItem(generateDataBar(), getApplicationContext()));
-        list.add(new PieChartItem(generateDataPie(), getApplicationContext()));
+
         itemDashBoards = new ArrayList<>();
         itemDashBoards.add(new ItemDashBoard("Profile",R.mipmap.ic_worker));
         itemDashBoards.add(new ItemDashBoard("18 Locations",R.mipmap.ic_project_management));
@@ -96,9 +94,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         itemDashBoards.add(new ItemDashBoard("30 Workers",R.mipmap.ic_collaboration));
         itemDashBoards.add(new ItemDashBoard("15 Rooms",R.mipmap.ic_search_home));
         itemDashBoards.add(new ItemDashBoard("5 Record",R.mipmap.ic_emergency));
-        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
-        mListView.setAdapter(cda);
+
         update();
+        token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
+        mRecordPresenter.getLocationRecord(token);
     }
     private void update(){
         if(mDashboardAdapter == null){
@@ -117,118 +116,59 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     private void getData(){
         token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
 
-        mGetAllLocationPresenter = new GetAllLocationPresenter(AdminDashboardActivity.this, this);
-
         int locationID = 1;
         String start = "14-07-2020", end = "17-07-2020";
-        mGetRecordsByLocationIdAndTimePresenterd = new GetRecordsByLocationIdAndTimePresenter
-                (AdminDashboardActivity.this, getApplication(),this);
-        mGetRecordsByLocationIdAndTimePresenterd.getRecordsByLocationIdAndTime(token, locationID, start, end);
-
     }
-    private PieData generateDataPie() {
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * 70) + 30), "Location " + (i+1)));
+    private PieData generateDataPie(List<LocationRecord> mLocationRecords) {
+        PieDataSet d = null;
+        for (int i = 0; i <mLocationRecords.size() ; i++) {
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            for (int j = 0; j < mLocationRecords.size(); j++) {
+                entries.add(new PieEntry((float) mLocationRecords.get(j).getTotalRecord(), mLocationRecords.get(j).getLocationCode()));
+            }
+             d = new PieDataSet(entries, "Report");
+
+            // space between slices
+            d.setSliceSpace(2f);
+            d.setColors(ColorTemplate.VORDIPLOM_COLORS);
         }
-        PieDataSet d = new PieDataSet(entries, "Accident Reports");
-
-        // space between slices
-        d.setSliceSpace(2f);
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
-
         return new PieData(d);
     }
+    private BarData generateDataBar(List<LocationRecord> mLocationRecords) {
+        BarData cd = null;
+        for (int i = 0; i <mLocationRecords.size() ; i++) {
+            ArrayList<BarEntry> entries = new ArrayList<>();
+            for (int j = 0; j < mLocationRecords.size(); j++) {
+                entries.add(new BarEntry(j, (int)mLocationRecords.get(j).getTotalRecord()));
+            }
+            BarDataSet d = new BarDataSet(entries, "Location ");
+            d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+            d.setHighLightAlpha(255);
 
-    private BarData generateDataBar() {
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            entries.add(new BarEntry(i, (int) (Math.random() * 70) + 30));
+            cd= new BarData(d);
+            cd.setBarWidth(0.9f);
+
         }
-
-        BarDataSet d = new BarDataSet(entries, "Location ");
-        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        d.setHighLightAlpha(255);
-
-        BarData cd = new BarData(d);
-        cd.setBarWidth(0.9f);
         return cd;
     }
-
-    private LineData generateDataLine() {
-        ArrayList<Entry> values1 = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            values1.add(new Entry(i, (int) (Math.random() * 65) + 40));
-        }
-
-        LineDataSet d1 = new LineDataSet(values1, "Location A");
-        d1.setLineWidth(2.5f);
-        d1.setCircleRadius(4.5f);
-        d1.setHighLightColor(Color.rgb(244, 117, 117));
-        d1.setDrawValues(false);
-
-        ArrayList<Entry> values2 = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            values2.add(new Entry(i, values1.get(i).getY() - 30));
-        }
-
-        LineDataSet d2 = new LineDataSet(values2, "Location B");
-        d2.setLineWidth(2.5f);
-        d2.setCircleRadius(4.5f);
-        d2.setHighLightColor(Color.rgb(244, 117, 117));
-        d2.setColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        d2.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        d2.setDrawValues(false);
-
-        ArrayList<Entry> values3 = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            values3.add(new Entry(i, values1.get(i).getY() - 20));
-        }
-
-        LineDataSet d3 = new LineDataSet(values3, "Location C");
-        d3.setLineWidth(2.5f);
-        d3.setCircleRadius(4.5f);
-        d3.setHighLightColor(Color.rgb(244, 117, 117));
-        d3.setColor(ColorTemplate.VORDIPLOM_COLORS[1]);
-        d3.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[1]);
-        d3.setDrawValues(false);
-
-        ArrayList<Entry> values4 = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            values4.add(new Entry(i, values1.get(i).getY() - 10));
-        }
-        LineDataSet d4 = new LineDataSet(values4, "Location D");
-        d4.setLineWidth(2.5f);
-        d4.setCircleRadius(4.5f);
-        d4.setHighLightColor(Color.rgb(244, 117, 117));
-        d4.setColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-        d4.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-        d4.setDrawValues(false);
-
-        ArrayList<Entry> values5 = new ArrayList<>();
-
-        for (int i = 0; i < 12; i++) {
-            values5.add(new Entry(i, values1.get(i).getY() - 5));
-        }
-        LineDataSet d5 = new LineDataSet(values5, "Location E");
-        d5.setLineWidth(2.5f);
-        d5.setCircleRadius(4.5f);
-        d5.setHighLightColor(Color.rgb(244, 117, 117));
-        d5.setColor(ColorTemplate.VORDIPLOM_COLORS[4]);
-        d5.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[4]);
-        d5.setDrawValues(false);
-
+    private LineData generateDataLine(List<LocationRecord> mLocationRecords) {
+        LineDataSet d1 = null;
         ArrayList<ILineDataSet> sets = new ArrayList<>();
-        sets.add(d1);
-        sets.add(d2);
-        sets.add(d3);
-        sets.add(d4);
-        sets.add(d5);
+        for (int i = 0; i < mLocationRecords.size(); i++) {
 
+            ArrayList<Entry> values1 = new ArrayList<>();
+
+            for (int j = 0; j < mLocationRecords.size(); j++) {
+                values1.add(new Entry(j, mLocationRecords.get(j).getTotalRecord()));
+            }
+            d1=new LineDataSet(values1, "Location");
+            d1.setLineWidth(2.5f);
+            d1.setCircleRadius(4.5f);
+            d1.setHighLightColor(Color.rgb(244, 117, 117));
+            d1.setDrawValues(false);
+
+            sets.add(d1);
+        }
         return new LineData(sets);
     }
     @Override
@@ -252,14 +192,15 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         DialogNotifyError.showErrorLoginDialog(AdminDashboardActivity.this,"Logout Failed");
     }
 
-    @Override
-    public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
-//chua xong
-    }
 
     @Override
-    public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
-//chua xong
+    public void getLocationRecordSuccess(List<LocationRecord> mLocationRecordList) {
+        list  = new ArrayList<>();;
+        list.add(new PieChartItem(generateDataPie(mLocationRecordList), getApplicationContext()));
+        list.add(new LineChartItem(generateDataLine(mLocationRecordList), getApplicationContext()));
+        list.add(new BarChartItem(generateDataBar(mLocationRecordList), getApplicationContext()));
+        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
+        mListView.setAdapter(cda);
     }
 
     /** adapter that supports 3 different item types */

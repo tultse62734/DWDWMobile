@@ -89,6 +89,8 @@ public class ManagerChooseLocationActivity extends AppCompatActivity  implements
                 public void OnClickItem(int position) {
                     Intent intent = new Intent(ManagerChooseLocationActivity.this,HomeManagerActivity.class);
                     SharePreferenceUtils.saveIntSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONID,mLocationList.get(position).getLocationId());
+                    SharePreferenceUtils.saveStringSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONNAME,mLocationList.get(position).getNameLocation());
+
                     startActivity(intent);
                 }
             });
