@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
@@ -35,6 +36,7 @@ import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocation
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.DeleteUserToRoomPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
@@ -64,6 +66,9 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
     private GetLocationRecordPresenter mRecordPresenter;
     private String token;
+    private TextView mTxtTime;
+    private String mStartTime = "";
+    private String mEndTime = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,30 +79,70 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     private void initView(){
         setTitle("ListViewMultiChartActivity");
         mListView  = findViewById(R.id.listView1);
+        mTxtTime = findViewById(R.id.txt_time_home_page);
         mBtnLogout = findViewById(R.id.lnl_log_out_dashboard);
         mRecyclerView = findViewById(R.id.rcv_item_dashboard);
         mBtnFilter = findViewById(R.id.lnl_filter_dashboarđ);
+        mTxtTime.setText(BundleString.getSelectedDate(AdminDashboardActivity.this));
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdminDashboardActivity.this,LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
-    private void initData(){
-        mDeleteUserToRoomPresenter = new DeleteUserToRoomPresenter(getApplication(),this);
-        mRecordPresenter = new GetLocationRecordPresenter(AdminDashboardActivity.this,this);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String selectDay = BundleString.getSelectedDate(getApplicationContext());
+        mTxtTime.setText(selectDay);
+        checkTypeFilterDate(selectDay);
+        token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
+        if(mStartTime.equalsIgnoreCase(mEndTime)){
+            mRecordPresenter.getLocationRecord(token,DateManagement.changeFormatDate(mStartTime),DateManagement.changeFormatDate(mStartTime));
+        }else {
+            mRecordPresenter.getLocationRecord(token,DateManagement.changeFormatDate(mStartTime),DateManagement.changeFormatDate(mEndTime));
+        }
+    }
+    private String splitToStartDayAndEndDay(String day) {
+        String days = "";
+        String[] tmp = day.split(", ");
+        days = tmp[1];
+        return days;
+    }
+    private void checkTypeFilterDate(String filterDate) {
+        if (filterDate.contains("-")) {
+            splitFromToDay(filterDate);
+        } else {
+            mStartTime = splitToStartDayAndEndDay(filterDate);
+            mEndTime = splitToStartDayAndEndDay(filterDate);
+        }
+    }
+
+
+    private void splitFromToDay(String filterDate) {
+        String[] tmp = filterDate.split("- ");
+        mStartTime = tmp[0];
+        mEndTime = tmp[1];
+    }
+    private void initData() {
+        mDeleteUserToRoomPresenter = new DeleteUserToRoomPresenter(getApplication(), this);
+        mRecordPresenter = new GetLocationRecordPresenter(AdminDashboardActivity.this, this);
 
         mBtnLogout.setOnClickListener(this);
         mBtnFilter.setOnClickListener(this);
-
         itemDashBoards = new ArrayList<>();
-        itemDashBoards.add(new ItemDashBoard("Profile",R.mipmap.ic_worker));
-        itemDashBoards.add(new ItemDashBoard("18 Locations",R.mipmap.ic_project_management));
-        itemDashBoards.add(new ItemDashBoard("17 Devices",R.mipmap.ic_security_camera));
-        itemDashBoards.add(new ItemDashBoard("30 Workers",R.mipmap.ic_collaboration));
-        itemDashBoards.add(new ItemDashBoard("15 Rooms",R.mipmap.ic_search_home));
-        itemDashBoards.add(new ItemDashBoard("5 Record",R.mipmap.ic_emergency));
-
+        itemDashBoards.add(new ItemDashBoard("Profile", R.mipmap.ic_worker));
+        itemDashBoards.add(new ItemDashBoard("18 Locations", R.mipmap.ic_project_management));
+        itemDashBoards.add(new ItemDashBoard("17 Devices", R.mipmap.ic_security_camera));
+        itemDashBoards.add(new ItemDashBoard("30 Workers", R.mipmap.ic_collaboration));
+        itemDashBoards.add(new ItemDashBoard("15 Rooms", R.mipmap.ic_search_home));
+        itemDashBoards.add(new ItemDashBoard("5 Record", R.mipmap.ic_emergency));
         update();
+        String selectDay = BundleString.getSelectedDate(AdminDashboardActivity.this);
+        checkTypeFilterDate(selectDay);
         token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
-        mRecordPresenter.getLocationRecord(token);
+        if (mStartTime.equalsIgnoreCase(mEndTime)) {
+            mRecordPresenter.getLocationRecord(token, DateManagement.changeFormatDate(mStartTime), DateManagement.changeFormatDate(mStartTime));
+        } else {
+            mRecordPresenter.getLocationRecord(token, DateManagement.changeFormatDate(mStartTime), DateManagement.changeFormatDate(mEndTime));
+        }
     }
     private void update(){
         if(mDashboardAdapter == null){

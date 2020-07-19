@@ -20,5 +20,6 @@ public interface ServiceRecord {
 
 
     @GET(ConfigAPI.Api.GETLOCATIONRECORD)
-    Call<ResponseBody> getLocationRecord(@HeaderMap Map<String, String> map);
+    Call<ResponseBody> getLocationRecord(@HeaderMap Map<String, String> map,@Query("startDate")String startDate
+    ,@Query("endDate")String endDate);
 }

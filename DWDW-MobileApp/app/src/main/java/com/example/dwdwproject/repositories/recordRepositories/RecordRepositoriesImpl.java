@@ -68,12 +68,12 @@ public class RecordRepositoriesImpl implements RecordRepositories {
     }
 
     @Override
-    public void getLocationRecord(final Context context, String token, final CallBackData<List<LocationRecord>> mCallBackData) {
+    public void getLocationRecord(final Context context, String token,String startDate,String endDate, final CallBackData<List<LocationRecord>> mCallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getLocationRecord(map);
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getLocationRecord(map,startDate,endDate);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.dwdwproject.utils;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +28,9 @@ public class DateManagement {
                 break;
             case 7:
                 convert = "Thứ 7";
+                break;
+            case 8:
+                convert = "Chủ nhật";
                 break;
         }
         return convert;
@@ -121,12 +125,11 @@ public class DateManagement {
 
     public static String getStartThisMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(getStartThisMonth());
+        return dateFormat.format(getStartThisMonth().toString());
     }
-
     public static String getEndThisMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(getEndThisMonth());
+        return dateFormat.format(getEndThisMonth().toString());
     }
 
     public static String getToday() {
@@ -178,6 +181,17 @@ public class DateManagement {
         cal.add(Calendar.WEEK_OF_YEAR, 0);
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         return cal.getTime();
+    }
+    public static String changeFormatDate(String date){
+        String resutl = null;
+        SimpleDateFormat sTo = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sTo1 = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+             resutl=  sTo.format(sTo1.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resutl;
     }
 
 

@@ -27,6 +27,7 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
     private Button mBtnDone;
     private LinearLayout mBtnClose;
     private String mFilterDate;
+    private String result ;
     private String mPickDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +76,10 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
 
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {
-        String starDay = DateManagement.fortmatIntToDate(day) + "/" + DateManagement.fortmatIntToDate((++month)) + "/" + year;
-        String endDay = DateManagement.fortmatIntToDate(dayEnd) + "/" + DateManagement.fortmatIntToDate((++monthEnd)) + "/" + yearEnd;
+        String starDay = DateManagement.fortmatIntToDate(day) + "-" + DateManagement.fortmatIntToDate((++month)) + "-" + year;
+        String endDay = DateManagement.fortmatIntToDate(dayEnd) + "-" + DateManagement.fortmatIntToDate((++monthEnd)) + "-" + yearEnd;
         if (DateManagement.isDateAfter(starDay, endDay)) {
-            mPickDate = starDay + "- " + endDay;
+            mPickDate = starDay + "-" + endDay;
         } else {
             showFilterDateDialog("Vui lòng chọn lại ngày!!!");
         }
@@ -119,27 +120,26 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
         } else if (mFilterDate == null) {
             mRadioButton = findViewById(mRadioGroup.getCheckedRadioButtonId());
             if (mRadioButton != null) {
-                mFilterDate = (String) mRadioButton.getText();
+                mFilterDate = (String) mRadioButton.getText().toString();
             } else {
                 mFilterDate = SharePreferenceUtils.getStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE);
             }
         }
         if (mFilterDate.equalsIgnoreCase("Hôm nay")) {
-            mFilterDate = DateManagement.getToday();
+            result = DateManagement.getToday();
         } else if (mFilterDate.equalsIgnoreCase("Hôm qua")) {
-            mFilterDate = DateManagement.getYesterDay();
+            result = DateManagement.getYesterDay();
         } else if (mFilterDate.equalsIgnoreCase("Tháng trước")) {
-            mFilterDate = DateManagement.getStartPreviosMonthDateString() + "- " + DateManagement.getEndPreviosMonthDateString();
+            result = DateManagement.getStartPreviosMonthDateString() + "- " + DateManagement.getEndPreviosMonthDateString();
         } else if (mFilterDate.equalsIgnoreCase("Tháng này")) {
-            mFilterDate = DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString();
+            result = DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString();
         } else if (mFilterDate.equalsIgnoreCase("Tuần trước")) {
-            mFilterDate = DateManagement.getStartPreviosWeekDateString() + "- " + DateManagement.getEndPreviosWeekDateString();
+            result = DateManagement.getStartPreviosWeekDateString() + "- " + DateManagement.getEndPreviosWeekDateString();
         } else if (mFilterDate.equalsIgnoreCase("Tuần này")) {
-            mFilterDate = DateManagement.getStartThisWeekDateString() + "- " + DateManagement.getEndThisWeekDateString();
+            result = DateManagement.getStartThisWeekDateString() + "- " + DateManagement.getEndThisWeekDateString();
         }
-        SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, mFilterDate);
+        SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
         finish();
-
     }
     private void initData(){
 

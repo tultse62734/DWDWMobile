@@ -22,6 +22,7 @@ import com.example.dwdwproject.presenters.LoginPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.AddUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.LoginView;
@@ -114,15 +115,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void intentToHomeAdminActivtity(){
+        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE, DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString());
         Intent intent = new Intent(LoginActivity.this,AdminDashboardActivity.class);
+        finish();
         startActivity(intent);
     }
     private void intentToHomeManageActivity(){
         Intent intent = new Intent(LoginActivity.this,ManagerChooseLocationActivity.class);
+        finish();
         startActivity(intent);
     }
     private void intentToHomeWorkerActivity(){
         Intent intent = new Intent(LoginActivity.this,HomeWorkerActivity.class);
+        finish();
         startActivity(intent);
     }
 

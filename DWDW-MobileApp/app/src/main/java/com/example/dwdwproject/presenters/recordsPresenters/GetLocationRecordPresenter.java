@@ -18,8 +18,8 @@ public class GetLocationRecordPresenter {
         this.mGetLocationRecordView = mGetLocationRecordView;
         this.mRecordRepositories = new RecordRepositoriesImpl();
     }
-    public void getLocationRecord(String token){
-        mRecordRepositories.getLocationRecord(mContext, token, new CallBackData<List<LocationRecord>>() {
+    public void getLocationRecord(String token,String startDate,String endDate){
+        mRecordRepositories.getLocationRecord(mContext, token,startDate,endDate, new CallBackData<List<LocationRecord>>() {
             @Override
             public void onSucess(List<LocationRecord> locationRecords) {
                 mGetLocationRecordView.getLocationRecordSuccess(locationRecords);
