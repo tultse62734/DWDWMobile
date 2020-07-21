@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface Service {
@@ -23,4 +24,9 @@ public interface Service {
     @GET(ConfigAPI.Api.GETUSERINFOR)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getUserInfor(@HeaderMap Map<String, String> map);
+
+    @PUT(ConfigAPI.Api.UPDATEINFOR)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> updateInfo(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
 }

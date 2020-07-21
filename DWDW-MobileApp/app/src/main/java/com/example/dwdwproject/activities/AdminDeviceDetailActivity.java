@@ -1,5 +1,4 @@
 package com.example.dwdwproject.activities;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +31,6 @@ import com.example.dwdwproject.views.devicesViews.GetDeviceIDView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 public class AdminDeviceDetailActivity extends AppCompatActivity implements View.OnClickListener,com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener, GetDeviceIDView {
     LinearLayout mBtnClose,mBtnUpdateDevice;
     TextView mEdtChoooseLocation,mEdtChoooseRoom,mEdtChooseTime;

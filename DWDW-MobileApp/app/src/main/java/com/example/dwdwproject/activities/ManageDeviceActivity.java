@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
-    LinearLayout mBtnClose,mBtnAdđeviceAdmin;
+    LinearLayout mBtnClose,mBtnAdđeviceAdmin,mBtnGetAllDevice;
     private FragmentPagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
@@ -58,14 +58,20 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                 Intent intent = new Intent(ManageDeviceActivity.this,AdminCreateDeviceActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.lnl_get_all_device_admin:
+                Intent intent1 = new Intent(ManageDeviceActivity.this,AdminGetAllDeviceActivity.class);
+                startActivity(intent1);
+                break;
         }
     }
     private void initView(){
+        mBtnGetAllDevice = findViewById(R.id.lnl_get_all_device_admin);
         mBtnClose = findViewById(R.id.lnl_close_manage_device);
         mBtnAdđeviceAdmin = findViewById(R.id.lnl_add_device_admin);
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
+        mBtnGetAllDevice.setOnClickListener(this);
         mBtnAdđeviceAdmin.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
 //        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));

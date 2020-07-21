@@ -131,6 +131,7 @@
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
@@ -142,6 +143,7 @@
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/edt_choose_status_update_room_admin"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
@@ -154,6 +156,7 @@
                     android:layout_height="@dimen/dp60">
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
@@ -165,6 +168,7 @@
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:gravity="center|left"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"

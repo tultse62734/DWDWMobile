@@ -114,8 +114,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
             mEndTime = splitToStartDayAndEndDay(filterDate);
         }
     }
-
-
     private void splitFromToDay(String filterDate) {
         String[] tmp = filterDate.split("- ");
         mStartTime = tmp[0];

@@ -15,6 +15,7 @@ public class Device implements Serializable {
     private int deviceStatus;
     @SerializedName("isActive")
     private boolean isActive;
+    private String roomCode;
 
     public Device(int deviceId, String nameDevice, String createDate, String locationDevice) {
         this.deviceId = deviceId;
@@ -23,10 +24,26 @@ public class Device implements Serializable {
         this.locationDevice = locationDevice;
     }
 
+    public Device(int deviceId, String nameDevice, String createDate, String locationDevice, String roomCode) {
+        this.deviceId = deviceId;
+        this.nameDevice = nameDevice;
+        this.createDate = createDate;
+        this.locationDevice = locationDevice;
+        this.roomCode = roomCode;
+    }
+
     public Device(int deviceId, String nameDevice, boolean isActive) {
         this.deviceId = deviceId;
         this.nameDevice = nameDevice;
         this.isActive = isActive;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
     }
 
     public int getDeviceId() {

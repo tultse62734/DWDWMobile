@@ -108,7 +108,6 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
                 updateRoom();
                 break;
         }
-
     }
     private void showChooseStatusRoomDialog(){
         final Dialog dialog = new Dialog(AdminRoomDetailActivity.this);
@@ -159,6 +158,7 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
             public void OnClickItem(int position) {
                 dialog.dismiss();
                 posLocation = position;
+                mRoomDTO.setLocationId(mLocationList.get(position).getLocationId());
                 mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation()+"");
             }
         });
@@ -183,18 +183,15 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
         token = SharePreferenceUtils.getStringSharedPreference(AdminRoomDetailActivity.this,BundleString.TOKEN);
         mUpdateRoomPresenter = new UpdateRoomPresenter(AdminRoomDetailActivity.this,this);
         mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString());
-        mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
+        mRoomDTO.setLocationId(mRoomDTO.getLocationId());
         mUpdateRoomPresenter.updateRoom(token,mRoomDTO);
     }
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminRoomDetailActivity.this,"Update Room Fail");
     }
-
     @Override
     public void getRoomSuccess(RoomDTO mRoomDTO) {
-        Intent intent = new Intent(AdminRoomDetailActivity.this,ManageRoomActivity.class);
         finish();
-        startActivity(intent);
     }
 }

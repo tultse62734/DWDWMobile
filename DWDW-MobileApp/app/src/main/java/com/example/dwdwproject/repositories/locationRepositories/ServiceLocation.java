@@ -22,7 +22,7 @@ public interface ServiceLocation {
 
     @GET(ConfigAPI.Api.GETLOCATIONBYID)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getLocationById(@HeaderMap Map<String, String> map,@Query("id") int id);
+    Call<ResponseBody> getLocationById(@HeaderMap Map<String, String> map,@Query("locationId") int id);
 
     @POST(ConfigAPI.Api.CREATELOCATION)
     @Headers({"Content-Type: application/json"})
@@ -34,7 +34,10 @@ public interface ServiceLocation {
 
     @PUT(ConfigAPI.Api.DEACTIVELOCATION)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> deactiveLocation(@HeaderMap Map<String, String> map,@Path("id") int id);
+    Call<ResponseBody> deactiveLocation(@HeaderMap Map<String, String> map,@Path("locationId") int id);
+    @PUT(ConfigAPI.Api.ACTIVELOCATION)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> activeLocation(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 
     @GET(ConfigAPI.Api.GETMANAGERLOCATION)
     Call<ResponseBody> getManagerLocation(@HeaderMap Map<String, String> map);

@@ -37,7 +37,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
     private String token;
-    private LinearLayout mBtnClose,mBtnAddManagerAdmin;
+    private LinearLayout mBtnClose,mBtnAddManagerAdmin,mBtnFilterManager;
     private GetAllLocationPresenter mGetLocationByIdPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +49,13 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_manage_manage);
         mBtnAddManagerAdmin = findViewById(R.id.lnl_add_manager_admin);
+        mBtnFilterManager  =findViewById(R.id.lnl_get_all_manager_admin);
     }
     private void  initData(){
         token = SharePreferenceUtils.getStringSharedPreference(ManageManagerActivity.this,BundleString.TOKEN);
         mGetLocationByIdPresenter  = new GetAllLocationPresenter(ManageManagerActivity.this,this);
         mBtnAddManagerAdmin.setOnClickListener(this);
+        mBtnFilterManager.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
 //        mLocationList = new ArrayList<>();
 //        mLocationList.add(new Location(1,"Khu A","18-11-2019",true));
@@ -111,7 +113,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
         view.setTextColor(getResources().getColor(R.color.colorWhite));
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -122,6 +123,10 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             case  R.id.lnl_add_manager_admin:
                 Intent intent = new Intent(ManageManagerActivity.this,AdminCreateManagerActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.lnl_get_all_manager_admin:
+                Intent intent1 = new Intent(ManageManagerActivity.this,AdminGetAllUserActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

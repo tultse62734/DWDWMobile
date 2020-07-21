@@ -51,10 +51,10 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
     private ChooseRoomAdapter mChooseRoomAdapter;
     private int posLocation;
     private List<Room> mRoomList;
-    private List<Room> mRoomListFromLocation;
     private int posRoom;
     private DeviceDTO mDeviceDTO;
     private String token ;
+    private int roomId;
     private GetAllLocationPresenter mLocationPresenter;
     private GetAllRoomFromLocationPresenter mRoomFromLocationPresenter;
     private AssignDevicePresenter mAssignDevicePresenter;
@@ -72,8 +72,10 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
         mLocationPresenter = new GetAllLocationPresenter(AdminAssignDeviceActivity.this,this);
         mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(AdminAssignDeviceActivity.this,this);
         mAssignDevicePresenter = new AssignDevicePresenter(AdminAssignDeviceActivity.this,this);
-
         mLocationPresenter.getAllLocation(token);
+        startTime = DateManagement.changeFormatDate1(mDeviceDTO.getStartDate())+"";
+        roomId = mDeviceDTO.getRoomId();
+        endTime = DateManagement.changeFormatDate1(mDeviceDTO.getEndDate())+"";
     }
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_admin_assign_device);
@@ -84,6 +86,10 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
         mEdtChooseTime = findViewById(R.id.edt_choose_time_assgin_admin);
     }
     private void initData(){
+        mEdtChooseTime.setText(startTime +" - " + endTime+"");
+        mEdtDeviceCode.setText(mDeviceDTO.getDeviceCode()+"");
+        mEdtChoooseLocation.setText(mDeviceDTO.getLocationCode()+"");
+        mEdtChoooseRoom.setText(mDeviceDTO.getRoomCode()+"");
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChoooseRoom.setOnClickListener(this);
@@ -98,8 +104,6 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
-
-
         );
         datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
     }
@@ -125,6 +129,7 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
         super.onResume();
         DatePickerDialog datePickerDialog = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
         if (datePickerDialog != null) datePickerDialog.setOnDateSetListener(this);
+        getDataLocation();
     }
     @Override
     public void onClick(View v) {
@@ -140,7 +145,12 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
                 clickOnRdOption();
                 break;
             case R.id.edt_choose_room_assign_admin:
-                showChooseRoomDialog();
+                if(mRoomList!=null){
+                    showChooseRoomDialog();
+                }else{
+                    DialogNotifyError.showErrorLoginDialog(AdminAssignDeviceActivity.this,"Choose Location First");
+                }
+
                 break;
             case R.id.lnl_submit_assign_device_admin:
                 assignDevice();
@@ -168,12 +178,11 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
             public void OnClickItem(int position) {
                 dialog.dismiss();
                 posLocation = position;
+                mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation());
                 mRoomFromLocationPresenter.getAllRoomFromLocation(token,mLocationList.get(position).getLocationId());
             }
         });
-
         dialog.show();
-
     }
     private void showChooseRoomDialog() {
         final Dialog dialog = new Dialog(AdminAssignDeviceActivity.this);
@@ -189,29 +198,32 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView1.setLayoutManager(layoutManager);
-        mChooseRoomAdapter = new ChooseRoomAdapter(AdminAssignDeviceActivity.this,mRoomListFromLocation);
+        mChooseRoomAdapter = new ChooseRoomAdapter(AdminAssignDeviceActivity.this,mRoomList);
         mRecyclerView1.setAdapter(mChooseRoomAdapter);
         mChooseRoomAdapter.OnClickItemListener(new ChooseRoomAdapter.OnClickItem() {
             @Override
             public void OnClickItem(int position) {
                 dialog.dismiss();
                 posRoom = position;
-                mEdtChoooseRoom.setText(mRoomListFromLocation.get(posRoom).getRoomName()+"");
+                roomId = mRoomList.get(posRoom).getRoomId();
+                mEdtChoooseRoom.setText(mRoomList.get(position).getRoomName());
+                mEdtChoooseRoom.setText(mRoomList.get(posRoom).getRoomName()+"");
             }
         });
-
         dialog.show();
     }
     private void assignDevice(){
         AssignDeviceDTO mAssignDeviceDTO = new AssignDeviceDTO();
         mAssignDeviceDTO.setDeviceId(mDeviceDTO.getDeviceId());
-        mAssignDeviceDTO.setRoomId(mRoomList.get(posRoom).getRoomId());
+        mAssignDeviceDTO.setRoomId(roomId);
+        mAssignDeviceDTO.setDateStart(startTime);
+        mAssignDeviceDTO.setDateEnd(endTime);
         mAssignDevicePresenter.assignDevice(token,mAssignDeviceDTO);
     }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        String starDay = DateManagement.fortmatIntToDate(dayOfMonth) + "-" + DateManagement.fortmatIntToDate((++monthOfYear)) + "-" + year;
-        String endDay = DateManagement.fortmatIntToDate(dayOfMonthEnd) + "-" + DateManagement.fortmatIntToDate((++monthOfYearEnd)) + "-" + yearEnd;
+        String starDay =   year + "-" + DateManagement.fortmatIntToDate((++monthOfYear)) + "-" +DateManagement.fortmatIntToDate(dayOfMonth) ;
+        String endDay = yearEnd + "-" + DateManagement.fortmatIntToDate((++monthOfYearEnd)) + "-" +DateManagement.fortmatIntToDate(dayOfMonthEnd) ;
         if (DateManagement.isDateAfter(starDay, endDay)) {
             startTime = starDay;
             endTime = endDay;
@@ -252,7 +264,6 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
     }
     @Override
     public void assignDeviceSuccess(AssignDeviceDTO mAssignDeviceDTO) {
-        Intent intent = new Intent(AdminAssignDeviceActivity.this,ManageDeviceActivity.class);
-        startActivity(intent);
+        finish();
     }
 }

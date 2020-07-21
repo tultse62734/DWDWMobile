@@ -19,7 +19,6 @@ import retrofit2.http.Query;
 public interface ServiceUsers {
     @GET(ConfigAPI.Api.GETALLUSER)
     Call<ResponseBody> getAllUser(@HeaderMap Map<String, String> map);
-
     @GET(ConfigAPI.Api.GETALLUSERBYADMIN)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getAllUserByAdmin(@HeaderMap Map<String, String> map,@Query("locationId") int id);
@@ -39,4 +38,9 @@ public interface ServiceUsers {
     @PUT(ConfigAPI.Api.DELETEUSER)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> deleteUser(@HeaderMap Map<String, String> map,@Path("locationId") int id);
+
+    @PUT(ConfigAPI.Api.ASSGINUSER)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> assginUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
 }

@@ -44,6 +44,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
         mBtnClose = findViewById(R.id.lnl_close_manage_room);
         mBtnAddRoomAdmin = findViewById(R.id.lnl_add_room_admin);
     }
+
     private void initData(){
         mBtnClose.setOnClickListener(this);
         mBtnAddRoomAdmin.setOnClickListener(this);
@@ -68,6 +69,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
         mViewPager = (ViewPager) findViewById(R.id.viewpager_room);
         mViewPager.setOffscreenPageLimit(locationList.size());
         mViewPager.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         //set viewPager for SmartTabLayout
         mViewPagerTab = (SmartTabLayout) findViewById(R.id.view_pager_tab_manage_room);
         mViewPagerTab.setViewPager(mViewPager);
@@ -78,7 +80,6 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
-
             @Override
             public void onPageSelected(int position) {
                 setColorForTab(position);
@@ -86,11 +87,9 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
-
     //set color for tab
     private void setColorForTab(int position) {
         int count = mAdapter.getCount();
@@ -104,7 +103,6 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
         view.setTextColor(getResources().getColor(R.color.colorWhite));
     }
-
     @Override
     public void onClick(View v) {
         int id  = v.getId();
@@ -118,7 +116,6 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
                 break;
         }
     }
-
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         mLocationList = new ArrayList<>();

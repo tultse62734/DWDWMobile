@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void intentToHomeAdminActivtity(){
-        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE, DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString());
+        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE,DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString());
         Intent intent = new Intent(LoginActivity.this,AdminDashboardActivity.class);
         finish();
         startActivity(intent);

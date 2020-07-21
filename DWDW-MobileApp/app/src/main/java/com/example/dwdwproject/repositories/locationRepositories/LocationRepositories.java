@@ -15,4 +15,5 @@ public interface LocationRepositories {
     void updateLocation(Context mContext,String token,LocationDTO mLocation,CallBackData<LocationDTO> callBackData);
     void deactiveLocation(Context mContext, String token, int locationId, CallBackData<LocationDTO> callBackData);
     void getManagerLocationList(Context mContext,String token,CallBackData<List<LocationDTO>> mCallBackData);
+    void updateLocationStatus(Context context,String token,int locationId,CallBackData<LocationDTO> mCallBackData);
 }

@@ -85,8 +85,33 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
         }
     @Override
     public void createDeviceSuccess(DeviceDTO mDeviceDTO) {
+        showNotifyDialog(mDeviceDTO,"Do you want to assgin this device?");
     }
-    private void intentToAdminGetAllDevice(DeviceDTO mDeviceDTO){
+    private void showNotifyDialog(final DeviceDTO deviceDTO,String messgae) {
+        final Dialog dialog = new Dialog(AdminCreateDeviceActivity.this);
+        dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button buttonOk = dialog.findViewById(R.id.btn_yes);
+        TextView mtxtMessge= dialog.findViewById(R.id.txt_dia);
+        mtxtMessge.setText(messgae);
+        Button buttonNo = dialog.findViewById(R.id.btn_no);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                intentToAdminAssignDevice(deviceDTO);
+            }
+        });
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                intentToAdminGetAllDevice();
+            }
+        });
+        dialog.show();
+    }
+    private void intentToAdminGetAllDevice(){
         Intent intent = new Intent(AdminCreateDeviceActivity.this,AdminGetAllDeviceActivity.class);
         finish();
         startActivity(intent);

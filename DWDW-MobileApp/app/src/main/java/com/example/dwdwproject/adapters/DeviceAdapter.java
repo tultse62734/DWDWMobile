@@ -39,12 +39,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     @Override
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, final int position) {
         holder.mTxtNameDevice.setText(mDeviceList.get(position).getNameDevice());
-        if(mDeviceList.get(position).isActive()){
-            holder.mTxtCreateDateDevice.setText("Đang hoạt động");
-        }else {
-            holder.mTxtCreateDateDevice.setText("Không hoạt động");
-        }
-
+        holder.mTxtCreateDateDevice.setText(mDeviceList.get(position).getCreateDate());
         holder.mLnlRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +48,18 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                 }
             }
         });
+        if(mDeviceList.get(position).getLocationDevice()!=null){
+            holder.mTxtLocationDevice.setText(mDeviceList.get(position).getLocationDevice());
+        }
+        else{
+            holder.mTxtLocationDevice.setText("No Assign");
+        }
+        if(mDeviceList.get(position).getRoomCode()!=null || mDeviceList.get(position).getRoomCode().length()!=0){
+            holder.mTxtRoomCode.setText(mDeviceList.get(position).getRoomCode());
+        }
+        else{
+            holder.mTxtRoomCode.setText("No Assign");
+        }
     }
     @Override
     public int getItemCount() {
@@ -89,7 +96,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     }
 
     public class DeviceViewHolder extends RecyclerView.ViewHolder {
-        TextView mTxtLocationDevice,mTxtCreateDateDevice,mTxtNameDevice;
+        TextView mTxtLocationDevice,mTxtCreateDateDevice,mTxtNameDevice,mTxtRoomCode;
         LinearLayout mLnlRoot;
         public DeviceViewHolder(View itemView) {
             super(itemView);
@@ -97,7 +104,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
             mTxtNameDevice = itemView.findViewById(R.id.txt_name_device);
             mTxtCreateDateDevice = itemView.findViewById(R.id.txt_create_date_device);
             mTxtLocationDevice = itemView.findViewById(R.id.txt_location_device);
-
+            mTxtRoomCode = itemView.findViewById(R.id.txt_room_device);
         }
     }
     public void onItemClickListerner(OnItemClickListenner mListenner){
@@ -105,5 +112,11 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     }
     public interface OnItemClickListenner{
         void onItemCLick(int pos);
+    }
+    public void notifyChange(List<Device> mDevices){
+        mDeviceList = new ArrayList<>();
+        mDeviceList = mDevices;
+        mLDeviceListFull = new ArrayList<>(mDeviceList);
+        notifyDataSetChanged();
     }
 }

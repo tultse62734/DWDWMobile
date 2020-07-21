@@ -7,11 +7,20 @@ public class DeviceDTO implements Serializable {
     private int deviceId;
     @SerializedName("deviceCode")
     private String deviceCode;
-    private String createDate;
-    @SerializedName("deviceStatus")
-    private int deviceStatus;
     @SerializedName("isActive")
     private boolean isActive;
+    @SerializedName("roomCode")
+    private String roomCode;
+    @SerializedName("locationCode")
+    private String locationCode;
+    @SerializedName("roomId")
+    private int roomId;
+    @SerializedName("locationId")
+    private int locationId;
+    @SerializedName("startDate")
+    private String startDate;
+    @SerializedName("endDate")
+    private String endDate;
     public int getDeviceId() {
         return deviceId;
     }
@@ -21,32 +30,61 @@ public class DeviceDTO implements Serializable {
     public String getDeviceCode() {
         return deviceCode;
     }
-
     public void setDeviceCode(String deviceCode) {
         this.deviceCode = deviceCode;
     }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public int getDeviceStatus() {
-        return deviceStatus;
-    }
-
-    public void setDeviceStatus(int deviceStatus) {
-        this.deviceStatus = deviceStatus;
-    }
-
     public boolean isActive() {
         return isActive;
     }
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
+    }
+
+    public String getLocationCode() {
+        return locationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        this.locationCode = locationCode;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

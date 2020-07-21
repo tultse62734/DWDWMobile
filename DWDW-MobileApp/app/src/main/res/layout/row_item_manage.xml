@@ -47,15 +47,15 @@
             </TextView>
             <LinearLayout
                 android:layout_marginTop="@dimen/dp20"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:weightSum="10"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:gravity="center"
+                    android:gravity="left"
                     android:layout_gravity="center"
-                    android:layout_weight="4"
+                    android:layout_weight="2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
@@ -71,11 +71,59 @@
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"
                     android:textSize="@dimen/sp15"
-                    android:layout_weight="6"
+                    android:layout_weight="8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
 
                 </TextView>
             </LinearLayout>
+            <TextView
+                android:id="@+id/txt_location_user"
+                android:text="Location A"
+                android:textStyle="bold"
+                android:textColor="@color/colorRed"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <LinearLayout
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_gravity="center"
+                android:weightSum="10"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"
+                    android:text="Role:"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/txt_role_user"
+                    android:text="Manager"
+                    android:textColor="@color/colorGreen"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp15"
+                    android:layout_weight="8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+            </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_time_user"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:textColor="@color/colorGreyDark"
+                    android:textStyle="bold"
+                    android:text="From 2020-07-21 to 2020-07-22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
         </LinearLayout>
 </LinearLayout>

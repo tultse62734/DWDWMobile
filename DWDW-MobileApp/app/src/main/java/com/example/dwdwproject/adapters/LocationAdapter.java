@@ -22,11 +22,14 @@ import com.example.dwdwproject.models.Location;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.http.PUT;
+
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationViewHolder> implements Filterable {
     private Context mContext;
     private List<Location> mLocationList;
     private List<Location> mLocationListFull;
     private OnClickDeleteItem mDeleteItem;
+    private OnClickActiveItem mClickActiveItem;
     private OnClickItem mOnClickItem;
     public LocationAdapter(Context mContext, List<Location> mLocationList) {
         this.mContext = mContext;
@@ -68,8 +71,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
                 }
             }
         });
+        holder.mLnlActiveLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickActiveItem!=null){
+                    mClickActiveItem.OnClickActiveItem(position);
+                }
+            }
+        });
     }
-
     @Override
     public int getItemCount() {
         return mLocationList.size();
@@ -107,7 +117,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
     public class LocationViewHolder extends RecyclerView.ViewHolder {
         TextView mTxtNameLocation,mTxtCreateDateLocation,mTxtStatusLocation;
-        LinearLayout mLnlRootLocation,mLnlDeteleLcation;
+        LinearLayout mLnlRootLocation,mLnlDeteleLcation,mLnlActiveLocation;
 
         public LocationViewHolder(View itemView) {
             super(itemView);
@@ -116,6 +126,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
             mTxtStatusLocation = itemView.findViewById(R.id.txt_status_location);
             mLnlRootLocation = itemView.findViewById(R.id.lnl_root_location_admin);
             mLnlDeteleLcation = itemView.findViewById(R.id.lnl_delete_location_admin);
+            mLnlActiveLocation = itemView.findViewById(R.id.lnl_active_location_admin);
         }
     }
     public void OnClickDeleteItemListener(OnClickDeleteItem mDeleteItem){
@@ -124,10 +135,22 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     public void OnClickItemListener(OnClickItem mOnClickItem){
         this.mOnClickItem = mOnClickItem;
     }
+    public void OnClickActiveListerner(OnClickActiveItem mActiveItem){
+        this.mClickActiveItem = mActiveItem;
+    }
     public interface OnClickDeleteItem{
         void OnClickDeleteItem(int position);
     }
     public interface OnClickItem{
         void OnClickItem(int position);
+    }
+    public interface OnClickActiveItem{
+        void OnClickActiveItem(int pos);
+    }
+    public void notify(List<Location> locationList){
+        mLocationList = new ArrayList<>();
+        mLocationList  = locationList;
+        mLocationListFull = new ArrayList<>(mLocationList);
+        notifyDataSetChanged();
     }
 }

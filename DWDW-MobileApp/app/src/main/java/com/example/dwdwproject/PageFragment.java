@@ -21,6 +21,7 @@ import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForAdminPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
@@ -117,15 +118,18 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     @Override
     public void getAllDeviceSuccess(List<DeviceDTO> mDeviceDTOList) {
         if(mDeviceDTOList!=null){
-            this.mDeviceList = new ArrayList<>();
-            this.mDeviceDTOS = new ArrayList<>();
-            this.mDeviceDTOS = mDeviceDTOList;
-            for (int i = 0; i <mDeviceDTOList.size() ; i++) {
+            mDeviceList = new ArrayList<>();
+            mDeviceDTOS = new ArrayList<>();
+            mDeviceDTOS = mDeviceDTOList;
+            for (int i = 0; i < mDeviceDTOList.size(); i++) {
                 int deviceId = mDeviceDTOList.get(i).getDeviceId();
-                String deviceCode = mDeviceDTOList.get(i).getDeviceCode();
+                String deviceName = mDeviceDTOList.get(i).getDeviceCode();
+                String locationName = mDeviceDTOList.get(i).getLocationCode();
                 boolean isActive = mDeviceDTOList.get(i).isActive();
-                mDeviceList.add(new Device(deviceId,deviceCode,isActive));
-                }
+                String roomName = mDeviceDTOList.get(i).getRoomCode();
+                String creatDate = DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getEndDate());
+                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName));
+            }
             updateUI();
         }
     }

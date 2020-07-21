@@ -279,13 +279,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         ClientApi clientApi = new ClientApi();
         JSONObject data = new JSONObject();
         try {
-            data.put("roomId",mAssignDeviceDTO.getDeviceId());
+            data.put("roomId",mAssignDeviceDTO.getRoomId());
 
-            data.put("deviceId",mAssignDeviceDTO.getRoomId());
+            data.put("deviceId",mAssignDeviceDTO.getDeviceId());
 
-            data.put("startDate",mAssignDeviceDTO.getDeviceId());
+            data.put("startDate",mAssignDeviceDTO.getDateStart());
 
-            data.put("endDate",mAssignDeviceDTO.getRoomId());
+            data.put("endDate",mAssignDeviceDTO.getDateEnd());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -302,7 +302,6 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                     try {
                         String result = response.body().string();
                         Type type = new TypeToken<AssignDeviceDTO>() {
-
                         }.getType();
                         //call response to get value data
                        AssignDeviceDTO  assignDeviceDTO = new Gson().fromJson(result, type);
@@ -311,7 +310,7 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                         e.printStackTrace();
                     }
                 } else {
-                    mCallBackData.onFail(response.message());
+                    mCallBackData.onFail("Dont' Assgin Device");
                 }
             }
 

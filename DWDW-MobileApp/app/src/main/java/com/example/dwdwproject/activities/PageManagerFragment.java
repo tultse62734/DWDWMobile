@@ -26,6 +26,7 @@ import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.userPresenters.GetAllUserFromLocationByAdPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
@@ -37,9 +38,10 @@ import java.util.List;
 
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
-public class PageManagerFragment extends Fragment implements GetAllListUserView {
+public class PageManagerFragment extends Fragment implements GetAllListUserView{
     private View mView;
     private List<Manager> mManagerList;
+    private List<UserDTO> mUserDTOList;
     private RecyclerView mRecyclerView;
     private ManageAdapter manageAdapter;
     private GetAllUserFromLocationByAdPresenter mAdPresenter;
@@ -118,7 +120,7 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AdminManagerDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(BundleString.MANAGERDETAIL,mManagerList.get(pos));
+                    bundle.putSerializable(BundleString.MANAGERDETAIL,mUserDTOList.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -128,22 +130,23 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView 
             manageAdapter.notifyDataSetChanged();
         }
     }
-
     @Override
     public void getAllUserSuccess(List<UserDTO> userDTOList) {
         if(userDTOList!=null){
             this.mManagerList = new ArrayList<>();
+            mUserDTOList = new ArrayList<>();
+            mUserDTOList = userDTOList;
             for (int i = 0; i <userDTOList.size() ; i++) {
-                String image = "https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg";
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
-                String dateOfBirth = userDTOList.get(i).getDateOfBirth();
-                mManagerList.add(new Manager(image,name,phone,dateOfBirth));
+                String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
+                String location = userDTOList.get(i).getLocationCode();
+                String roleName = userDTOList.get(i).getRoleName();
+                mManagerList.add(new Manager(name,phone,roleName,location,creatDate));
             }
             updateUI();
         }
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");

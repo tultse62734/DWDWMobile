@@ -6,7 +6,7 @@ public class ConfigAPI {
         //User
         String LOGIN = "User/LoginAsync";
         String GETUSERINFOR="User/GetUserInfoToken";
-        String UPDATEINFOR ="";
+        String UPDATEINFOR ="User/UpdatePersonalInfo";
         //Device
         String GETALLDEVICE = "Device/GetAllDevice";
         String GETDEVICEBYID ="";
@@ -22,7 +22,8 @@ public class ConfigAPI {
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";
-        String DEACTIVELOCATION = "Location/DeactiveLocation";
+        String DEACTIVELOCATION = "/api/Location/DeactiveLocation/{locationId}";
+        String ACTIVELOCATION = "Location/UpdateLocationStatus";
         String GETMANAGERLOCATION = "Location/GetLocationsByManager";
         //Room
         String GETALLROOM = "";
@@ -31,12 +32,13 @@ public class ConfigAPI {
         String UPDATEROOM = "Room/UpdateRoom";
         String GETROOMFROMLOCATION="Room/GetRoomsFromLocation/{locationId}";
         //Users
-        String GETALLUSER  = "";
+        String GETALLUSER  = "User/GetAll";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";
         String GETALLUSERBYMANAGER = "User/GetUserFromLocationsByManager";
-        String CREATEUSER="CraeteUserByAdmin";
+        String CREATEUSER="User/CreateUserByAdmin";
         String UPDATEUSER="User/UpdateUserByAdmin";
         String DELETEUSER ="";
+        String ASSGINUSER = "User/AssignUserToLocationByAdmin";
         //Shift
         String GETALLSHIFT = "Shift/GetAllShift";
         String GETSHIFTOFMANAGER = "Shift/GetShiftManager";

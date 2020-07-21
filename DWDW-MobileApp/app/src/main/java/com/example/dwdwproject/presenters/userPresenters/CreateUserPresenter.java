@@ -16,26 +16,13 @@ public class CreateUserPresenter {
     private GetUserView mGetUserView;
     private UserRepositories mUserRepositories;
 
-    public CreateUserPresenter(Context mContext, Application mApplication,GetUserView mGetUserView) {
+    public CreateUserPresenter(Context mContext,GetUserView mGetUserView) {
         this.mContext = mContext;
         this.mGetUserView = mGetUserView;
         this.mUserRepositories = new UserRepositotiesImpl();
-        this.management = new DWDWManagement(mApplication);
 
     }
-    public void createUserToken(final UserDTO mUserDTO){
-        management.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                createUser(accessToken,mUserDTO);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
     public void createUser(String token,UserDTO mUserDTO){
         this.mUserRepositories.createUser(mContext, token, mUserDTO, new CallBackData<UserDTO>() {
             @Override

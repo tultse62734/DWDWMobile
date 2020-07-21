@@ -38,12 +38,9 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
         View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_manage, parent,false);
         WorkerViewHolder viewHolder = new WorkerViewHolder(view);
         return viewHolder;
-
     }
-
     @Override
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, final int position) {
-        Picasso.get().load(mManagerList.get(position).getImageResourceId()).into(holder.ivProfile);
             holder.tvMobile.setText(mManagerList.get(position).getPhone());
             holder.tvName.setText(mManagerList.get(position).getName());
             holder.mLnlnRootManager.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +51,14 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
                     }
                 }
             });
+            holder.mTxtTime.setText(mManagerList.get(position).getCreateTime());
+            holder.mTxtRole.setText(mManagerList.get(position).getRoleName());
+        if(mManagerList.get(position).getLocationName()!=null){
+            holder.mTxtLocation.setText(mManagerList.get(position).getLocationName());
+        }
+        else{
+            holder.mTxtLocation.setText("No Assign");
+        }
     }
     @Override
     public int getItemCount() {
@@ -85,12 +90,20 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mManagerList.clear();
             mManagerList.addAll((List) results.values);
+            mManagerListFull = new ArrayList<>(mManagerList);
             notifyDataSetChanged();
         }
     };
+    public void notify(List<Manager> managerList){
+        mManagerList = new ArrayList<>();
+        mManagerList = managerList;
+        mManagerListFull = new ArrayList<>(managerList);
+        notifyDataSetChanged();
+    }
     public class WorkerViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProfile;
         TextView tvName;
+        TextView mTxtTime,mTxtRole,mTxtLocation;
         LinearLayout mLnlnRootManager;
         TextView tvMobile;
         public WorkerViewHolder(View itemView) {
@@ -99,6 +112,9 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
             tvName = (TextView) itemView.findViewById(R.id.txt_name_worker);
             tvMobile = (TextView) itemView.findViewById(R.id.txt_phone_worker);
             mLnlnRootManager = itemView.findViewById(R.id.lnl_root_manage_manager);
+            mTxtRole = itemView.findViewById(R.id.txt_role_user);
+            mTxtTime = itemView.findViewById(R.id.txt_time_user);
+            mTxtLocation = itemView.findViewById(R.id.txt_location_user);
         }
     }
     public void OnItemClickListener(OnItemClickListener itemClickListener){

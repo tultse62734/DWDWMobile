@@ -22,7 +22,7 @@
                 android:textSize="@dimen/sp22"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
-                android:text="Quản lý sự cố"
+                android:text="Manage Record"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="0dp"

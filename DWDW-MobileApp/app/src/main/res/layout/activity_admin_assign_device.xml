@@ -38,13 +38,13 @@
                     android:layout_weight="2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
+
                     <ImageView
-                        android:tint="@color/colorWhite"
+                        android:layout_width="25dp"
+                        android:layout_height="match_parent"
                         android:scaleType="fitXY"
                         android:src="@mipmap/ic_close"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp">
-                    </ImageView>
+                        android:tint="@color/colorWhite"></ImageView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -72,9 +72,11 @@
 
                 </TextView>
                 <EditText
+                    android:clickable="true"
                     android:id="@+id/edit_assign_device_code"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
+                    android:enabled="false"
                     android:background="@drawable/rounder_edit_text_1dp"
                     android:hint="Input Device Code"
                     android:textColorHighlight="@color/colorGreyDark"
@@ -133,12 +135,11 @@
                     android:layout_height="@dimen/dp60">
                 </TextView>
                 <TextView
-
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Thời gian  :"
+                    android:text="Time :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -151,7 +152,7 @@
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
                     android:textColorHighlight="@color/colorGreyDark"
-                    android:hint="---- Chọn ngày ----"
+                    android:hint="---- Choose ----"
                     android:textColorHint="@color/colorGrey"
                     android:textColor="@color/colorYellowOrange"
                     android:layout_width="match_parent"
@@ -171,7 +172,7 @@
                         android:textColor="@color/colorWhite"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Thêm"
+                        android:text="Assign"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

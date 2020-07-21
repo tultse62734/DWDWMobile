@@ -9,7 +9,6 @@ import com.example.dwdwproject.repositories.DWDWRepositoriesImpl;
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.GetUserInforTokenView;
-
 public class GetUserInforTokenPresenter {
     private Context mContext;
     private GetUserInforTokenView mGetUserInforTokenView;
@@ -32,5 +31,17 @@ public class GetUserInforTokenPresenter {
             }
         });
     }
+    public void updateInfor(String token,UserDTO mUserDTO){
+        mDwdwRepositories.UpdateAccout(mContext, token, mUserDTO, new CallBackData<UserDTO>() {
+            @Override
+            public void onSucess(UserDTO userDTO) {
+                mGetUserInforTokenView.getInforSuccess(userDTO);
+            }
 
+            @Override
+            public void onFail(String message) {
+                mGetUserInforTokenView.showError(message);
+            }
+        });
+    }
 }

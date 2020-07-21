@@ -1,5 +1,4 @@
 package com.example.dwdwproject.repositories;
-
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.LoginDTO;
@@ -29,7 +28,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class DWDWRepositoriesImpl implements DWDWRepositories {
     @Override
     public void Login(final Context mContext, LoginDTO mLoginDTO, final CallBackData<ReponseDTO> callBackData) {
@@ -43,10 +41,8 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-
         Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -68,7 +64,6 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                     callBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
@@ -154,6 +149,54 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 mCallBackData.onFail(t.getMessage());
 
+            }
+        });
+    }
+
+    @Override
+    public void UpdateAccout(final Context context, String token, UserDTO mUserDTO, final CallBackData<UserDTO> mCallBackData) {
+        ClientApi clientApi = new ClientApi();
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("password",mUserDTO.getPassword());
+            jsonObject.put("phone",mUserDTO.getGender());
+            jsonObject.put("dateOfBirth",mUserDTO.getDateOfBirth());
+            jsonObject.put("gender",mUserDTO.getGender());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
+        Call<ResponseBody> mBodyCall = clientApi.Services().updateInfo(map,body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<UserDTO>() {
+
+                        }.getType();
+                        //call response to get value data
+                        UserDTO userDTO = new Gson().fromJson(result, type);
+                        System.out.println(userDTO.getUserName().toString());
+                        mCallBackData.onSucess(userDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
             }
         });
     }

@@ -129,8 +129,6 @@ public class AdminLocationDetailActivity extends AppCompatActivity implements Vi
     }
     @Override
     public void updateLocationSuccess() {
-        Intent intent = new Intent(AdminLocationDetailActivity.this,ManageLocationActivity.class);
         finish();
-        startActivity(intent);
     }
 }

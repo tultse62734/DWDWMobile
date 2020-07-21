@@ -22,19 +22,23 @@ import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.locationsPresenters.CreateLocationPresenter;
+import com.example.dwdwproject.presenters.locationsPresenters.DeactiveLocationPresenter;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
+import com.example.dwdwproject.presenters.locationsPresenters.UpdateActiveLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.presenters.locationsPresenters.UpdateLocationPresenter;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.locationsViews.DeactiveLocatonView;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
 import com.example.dwdwproject.views.locationsViews.CreateLocatonView;
+import com.example.dwdwproject.views.locationsViews.UpdateActiveLocationView;
 import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView, CreateLocatonView, UpdateLocatonView {
+public class ManageLocationActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView, DeactiveLocatonView, UpdateActiveLocationView {
     private RecyclerView mRecyclerView;
     private List<Location> mLocationList;
     private LocationAdapter mLocationAdapter;
@@ -43,6 +47,8 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     private SearchView mSearchView;
     private List<LocationDTO> mLocationDTOS;
     private LinearLayout mBtnClose,mBtnAddLocation;
+    private DeactiveLocationPresenter  mDeactiveLocationPresenter;
+    private UpdateActiveLocationPresenter mUpdateActiveLocationPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,9 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        token =  SharePreferenceUtils.getStringSharedPreference(ManageLocationActivity.this,BundleString.TOKEN);
+        mUpdateActiveLocationPresenter = new UpdateActiveLocationPresenter(ManageLocationActivity.this,this);
+        mDeactiveLocationPresenter = new DeactiveLocationPresenter(ManageLocationActivity.this,this);
         mBtnClose.setOnClickListener(this);
         mBtnAddLocation.setOnClickListener(this);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -85,7 +94,6 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
 //        mLocationList.add(new Location(6,"Khu F","1-10-2019",true));
 //
 //        updateUI();
-        token =  SharePreferenceUtils.getStringSharedPreference(ManageLocationActivity.this,BundleString.TOKEN);
         getAllLocationPresenter = new GetAllLocationPresenter(ManageLocationActivity.this,this);
         getAllLocationPresenter.getAllLocation(token);
     }
@@ -96,7 +104,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             mLocationAdapter.OnClickDeleteItemListener(new LocationAdapter.OnClickDeleteItem() {
                 @Override
                 public void OnClickDeleteItem(int position) {
-                    showLogoutDialog("Do want to delete this location ? ");
+                    showDeactivetDialog("Do want to deactive this location ? ",mLocationList.get(position).getLocationId());
                 }
             });
             mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
@@ -109,10 +117,22 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
                   startActivity(intent);
                 }
             });
+            mLocationAdapter.OnClickActiveListerner(new LocationAdapter.OnClickActiveItem() {
+                @Override
+                public void OnClickActiveItem(int pos) {
+                    showActivetDialog("Do want to Active this location ? ",mLocationList.get(pos).getLocationId());
+
+                }
+            });
         }
         else {
-            mLocationAdapter.notifyDataSetChanged();
+            mLocationAdapter.notify(mLocationList);
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllLocationPresenter.getAllLocation(token);
     }
     @Override
     public void onClick(View v) {
@@ -127,7 +147,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
-    private void showLogoutDialog(String message) {
+    private void showDeactivetDialog(String message, final int locationId) {
         final Dialog dialog = new Dialog(ManageLocationActivity.this);
         dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -139,6 +159,30 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                mDeactiveLocationPresenter.deactiveLocation(token,locationId);
+            }
+        });
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    private void showActivetDialog(String message, final int locationId) {
+        final Dialog dialog = new Dialog(ManageLocationActivity.this);
+        dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button buttonOk = dialog.findViewById(R.id.btn_yes);
+        Button buttonNo = dialog.findViewById(R.id.btn_no);
+        TextView  textView = dialog.findViewById(R.id.txt_dia);
+        textView.setText(message);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                mUpdateActiveLocationPresenter.updateActiveLocation(token,locationId);
             }
         });
         buttonNo.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +195,7 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
     }
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ManageLocationActivity.this,"Can't show data");
+        DialogNotifyError.showErrorLoginDialog(ManageLocationActivity.this,message);
         }
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
@@ -169,13 +213,11 @@ public class ManageLocationActivity extends AppCompatActivity implements View.On
         }
     }
     @Override
-    public void createLocationSuccess(){
-        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
-        startActivity(intent);
+    public void deactiveLocationSuccess() {
+        getAllLocationPresenter.getAllLocation(token);
     }
     @Override
-    public void updateLocationSuccess(){
-        Intent intent  = new Intent(ManageLocationActivity.this,AdminLocationDetailActivity.class);
-        startActivity(intent);
+    public void updateActiveLocationSuccess(LocationDTO mLocationDTO) {
+        getAllLocationPresenter.getAllLocation(token);
     }
 }

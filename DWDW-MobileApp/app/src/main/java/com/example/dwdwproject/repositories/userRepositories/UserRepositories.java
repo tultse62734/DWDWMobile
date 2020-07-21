@@ -2,6 +2,7 @@ package com.example.dwdwproject.repositories.userRepositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.AssignUserDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.utils.CallBackData;
 
@@ -13,4 +14,5 @@ public interface UserRepositories {
     void createUser(Context mContext,String token,UserDTO mUserDTO,CallBackData<UserDTO> mCallBackData);
     void updateUserById(Context context,String token,UserDTO mUserDTO,CallBackData<UserDTO>mCallBackData);
     void deleteUserById(Context context,String token,int userId,CallBackData<String>mCallBackData);
+    void assignUserToLocation(Context context, String token, AssignUserDTO assignUserDTO,CallBackData<AssignUserDTO> mCallBackData);
 }

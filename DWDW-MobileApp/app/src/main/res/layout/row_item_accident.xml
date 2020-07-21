@@ -120,15 +120,16 @@
                 android:background="@drawable/radius_conner_top_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp30">
+
                 <TextView
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp15"
-                    android:text="Xem"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="View"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold">
 
                 </TextView>
             </LinearLayout>

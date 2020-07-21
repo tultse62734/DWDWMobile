@@ -78,10 +78,24 @@
             </TextView>
             <LinearLayout
                 android:layout_marginRight="@dimen/dp10"
+                android:id="@+id/lnl_get_all_manager_admin"
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_weight="1.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_filter"
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginRight="@dimen/dp10"
                 android:id="@+id/lnl_add_manager_admin"
                 android:gravity="right"
                 android:layout_gravity="center"
-                android:layout_weight="3"
+                android:layout_weight="1.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <ImageView

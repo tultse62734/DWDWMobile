@@ -19,7 +19,13 @@ import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ShiftDateFilterActivity extends AppCompatActivity implements com.borax12.materialdaterangepicker.date.DatePickerDialog.OnDateSetListener{
     private RadioGroup mRadioGroup;
     private RadioButton mRadioButton;
@@ -27,7 +33,7 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
     private Button mBtnDone;
     private LinearLayout mBtnClose;
     private String mFilterDate;
-    private String result ;
+    private String result = null ;
     private String mPickDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,6 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
         });
 
     }
-
     public void clickOnRdOption() {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
@@ -71,9 +76,7 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
         datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
-
     }
-
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {
         String starDay = DateManagement.fortmatIntToDate(day) + "-" + DateManagement.fortmatIntToDate((++month)) + "-" + year;
@@ -125,23 +128,33 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
                 mFilterDate = SharePreferenceUtils.getStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE);
             }
         }
-        if (mFilterDate.equalsIgnoreCase("Hôm nay")) {
+        if (mFilterDate.equalsIgnoreCase("Today")) {
             result = DateManagement.getToday();
-        } else if (mFilterDate.equalsIgnoreCase("Hôm qua")) {
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+
+        } else if (mFilterDate.equalsIgnoreCase("Yesterday")) {
             result = DateManagement.getYesterDay();
-        } else if (mFilterDate.equalsIgnoreCase("Tháng trước")) {
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+
+        } else if (mFilterDate.equalsIgnoreCase("Last month")) {
             result = DateManagement.getStartPreviosMonthDateString() + "- " + DateManagement.getEndPreviosMonthDateString();
-        } else if (mFilterDate.equalsIgnoreCase("Tháng này")) {
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+
+        } else if (mFilterDate.equalsIgnoreCase("This month")) {
             result = DateManagement.getStartThisMonthDateString() + "- " + DateManagement.getEndThisMonthDateString();
-        } else if (mFilterDate.equalsIgnoreCase("Tuần trước")) {
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+
+        } else if (mFilterDate.equalsIgnoreCase("Last week")) {
             result = DateManagement.getStartPreviosWeekDateString() + "- " + DateManagement.getEndPreviosWeekDateString();
-        } else if (mFilterDate.equalsIgnoreCase("Tuần này")) {
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+
+        } else if (mFilterDate.equalsIgnoreCase("This week")) {
             result = DateManagement.getStartThisWeekDateString() + "- " + DateManagement.getEndThisWeekDateString();
+            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
         }
         SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
         finish();
     }
     private void initData(){
-
     }
 }

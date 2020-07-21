@@ -11,7 +11,7 @@
         android:weightSum="10"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp100">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:gravity="center"
             android:layout_gravity="center"
@@ -52,7 +52,6 @@
                 android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
             </TextView>
             <TextView
                 android:id="@+id/txt_location_device"
@@ -62,7 +61,15 @@
                 android:text="Khu A"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+            </TextView>
+            <TextView
+                android:id="@+id/txt_room_device"
+                android:textColor="@color/colorGreen"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:text="Room 101"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             </TextView>
         </LinearLayout>
         <LinearLayout
@@ -84,7 +91,7 @@
                    android:textStyle="bold"
                    android:gravity="center"
                    android:layout_gravity="center"
-                   android:text="Sửa"
+                   android:text="Edit"
                    android:textColor="@color/colorWhite"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content">

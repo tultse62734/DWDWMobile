@@ -87,6 +87,7 @@
 
                 </EditText>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
@@ -98,6 +99,7 @@
 
                 </TextView>
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/edt_choose_status_add__location_admin"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"

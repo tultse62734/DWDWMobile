@@ -9,16 +9,30 @@ public class UserDTO implements Serializable,Cloneable {
     private int userId;
     @SerializedName("userName")
     private String userName;
+    @SerializedName("password")
+    private String password;
     @SerializedName("phone")
     private String phone;
     @SerializedName("dateOfBirth")
     private String dateOfBirth;
     @SerializedName("gender")
     private int gender;
-    @SerializedName("roleId")
-    private int roleId;
+    @SerializedName("deviceToken")
+    private String deviceToken;
     @SerializedName("isActive")
     private boolean isActive;
+    @SerializedName("roleId")
+    private int roleId;
+    @SerializedName("roleName")
+    private String roleName;
+    @SerializedName("locationId")
+    private int locationId;
+    @SerializedName("locationCode")
+    private String locationCode;
+    @SerializedName("startDate")
+    private String startDate;
+    @SerializedName("endDate")
+    private String endDate;
     public int getUserId() {
         return userId;
     }
@@ -73,5 +87,61 @@ public class UserDTO implements Serializable,Cloneable {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getLocationCode() {
+        return locationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        this.locationCode = locationCode;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

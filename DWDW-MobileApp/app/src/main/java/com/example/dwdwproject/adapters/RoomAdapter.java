@@ -43,10 +43,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         holder.mTxtNameRoom.setText(mRoomList.get(position).getRoomName()+"");
         holder.mTxtCreateDateRoom.setText(mRoomList.get(position).getRoomCreateDate()+"");
         if(mRoomList.get(position).isStatus()){
-            holder.mTxtStatusRoom.setText("Đang hoạt động");
+            holder.mTxtStatusRoom.setText("Active");
             holder.mTxtStatusRoom.setTextColor(Color.parseColor("#4CAF50"));
         }else {
-            holder.mTxtStatusRoom.setText("Không hoạt động");
+            holder.mTxtStatusRoom.setText("Deactive");
             holder.mTxtStatusRoom.setTextColor(Color.parseColor("#D81B21"));
         }
         holder.mLnlRootRoom.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +89,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mRoomList.clear();
             mRoomList.addAll((List) results.values);
+            mRoomListFull = new ArrayList<>(mRoomList);
             notifyDataSetChanged();
         }
     };

@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+
 public class DateManagement {
     public static String convertDayOfWeek(int dayOfWeek) {
         String convert = "";
@@ -57,14 +59,16 @@ public class DateManagement {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(today());
     }
+    public static Date toDate(String value) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(value);
+    }
+
     public static boolean isDateAfter(String startDate, String endDate)
     {
         try
         {
-            String myFormatString = "dd/MM/yyyy"; // for example
-            SimpleDateFormat df = new SimpleDateFormat(myFormatString);
-            Date date1 = df.parse(endDate);
-            Date startingDate = df.parse(startDate);
+            Date date1 = toDate(endDate+" 00:00:00");
+            Date startingDate = toDate(startDate+"  00:00:00");
             if (date1.after(startingDate))
                 return true;
             else
@@ -104,14 +108,14 @@ public class DateManagement {
         return dateFormat.format(getEndPreviosMonth());
     }
 
-    public static Date getStartThisMonth() {
+    public static String getStartThisMonthDateString() {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, 0);
-        return cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(cal.getTime()).toString();
     }
-
-    public static Date getEndThisMonth() {
+    public static String getEndThisMonthDateString() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, 0);
         int dayOfPreviosMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -120,18 +124,9 @@ public class DateManagement {
             dayOfPreviosMonth = dayNow-1;
         }
         cal.set(Calendar.DATE, dayOfPreviosMonth);
-        return cal.getTime();
-    }
-
-    public static String getStartThisMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(getStartThisMonth().toString());
+        return dateFormat.format(cal.getTime()).toString();
     }
-    public static String getEndThisMonthDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(getEndThisMonth().toString());
-    }
-
     public static String getToday() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -194,6 +189,23 @@ public class DateManagement {
         return resutl;
     }
 
+    public static String changeFormatDate1(String date){
+        String resutl = null;
+        if(date!=null) {
+
+            SimpleDateFormat sTo = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sTo1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            try {
+                resutl = sTo.format(sTo1.parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }else
+            resutl = "No Assign";
+
+        return resutl;
+        }
 
     public static String getStartThisWeekDateString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

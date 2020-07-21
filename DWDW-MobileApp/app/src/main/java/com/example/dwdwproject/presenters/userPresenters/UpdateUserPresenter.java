@@ -16,28 +16,13 @@ public class UpdateUserPresenter {
     private GetUserView mGetUserView;
     private UserRepositories mUserRepositories;
 
-    public UpdateUserPresenter(Context mContext, Application mApplication, GetUserView mGetUserView) {
+    public UpdateUserPresenter(Context mContext, GetUserView mGetUserView) {
         this.mContext = mContext;
         this.mGetUserView = mGetUserView;
         this.mUserRepositories = new UserRepositotiesImpl();
-        this.management = new DWDWManagement(mApplication);
-
-    }
-    public void updateUserToken(final UserDTO mUserDTO){
-        management.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                updateUser(accessToken,mUserDTO);
-            }
-
-            @Override
-            public void onDataFail() {
-
-            }
-        });
     }
     public void updateUser(String token,UserDTO mUserDTO){
-        this.mUserRepositories.createUser(mContext, token, mUserDTO, new CallBackData<UserDTO>() {
+        this.mUserRepositories.updateUserById(mContext, token, mUserDTO, new CallBackData<UserDTO>() {
             @Override
             public void onSucess(UserDTO userDTO) {
                 mGetUserView.getUserSuccess(userDTO);

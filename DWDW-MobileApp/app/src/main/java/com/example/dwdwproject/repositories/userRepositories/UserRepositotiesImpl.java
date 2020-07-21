@@ -2,6 +2,8 @@ package com.example.dwdwproject.repositories.userRepositories;
 
 import android.content.Context;
 
+import com.example.dwdwproject.ResponseDTOs.AssignDeviceDTO;
+import com.example.dwdwproject.ResponseDTOs.AssignUserDTO;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.models.Location;
@@ -12,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -150,9 +153,22 @@ public class UserRepositotiesImpl implements UserRepositories {
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mUserDTO);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userName",mUserDTO.getUserName());
+
+            data.put("password",mUserDTO.getPassword());
+
+            data.put("phone",mUserDTO.getPhone());
+
+            data.put("dateOfBirth",mUserDTO.getDateOfBirth());
+            data.put("gender",mUserDTO.getGender());
+            data.put("roleId",mUserDTO.getRoleId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().createUser(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
@@ -185,17 +201,25 @@ public class UserRepositotiesImpl implements UserRepositories {
         });
 
     }
-
     @Override
     public void updateUserById(final Context mContext, String token, UserDTO mUserDTO, final CallBackData<UserDTO> mCallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mUserDTO);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
-        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().createUser(map,body);
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userId",mUserDTO.getUserId());
+            data.put("userName",mUserDTO.getUserName());
+            data.put("phone",mUserDTO.getPhone());
+            data.put("dateOfBirth",mUserDTO.getDateOfBirth());
+            data.put("gender",mUserDTO.getGender());
+            data.put("roleId",mUserDTO.getRoleId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().updateUser(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -231,5 +255,54 @@ public class UserRepositotiesImpl implements UserRepositories {
     @Override
     public void deleteUserById(Context context, String token, int userId, CallBackData<String> mCallBackData) {
 
+    }
+    @Override
+    public void assignUserToLocation(final Context context, String token, AssignUserDTO assignUserDTO,final CallBackData<AssignUserDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userId",assignUserDTO.getUserId());
+
+            data.put("locationId",assignUserDTO.getLocationId());
+
+            data.put("startDate",assignUserDTO.getStartDate());
+
+            data.put("endDate",assignUserDTO.getEndDate());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().assginUser(map,body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<AssignUserDTO>() {
+                        }.getType();
+                        //call response to get value data
+                        AssignUserDTO  assignUserDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(assignUserDTO);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
     }
 }

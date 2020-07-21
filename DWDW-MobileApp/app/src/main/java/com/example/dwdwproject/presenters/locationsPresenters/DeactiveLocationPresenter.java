@@ -14,9 +14,8 @@ import com.example.dwdwproject.views.locationsViews.UpdateLocatonView;
 public class DeactiveLocationPresenter {
     private Context mContext;
     private DeactiveLocatonView mDeactiveLocationView;
-    private DWDWManagement dwdwManagement ;
     private LocationRepositories mLocationRepositories;
-    public DeactiveLocationPresenter(Context mContext, Application mApplication, DeactiveLocatonView mDeactiveLocationView) {
+    public DeactiveLocationPresenter(Context mContext, DeactiveLocatonView mDeactiveLocationView) {
         this.mContext = mContext;
         this.mDeactiveLocationView = mDeactiveLocationView;
         this.mLocationRepositories = new LocationRepositoriesImpl();
@@ -31,19 +30,6 @@ public class DeactiveLocationPresenter {
             @Override
             public void onFail(String message) {
                 mDeactiveLocationView.showError(message);
-            }
-        });
-    }
-    public void deactiveLocationToken(final int locationId){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                deactiveLocation(accessToken,locationId);
-            }
-
-            @Override
-            public void onDataFail() {
-
             }
         });
     }

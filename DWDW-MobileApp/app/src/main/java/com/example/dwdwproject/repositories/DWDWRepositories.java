@@ -10,4 +10,5 @@ public interface DWDWRepositories {
     void Login(Context mContext, LoginDTO mLoginDTO, CallBackData<ReponseDTO>callBackData);
     void Login2(Context mContext, LoginDTO mLoginDTO, CallBackData<String>callBackData);
     void GetUsetInfor(Context context,String token, CallBackData<UserDTO> mCallBackData);
+    void UpdateAccout(Context mContext,String token ,UserDTO mUserDTO,CallBackData<UserDTO> mCallBackData);
 }
