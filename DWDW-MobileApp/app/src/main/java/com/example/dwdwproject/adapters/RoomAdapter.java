@@ -111,4 +111,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     public  interface OnItemClickListerner{
         void onItemClick(int pos);
     }
+    public void notify(List<Room> roomList){
+        mRoomList = new ArrayList<>();
+        mRoomList = roomList;
+        mRoomListFull = new ArrayList<>(mRoomList);
+        notifyDataSetChanged();
+    }
 }

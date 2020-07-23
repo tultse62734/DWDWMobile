@@ -48,6 +48,13 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
         mGetAllLocationPresenter = new GetAllLocationPresenter(AdminAccidentManageActivity.this,this);
         mGetAllLocationPresenter.getAllLocation(token);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadDataFragment();
+    }
+
     private void getCategoryData(List<Location> locationList) {
         FragmentPagerItems.Creator creator = FragmentPagerItems.with(getApplicationContext());
         for (int i = 0; i <locationList.size(); i++) {
@@ -79,7 +86,6 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
@@ -121,5 +127,10 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminAccidentManageActivity.this,message);
+    }
+    private void reloadDataFragment() {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            ((PageAccidentFragment) mAdapter.getPage(i)).reloadPage();
+        }
     }
 }

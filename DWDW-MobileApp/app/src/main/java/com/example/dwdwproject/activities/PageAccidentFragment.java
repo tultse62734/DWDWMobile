@@ -105,4 +105,9 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),message);
     }
+    public void reloadPage(){
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(), BundleString.TOKEN);
+        mRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(getContext(),this);
+        mRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
+    }
 }

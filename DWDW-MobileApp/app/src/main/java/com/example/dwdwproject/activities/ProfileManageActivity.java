@@ -20,7 +20,7 @@ import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
 public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetUserInforTokenView {
-    private LinearLayout mLnlWorker,mLnlDevice,mBtnClose;
+    private LinearLayout mLnlWorker,mLnlDevice,mBtnClose,mBtnUpdate;
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO userDTO;
@@ -39,7 +39,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mTxtBirthDayProfile = findViewById(R.id.txt_email_profile);
         mTxtPhoneProfile = findViewById(R.id.txt_phone_profile);
         mTxtRoleProfile = findViewById(R.id.txt_role_profile);
-
+        mBtnUpdate = findViewById(R.id.lnl_update_account);
     }
     private void getDateServer(){
         token = SharePreferenceUtils.getStringSharedPreference(ProfileManageActivity.this, BundleString.TOKEN);
@@ -78,6 +78,9 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
             case R.id.lnl_close_manage_profile:
                 finish();
                 break;
+            case R.id.lnl_update_account:
+                intentToUpdateAccount(userDTO);
+                break;
         }
     }
     private void intentToManageWorkerActivty(){
@@ -87,11 +90,17 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private void intentToManageDeviceActivity(){
         Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
         startActivity(intent);
-    }@Override
+    }
+    private void intentToUpdateAccount(UserDTO userDTO){
+        Intent intent = new Intent(ProfileManageActivity.this,UpdateInforAccountActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BundleString.ACCOUNT,userDTO);
+        startActivity(intent);
+    }
+    @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Data fail");
     }
-
     @Override
     public void getInforSuccess(UserDTO mUserDTO) {
         userDTO = mUserDTO;

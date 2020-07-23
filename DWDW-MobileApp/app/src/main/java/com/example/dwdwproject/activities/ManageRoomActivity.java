@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.models.Location;
@@ -43,6 +44,12 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_manage_room);
         mBtnAddRoomAdmin = findViewById(R.id.lnl_add_room_admin);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadDataFragment();
     }
 
     private void initData(){
@@ -130,5 +137,10 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageRoomActivity.this,"Data is error");
+    }
+    private void reloadDataFragment() {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            ((PageRoomFragment) mAdapter.getPage(i)).reloadPage();
+        }
     }
 }

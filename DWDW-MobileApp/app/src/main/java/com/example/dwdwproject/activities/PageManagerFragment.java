@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
@@ -127,7 +128,7 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView{
             });
 
         }else {
-            manageAdapter.notifyDataSetChanged();
+            manageAdapter.notify(mManagerList);
         }
     }
     @Override
@@ -151,5 +152,9 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView{
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");
     }
-
+    public void reloadPage(){
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
+        mAdPresenter = new GetAllUserFromLocationByAdPresenter(getContext(),this);
+        mAdPresenter.getAllUser(token,locationId);
+    }
 }

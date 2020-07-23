@@ -64,6 +64,11 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                 break;
         }
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadDataFragment();
+    }
     private void initView(){
         mBtnGetAllDevice = findViewById(R.id.lnl_get_all_device_admin);
         mBtnClose = findViewById(R.id.lnl_close_manage_device);
@@ -116,6 +121,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
 
             }
         });
+
     }
 
     //set color for tab
@@ -147,5 +153,10 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void showError(String message) {
     DialogNotifyError.showErrorLoginDialog(ManageDeviceActivity.this,"Data is error");
+    }
+    private void reloadDataFragment() {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            ((PageFragment) mAdapter.getPage(i)).reloadPage();
+        }
     }
 }

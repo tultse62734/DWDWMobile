@@ -115,6 +115,11 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
             mDeviceAdapter.notifyDataSetChanged();
         }
     }
+    public void reloadPage(){
+        token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
+        mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),getActivity().getApplication(),this);
+        mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);
+    }
     @Override
     public void getAllDeviceSuccess(List<DeviceDTO> mDeviceDTOList) {
         if(mDeviceDTOList!=null){

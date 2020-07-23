@@ -106,7 +106,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
             });
         }
         else {
-            mRoomAdapter.notifyDataSetChanged();
+            mRoomAdapter.notify(mRoomList);
         }
 
     }
@@ -128,5 +128,10 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),"Data is error");
+    }
+    public void reloadPage(){
+        token =  SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
+        mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),this);
+        mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
     }
 }

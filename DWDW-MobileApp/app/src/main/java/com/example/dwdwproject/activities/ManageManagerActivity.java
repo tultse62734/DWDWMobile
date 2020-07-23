@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dwdwproject.PageFragment;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.adapters.ManageAdapter;
@@ -113,6 +114,13 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         view.setBackground(getResources().getDrawable(R.color.colorOrange));
         view.setTextColor(getResources().getColor(R.color.colorWhite));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadDataFragment();
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -148,5 +156,10 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,"Data");
+    }
+    private void reloadDataFragment() {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            ((PageManagerFragment) mAdapter.getPage(i)).reloadPage();
+        }
     }
 }
