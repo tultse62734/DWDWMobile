@@ -16,18 +16,14 @@ import java.util.List;
 public class CreateShiftPresenter {
     private Context mContext;
     private CreateShiftView mCreateShiftView;
-    private DWDWManagement dwdwManagement;
     private ShiftRepositories mShiftRepositories;
-
-    public CreateShiftPresenter(Context mContext, Application mApplication, CreateShiftView mCreateShiftView) {
+    public CreateShiftPresenter(Context mContext, CreateShiftView mCreateShiftView) {
         this.mContext = mContext;
         this.mCreateShiftView = mCreateShiftView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mShiftRepositories = new ShiftRepositoriesImpl();
     }
-
-    public void createShifts(String Token, ShiftDTO mShiftDTO){
-        this.mShiftRepositories.createShift(mContext, Token, mShiftDTO, new CallBackData<ShiftDTO>() {
+    public void createShifts(String Token, int locationId,ShiftDTO mShiftDTO){
+        this.mShiftRepositories.createShift(mContext, Token,locationId, mShiftDTO, new CallBackData<ShiftDTO>() {
             @Override
             public void onSucess(ShiftDTO shiftDTO) {
                 mCreateShiftView.createShiftSuccess();
@@ -36,20 +32,6 @@ public class CreateShiftPresenter {
             @Override
             public void onFail(String message) {
                 mCreateShiftView.showError(message);
-            }
-        });
-    }
-
-    public void getAllShiftToken(final ShiftDTO mShiftDTO){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                createShifts(accessToken, mShiftDTO);
-            }
-
-            @Override
-            public void onDataFail() {
-
             }
         });
     }

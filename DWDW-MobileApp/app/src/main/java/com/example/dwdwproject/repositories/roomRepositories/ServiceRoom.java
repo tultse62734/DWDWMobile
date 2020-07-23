@@ -27,7 +27,9 @@ public interface ServiceRoom {
     @GET(ConfigAPI.Api.GETROOMFROMLOCATION)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getRoomByLocationId(@HeaderMap Map<String, String> map,@Path("locationId") int id);
-
+    @GET(ConfigAPI.Api.GETROOMFROMLOCATIONBYMANAGER)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getRoomByLocationIdByManager(@HeaderMap Map<String, String> map,@Path("locationId") int id);
     @POST(ConfigAPI.Api.CREATEROOM)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> createRoom(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

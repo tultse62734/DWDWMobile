@@ -67,7 +67,6 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onResume() {
         super.onResume();
-        reloadDataFragment();
     }
     private void initView(){
         mBtnGetAllDevice = findViewById(R.id.lnl_get_all_device_admin);
@@ -148,6 +147,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                     this.mLocationList.add(new Location(locationId,locationName,isactive));
                 }
                 getCategoryData(mLocationList);
+                reloadDataFragment();
             }
     }
     @Override

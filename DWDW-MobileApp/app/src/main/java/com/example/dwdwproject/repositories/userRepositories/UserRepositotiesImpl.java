@@ -114,9 +114,8 @@ public class UserRepositotiesImpl implements UserRepositories {
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUserByManager(map,locationId);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllWorkerByManager(map,locationId);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -254,7 +253,6 @@ public class UserRepositotiesImpl implements UserRepositories {
 
     @Override
     public void deleteUserById(Context context, String token, int userId, CallBackData<String> mCallBackData) {
-
     }
     @Override
     public void assignUserToLocation(final Context context, String token, AssignUserDTO assignUserDTO,final CallBackData<AssignUserDTO> mCallBackData) {

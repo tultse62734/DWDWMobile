@@ -49,7 +49,6 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-        reloadDataFragment();
     }
 
     private void initData(){
@@ -133,6 +132,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
             mLocationList.add(new Location(id,name, isActive));
         }
         getCategoryData(mLocationList);
+        reloadDataFragment();
     }
     @Override
     public void showError(String message) {

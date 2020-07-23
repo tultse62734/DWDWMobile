@@ -52,7 +52,6 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
     @Override
     protected void onResume() {
         super.onResume();
-        reloadDataFragment();
     }
 
     private void getCategoryData(List<Location> locationList) {
@@ -122,6 +121,7 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
                 this.mLocationList.add(new Location(locationId,locationName,isactive));
             }
             getCategoryData(mLocationList);
+            reloadDataFragment();
         }
     }
     @Override

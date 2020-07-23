@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -26,7 +27,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShiftRepositoriesImpl implements ShiftRepositories {
-
     @Override
     public void getAllShift(final Context mContext, String token,final CallBackData<List<ShiftDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
@@ -65,7 +65,6 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             }
         });
     }
-
     @Override
     public void getShiftByManager(final Context mContext, String token,final CallBackData<List<ShiftDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
@@ -74,7 +73,6 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesShift().getShiftManager(map);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -145,16 +143,22 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
     }
 
     @Override
-    public void createShift(final Context context, String token, ShiftDTO mShift, final CallBackData<ShiftDTO> CallBackData) {
+    public void createShift(final Context context, String token, int locationId ,ShiftDTO mShift, final CallBackData<ShiftDTO> CallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        JSONObject data = new JSONObject();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mShift);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), requestBody);
-        Call<ResponseBody> mBodyCall = clientApi.ServicesShift().createShift(map,body);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("workerID",mShift.getWorkerId());
+            jsonObject.put("date",mShift.getDate());
+            jsonObject.put("roomId",mShift.getRoomId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesShift().createShift(map,locationId,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -163,8 +167,7 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Shift>() {
-
+                        Type type = new TypeToken<ShiftDTO>() {
                         }.getType();
                         //call response to get value data
                         ShiftDTO mShiftDTO = new Gson().fromJson(result, type);
@@ -177,7 +180,6 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                     CallBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);
@@ -185,17 +187,23 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             }
         });
     }
-
     @Override
-    public void updateShift(final Context mContext,String token,ShiftDTO mShift,final CallBackData<ShiftDTO> callBackData) {
+    public void updateShift(final Context mContext,String token,int locationId,ShiftDTO mShift,final CallBackData<ShiftDTO> callBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        Gson gson = new Gson();
-        String requestBody = gson.toJson(mShift);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),requestBody.toString());
-        Call<ResponseBody> mBodyCall = clientApi.ServicesShift().updateShift(map,body);
+        JSONObject jsonObject =  new JSONObject();
+        try {
+            jsonObject.put("workerID",mShift.getWorkerId());
+            jsonObject.put("date",mShift.getDate());
+            jsonObject.put("roomId",mShift.getRoomId());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesShift().updateShift(map,locationId,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -259,11 +267,45 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                     callBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
                 callBackData.onFail(t.getMessage());
+            }
+        });
+    }
+    @Override
+    public void getShiftFromLocation(final Context mContext, String token, int locationId, String date,final CallBackData<List<ShiftDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesShift().getShiftFromLocation(map,locationId,date);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<List<ShiftDTO>>() {
+                        }.getType();
+                        //call response to get value data
+                        List<ShiftDTO> mShiftDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(mShiftDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                mCallBackData.onFail(t.getMessage());
             }
         });
     }

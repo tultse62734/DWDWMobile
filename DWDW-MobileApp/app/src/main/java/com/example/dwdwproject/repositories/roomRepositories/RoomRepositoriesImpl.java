@@ -194,4 +194,42 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             }
         });
     }
+
+    @Override
+    public void getAllRoomfromLocationByManager(final Context context, String token, int locationId, final CallBackData<List<RoomDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesRoom().getRoomByLocationIdByManager(map,locationId);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<List<RoomDTO>>() {
+
+                        }.getType();
+                        //call response to get value data
+                        List<RoomDTO>mRoomDTOS = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(mRoomDTOS);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
 }

@@ -36,5 +36,18 @@ public class GetAllRoomFromLocationPresenter {
             }
         });
     }
+    public void getAllRoomFromLocationByManager(String token,int locationId){
+        this.mRoomRepositories.getAllRoomfromLocationByManager(mContext, token, locationId, new CallBackData<List<RoomDTO>>() {
+            @Override
+            public void onSucess(List<RoomDTO> roomDTOS) {
+                mGetListRoomView.getListRoomSuccess(roomDTOS);
+            }
+
+            @Override
+            public void onFail(String message) {
+                mGetListRoomView.showError(message);
+            }
+        });
+    }
 
 }

@@ -118,9 +118,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onResume() {
         super.onResume();
-        reloadDataFragment();
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -138,7 +136,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
-
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList !=null){
@@ -150,6 +147,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 this.mLocationList.add(new Location(locationId,locationName,isactive));
             }
             getCategoryData(mLocationList);
+            reloadDataFragment();
         }
     }
 

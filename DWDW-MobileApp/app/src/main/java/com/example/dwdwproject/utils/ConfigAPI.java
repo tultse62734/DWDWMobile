@@ -31,6 +31,8 @@ public class ConfigAPI {
         String CREATEROOM ="Room/CreateRoom";
         String UPDATEROOM = "Room/UpdateRoom";
         String GETROOMFROMLOCATION="Room/GetRoomsFromLocation/{locationId}";
+        String GETROOMFROMLOCATIONBYMANAGER="Room/GetRoomsFromLocationByManager/{locationId}";
+
         //Users
         String GETALLUSER  = "User/GetAll";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";
@@ -39,6 +41,7 @@ public class ConfigAPI {
         String UPDATEUSER="User/UpdateUserByAdmin";
         String DELETEUSER ="";
         String ASSGINUSER = "User/AssignUserToLocationByAdmin";
+        String GETWORKERFROMLOCATION = "User/GetWorkerFromLocationsByManager";
         //Shift
         String GETALLSHIFT = "Shift/GetAllShift";
         String GETSHIFTOFMANAGER = "Shift/GetShiftManager";
@@ -46,6 +49,7 @@ public class ConfigAPI {
         String CREATESHIFT = "Shift/CreateShift";
         String UPDATESHIFT = "Shift/UpdateShift";
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
+        String GETSHIFTFROMLOCATION = "Shift/GetShiftFromLocationByDateManager";
         //Record
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationIdAndTime";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";

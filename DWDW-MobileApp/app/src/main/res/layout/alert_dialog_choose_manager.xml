@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    android:orientation="vertical"
     android:layout_marginLeft="@dimen/dp16"
     android:layout_marginRight="@dimen/dp16"
-    android:background="@drawable/radius_conner_white">
+    android:background="@drawable/radius_conner_white"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_marginRight="@dimen/dp16"
         android:layout_marginLeft="@dimen/dp16"
@@ -19,30 +20,29 @@
             android:textSize="@dimen/sp22"
             android:textStyle="bold"
             android:textColor="@color/colorOrange"
-            android:text="Room"
+            android:text="Worker"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
         </TextView>
         <LinearLayout
-            android:id="@+id/lnl_close_dialog_choose_room"
+            android:id="@+id/lnl_close_dialog_choose_worker"
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:tint="@color/colorOrange"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_close"
-                android:layout_width="25dp"
-                android:layout_height="25dp">
-            </ImageView>
+                android:tint="@color/colorOrange"></ImageView>
         </LinearLayout>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_choose_room"
+        android:id="@+id/rcv_choose_worker"
         android:layout_width="350dp"
         android:layout_height="wrap_content">
-
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

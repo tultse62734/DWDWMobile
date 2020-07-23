@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".activities.ManagerCreateShiftActivity">
+    android:orientation="vertical"
+    tools:context=".activities.ManagerUpdateShiftActivity">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,14 +25,14 @@
                     android:textSize="@dimen/sp22"
                     android:textStyle="bold"
                     android:textColor="@color/colorWhite"
-                    android:text="CreateShift"
+                    android:text="Update Shift"
                     android:layout_marginRight="@dimen/dp10"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                 </TextView>
                 <LinearLayout
-                    android:id="@+id/lnl_close_admin_create_shift"
+                    android:id="@+id/lnl_close_admin_update_shift"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_weight="2"
@@ -72,7 +72,7 @@
 
                 </TextView>
                 <TextView
-                    android:id="@+id/txt_choose_worker"
+                    android:id="@+id/txt_choose_worker_update"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -96,7 +96,7 @@
                 </TextView>
                 <TextView
                     android:gravity="center|left"
-                    android:id="@+id/edt_choose_location_create_shift"
+                    android:id="@+id/edt_choose_location_update_shift"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:layout_gravity="center"
@@ -121,7 +121,7 @@
                 <TextView
                     android:gravity="center|left"
                     android:layout_gravity="center"
-                    android:id="@+id/edt_choose_room_create_shift"
+                    android:id="@+id/edt_choose_room_update_shift"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -145,7 +145,7 @@
                 <TextView
                     android:gravity="center|left"
                     android:layout_gravity="center"
-                    android:id="@+id/edt_choose_time_create_shift"
+                    android:id="@+id/edt_choose_time_update_shift"
                     android:textSize="@dimen/sp18"
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
@@ -158,7 +158,7 @@
                 </TextView>
                 <LinearLayout
                     android:layout_marginBottom="@dimen/dp20"
-                    android:id="@+id/lnl_submit_create_shift"
+                    android:id="@+id/lnl_submit_update_shift"
                     android:layout_marginRight="@dimen/dp20"
                     android:layout_marginTop="@dimen/dp20"
                     android:layout_marginLeft="@dimen/dp20"
@@ -170,7 +170,7 @@
                         android:textColor="@color/colorWhite"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="Create"
+                        android:text="Update"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -179,7 +179,5 @@
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
-
-
 
 </LinearLayout>

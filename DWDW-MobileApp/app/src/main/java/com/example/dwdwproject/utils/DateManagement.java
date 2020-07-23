@@ -14,7 +14,7 @@ public class DateManagement {
                 convert = "Chủ Nhật";
                 break;
             case 2:
-                convert = "Thứ 2";
+                convert = "Monday";
                 break;
             case 3:
                 convert = "Thứ 3";
@@ -26,13 +26,10 @@ public class DateManagement {
                 convert = "Thứ 5";
                 break;
             case 6:
-                convert = "Thứ 6";
+                convert = "Friday";
                 break;
             case 7:
-                convert = "Thứ 7";
-                break;
-            case 8:
-                convert = "Chủ nhật";
+                convert = "Satuday";
                 break;
         }
         return convert;
@@ -46,17 +43,29 @@ public class DateManagement {
         }
         return day;
     }
+    public static String changeDateStringToString(String input){
+        SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        Date date = null;
+        try {
+            date = parser.parse(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = formatter.format(date);
+        return formattedDate;
+    }
     public static Date yesterday() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
         return cal.getTime();
     }
     public static String getYesterdayDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(yesterday());
     }
     public static String getTodayDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(today());
     }
     public static Date toDate(String value) throws ParseException {
@@ -112,7 +121,7 @@ public class DateManagement {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);
         cal.add(Calendar.MONTH, 0);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(cal.getTime()).toString();
     }
     public static String getEndThisMonthDateString() {
@@ -124,7 +133,7 @@ public class DateManagement {
             dayOfPreviosMonth = dayNow-1;
         }
         cal.set(Calendar.DATE, dayOfPreviosMonth);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(cal.getTime()).toString();
     }
     public static String getToday() {
@@ -134,7 +143,13 @@ public class DateManagement {
         String today = dayWeek + ", " + getTodayDateString();
         return today;
     }
-
+    public static String getToday1() {
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        String dayWeek = convertDayOfWeek(dayOfWeek);
+        String today = getTodayDateString();
+        return today;
+    }
     public static String getYesterDay() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
@@ -179,8 +194,8 @@ public class DateManagement {
     }
     public static String changeFormatDate(String date){
         String resutl = null;
-        SimpleDateFormat sTo = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sTo1 = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sTo = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sTo1 = new SimpleDateFormat("yyyy/MM/dd");
         try {
              resutl=  sTo.format(sTo1.parse(date));
         } catch (ParseException e) {

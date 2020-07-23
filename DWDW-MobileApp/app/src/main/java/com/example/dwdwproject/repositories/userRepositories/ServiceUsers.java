@@ -26,7 +26,9 @@ public interface ServiceUsers {
     @GET(ConfigAPI.Api.GETALLUSERBYMANAGER)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getAllUserByManager(@HeaderMap Map<String, String> map,@Query("locationId") int id);
-
+    @GET(ConfigAPI.Api.GETWORKERFROMLOCATION)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getAllWorkerByManager(@HeaderMap Map<String, String> map,@Query("locationID") int id);
     @POST(ConfigAPI.Api.CREATEUSER)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> createUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

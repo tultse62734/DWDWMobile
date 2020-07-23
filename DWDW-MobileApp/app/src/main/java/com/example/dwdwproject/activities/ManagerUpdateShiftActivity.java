@@ -25,20 +25,22 @@ import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
 import com.example.dwdwproject.presenters.shiftPresenters.CreateShiftPresenter;
+import com.example.dwdwproject.presenters.shiftPresenters.UpdateShiftPresenter;
 import com.example.dwdwproject.presenters.userPresenters.GetAllWorkerFromLocationByManagerPresenter;
+import com.example.dwdwproject.presenters.userPresenters.UpdateUserPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.roomViews.GetListRoomView;
-import com.example.dwdwproject.views.shiftsViews.CreateShiftView;
+import com.example.dwdwproject.views.shiftsViews.UpdateShiftView;
 import com.example.dwdwproject.views.userViews.GetAllListUserView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ManagerCreateShiftActivity extends AppCompatActivity implements View.OnClickListener, GetListRoomView, GetAllListUserView, CreateShiftView {
+public class ManagerUpdateShiftActivity extends AppCompatActivity implements View.OnClickListener, GetListRoomView, GetAllListUserView, UpdateShiftView {
     private LinearLayout mBtnCreate, mBtnClose;
     private TextView mTxtWorker, mTxtTime, mTxtLocation, mTxtRoom;
     private int locationId;
@@ -53,34 +55,41 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
     private ChooseManagerAdapter managerAdapter;
     private List<Room> mRoomList;
     private List<Manager> managerList;
-    private CreateShiftPresenter mCreateShiftPresenter;
+    private UpdateShiftPresenter mUpdateShiftPresenter;
+    private ShiftDTO mShiftDTO;
     private String token;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager_create_shift);
+        setContentView(R.layout.activity_manager_update_shift);
         getDataServer();
     }
     private void initView() {
-        mBtnClose = findViewById(R.id.lnl_close_admin_create_shift);
-        mBtnCreate = findViewById(R.id.lnl_submit_create_shift);
-        mTxtWorker = findViewById(R.id.txt_choose_worker);
-        mTxtLocation = findViewById(R.id.edt_choose_location_create_shift);
-        mTxtRoom = findViewById(R.id.edt_choose_room_create_shift);
-        mTxtTime = findViewById(R.id.edt_choose_time_create_shift);
+        mBtnClose = findViewById(R.id.lnl_close_admin_update_shift);
+        mBtnCreate = findViewById(R.id.lnl_submit_update_shift);
+        mTxtWorker = findViewById(R.id.txt_choose_worker_update);
+        mTxtLocation = findViewById(R.id.edt_choose_location_update_shift);
+        mTxtRoom = findViewById(R.id.edt_choose_room_update_shift);
+        mTxtTime = findViewById(R.id.edt_choose_time_update_shift);
     }
     public void getDataServer(){
-        token  = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.TOKEN);
-        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONID);
-        locationCode = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this, BundleString.LOCATIONNAME);
-        mCreateShiftPresenter = new CreateShiftPresenter(ManagerCreateShiftActivity.this,this);
-        managerPresenter = new GetAllWorkerFromLocationByManagerPresenter(ManagerCreateShiftActivity.this,this);
-        mGetAllRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(ManagerCreateShiftActivity.this,this);
+        Bundle bundle = getIntent().getExtras();
+        mShiftDTO = (ShiftDTO) bundle.getSerializable(BundleString.SHIFTDETAIL);
+        roomId =mShiftDTO.getRoomId();
+        workerId = mShiftDTO.getWorkerId();
+        token  = SharePreferenceUtils.getStringSharedPreference(ManagerUpdateShiftActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerUpdateShiftActivity.this,BundleString.LOCATIONID);
+        locationCode = SharePreferenceUtils.getStringSharedPreference(ManagerUpdateShiftActivity.this, BundleString.LOCATIONNAME);
+        mUpdateShiftPresenter = new UpdateShiftPresenter(ManagerUpdateShiftActivity.this,this);
+        managerPresenter = new GetAllWorkerFromLocationByManagerPresenter(ManagerUpdateShiftActivity.this,this);
+        mGetAllRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(ManagerUpdateShiftActivity.this,this);
         managerPresenter.getAllWorker(token,locationId);
     }
     private void initData() {
         mTxtLocation.setText(locationCode);
+        mTxtTime.setText(DateManagement.changeFormatDate1(mShiftDTO.getDate()));
+        mTxtWorker.setText(mShiftDTO.getUsername()+"");
+        mTxtRoom.setText(mShiftDTO.getRoomCode());
         mBtnCreate.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
         mTxtTime.setOnClickListener(this);
@@ -91,32 +100,31 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.lnl_close_admin_create_shift:
+            case R.id.lnl_close_admin_update_shift:
                 finish();
                 break;
-            case R.id.lnl_submit_create_shift:
-                createShift();
+            case R.id.lnl_submit_update_shift:
+               updateShift();
                 break;
-            case R.id.txt_choose_worker:
+            case R.id.txt_choose_worker_update:
                 showChooseManagerDialog();
                 break;
-            case R.id.edt_choose_time_create_shift:
+            case R.id.edt_choose_time_update_shift:
                 chooseTimeBirthDay();
                 break;
-            case R.id.edt_choose_room_create_shift:
-               showChooseRoomDialog();
+            case R.id.edt_choose_room_update_shift:
+                showChooseRoomDialog();
                 break;
         }
     }
-    private void createShift(){
-        ShiftDTO mShiftDTO = new ShiftDTO();
+    private void updateShift(){
         mShiftDTO.setWorkerId(workerId);
         mShiftDTO.setDate(date);
         mShiftDTO.setRoomId(roomId);
-        mCreateShiftPresenter.createShifts(token,locationId,mShiftDTO);
+        mUpdateShiftPresenter.updateShifts(token,locationId,mShiftDTO);
     }
     private void showChooseRoomDialog() {
-        final Dialog dialog = new Dialog(ManagerCreateShiftActivity.this);
+        final Dialog dialog = new Dialog(ManagerUpdateShiftActivity.this);
         dialog.setContentView(R.layout.alert_dialog_choose_room);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mRecyclerView = dialog.findViewById(R.id.rcv_choose_room);
@@ -129,7 +137,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
-        mChooseRoomAdapter = new ChooseRoomAdapter(ManagerCreateShiftActivity.this,mRoomList);
+        mChooseRoomAdapter = new ChooseRoomAdapter(ManagerUpdateShiftActivity.this,mRoomList);
         mRecyclerView.setAdapter(mChooseRoomAdapter);
         mChooseRoomAdapter.OnClickItemListener(new ChooseRoomAdapter.OnClickItem() {
             @Override
@@ -142,7 +150,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         dialog.show();
     }
     private void showChooseManagerDialog() {
-        final Dialog dialog = new Dialog(ManagerCreateShiftActivity.this);
+        final Dialog dialog = new Dialog(ManagerUpdateShiftActivity.this);
         dialog.setContentView(R.layout.alert_dialog_choose_manager);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mRecyclerView1 = dialog.findViewById(R.id.rcv_choose_worker);
@@ -155,7 +163,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView1.setLayoutManager(layoutManager);
-        managerAdapter = new ChooseManagerAdapter(ManagerCreateShiftActivity.this,managerList);
+        managerAdapter = new ChooseManagerAdapter(ManagerUpdateShiftActivity.this,managerList);
         mRecyclerView1.setAdapter(managerAdapter);
         managerAdapter.OnItemClickListener(new ManageAdapter.OnItemClickListener() {
             @Override
@@ -199,6 +207,12 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         initView();
         initData();
     }
+
+    @Override
+    public void updateShiftSuccess() {
+            finish();
+    }
+
     @Override
     public void getAllUserSuccess(List<UserDTO> userDTOList) {
         if(userDTOList!=null){
@@ -208,7 +222,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
-                String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONNAME);
+                String location = SharePreferenceUtils.getStringSharedPreference(ManagerUpdateShiftActivity.this,BundleString.LOCATIONNAME);
                 String roleName = userDTOList.get(i).getRoleName();
                 managerList.add(new Manager(userId,name,phone,roleName,location,creatDate));
             }
@@ -216,12 +230,10 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         }
 
     }
+
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(ManagerCreateShiftActivity.this, message);
-    }
-    @Override
-    public void createShiftSuccess() {
-        finish();
+        DialogNotifyError.showErrorLoginDialog(ManagerUpdateShiftActivity.this, message);
+
     }
 }

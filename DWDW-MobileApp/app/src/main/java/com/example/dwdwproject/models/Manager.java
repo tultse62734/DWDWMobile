@@ -3,6 +3,7 @@ package com.example.dwdwproject.models;
 import java.io.Serializable;
 
 public class Manager  implements Serializable {
+    private int userId;
     private String  imageResourceId;
     private  String name;
     private  String phone;
@@ -17,7 +18,8 @@ public class Manager  implements Serializable {
         this.email = email;
     }
 
-    public Manager(String name, String phone, String roleName, String locationName, String createTime) {
+    public Manager(int userId,String name, String phone, String roleName, String locationName, String createTime) {
+        this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.roleName = roleName;
@@ -30,6 +32,14 @@ public class Manager  implements Serializable {
 
     public void setImageResourceId(String imageResourceId) {
         this.imageResourceId = imageResourceId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {

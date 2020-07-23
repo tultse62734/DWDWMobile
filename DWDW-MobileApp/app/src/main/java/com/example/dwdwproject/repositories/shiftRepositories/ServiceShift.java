@@ -13,6 +13,7 @@ import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface ServiceShift {
     @GET(ConfigAPI.Api.GETALLSHIFT)
@@ -26,13 +27,16 @@ public interface ServiceShift {
 
     @POST(ConfigAPI.Api.CREATESHIFT)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> createShift(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+    Call<ResponseBody> createShift(@HeaderMap Map<String, String> map,@Query("locationId") int locationId,@Body RequestBody mRequestBody);
 
     @PUT(ConfigAPI.Api.UPDATESHIFT)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> updateShift(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+    Call<ResponseBody> updateShift(@HeaderMap Map<String, String> map,@Query("locationID") int locationId,@Body RequestBody mRequestBody);
 
     @PUT(ConfigAPI.Api.UPDATESHIFTACTIVE)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateShiftActive(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+    @GET(ConfigAPI.Api.GETSHIFTFROMLOCATION)
+    Call<ResponseBody> getShiftFromLocation(@HeaderMap Map<String, String> map, @Query("locationId") int locationId,@Query("date")String date);
+
 }

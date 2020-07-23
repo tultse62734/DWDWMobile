@@ -16,18 +16,15 @@ import java.util.List;
 public class UpdateShiftPresenter {
     private Context mContext;
     private UpdateShiftView mUpdateShiftView;
-    private DWDWManagement dwdwManagement;
     private ShiftRepositories mShiftRepositories;
-
-    public UpdateShiftPresenter(Context mContext, Application mApplication, UpdateShiftView mUpdateShiftView) {
+    public UpdateShiftPresenter(Context mContext, UpdateShiftView mUpdateShiftView) {
         this.mContext = mContext;
         this.mUpdateShiftView = mUpdateShiftView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mShiftRepositories = new ShiftRepositoriesImpl();
     }
 
-    public void updateShifts(String Token, ShiftDTO mShiftDTO){
-        this.mShiftRepositories.updateShift(mContext, Token, mShiftDTO, new CallBackData<ShiftDTO>() {
+    public void updateShifts(String Token, int locationID,ShiftDTO mShiftDTO){
+        this.mShiftRepositories.updateShift(mContext, Token,locationID, mShiftDTO, new CallBackData<ShiftDTO>() {
             @Override
             public void onSucess(ShiftDTO shiftDTO) {
                 mUpdateShiftView.updateShiftSuccess();
@@ -40,17 +37,4 @@ public class UpdateShiftPresenter {
         });
     }
 
-    public void getAllShiftToken(final ShiftDTO mShiftDTO){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                updateShifts(accessToken, mShiftDTO);
-            }
-
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

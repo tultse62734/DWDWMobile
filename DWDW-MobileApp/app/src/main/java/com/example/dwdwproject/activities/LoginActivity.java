@@ -121,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
     }
     private void intentToHomeManageActivity(){
+        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE,DateManagement.getToday1());
         Intent intent = new Intent(LoginActivity.this,ManagerChooseLocationActivity.class);
         finish();
         startActivity(intent);
