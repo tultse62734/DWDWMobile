@@ -54,7 +54,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         else{
             holder.mTxtLocationDevice.setText("No Assign");
         }
-        if(mDeviceList.get(position).getRoomCode()!=null || mDeviceList.get(position).getRoomCode().length()!=0){
+        if(mDeviceList.get(position).getRoomCode()!=null){
             holder.mTxtRoomCode.setText(mDeviceList.get(position).getRoomCode());
         }
         else{

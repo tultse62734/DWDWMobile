@@ -85,7 +85,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="Sửa"
+                    android:text="Edit"
                     android:textColor="@color/colorWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
