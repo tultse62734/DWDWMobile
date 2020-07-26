@@ -95,7 +95,7 @@
                         android:layout_marginBottom="@dimen/dp10"
                         android:textSize="@dimen/sp18"
                         android:textStyle="bold"
-                        android:text="Username:"
+                        android:text="Password:"
                         android:textColor="@color/colorRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -104,12 +104,12 @@
 
 
                     <EditText
-                        android:id="@+id/edit_update_username_account"
+                        android:id="@+id/edit_update_password_account"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"
                         android:background="@drawable/rounder_edit_text_1dp"
                         android:textColorHighlight="@color/colorGreyDark"
-                        android:hint="Input username"
+                        android:hint="Input Password"
                         android:textColorHint="@color/colorGrey"
                         android:textColor="@color/colorYellowOrange"
                         android:layout_width="match_parent"
@@ -190,8 +190,8 @@
 
                     </TextView>
 
-
                     <TextView
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/dp10"
                         android:layout_marginBottom="@dimen/dp10"
                         android:textSize="@dimen/sp18"
@@ -203,6 +203,7 @@
 
                     </TextView>
                     <TextView
+                        android:visibility="gone"
                         android:layout_gravity="center|left"
                         android:id="@+id/edt_choose_role_update_account"
                         android:textSize="@dimen/sp18"

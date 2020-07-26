@@ -15,13 +15,11 @@ import java.util.List;
 public class GetDeviceForAdminPresenter {
     private Context mContext;
     private GetAllDeviceView getAllDeviceView;
-    private DWDWManagement dwdwManagement;
     private DeviceRepositories mDeviceRepositories;
 
-    public GetDeviceForAdminPresenter(Context mContext, Application mApplication,GetAllDeviceView getAllDeviceView) {
+    public GetDeviceForAdminPresenter(Context mContext,GetAllDeviceView getAllDeviceView) {
         this.mContext = mContext;
         this.getAllDeviceView = getAllDeviceView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mDeviceRepositories = new DeviceRepositoriesImpl();
 
     }

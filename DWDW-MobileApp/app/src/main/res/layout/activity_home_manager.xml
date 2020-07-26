@@ -47,6 +47,7 @@
                 </LinearLayout>
             </LinearLayout>
             <TextView
+                android:id="@+id/txt_time_manager"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
@@ -60,7 +61,7 @@
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
-                android:text="Trang chủ"
+                android:text="Home"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_marginTop="@dimen/dp20"
@@ -117,7 +118,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý nhân viên"
+                            android:text="Manage Worker"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -150,7 +151,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý thiết bị"
+                            android:text="Manage Device"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -191,7 +192,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Thông tin"
+                            android:text="Profile"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -224,7 +225,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý phòng"
+                            android:text="Manage Room"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -266,7 +267,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý ca"
+                            android:text="Manage Shift"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -299,7 +300,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Quản lý sự cố "
+                            android:text="Manage Shift"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">

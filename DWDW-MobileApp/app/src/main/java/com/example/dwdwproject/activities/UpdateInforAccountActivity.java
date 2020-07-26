@@ -33,17 +33,13 @@ import java.util.Calendar;
 import java.util.List;
 public class UpdateInforAccountActivity extends AppCompatActivity implements View.OnClickListener, GetUserInforTokenView {
     private LinearLayout mBtnClose,mBtnUpdateManager;
-    private EditText mTxtUsername,mTxtPhone;
+    private EditText mTxtPassword,mTxtPhone;
     private TextView mTxtBirthDay,mTxtRole,mtxtGender;
     private String token;
-    private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerView1;
-    private int posLocation;
-    private ChooseStatusAdapter mLocationAdapter;
     private ChooseStatusAdapter mLocationAdapter1;
-    private List<Status> mStatusList;
-    private String birthday;
-    private int roleId,genderId;
+    private String password,phone,birthday;
+    private int genderId;
     private int mYear,mMonth,mDay;
     private List<Status> mStatusList1;
     private UserDTO mUserDTO;
@@ -55,21 +51,21 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
         initView();
         initData();
     }
-    private  void initView(){
-        Bundle bundle = getIntent().getExtras();
-        mUserDTO = (UserDTO)  bundle.getSerializable(BundleString.ACCOUNT);
-        mBtnClose = findViewById(R.id.lnl_close_admin_manager_detail);
-        mBtnUpdateManager = findViewById(R.id.lnl_submit_update_user_admin);
-        token = SharePreferenceUtils.getStringSharedPreference(UpdateInforAccountActivity.this, BundleString.TOKEN);
-        mTxtUsername = findViewById(R.id.edit_update_username);
-        mTxtPhone = findViewById(R.id.edit_update_phone);
-        mTxtBirthDay = findViewById(R.id.edt_choose_date_update_manager_admin);
-        mTxtRole = findViewById(R.id.edt_choose_role_update_manager_admin);
-        mtxtGender = findViewById(R.id.edt_choose_gender_update_manager_admin);
+    private void initView(){
+        mBtnClose = findViewById(R.id.lnl_close_update_account);
+        mBtnUpdateManager = findViewById(R.id.lnl_submit_update_account);
+        mTxtPassword = (EditText)findViewById(R.id.edit_update_password_account);
+        mTxtPhone = (EditText)findViewById(R.id.edit_update_phone_account);
+        mTxtBirthDay = (TextView)findViewById(R.id.edt_choose_date_update_account);
+        mTxtRole = (TextView)findViewById(R.id.edt_choose_role_update_account);
+        mtxtGender = (TextView)findViewById(R.id.edt_choose_gender_update_account);
     }
     private void initData(){
-        mTxtUsername.setText(mUserDTO.getUserName());
-        mTxtPhone.setText(mUserDTO.getPhone());
+        token = SharePreferenceUtils.getStringSharedPreference(UpdateInforAccountActivity.this, BundleString.TOKEN);
+        Bundle bundle = getIntent().getExtras();
+        mUserDTO = (UserDTO) bundle.getSerializable(BundleString.ACCOUNT);
+        phone = mUserDTO.getPhone()+"";
+        mTxtPhone.setText(phone);
         if(mUserDTO.getDateOfBirth()!=null){
             birthday = mUserDTO.getDateOfBirth()+"";
             mTxtBirthDay.setText(birthday);
@@ -84,13 +80,9 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
             genderId = 0;
             mtxtGender.setText("Choose Gender");
         }
-        roleId= mUserDTO.getRoleId();
         mTxtRole.setText(mUserDTO.getRoleName());
         mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(UpdateInforAccountActivity.this,this);
-        mStatusList = new ArrayList<>();
         mStatusList1 = new ArrayList<>();
-        mStatusList.add(new Status("Manager ",true,2));
-        mStatusList.add(new Status("Worker",false,3));
         mStatusList1.add(new Status("Women",true,1));
         mStatusList1.add(new Status("Men",false,2));
         mBtnClose.setOnClickListener(this);
@@ -98,34 +90,6 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
         mtxtGender.setOnClickListener(this);
         mTxtBirthDay.setOnClickListener(this);
         mTxtRole.setOnClickListener(this);
-    }
-    private void showChooseRoleDialog(){
-        final Dialog dialog = new Dialog(UpdateInforAccountActivity.this);
-        dialog.setContentView(R.layout.alert_dialog_choose_status);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mRecyclerView = dialog.findViewById(R.id.rcv_choose_status);
-        LinearLayout mBtnClose = dialog.findViewById(R.id.lnl_close_dialog_choose_status);
-        TextView mTextView = dialog.findViewById(R.id.txt_choose_dialog);
-        mTextView.setText("Choose Role");
-        mBtnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mLocationAdapter = new ChooseStatusAdapter(UpdateInforAccountActivity.this,mStatusList);
-        mRecyclerView.setAdapter(mLocationAdapter);
-        mLocationAdapter.OnClickItemListener(new ChooseStatusAdapter.OnClickItem() {
-            @Override
-            public void OnClickItem(int position) {
-                dialog.dismiss();
-                roleId = mStatusList.get(position).getRoleId();
-                mTxtRole.setText(mStatusList.get(position).getStatusName()+"");
-            }
-        });
-        dialog.show();
     }
     private void chooseTimeBirthDay(){
         final Calendar c = Calendar.getInstance();
@@ -177,11 +141,10 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
     }
     private void updateUser(){
         if(genderId!=0){
-            mUserDTO.setUserName(mTxtUsername.getText().toString());
+            mUserDTO.setPassword(mTxtPassword.getText().toString());
             mUserDTO.setPhone(mTxtPhone.getText().toString());
             mUserDTO.setDateOfBirth(birthday);
             mUserDTO.setGender(genderId);
-            mUserDTO.setRoleId(roleId);
             mGetUserInforTokenPresenter.updateInfor(token,mUserDTO);
         }
         else {
@@ -193,24 +156,20 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.lnl_close_admin_manager_detail:
+            case R.id.lnl_close_update_account:
                 finish();
                 break;
-            case R.id.lnl_submit_update_user_admin:
+            case R.id.lnl_submit_update_account:
                 updateUser();
                 break;
-            case R.id.edt_choose_gender_update_manager_admin:
+            case R.id.edt_choose_gender_update_account:
                 showChooseGenderDialog();
                 break;
-            case R.id.edt_choose_role_update_manager_admin:
-                showChooseRoleDialog();
-                break;
-            case R.id.edt_choose_date_update_manager_admin:
+            case R.id.edt_choose_date_update_account:
                 chooseTimeBirthDay();
                 break;
         }
     }
-
     @Override
     public void getInforSuccess(UserDTO mUserDTO) {
         finish();

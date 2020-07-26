@@ -63,14 +63,12 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView{
         mView =  inflater.inflate(R.layout.fragment_page_manager, container, false);
         return  mView;
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
         initData();
     }
-
     // TODO: Rename method, update argument and hook method into UI event
     private void initView(){
         mSearchView = mView.findViewById(R.id.search_view_page_manager);
@@ -123,7 +121,7 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView{
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(BundleString.MANAGERDETAIL,mUserDTOList.get(pos));
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    getActivity().startActivityForResult(intent,ManageManagerActivity.UPDATE_MANAGER_CODE);
                 }
             });
 

@@ -4,6 +4,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -78,6 +79,8 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
             int id = v.getId();
             switch (id){
                 case R.id.lnl_close_admin_manage_getall_device:
+                    Intent returnIntent = new Intent();
+                    setResult(Activity.RESULT_CANCELED, returnIntent);
                     finish();
                     break;
             }

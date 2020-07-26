@@ -12,7 +12,7 @@
         <TextView
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="Thông báo"
+            android:text="Messgae"
             android:textSize="@dimen/sp18"
             android:textStyle="bold"
             android:textColor="@color/colorOrange"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="Chọn ngày sai xin vui lòng chọn lại!"
+            android:text="Choose Date again!"
             android:textColor="@color/colorBlack"
             android:textSize="16dp"
             android:textStyle="bold" />

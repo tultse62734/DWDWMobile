@@ -62,7 +62,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mLnlWorker.setOnClickListener(this);
         mLnlDevice.setOnClickListener(this);
         mBtnClose.setOnClickListener(this);
-
+        mBtnUpdate.setOnClickListener(this);
 
     }
     @Override
@@ -95,6 +95,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(ProfileManageActivity.this,UpdateInforAccountActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(BundleString.ACCOUNT,userDTO);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
     @Override

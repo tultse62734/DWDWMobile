@@ -195,6 +195,7 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
         ClientApi clientApi = new ClientApi();
         JSONObject jsonObject =  new JSONObject();
         try {
+            jsonObject.put("shiftId",mShift.getShiftId());
             jsonObject.put("workerID",mShift.getWorkerId());
             jsonObject.put("date",mShift.getDate());
             jsonObject.put("roomId",mShift.getRoomId());
@@ -212,7 +213,7 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<Shift>() {
+                        Type type = new TypeToken<ShiftDTO>() {
 
                         }.getType();
                         //call response to get value data

@@ -61,7 +61,7 @@
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
-                android:text="Trang chủ"
+                android:text="Home"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_marginTop="@dimen/dp20"
@@ -115,7 +115,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Xem ca làm "
+                            android:text="Shift View"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -148,7 +148,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Thông tin"
+                            android:text="Profile"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -191,7 +191,6 @@
                             android:layout_height="@dimen/dp80"
                             android:layout_marginTop="@dimen/dp10"
                             android:src="@mipmap/ic_emergency"></ImageView>
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -199,11 +198,10 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Lỗi"
+                            android:text="Record"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
-
                         </TextView>
                     </LinearLayout>
 

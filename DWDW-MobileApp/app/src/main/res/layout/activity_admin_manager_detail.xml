@@ -103,7 +103,7 @@
 
 
                     <EditText
-                         android:id="@+id/edit_update_username"
+                        android:id="@+id/edit_update_username"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"
                         android:background="@drawable/rounder_edit_text_1dp"

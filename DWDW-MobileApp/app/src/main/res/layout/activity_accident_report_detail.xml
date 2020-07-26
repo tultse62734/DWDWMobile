@@ -37,7 +37,7 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chi tiết báo cáo"
+                        android:text="Report Detail"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/dp25"
                         android:layout_weight="4"/>
@@ -129,7 +129,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Phòng :"
+                                android:text="Room :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
@@ -159,7 +159,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Thiết bị :"
+                                android:text="Device :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
@@ -189,7 +189,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Thời gian:"
+                                android:text="Time:"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
@@ -218,7 +218,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Khu vực  :"
+                                android:text="Location  :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
@@ -248,7 +248,7 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Quản lý  :"
+                                android:text="Manager  :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">

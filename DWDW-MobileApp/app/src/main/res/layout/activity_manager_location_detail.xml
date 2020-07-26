@@ -67,7 +67,7 @@
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Tên khu vực :"
+                    android:text="LocationCode :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -89,17 +89,19 @@
 
                 </EditText>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:text="Trạng thái :"
+                    android:text="Trạng thái:"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:gravity="center|left"
                     android:id="@+id/edt_choose_status_update_location_manager_deta"
                     android:textSize="@dimen/sp18"
@@ -115,6 +117,7 @@
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/dp10"
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
@@ -126,6 +129,7 @@
 
                 </TextView>
                 <TextView
+                    android:visibility="gone"
                     android:gravity="center|left"
                     android:id="@+id/txt_time_create_date_update_location_manager"
                     android:textSize="@dimen/sp18"

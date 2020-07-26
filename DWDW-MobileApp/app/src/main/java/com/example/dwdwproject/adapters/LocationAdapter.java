@@ -49,10 +49,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         holder.mTxtNameLocation.setText(mLocationList.get(position).getNameLocation());
         holder.mTxtCreateDateLocation.setText(mLocationList.get(position).getCreateDate());
         if(mLocationList.get(position).isStatus()){
-            holder.mTxtStatusLocation.setText("Đang hoạt động");
+            holder.mTxtStatusLocation.setText("Active");
             holder.mTxtStatusLocation.setTextColor(Color.parseColor("#4CAF50"));
         }else {
-            holder.mTxtStatusLocation.setText("Không hoạt động");
+            holder.mTxtStatusLocation.setText("Deactive");
             holder.mTxtStatusLocation.setTextColor(Color.parseColor("#D81B21"));
         }
         holder.mLnlDeteleLcation.setOnClickListener(new View.OnClickListener() {

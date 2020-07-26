@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -194,7 +195,6 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
         });
 
         dialog.show();
-
     }
     private void showChooseRoomDialog() {
         final Dialog dialog = new Dialog(AdminDeviceDetailActivity.this);
@@ -224,16 +224,14 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
         dialog.show();
 
     }
-
     @Override
     public void getDeviceView(DeviceDTO mDeviceDTO) {
-        Intent intent = new Intent(AdminDeviceDetailActivity.this,ManageDeviceActivity.class);
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
-        startActivity(intent);
     }
-
     @Override
     public void showError(String message) {
-
+        DialogNotifyError.showErrorLoginDialog(AdminDeviceDetailActivity.this,message);
     }
 }

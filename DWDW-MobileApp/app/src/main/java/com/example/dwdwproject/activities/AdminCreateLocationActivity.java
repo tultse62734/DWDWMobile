@@ -57,8 +57,8 @@ public class AdminCreateLocationActivity extends AppCompatActivity implements Vi
     private void getDataLocation(){
         mBtnClose.setOnClickListener(this);
         mStatusList = new ArrayList<>();
-        mStatusList.add(new Status("Đang hoạt động",true));
-        mStatusList.add(new Status("Không hoạt động",false));
+        mStatusList.add(new Status("Active",true));
+        mStatusList.add(new Status("Deactive",false));
     }
     private void createLocation (){
         String locationCode = mEdtLocationCode.getText().toString();

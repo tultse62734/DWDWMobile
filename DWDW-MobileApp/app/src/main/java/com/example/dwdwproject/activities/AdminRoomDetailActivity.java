@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -192,6 +193,8 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
     }
     @Override
     public void getRoomSuccess(RoomDTO mRoomDTO) {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
     }
 }

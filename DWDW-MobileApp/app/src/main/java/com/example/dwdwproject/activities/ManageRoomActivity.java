@@ -1,8 +1,10 @@
 package com.example.dwdwproject.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,9 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     private List<Location> mLocationList;
     private String token ;
     private SmartTabLayout mViewPagerTab;
+    public final static int CREATE_ROOM_CODE = 133;
+    public final static int GET_ALL_ROOM_CODE = 132;
+    public final static int UPDATE_ROOM_CODE = 131;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +52,25 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == CREATE_ROOM_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }
+        if (requestCode == GET_ALL_ROOM_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }if (requestCode == UPDATE_ROOM_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }
     }
-
     private void initData(){
         mBtnClose.setOnClickListener(this);
         mBtnAddRoomAdmin.setOnClickListener(this);
@@ -95,6 +115,8 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
             public void onPageScrollStateChanged(int state) {
             }
         });
+        reloadDataFragment();
+
     }
     //set color for tab
     private void setColorForTab(int position) {
@@ -118,7 +140,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.lnl_add_room_admin:
                 Intent intent = new Intent(ManageRoomActivity.this,AdminCreateRoomActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,CREATE_ROOM_CODE);
                 break;
         }
     }
@@ -142,5 +164,6 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
         for (int i = 0; i < mAdapter.getCount(); i++) {
             ((PageRoomFragment) mAdapter.getPage(i)).reloadPage();
         }
+        mAdapter.notifyDataSetChanged();
     }
 }

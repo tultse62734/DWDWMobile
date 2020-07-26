@@ -1,10 +1,12 @@
 package com.example.dwdwproject.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +42,9 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private SmartTabLayout mViewPagerTab;
     private String token;
+    public final static int CREATE_DEVICE_CODE = 113;
+    public final static int GET_ALL_DEVICE_CODE = 112;
+    public final static int UPDATE_DEVICE_CODE = 111;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,18 +61,35 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.lnl_add_device_admin:
                 Intent intent = new Intent(ManageDeviceActivity.this,AdminCreateDeviceActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,CREATE_DEVICE_CODE);
                 break;
             case R.id.lnl_get_all_device_admin:
                 Intent intent1 = new Intent(ManageDeviceActivity.this,AdminGetAllDeviceActivity.class);
-                startActivity(intent1);
+                startActivityForResult(intent1,GET_ALL_DEVICE_CODE);
                 break;
         }
     }
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == CREATE_DEVICE_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }
+        if (requestCode == GET_ALL_DEVICE_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }if (requestCode == UPDATE_DEVICE_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }
     }
+
     private void initView(){
         mBtnGetAllDevice = findViewById(R.id.lnl_get_all_device_admin);
         mBtnClose = findViewById(R.id.lnl_close_manage_device);
@@ -120,6 +142,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
 
             }
         });
+        reloadDataFragment();
 
     }
 
@@ -147,7 +170,6 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
                     this.mLocationList.add(new Location(locationId,locationName,isactive));
                 }
                 getCategoryData(mLocationList);
-                reloadDataFragment();
             }
     }
     @Override
@@ -158,5 +180,6 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
         for (int i = 0; i < mAdapter.getCount(); i++) {
             ((PageFragment) mAdapter.getPage(i)).reloadPage();
         }
+        mAdapter.notifyDataSetChanged();
     }
 }

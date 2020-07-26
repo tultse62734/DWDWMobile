@@ -93,7 +93,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
                 return false;            }
         });
         token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
-        mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),getActivity().getApplication(),this);
+        mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),this);
         mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);
     }
     private void updateUI(){
@@ -107,17 +107,17 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(BundleString.DEVICEDETAIL,mDeviceDTOS.get(pos));
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    getActivity().startActivityForResult(intent,ManageDeviceActivity.UPDATE_DEVICE_CODE);
                 }
             });
         }
         else {
-            mDeviceAdapter.notifyDataSetChanged();
+            mDeviceAdapter.notifyChange(mDeviceList);
         }
     }
     public void reloadPage(){
         token = SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
-        mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),getActivity().getApplication(),this);
+        mDeviceForAdminPresenter = new GetDeviceForAdminPresenter(getContext(),this);
         mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);
     }
     @Override

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -85,7 +86,7 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
         }
     @Override
     public void createDeviceSuccess(DeviceDTO mDeviceDTO) {
-        showNotifyDialog(mDeviceDTO,"Do you want to assgin this device?");
+        intentToAdminGetAllDevice();
     }
     private void showNotifyDialog(final DeviceDTO deviceDTO,String messgae) {
         final Dialog dialog = new Dialog(AdminCreateDeviceActivity.this);
@@ -112,9 +113,9 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
         dialog.show();
     }
     private void intentToAdminGetAllDevice(){
-        Intent intent = new Intent(AdminCreateDeviceActivity.this,AdminGetAllDeviceActivity.class);
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
-        startActivity(intent);
     }
     private void intentToAdminAssignDevice(DeviceDTO mDeviceDTO){
         Intent intent = new Intent(AdminCreateDeviceActivity.this,AdminAssignDeviceActivity.class);

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -84,6 +85,8 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
         int id = v.getId();
         switch (id){
             case R.id.lnl_close_admin_manage_getall_user:
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED, returnIntent);
                 finish();
                 break;
         }

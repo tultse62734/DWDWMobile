@@ -250,7 +250,6 @@ public class UserRepositotiesImpl implements UserRepositories {
         });
 
     }
-
     @Override
     public void deleteUserById(Context context, String token, int userId, CallBackData<String> mCallBackData) {
     }

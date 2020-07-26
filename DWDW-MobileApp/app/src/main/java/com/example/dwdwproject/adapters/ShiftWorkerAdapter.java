@@ -33,9 +33,9 @@ public class ShiftWorkerAdapter extends RecyclerView.Adapter<ShiftWorkerAdapter.
     @Override
     public void onBindViewHolder(@NonNull ShiftWorkerViewHoler holder, int position) {
             holder.mTxtShiftTime.setText(mWorkerShiftList.get(position).getShiftTime());
-            holder.mTxtShiftRoom.setText("Phòng "+mWorkerShiftList.get(position).getShiftRoom());
+            holder.mTxtShiftRoom.setText("Room "+mWorkerShiftList.get(position).getShiftRoom());
             holder.mTxtDate.setText(mWorkerShiftList.get(position).getShiftDay());
-            holder.mTxtNameManager.setText("Quản lý : "+mWorkerShiftList.get(position).getShiftNameManager());
+            holder.mTxtNameManager.setText("Manager : "+mWorkerShiftList.get(position).getShiftNameManager());
             holder.mTxtShiftStartEndTime.setText(mWorkerShiftList.get(position).getShiftStart() + " - " +mWorkerShiftList.get(position).getShiftEnd());
             holder.mTxtShiftLocation.setText(mWorkerShiftList.get(position).getShiftLocation());
             holder.mTxtStatus.setText(mWorkerShiftList.get(position).getShiftStatus());

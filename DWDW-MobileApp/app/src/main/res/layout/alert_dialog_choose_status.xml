@@ -20,7 +20,7 @@
             android:textSize="@dimen/sp22"
             android:textStyle="bold"
             android:textColor="@color/colorOrange"
-            android:text="Room"
+            android:text="Option"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
         </TextView>

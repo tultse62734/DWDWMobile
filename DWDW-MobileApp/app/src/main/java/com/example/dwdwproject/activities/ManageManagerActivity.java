@@ -1,9 +1,11 @@
 package com.example.dwdwproject.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.example.dwdwproject.views.locationsViews.GetLocationView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,16 @@ import java.util.List;
 import in.myinnos.alphabetsindexfastscrollrecycler.IndexFastScrollRecyclerView;
 
 public class ManageManagerActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
-    private FragmentPagerItemAdapter mAdapter;
+    private FragmentStatePagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
     private String token;
     private LinearLayout mBtnClose,mBtnAddManagerAdmin,mBtnFilterManager;
     private GetAllLocationPresenter mGetLocationByIdPresenter;
+    public final static int CREATE_MANAGER_CODE = 123;
+    public final static int GET_ALL_MANAGER_CODE = 122;
+    public final static int UPDATE_MANAGER_CODE = 121;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +80,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
             bundle.putInt(BundleString.LOCATIONID,locationList.get(i).getLocationId());
             creator.add(locationList.get(i).getNameLocation(), PageManagerFragment.class, bundle);
         }
-        mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+        mAdapter = new FragmentStatePagerItemAdapter(getSupportFragmentManager(),
                 creator.create());
         mViewPager = (ViewPager) findViewById(R.id.viewpager_manager);
         mViewPager.setOffscreenPageLimit(locationList.size());
@@ -99,6 +105,7 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
 
             }
         });
+        reloadDataFragment();
     }
 
     //set color for tab
@@ -116,8 +123,24 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == CREATE_MANAGER_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetLocationByIdPresenter.getAllLocation(token);
+            }
+        }
+        if (requestCode == GET_ALL_MANAGER_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetLocationByIdPresenter.getAllLocation(token);
+            }
+        }if (requestCode == UPDATE_MANAGER_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetLocationByIdPresenter.getAllLocation(token);
+            }
+        }
     }
     @Override
     public void onClick(View v) {
@@ -128,11 +151,11 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 break;
             case  R.id.lnl_add_manager_admin:
                 Intent intent = new Intent(ManageManagerActivity.this,AdminCreateManagerActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,CREATE_MANAGER_CODE);
                 break;
             case R.id.lnl_get_all_manager_admin:
                 Intent intent1 = new Intent(ManageManagerActivity.this,AdminGetAllUserActivity.class);
-                startActivity(intent1);
+                startActivityForResult(intent1,GET_ALL_MANAGER_CODE);
                 break;
         }
     }
@@ -147,10 +170,8 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
                 this.mLocationList.add(new Location(locationId,locationName,isactive));
             }
             getCategoryData(mLocationList);
-            reloadDataFragment();
         }
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageManagerActivity.this,"Data");
@@ -159,5 +180,6 @@ public class ManageManagerActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < mAdapter.getCount(); i++) {
             ((PageManagerFragment) mAdapter.getPage(i)).reloadPage();
         }
+        mAdapter.notifyDataSetChanged();
     }
 }

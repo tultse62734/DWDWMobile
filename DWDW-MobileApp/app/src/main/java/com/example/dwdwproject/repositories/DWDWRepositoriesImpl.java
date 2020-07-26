@@ -162,7 +162,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
         JSONObject jsonObject =  new JSONObject();
         try {
             jsonObject.put("password",mUserDTO.getPassword());
-            jsonObject.put("phone",mUserDTO.getGender());
+            jsonObject.put("phone",mUserDTO.getPhone());
             jsonObject.put("dateOfBirth",mUserDTO.getDateOfBirth());
             jsonObject.put("gender",mUserDTO.getGender());
         } catch (JSONException e) {

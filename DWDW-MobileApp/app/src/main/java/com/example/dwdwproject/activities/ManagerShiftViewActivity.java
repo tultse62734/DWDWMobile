@@ -85,6 +85,13 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
         setDataCalendar();
         mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
     }
+    private void loadData(){
+        token = SharePreferenceUtils.getStringSharedPreference(ManagerShiftViewActivity.this,BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(ManagerShiftViewActivity.this,BundleString.LOCATIONID);
+        date = BundleString.getSelectedDate(ManagerShiftViewActivity.this);
+        mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
+
+    }
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -97,7 +104,7 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
                 startActivity(intent);
                 break;
             case  R.id.lnl_filter_shift_worker:
-                Intent intent1 = new Intent(ManagerShiftViewActivity.this,ShiftDateFilterActivity.class);
+                Intent intent1 = new Intent(ManagerShiftViewActivity.this,ShiftFilterChooseLocationActivity.class);
                 startActivity(intent1);
                 break;
         }
@@ -143,13 +150,11 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();
-        mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
+        loadData();
     }
-
     private void loadEvents() {
         addEvents(23, Calendar.JUNE, 2020);
         addEvents(24,Calendar.JUNE, 2020);

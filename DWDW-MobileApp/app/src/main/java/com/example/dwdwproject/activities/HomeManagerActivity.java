@@ -10,12 +10,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 
 public class HomeManagerActivity extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout mBtnMManage,mBtnLogout,mBtnProfile,mBtnDevice,mBtnAccident,mBtnShift,mBtnRoom;
     private LinearLayout mLnlProfile;
+    private TextView mtxtTime;
+    private String time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +28,8 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         initVieẉ̣();
         initData();
     }
-
     private void initVieẉ̣(){
+        mtxtTime = findViewById(R.id.txt_time_manager);
         mBtnMManage = findViewById(R.id.lnl_manage_worker);
         mBtnDevice = findViewById(R.id.lnl_manage_device);
         mBtnAccident = findViewById(R.id.lnl_manage_accident_manager);
@@ -35,6 +40,8 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         mBtnLogout = findViewById(R.id.lnl_log_out_manage);
     }
     private void initData(){
+        time = BundleString.getSelectedDate(HomeManagerActivity.this);
+        mtxtTime.setText(time);
         mBtnLogout.setOnClickListener(this);
         mBtnRoom.setOnClickListener(this);
         mBtnShift.setOnClickListener(this);

@@ -101,7 +101,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(BundleString.ROOMDETAIL,mRoomDTOS.get(pos));
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    getActivity().startActivityForResult(intent,ManageRoomActivity.UPDATE_ROOM_CODE);
                 }
             });
         }

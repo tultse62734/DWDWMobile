@@ -19,6 +19,7 @@ public class ShiftDTO implements Serializable {
     private String roomCode;
     @SerializedName("isActive")
     private boolean isActive;
+    @SerializedName("userId")
     private int workerId;
     public int getShiftId() {
         return shiftId;
