@@ -122,19 +122,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void intentToHomeManageActivity(){
         SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE,DateManagement.getToday1());
+        SharePreferenceUtils.saveIntSharedPreference(LoginActivity.this,BundleString.INTENTHOME,1);
         Intent intent = new Intent(LoginActivity.this,ManagerChooseLocationActivity.class);
         finish();
         startActivity(intent);
     }
     private void intentToHomeWorkerActivity(){
-        Intent intent = new Intent(LoginActivity.this,HomeWorkerActivity.class);
+        SharePreferenceUtils.saveStringSharedPreference(LoginActivity.this,BundleString.FILTER_DATE_IS_SELECTE,DateManagement.getToday1());
+        SharePreferenceUtils.saveIntSharedPreference(LoginActivity.this,BundleString.INTENTHOME,2);
+        Intent intent = new Intent(LoginActivity.this,ManagerChooseLocationActivity.class);
         finish();
         startActivity(intent);
     }
-
     @Override
     public void loginSuccessString̣̣̣(String token) {
-
     }
     @Override
     public void loginSuccess(ReponseDTO mReponseDTO) {

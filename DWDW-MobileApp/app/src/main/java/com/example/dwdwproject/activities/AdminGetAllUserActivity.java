@@ -22,16 +22,18 @@ import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.models.User;
 import com.example.dwdwproject.presenters.devicesPresenters.GetAllDevicePresenter;
 import com.example.dwdwproject.presenters.userPresenters.AdminGetAllUserPresenter;
+import com.example.dwdwproject.presenters.userPresenters.UpdateUserPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.userViews.GetAllListUserView;
+import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminGetAllUserActivity extends AppCompatActivity implements View.OnClickListener, GetAllListUserView {
+public class AdminGetAllUserActivity extends AppCompatActivity implements View.OnClickListener, GetAllListUserView, GetUserView {
     private RecyclerView mRecyclerView;
     private ManageAdapter manageAdapter;
     private List<Manager> mUserList;
@@ -39,6 +41,7 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
     private LinearLayout mBtnClose;
     private String token ;
     private SearchView mSearchView;
+    private UpdateUserPresenter mUpdateUserPresenter;
     private AdminGetAllUserPresenter mAdminGetAllUserPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
                 return false;
             }
         });
+        mUpdateUserPresenter = new UpdateUserPresenter(AdminGetAllUserActivity.this,this);
         mAdminGetAllUserPresenter = new AdminGetAllUserPresenter(AdminGetAllUserActivity.this,this);
         token = SharePreferenceUtils.getStringSharedPreference(AdminGetAllUserActivity.this, BundleString.TOKEN);
         mAdminGetAllUserPresenter.getAllUser(token);
@@ -105,6 +109,16 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
                     startActivity(intent);
                 }
             });
+            manageAdapter.OnItemActiveClickListener(new ManageAdapter.OnItemActiveClickListener() {
+                @Override
+                public void onItemActiveClick(int pos) {
+                    if(mDtoList.get(pos).isActive()){
+                        mUpdateUserPresenter.updateUseStatus(token,mDtoList.get(pos).getUserId(),false);
+                    }else{
+                        mUpdateUserPresenter.updateUseStatus(token,mDtoList.get(pos).getUserId(),true);
+                    }
+                }
+            });
 
         }else {
             manageAdapter.notify(mUserList);
@@ -123,7 +137,8 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
                 String location = userDTOList.get(i).getLocationCode();
                 String roleName = userDTOList.get(i).getRoleName();
-                mUserList.add(new Manager(userId,name,phone,roleName,location,creatDate));
+                boolean isActive = userDTOList.get(i).isActive();
+                mUserList.add(new Manager(userId,name,phone,roleName,location,creatDate,isActive));
             }
             updateUI();
         }
@@ -132,5 +147,10 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminGetAllUserActivity.this,message);
+    }
+
+    @Override
+    public void getUserSuccess(UserDTO userDTO) {
+        mAdminGetAllUserPresenter.getAllUser(token);
     }
 }

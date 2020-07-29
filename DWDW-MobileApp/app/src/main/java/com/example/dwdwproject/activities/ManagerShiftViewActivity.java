@@ -22,11 +22,13 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Shift;
 import com.example.dwdwproject.models.ShiftTime;
 import com.example.dwdwproject.presenters.shiftPresenters.GetAllShiftFromLocationPresenter;
+import com.example.dwdwproject.presenters.shiftPresenters.UpdateShiftActivePresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.shiftsViews.GetShiftManagerView;
+import com.example.dwdwproject.views.shiftsViews.UpdateShiftActiveView;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -42,7 +44,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-public class ManagerShiftViewActivity extends AppCompatActivity implements View.OnClickListener, GetShiftManagerView {
+public class ManagerShiftViewActivity extends AppCompatActivity implements View.OnClickListener, GetShiftManagerView, UpdateShiftActiveView {
     private LinearLayout mBtnClose,mBtnAddShiftWorker,mBtnFilter;
     private List<Shift> mShiftList;
     private List<ShiftDTO> mShiftDTOS;
@@ -55,7 +57,9 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
     private Calendar currentCalender = Calendar.getInstance(Locale.getDefault());
     private GetAllShiftFromLocationPresenter mGetAllShiftFromLocationPresenter;
     private String token;
+    private boolean isActive;
     private int locationId;
+    private UpdateShiftActivePresenter mUpdateShiftActivePresenter;
     private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
         locationId = SharePreferenceUtils.getIntSharedPreference(ManagerShiftViewActivity.this,BundleString.LOCATIONID);
         date = BundleString.getSelectedDate(ManagerShiftViewActivity.this);
         mTxtTime.setText(date);
+        mUpdateShiftActivePresenter = new UpdateShiftActivePresenter(ManagerShiftViewActivity.this,this);
         mGetAllShiftFromLocationPresenter = new GetAllShiftFromLocationPresenter(ManagerShiftViewActivity.this,this);
         mBtnClose.setOnClickListener(this);
         mBtnFilter.setOnClickListener(this);
@@ -121,6 +126,19 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
                     bundle.putSerializable(BundleString.SHIFTDETAIL,mShiftDTOS.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);
+                }
+            });
+            mShiftAdapter.OnItemAciveClickListener(new ShiftAdapter.OnItemActiveClick() {
+                @Override
+                public void onItemActiveClick(int pos) {
+                    if(mShiftDTOS.get(pos).isActive()){
+                        mShiftDTOS.get(pos).setActive(false);
+                        mUpdateShiftActivePresenter.updateShiftsActive(token,mShiftDTOS.get(pos));
+                    }else {
+                        mShiftDTOS.get(pos).setActive(true);
+                        mUpdateShiftActivePresenter.updateShiftsActive(token,mShiftDTOS.get(pos));
+                    }
+
                 }
             });
         }
@@ -247,8 +265,8 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
                  String locationName = SharePreferenceUtils.getStringSharedPreference(ManagerShiftViewActivity.this,BundleString.LOCATIONNAME);
                  String username =mShiftDTOList.get(i).getUsername();
                  String roomCode = mShiftDTOList.get(i).getRoomCode();
-                mShiftList.add(new Shift(shiftId,username,locationName,roomCode ));
-
+                 boolean isActive = mShiftDTOList.get(i).isActive();
+                mShiftList.add(new Shift(shiftId,username,locationName,roomCode,isActive));
             }
             updateUI();
         }
@@ -259,5 +277,10 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManagerShiftViewActivity.this,message);
+    }
+
+    @Override
+    public void updateShiftActiveSuccess() {
+        mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
     }
 }

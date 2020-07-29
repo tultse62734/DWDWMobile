@@ -43,7 +43,7 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
         Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),channel_id)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_emergency)
                 .setSound(uri)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000,1000,1000,1000,1000})
@@ -51,7 +51,7 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
         builder = builder.setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setSmallIcon(R.mipmap.ic_emergency);
         //NotificationManager để hiển thị ra
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -67,6 +67,5 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
         idText = filter.replaceAll("-","");
         int id = Integer.parseInt(idText);
         notificationManager.notify(id,builder.build());
-
     }
 }

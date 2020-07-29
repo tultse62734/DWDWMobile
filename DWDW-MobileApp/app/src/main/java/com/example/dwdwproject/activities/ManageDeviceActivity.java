@@ -30,13 +30,14 @@ import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManageDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
     LinearLayout mBtnClose,mBtnAdđeviceAdmin,mBtnGetAllDevice;
-    private FragmentPagerItemAdapter mAdapter;
+    private FragmentStatePagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private GetAllLocationPresenter mGetAllLocationPresenter;
@@ -89,13 +90,14 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
             }
         }
     }
-
     private void initView(){
         mBtnGetAllDevice = findViewById(R.id.lnl_get_all_device_admin);
         mBtnClose = findViewById(R.id.lnl_close_manage_device);
         mBtnAdđeviceAdmin = findViewById(R.id.lnl_add_device_admin);
     }
     private void initData(){
+        token = SharePreferenceUtils.getStringSharedPreference(ManageDeviceActivity.this,BundleString.TOKEN);
+        mGetAllLocationPresenter  = new GetAllLocationPresenter(ManageDeviceActivity.this,this);
         mBtnClose.setOnClickListener(this);
         mBtnGetAllDevice.setOnClickListener(this);
         mBtnAdđeviceAdmin.setOnClickListener(this);
@@ -105,8 +107,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
 //        mLocationList.add(new Location(3,"Khu C","18-11-2019",true));
 //        mLocationList.add(new Location(4,"Khu D","18-11-2019",true));
 //        getCategoryData(mLocationList);
-        token = SharePreferenceUtils.getStringSharedPreference(ManageDeviceActivity.this,BundleString.TOKEN);
-        mGetAllLocationPresenter  = new GetAllLocationPresenter(ManageDeviceActivity.this,this);
+
         mGetAllLocationPresenter.getAllLocation(token);
     }
     private void getCategoryData(List<Location> locationList) {
@@ -116,7 +117,7 @@ public class ManageDeviceActivity extends AppCompatActivity implements View.OnCl
             bundle.putInt(BundleString.LOCATIONID,locationList.get(i).getLocationId());
             creator.add(locationList.get(i).getNameLocation(), PageFragment.class, bundle);
         }
-        mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+        mAdapter = new FragmentStatePagerItemAdapter(getSupportFragmentManager(),
                 creator.create());
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mViewPager.setOffscreenPageLimit(locationList.size());

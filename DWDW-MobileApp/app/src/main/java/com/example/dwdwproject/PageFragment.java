@@ -20,16 +20,18 @@ import com.example.dwdwproject.activities.ManageDeviceActivity;
 import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForAdminPresenter;
+import com.example.dwdwproject.presenters.devicesPresenters.UpdateDevicePresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
+import com.example.dwdwproject.views.devicesViews.GetDeviceIDView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageFragment extends Fragment implements GetAllDeviceView {
+public class PageFragment extends Fragment implements GetAllDeviceView , GetDeviceIDView {
     private View mView;
     private RecyclerView mRecyclerView;
     private List<Device> mDeviceList;
@@ -39,6 +41,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     private String token;
     private int locationId;
     private GetDeviceForAdminPresenter mDeviceForAdminPresenter;
+    private UpdateDevicePresenter mUpdateDevicePresenter;
     public PageFragment() {
     }
     @Override
@@ -67,6 +70,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        mUpdateDevicePresenter = new UpdateDevicePresenter(getContext(),this);
 //        mDeviceList = new ArrayList<>();
 //        mDeviceList.add(new Device(1,"Camera 2MP","2020-11-20","Khu A"));
 //        mDeviceList.add(new Device(2,"Camera 4MP","2020-11-20","Khu B"));
@@ -110,6 +114,18 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
                     getActivity().startActivityForResult(intent,ManageDeviceActivity.UPDATE_DEVICE_CODE);
                 }
             });
+            mDeviceAdapter.onItemActiveClickListerner(new DeviceAdapter.OnItemActiveClickListerner() {
+                @Override
+                public void onItemActiveClick(int pos) {
+                    if(mDeviceDTOS.get(pos).isActive()){
+                        mDeviceDTOS.get(pos).setActive(false);
+                        mUpdateDevicePresenter.updateDeviceStatus(token,mDeviceDTOS.get(pos));
+                    }else{
+                        mDeviceDTOS.get(pos).setActive(true);
+                        mUpdateDevicePresenter.updateDeviceStatus(token,mDeviceDTOS.get(pos));
+                    }
+                }
+            });
         }
         else {
             mDeviceAdapter.notifyChange(mDeviceList);
@@ -133,7 +149,7 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
                 boolean isActive = mDeviceDTOList.get(i).isActive();
                 String roomName = mDeviceDTOList.get(i).getRoomCode();
                 String creatDate = DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getEndDate());
-                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName));
+                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName,isActive));
             }
             updateUI();
         }
@@ -141,6 +157,10 @@ public class PageFragment extends Fragment implements GetAllDeviceView {
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),"Data Fail");
+    }
+    @Override
+    public void getDeviceView(DeviceDTO mDeviceDTO) {
+        mDeviceForAdminPresenter.getDeviceFromLocationForAd(token,locationId);
     }
 }
 

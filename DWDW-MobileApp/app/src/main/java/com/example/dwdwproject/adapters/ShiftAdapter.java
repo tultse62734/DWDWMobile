@@ -1,6 +1,7 @@
 package com.example.dwdwproject.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftViewHol
     private Context mContext;
     private List<Shift> mShiftList;
     private OnItemClickListerner mClickListerner;
+    private  OnItemActiveClick nmActiveClick;
     public ShiftAdapter(Context mContext, List<Shift> mShiftList) {
         this.mContext = mContext;
         this.mShiftList = mShiftList;
@@ -44,20 +46,40 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftViewHol
                 }
             }
         });
+        if(mShiftList.get(position).isActive()){
+            holder.txtActive.setText("Active");
+            holder.txtNameActive.setText("Deactive");
+            holder.txtActive.setTextColor(Color.parseColor("#4CAF50"));
+        }else {
+            holder.txtActive.setText("Deactive");
+            holder.txtNameActive.setText("Active");
+            holder.txtActive.setTextColor(Color.parseColor("#D81B21"));
+        }
+        holder.lnlActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nmActiveClick!=null){
+                    nmActiveClick.onItemActiveClick(position);
+                }
+            }
+        });
     }
     @Override
     public int getItemCount() {
         return mShiftList.size();
     }
     public  class ShiftViewHolder extends RecyclerView.ViewHolder{
-        private TextView mTxtNameShift,mTxtLocationShift,mTxtRoomShift;
-        private LinearLayout lnlRoot;
+        private TextView mTxtNameShift,mTxtLocationShift,mTxtRoomShift,txtActive,txtNameActive;
+        private LinearLayout lnlRoot,lnlActive;
         public ShiftViewHolder(@NonNull View itemView) {
             super(itemView);
             mTxtNameShift = itemView.findViewById(R.id.txt_name_shift);
             mTxtLocationShift = itemView.findViewById(R.id.txt_location_shift);
             mTxtRoomShift = itemView.findViewById(R.id.txt_room_shift);
             lnlRoot = itemView.findViewById(R.id.lnl_root_shift);
+            lnlActive = itemView.findViewById(R.id.lnl_active_shift);
+            txtActive = itemView.findViewById(R.id.txt_active_shift);
+            txtNameActive = itemView.findViewById(R.id.txt_name_active_shift);
         }
     }
     public void notify(List<Shift> shiftList){
@@ -67,6 +89,12 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ShiftViewHol
     }
     public void OnItemClick(OnItemClickListerner mClickListerner){
         this.mClickListerner = mClickListerner;
+    }
+    public void OnItemAciveClickListener(OnItemActiveClick mClick){
+        this.nmActiveClick = mClick;
+    }
+    public interface OnItemActiveClick{
+        void onItemActiveClick(int pos);
     }
     public interface  OnItemClickListerner{
         void onItemClick(int pos);

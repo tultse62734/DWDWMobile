@@ -1,6 +1,7 @@
 package com.example.dwdwproject.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     private List<Device> mDeviceList;
     private List<Device> mLDeviceListFull;
     private OnItemClickListenner mListenner;
+    private OnItemActiveClickListerner mClickListerner;
     public DeviceAdapter(Context mContext, List<Device> mDeviceList) {
         this.mContext = mContext;
         this.mDeviceList = mDeviceList;
@@ -48,6 +50,23 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
                 }
             }
         });
+        holder.mLnlActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListerner!=null){
+                    mClickListerner.onItemActiveClick(position);
+                }
+            }
+        });
+        if(mDeviceList.get(position).isActive()){
+            holder.mTxtActiveDevive.setText("Active");
+            holder.mTxtActive.setText("Deactive");
+            holder.mTxtActiveDevive.setTextColor(Color.parseColor("#4CAF50"));
+        }else {
+            holder.mTxtActiveDevive.setText("Deactive");
+            holder.mTxtActive.setText("Active");
+            holder.mTxtActiveDevive.setTextColor(Color.parseColor("#D81B21"));
+        }
         if(mDeviceList.get(position).getLocationDevice()!=null){
             holder.mTxtLocationDevice.setText(mDeviceList.get(position).getLocationDevice());
         }
@@ -87,6 +106,7 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mDeviceList.clear();
             mDeviceList.addAll((List) results.values);
+            mLDeviceListFull = new ArrayList<>(mDeviceList);
             notifyDataSetChanged();
         }
     };
@@ -97,7 +117,8 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
 
     public class DeviceViewHolder extends RecyclerView.ViewHolder {
         TextView mTxtLocationDevice,mTxtCreateDateDevice,mTxtNameDevice,mTxtRoomCode;
-        LinearLayout mLnlRoot;
+        LinearLayout mLnlRoot,mLnlActive;
+        TextView mTxtActive,mTxtActiveDevive;
         public DeviceViewHolder(View itemView) {
             super(itemView);
             mLnlRoot = itemView.findViewById(R.id.lnl_root_manage_device);
@@ -105,6 +126,9 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
             mTxtCreateDateDevice = itemView.findViewById(R.id.txt_create_date_device);
             mTxtLocationDevice = itemView.findViewById(R.id.txt_location_device);
             mTxtRoomCode = itemView.findViewById(R.id.txt_room_device);
+            mTxtActive = itemView.findViewById(R.id.txt_name_active_device);
+            mTxtActiveDevive = itemView.findViewById(R.id.txt_active_device);
+            mLnlActive = itemView.findViewById(R.id.lnl_active_device);
         }
     }
     public void onItemClickListerner(OnItemClickListenner mListenner){
@@ -112,6 +136,12 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     }
     public interface OnItemClickListenner{
         void onItemCLick(int pos);
+    }
+    public void onItemActiveClickListerner(OnItemActiveClickListerner mListerner){
+        this.mClickListerner = mListerner;
+    }
+    public interface OnItemActiveClickListerner{
+        void onItemActiveClick(int pos);
     }
     public void notifyChange(List<Device> mDevices){
         mDeviceList = new ArrayList<>();

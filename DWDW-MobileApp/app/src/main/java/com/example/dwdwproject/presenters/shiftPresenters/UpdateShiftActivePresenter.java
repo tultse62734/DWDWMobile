@@ -17,16 +17,12 @@ import java.util.List;
 public class UpdateShiftActivePresenter {
     private Context mContext;
     private UpdateShiftActiveView mUpdateShiftActiveView;
-    private DWDWManagement dwdwManagement;
     private ShiftRepositories mShiftRepositories;
-
-    public UpdateShiftActivePresenter(Context mContext, Application mApplication, UpdateShiftActiveView mUpdateShiftActiveView) {
+    public UpdateShiftActivePresenter(Context mContext, UpdateShiftActiveView mUpdateShiftActiveView) {
         this.mContext = mContext;
         this.mUpdateShiftActiveView = mUpdateShiftActiveView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mShiftRepositories = new ShiftRepositoriesImpl();
     }
-
     public void updateShiftsActive(String Token, ShiftDTO mShiftDTO){
         this.mShiftRepositories.updateShiftActive(mContext, Token, mShiftDTO, new CallBackData<ShiftDTO>() {
             @Override
@@ -41,17 +37,5 @@ public class UpdateShiftActivePresenter {
         });
     }
 
-    public void getAllShiftToken(final ShiftDTO mShiftDTO){
-        dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                updateShiftsActive(accessToken, mShiftDTO);
-            }
 
-            @Override
-            public void onDataFail() {
-
-            }
-        });
-    }
 }

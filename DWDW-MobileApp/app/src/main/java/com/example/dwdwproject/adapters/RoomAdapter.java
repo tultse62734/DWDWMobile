@@ -25,6 +25,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     private List<Room> mRoomList;
     private List<Room> mRoomListFull;
     private OnItemClickListerner mListerner;
+    private OnItemActiveClickListerner mClickListerner;
     public RoomAdapter(Context mContext, List<Room> mRoomList) {
         this.mContext = mContext;
         this.mRoomList = mRoomList;
@@ -44,9 +45,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         holder.mTxtCreateDateRoom.setText(mRoomList.get(position).getRoomCreateDate()+"");
         if(mRoomList.get(position).isStatus()){
             holder.mTxtStatusRoom.setText("Active");
+            holder.mTxtActive.setText("Deactive");
             holder.mTxtStatusRoom.setTextColor(Color.parseColor("#4CAF50"));
         }else {
             holder.mTxtStatusRoom.setText("Deactive");
+            holder.mTxtActive.setText("Active");
             holder.mTxtStatusRoom.setTextColor(Color.parseColor("#D81B21"));
         }
         holder.mLnlRootRoom.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +57,14 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             public void onClick(View v) {
                 if(mListerner!=null){
                     mListerner.onItemClick(position);
+                }
+            }
+        });
+        holder.mLnlActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListerner!=null){
+                    mClickListerner.onItemActiveClick(position);
                 }
             }
         });
@@ -95,21 +106,29 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     };
 
     public class RoomViewHolder extends RecyclerView.ViewHolder {
-        TextView mTxtNameRoom,mTxtCreateDateRoom,mTxtStatusRoom;
-        LinearLayout mLnlRootRoom;
+        TextView mTxtNameRoom,mTxtCreateDateRoom,mTxtStatusRoom,mTxtActive;
+        LinearLayout mLnlRootRoom,mLnlActive;
         public RoomViewHolder(View itemView) {
             super(itemView);
             mTxtNameRoom = itemView.findViewById(R.id.txt_name_room);
             mTxtCreateDateRoom = itemView.findViewById(R.id.txt_create_date_room);
             mTxtStatusRoom = itemView.findViewById(R.id.txt_status_room);
             mLnlRootRoom = itemView.findViewById(R.id.lnl_root_manage_room);
+            mTxtActive = itemView.findViewById(R.id.txt_name_active_room);
+            mLnlActive = itemView.findViewById(R.id.lnl_active_room);
         }
     }
     public void OnItemClickListerner(OnItemClickListerner itemClickListerner){
         this.mListerner = itemClickListerner;
     }
+    public void OnItemActiveClickListerner(OnItemActiveClickListerner mListerner){
+        this.mClickListerner = mListerner;
+    }
     public  interface OnItemClickListerner{
         void onItemClick(int pos);
+    }
+    public interface  OnItemActiveClickListerner{
+        void onItemActiveClick(int pos);
     }
     public void notify(List<Room> roomList){
         mRoomList = new ArrayList<>();

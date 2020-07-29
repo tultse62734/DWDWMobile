@@ -17,6 +17,8 @@ public class ConfigAPI {
         String ADMINGETALLDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomAdmin";
         String MANAGERGETDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomManager";
         String ASSIGNDEVICEINTOROOM = "Device/AssignDeviceToRoom";
+        String UPDATEDEVICESTATUS = "Device/UpdateDeviceActive";
+
         //Location
         String GETALLLOCATION = "Location/GetLocations";
         String GETLOCATIONBYID ="Location/GetLocationById";
@@ -24,7 +26,7 @@ public class ConfigAPI {
         String UPDATELOCATION = "Location/UpdateLocation";
         String DEACTIVELOCATION = "/api/Location/DeactiveLocation/{locationId}";
         String ACTIVELOCATION = "Location/UpdateLocationStatus";
-        String GETMANAGERLOCATION = "Location/GetLocationsByManager";
+        String GETMANAGERLOCATION = "Location/GetLocationsByManagerWorker";
         //Room
         String GETALLROOM = "";
         String GETROOMBYID ="";
@@ -32,7 +34,7 @@ public class ConfigAPI {
         String UPDATEROOM = "Room/UpdateRoom";
         String GETROOMFROMLOCATION="Room/GetRoomsFromLocation/{locationId}";
         String GETROOMFROMLOCATIONBYMANAGER="Room/GetRoomsFromLocationByManager/{locationId}";
-
+        String UPDATEROOMSTATUS = "Room/DeactiveRoom/{roomId}";
         //Users
         String GETALLUSER  = "User/GetAll";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";
@@ -42,10 +44,11 @@ public class ConfigAPI {
         String DELETEUSER ="";
         String ASSGINUSER = "User/AssignUserToLocationByAdmin";
         String GETWORKERFROMLOCATION = "User/GetWorkerFromLocationsByManager";
+        String UPDATEUSERSTATUS ="User/UpdateUserActiveByAdmin";
         //Shift
         String GETALLSHIFT = "Shift/GetAllShift";
         String GETSHIFTOFMANAGER = "Shift/GetShiftManager";
-        String GETSHIFTOFWORKER = "Shift/GetShiftWorker";
+        String GETSHIFTOFWORKER = "Shift/GetShiftFromLocationByDateWorker";
         String CREATESHIFT = "Shift/CreateShift";
         String UPDATESHIFT = "Shift/UpdateShift";
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";

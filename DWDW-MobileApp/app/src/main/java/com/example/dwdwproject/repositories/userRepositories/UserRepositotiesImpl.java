@@ -302,4 +302,49 @@ public class UserRepositotiesImpl implements UserRepositories {
             }
         });
     }
+    @Override
+    public void updateUserStatus(final Context mContext, String token, int userId, boolean isActive,final CallBackData<UserDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userId",userId);
+            data.put("isActive",isActive);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().updateUserStatus(map,body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<UserDTO>() {
+
+                        }.getType();
+                        //call response to get value data
+                        UserDTO mUserDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(mUserDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(mContext, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+
+    }
 }

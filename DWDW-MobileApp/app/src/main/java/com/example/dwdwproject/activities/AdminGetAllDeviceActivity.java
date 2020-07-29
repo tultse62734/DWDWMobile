@@ -17,15 +17,17 @@ import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.presenters.devicesPresenters.GetAllDevicePresenter;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForManagerPresenter;
+import com.example.dwdwproject.presenters.devicesPresenters.UpdateDevicePresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
+import com.example.dwdwproject.views.devicesViews.GetDeviceIDView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class AdminGetAllDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllDeviceView {
+public class AdminGetAllDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllDeviceView, GetDeviceIDView {
     private RecyclerView mRecyclerView;
     private DeviceAdapter mDeviceAdapter;
     private List<Device> mDeviceList;
@@ -34,6 +36,7 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
     private String token ;
     private SearchView mSearchView;
     private GetAllDevicePresenter mGetAllDevicePresenter;
+    private UpdateDevicePresenter mUpdateDevicePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        mUpdateDevicePresenter = new UpdateDevicePresenter(AdminGetAllDeviceActivity.this,this);
+        mGetAllDevicePresenter = new GetAllDevicePresenter(AdminGetAllDeviceActivity.this,this);
+        token = SharePreferenceUtils.getStringSharedPreference(AdminGetAllDeviceActivity.this, BundleString.TOKEN);
         mBtnClose.setOnClickListener(this);
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -64,8 +70,7 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
                 return false;
             }
         });
-        mGetAllDevicePresenter = new GetAllDevicePresenter(AdminGetAllDeviceActivity.this,this);
-        token = SharePreferenceUtils.getStringSharedPreference(AdminGetAllDeviceActivity.this, BundleString.TOKEN);
+
         mGetAllDevicePresenter.getAllDevice(token);
     }
     @Override
@@ -99,6 +104,18 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
                     startActivity(intent);
                 }
             });
+            mDeviceAdapter.onItemActiveClickListerner(new DeviceAdapter.OnItemActiveClickListerner() {
+                @Override
+                public void onItemActiveClick(int pos) {
+                    if(mDtoList.get(pos).isActive()){
+                        mDtoList.get(pos).setActive(false);
+                        mUpdateDevicePresenter.updateDeviceStatus(token,mDtoList.get(pos));
+                    }else{
+                        mDtoList.get(pos).setActive(true);
+                        mUpdateDevicePresenter.updateDeviceStatus(token,mDtoList.get(pos));
+                    }
+                }
+            });
         }
         else {
             mDeviceAdapter.notifyChange(mDeviceList);
@@ -117,7 +134,7 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
                 boolean isActive = mDeviceDTOList.get(i).isActive();
                 String roomName = mDeviceDTOList.get(i).getRoomCode();
                 String creatDate = DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getEndDate());
-                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName));
+                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName,isActive));
             }
             updateUI();
         }
@@ -126,5 +143,9 @@ public class AdminGetAllDeviceActivity extends AppCompatActivity implements View
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminGetAllDeviceActivity.this,message);
 
+    }
+    @Override
+    public void getDeviceView(DeviceDTO mDeviceDTO) {
+        mGetAllDevicePresenter.getAllDevice(token);
     }
 }

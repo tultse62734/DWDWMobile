@@ -40,7 +40,6 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
     private String token;
     private RecyclerView mRecyclerView;
     private RecyclerView mRecyclerView1;
-    private int posLocation;
     private ChooseStatusAdapter mLocationAdapter;
     private ChooseStatusAdapter mLocationAdapter1;
     private List<Status> mStatusList;

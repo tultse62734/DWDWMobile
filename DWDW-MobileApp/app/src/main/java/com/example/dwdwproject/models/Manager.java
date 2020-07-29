@@ -11,6 +11,7 @@ public class Manager  implements Serializable {
     private String roleName;
     private String locationName;
     private String createTime;
+    private boolean isActive;
     public Manager(String imageResourceId, String name, String phone, String email) {
         this.imageResourceId = imageResourceId;
         this.name = name;
@@ -18,13 +19,14 @@ public class Manager  implements Serializable {
         this.email = email;
     }
 
-    public Manager(int userId,String name, String phone, String roleName, String locationName, String createTime) {
+    public Manager(int userId,String name, String phone, String roleName, String locationName, String createTime, boolean isActive) {
         this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.roleName = roleName;
         this.locationName = locationName;
         this.createTime = createTime;
+        this.isActive  = isActive;
     }
     public String getImageResourceId() {
         return imageResourceId;
@@ -88,5 +90,13 @@ public class Manager  implements Serializable {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

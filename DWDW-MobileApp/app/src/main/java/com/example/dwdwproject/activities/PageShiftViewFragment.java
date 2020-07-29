@@ -78,13 +78,13 @@ public class PageShiftViewFragment extends Fragment {
     }
     private void initData(){
         mShiftList = new ArrayList<>();
-        mShiftList.add(new Shift(1,"Nhân Viên A","Khu A","Room 101"));
-        mShiftList.add(new Shift(2,"Nhân Viên B","Khu B","Room 102"));
-        mShiftList.add(new Shift(3,"Nhân Viên C","Khu C","Room 103"));
-        mShiftList.add(new Shift(4,"Nhân Viên D","Khu D","Room 104"));
-        mShiftList.add(new Shift(5,"Nhân Viên E","Khu E","Room 105"));
-        mShiftList.add(new Shift(6,"Nhân Viên F","Khu F","Room 106"));
-        mShiftList.add(new Shift(7,"Nhân Viên H","Khu H","Room 107"));
+//        mShiftList.add(new Shift(1,"Nhân Viên A","Khu A","Room 101"));
+//        mShiftList.add(new Shift(2,"Nhân Viên B","Khu B","Room 102"));
+//        mShiftList.add(new Shift(3,"Nhân Viên C","Khu C","Room 103"));
+//        mShiftList.add(new Shift(4,"Nhân Viên D","Khu D","Room 104"));
+//        mShiftList.add(new Shift(5,"Nhân Viên E","Khu E","Room 105"));
+//        mShiftList.add(new Shift(6,"Nhân Viên F","Khu F","Room 106"));
+//        mShiftList.add(new Shift(7,"Nhân Viên H","Khu H","Room 107"));
         updateUI();
         setDataCalendar();
     }

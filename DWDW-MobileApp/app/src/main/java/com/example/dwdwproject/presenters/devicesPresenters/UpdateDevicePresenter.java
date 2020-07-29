@@ -1,5 +1,4 @@
 package com.example.dwdwproject.presenters.devicesPresenters;
-
 import android.app.Application;
 import android.content.Context;
 
@@ -9,7 +8,6 @@ import com.example.dwdwproject.repositories.devicesRepositories.DeviceRepositori
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.devicesViews.GetDeviceIDView;
-
 public class UpdateDevicePresenter {
     private Context mContext;
     private GetDeviceIDView mGetDeviceIDView;
@@ -25,6 +23,19 @@ public class UpdateDevicePresenter {
             public void onSucess(DeviceDTO deviceDTO) {
                 mGetDeviceIDView.getDeviceView(deviceDTO);
             }
+            @Override
+            public void onFail(String message) {
+                mGetDeviceIDView.showError(message);
+            }
+        });
+    }
+    public void updateDeviceStatus(String token,DeviceDTO mDeviceDTO){
+        mDeviceRepositories.updateStatusDevice(mContext, token, mDeviceDTO, new CallBackData<DeviceDTO>() {
+            @Override
+            public void onSucess(DeviceDTO deviceDTO) {
+                mGetDeviceIDView.getDeviceView(deviceDTO);
+            }
+
             @Override
             public void onFail(String message) {
                 mGetDeviceIDView.showError(message);

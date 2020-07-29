@@ -37,4 +37,8 @@ public interface ServiceRoom {
     @PUT(ConfigAPI.Api.UPDATEROOM)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateRoom(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
+    @PUT(ConfigAPI.Api.UPDATEROOMSTATUS)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> updateRoomStatus(@HeaderMap Map<String, String> map,@Path("roomId") int id);
 }

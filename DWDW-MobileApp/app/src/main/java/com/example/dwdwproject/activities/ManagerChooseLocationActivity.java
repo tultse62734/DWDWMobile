@@ -33,6 +33,7 @@ public class ManagerChooseLocationActivity extends AppCompatActivity  implements
     private List<Location> mLocationList;
     private GetManagerLocationPresenter getManagerLocationPresenter;
     private String token;
+    private int intentHome;
     private ChooseLocationAdapter mChooseLocationAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class ManagerChooseLocationActivity extends AppCompatActivity  implements
         initData();
     }
     private void initVieẉ̣(){
+        intentHome = SharePreferenceUtils.getIntSharedPreference(ManagerChooseLocationActivity.this,BundleString.INTENTHOME);
         mRecyclerView = findViewById(R.id.rcv_mamaner_choose_location);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -87,11 +89,18 @@ public class ManagerChooseLocationActivity extends AppCompatActivity  implements
             mChooseLocationAdapter.OnClickItemListener(new ChooseLocationAdapter.OnClickItem() {
                 @Override
                 public void OnClickItem(int position) {
-                    Intent intent = new Intent(ManagerChooseLocationActivity.this,HomeManagerActivity.class);
-                    SharePreferenceUtils.saveIntSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONID,mLocationList.get(position).getLocationId());
-                    SharePreferenceUtils.saveStringSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONNAME,mLocationList.get(position).getNameLocation());
+                    if(intentHome ==1){
+                        Intent intent = new Intent(ManagerChooseLocationActivity.this,HomeManagerActivity.class);
+                        SharePreferenceUtils.saveIntSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONID,mLocationList.get(position).getLocationId());
+                        SharePreferenceUtils.saveStringSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONNAME,mLocationList.get(position).getNameLocation());
 
-                    startActivity(intent);
+                        startActivity(intent);
+                    }else if(intentHome ==2) {
+                        Intent intent = new Intent(ManagerChooseLocationActivity.this,HomeWorkerActivity.class);
+                        SharePreferenceUtils.saveIntSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONID,mLocationList.get(position).getLocationId());
+                        SharePreferenceUtils.saveStringSharedPreference(ManagerChooseLocationActivity.this, BundleString.LOCATIONNAME,mLocationList.get(position).getNameLocation());
+                        startActivity(intent);
+                    }
                 }
             });
         }

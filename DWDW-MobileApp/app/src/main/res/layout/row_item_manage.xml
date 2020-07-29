@@ -4,126 +4,142 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="10"
-    android:id="@+id/lnl_root_manage_manager"
+
     android:layout_marginBottom="@dimen/dp20"
     android:background="@drawable/radius_conner_grey"
     >
-   <LinearLayout
-       android:layout_marginBottom="@dimen/dp10"
-       android:layout_marginTop="@dimen/dp16"
-       android:layout_marginRight="@dimen/dp10"
-       android:layout_marginLeft="@dimen/dp10"
-       android:background="@drawable/radius_conner_white"
-       android:gravity="center"
-       android:layout_gravity="center"
-       android:layout_weight="3.42"
-       android:layout_width="0dp"
-       android:layout_height="wrap_content">
-       <ImageView
-           android:id="@+id/image_avata"
-           android:scaleType="fitXY"
-           android:src="@drawable/bg_login"
-           android:layout_width="@dimen/dp80"
-           android:layout_height="@dimen/dp80">
-
-       </ImageView>
-   </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lnl_root_manage_manager"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp16"
+        android:orientation="vertical"
+        android:layout_weight="6.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_name_worker"
+            android:textSize="@dimen/sp22"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrangeDark"
+            android:text="Lê Tuấn Tú"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
         <LinearLayout
-            android:layout_marginLeft="@dimen/dp10"
-            android:layout_marginBottom="@dimen/dp10"
-            android:layout_marginTop="@dimen/dp16"
-            android:orientation="vertical"
-            android:layout_weight="6.5"
-            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_gravity="left"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="left"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/ic_phone"
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20">
+                </ImageView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_phone_worker"
+                android:text="0774959623"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp15"
+                android:layout_weight="8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/txt_location_user"
+            android:text="Location A"
+            android:textStyle="bold"
+            android:textColor="@color/colorRed"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/txt_active_user"
+            android:text="Active"
+            android:textStyle="bold"
+            android:textColor="@color/colorYellowOrange"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_gravity="center"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/txt_name_worker"
-                android:textSize="@dimen/sp22"
                 android:textStyle="bold"
-                android:textColor="@color/colorOrangeDark"
-                android:text="Lê Tuấn Tú"
-                android:layout_width="match_parent"
+                android:textColor="@color/colorBlack"
+                android:text="Role:"
+                android:layout_weight="2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
+
             </TextView>
-            <LinearLayout
-                android:layout_marginTop="@dimen/dp20"
-                android:layout_gravity="left"
-                android:weightSum="10"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:gravity="left"
-                    android:layout_gravity="center"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@mipmap/ic_phone"
-                        android:layout_width="@dimen/dp20"
-                        android:layout_height="@dimen/dp20">
-                    </ImageView>
-                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_phone_worker"
-                    android:text="0774959623"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp15"
-                    android:layout_weight="8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                </TextView>
-            </LinearLayout>
             <TextView
-                android:id="@+id/txt_location_user"
-                android:text="Location A"
+                android:id="@+id/txt_role_user"
+                android:text="Manager"
+                android:textColor="@color/colorGreen"
                 android:textStyle="bold"
-                android:textColor="@color/colorRed"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_width="match_parent"
+                android:textSize="@dimen/sp15"
+                android:layout_weight="8"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
+
             </TextView>
-            <LinearLayout
-                android:layout_marginTop="@dimen/dp10"
+        </LinearLayout>
+        <TextView
+            android:id="@+id/txt_time_user"
+            android:layout_marginTop="@dimen/dp10"
+            android:textColor="@color/colorGreyDark"
+            android:textStyle="bold"
+            android:text="From 2020-07-21 to 2020-07-22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="3.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/lnl_active_user"
+            android:background="@drawable/radius_conner_orange"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txt_name_active_user"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:gravity="center"
                 android:layout_gravity="center"
-                android:weightSum="10"
-                android:orientation="horizontal"
+                android:text="Active"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/colorBlack"
-                    android:text="Role:"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
 
-                </TextView>
-
-                <TextView
-                    android:id="@+id/txt_role_user"
-                    android:text="Manager"
-                    android:textColor="@color/colorGreen"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp15"
-                    android:layout_weight="8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                </TextView>
-            </LinearLayout>
-                <TextView
-                    android:id="@+id/txt_time_user"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:textColor="@color/colorGreyDark"
-                    android:textStyle="bold"
-                    android:text="From 2020-07-21 to 2020-07-22"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </TextView>
+            </TextView>
         </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

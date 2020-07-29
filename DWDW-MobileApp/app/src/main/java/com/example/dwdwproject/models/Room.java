@@ -7,7 +7,6 @@ public class Room implements Serializable {
     private String roomName;
     private String roomCreateDate;
     private boolean isStatus;
-
     public Room(int roomId, String roomName, String roomCreateDate, boolean isStatus) {
         this.roomId = roomId;
         this.roomName = roomName;

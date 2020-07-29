@@ -15,6 +15,7 @@ public class BundleString {
     public static final String SHIFTDETAIL = "SHIFTDETAIL";
     public static final String TOKEN = "TOKEN";
     public static final String DEVICEASSGINT = "DEVICEASSGINT";
+    public static final String INTENTHOME = "INTENTHOME";
     public static String getSelectedDate(Context context){
         return SharePreferenceUtils.getStringSharedPreference(context, BundleString.FILTER_DATE_IS_SELECTE);
     }

@@ -20,13 +20,25 @@ public class UpdateRoomPresenter {
         this.mGetRoomView = mGetRoomView;
         this.mRoomRepositories = new RoomRepositoriesImpl();
     }
-    public void updateRoom(String token, final RoomDTO mRoomDTO){
+    public void updateRoom(String token,  RoomDTO mRoomDTO){
         mRoomRepositories.updateRoomById(mContext, token, mRoomDTO, new CallBackData<RoomDTO>() {
             @Override
             public void onSucess(RoomDTO roomDTO) {
                 mGetRoomView.getRoomSuccess(roomDTO);
             }
 
+            @Override
+            public void onFail(String message) {
+                mGetRoomView.showError(message);
+            }
+        });
+    }
+    public void updateRoomStatus(String token, final RoomDTO mRoomDTO){
+        mRoomRepositories.getRoomStatus(mContext, token, mRoomDTO, new CallBackData<RoomDTO>() {
+            @Override
+            public void onSucess(RoomDTO roomDTO) {
+                mGetRoomView.getRoomSuccess(mRoomDTO);
+            }
             @Override
             public void onFail(String message) {
                 mGetRoomView.showError(message);

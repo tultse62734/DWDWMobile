@@ -24,13 +24,14 @@ import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManageRoomActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
     LinearLayout mBtnClose,mBtnAddRoomAdmin;
-    private FragmentPagerItemAdapter mAdapter;
+    private FragmentStatePagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private List<Location> mLocationList;
@@ -90,7 +91,7 @@ public class ManageRoomActivity extends AppCompatActivity implements View.OnClic
             bundle.putSerializable(BundleString.LOCATIONID,locationList.get(i).getLocationId());
             creator.add(locationList.get(i).getNameLocation(), PageRoomFragment.class, bundle);
         }
-        mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+        mAdapter = new FragmentStatePagerItemAdapter(getSupportFragmentManager(),
                 creator.create());
         mViewPager = (ViewPager) findViewById(R.id.viewpager_room);
         mViewPager.setOffscreenPageLimit(locationList.size());

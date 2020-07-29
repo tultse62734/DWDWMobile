@@ -7,12 +7,13 @@ public class Shift implements Serializable {
     private String shiftCode;
     private String shiftLocation;
     private String shiftRoom;
-
-    public Shift(int shiftId, String shiftCode, String shiftLocation, String shiftRoom) {
+    private boolean isActive;
+    public Shift(int shiftId, String shiftCode, String shiftLocation, String shiftRoom,boolean isActive) {
         this.shiftId = shiftId;
         this.shiftCode = shiftCode;
         this.shiftLocation = shiftLocation;
         this.shiftRoom = shiftRoom;
+        this.isActive = isActive;
     }
 
     public int getShiftId() {
@@ -45,5 +46,13 @@ public class Shift implements Serializable {
 
     public void setShiftRoom(String shiftRoom) {
         this.shiftRoom = shiftRoom;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

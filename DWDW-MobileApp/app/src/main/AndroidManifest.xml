@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ShiftFilterChooseLocationActivity"></activity>
+        <activity android:name=".activities.ShiftFilterChooseLocationActivity" />
         <activity android:name=".activities.ManagerUpdateShiftActivity" />
         <activity android:name=".activities.UpdateInforAccountActivity" />
         <activity android:name=".activities.AdminGetAllUserActivity" />

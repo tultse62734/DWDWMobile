@@ -65,7 +65,6 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                 mAccidentAdapter.notifyDataSetChanged();
             }
         }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -75,7 +74,6 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
-
     @Override
     public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
         if(mRecordDTOList!=null){
@@ -92,7 +90,6 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
             updateUI();
         }
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageAccidentActivity.this,message);

@@ -174,6 +174,8 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         int id = v.getId();
         switch (id){
             case R.id.lnl_close_admin_add_manager:
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED, returnIntent);
                 finish();
                 break;
             case R.id.lnl_submit_create_manager:

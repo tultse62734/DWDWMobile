@@ -27,7 +27,6 @@ import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationP
 import com.example.dwdwproject.presenters.shiftPresenters.CreateShiftPresenter;
 import com.example.dwdwproject.presenters.shiftPresenters.UpdateShiftPresenter;
 import com.example.dwdwproject.presenters.userPresenters.GetAllWorkerFromLocationByManagerPresenter;
-import com.example.dwdwproject.presenters.userPresenters.UpdateUserPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
@@ -224,7 +223,8 @@ public class ManagerUpdateShiftActivity extends AppCompatActivity implements Vie
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
                 String location = SharePreferenceUtils.getStringSharedPreference(ManagerUpdateShiftActivity.this,BundleString.LOCATIONNAME);
                 String roleName = userDTOList.get(i).getRoleName();
-                managerList.add(new Manager(userId,name,phone,roleName,location,creatDate));
+                boolean isActive = userDTOList.get(i).isActive();
+                managerList.add(new Manager(userId,name,phone,roleName,location,creatDate,isActive));
             }
             mGetAllRoomFromLocationPresenter.getAllRoomFromLocationByManager(token,locationId);
         }

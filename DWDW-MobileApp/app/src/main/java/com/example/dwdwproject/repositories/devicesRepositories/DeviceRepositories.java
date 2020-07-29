@@ -16,4 +16,5 @@ public interface DeviceRepositories {
     void getAllDeviceFromLocationByAdmin(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
     void getActiveDeviceFromLocationByManager(Context mContext,String token,int locationId,CallBackData<List<DeviceDTO>>mCallBackData);
     void assginDeviceIntoRoom(Context mContext, String token, AssignDeviceDTO mAssignDeviceDTO,CallBackData<AssignDeviceDTO> mCallBackData);
+    void updateStatusDevice(Context mContext,String token,DeviceDTO mDeviceDTO,CallBackData<DeviceDTO> mCallBackData);
 }

@@ -9,13 +9,10 @@ import com.example.dwdwproject.repositories.userRepositories.UserRepositotiesImp
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.userViews.GetUserView;
-
 public class UpdateUserPresenter {
     private Context mContext;
-    private DWDWManagement management;
     private GetUserView mGetUserView;
     private UserRepositories mUserRepositories;
-
     public UpdateUserPresenter(Context mContext, GetUserView mGetUserView) {
         this.mContext = mContext;
         this.mGetUserView = mGetUserView;
@@ -27,7 +24,18 @@ public class UpdateUserPresenter {
             public void onSucess(UserDTO userDTO) {
                 mGetUserView.getUserSuccess(userDTO);
             }
-
+            @Override
+            public void onFail(String message) {
+                mGetUserView.showError(message);
+            }
+        });
+    }
+    public void updateUseStatus(String token,int userId,boolean isActive){
+        this.mUserRepositories.updateUserStatus(mContext, token, userId, isActive, new CallBackData<UserDTO>() {
+            @Override
+            public void onSucess(UserDTO userDTO) {
+                mGetUserView.getUserSuccess(userDTO);
+            }
             @Override
             public void onFail(String message) {
                 mGetUserView.showError(message);

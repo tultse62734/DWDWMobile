@@ -17,14 +17,12 @@ public class GetShiftManagerPresenter {
     private GetShiftManagerView mGetShiftManagerView;
     private DWDWManagement dwdwManagement;
     private ShiftRepositories mShiftRepositories;
-
     public GetShiftManagerPresenter(Context mContext, Application mApplication, GetShiftManagerView mGetShiftManagerView) {
         this.mContext = mContext;
         this.mGetShiftManagerView = mGetShiftManagerView;
         this.dwdwManagement = new DWDWManagement(mApplication);
         this.mShiftRepositories = new ShiftRepositoriesImpl();
     }
-
     public void getShiftsManager(String Token){
         this.mShiftRepositories.getShiftByManager(mContext, Token, new CallBackData<List<ShiftDTO>>() {
             @Override

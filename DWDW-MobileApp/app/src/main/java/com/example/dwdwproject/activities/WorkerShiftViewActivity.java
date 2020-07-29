@@ -15,10 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.ShiftDTO;
 import com.example.dwdwproject.adapters.ShiftAdapter;
 import com.example.dwdwproject.adapters.ShiftWorkerAdapter;
 import com.example.dwdwproject.models.Shift;
 import com.example.dwdwproject.models.WorkerShift;
+import com.example.dwdwproject.presenters.shiftPresenters.GetShiftWorkerPresenter;
+import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
+import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.shiftsViews.GetShiftManagerView;
+import com.example.dwdwproject.views.shiftsViews.GetShiftWorkerView;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
@@ -31,7 +39,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-public class WorkerShiftViewActivity extends AppCompatActivity implements View.OnClickListener {
+public class WorkerShiftViewActivity extends AppCompatActivity implements View.OnClickListener, GetShiftWorkerView {
     private View mView;
     private LinearLayout mBtnClose,mBtnFilter;
     private List<WorkerShift> mWorkerShiftList;
@@ -42,7 +50,11 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy", Locale.getDefault());
     private TextView mTxtTime;
     private Calendar currentCalender = Calendar.getInstance(Locale.getDefault());
-
+    private GetShiftWorkerPresenter mGetShiftWorkerPresenter;
+    private String token;
+    private int locationId;
+    private List<ShiftDTO> mShiftDTOS;
+    private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +63,7 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
         initData();
     }
     private void initView(){
+        mGetShiftWorkerPresenter = new GetShiftWorkerPresenter(WorkerShiftViewActivity.this,this);
         mBtnFilter = findViewById(R.id.lnl_filter_shift_worker);
         mTxtTime = findViewById(R.id.txt_shif_time_worker_time);
         mBtnClose = findViewById(R.id.lnl_close_manage_shift_worker);
@@ -59,14 +72,13 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        token = SharePreferenceUtils.getStringSharedPreference(WorkerShiftViewActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerShiftViewActivity.this,BundleString.LOCATIONID);
+        date = BundleString.getSelectedDate(WorkerShiftViewActivity.this);
         mBtnClose.setOnClickListener(this);
         mBtnFilter.setOnClickListener(this);
-            mWorkerShiftList = new ArrayList<>();
-            mWorkerShiftList.add(new WorkerShift("Ca sáng","101","Lê Văn A","Khu A","18-11-1997","Chưa điểm danh","7:00 AM","12:00 AM"));
-            mWorkerShiftList.add(new WorkerShift("Ca chiều","200","Lê Văn A","Khu B","18-11-1997","Chưa điểm danh","12:00 AM","17:00 AM"));
-            mWorkerShiftList.add(new WorkerShift("Ca Tối","300","Lê Văn A","Khu C","18-11-1997","Chưa điểm danh","17:00 AM","24:00 AM"));
-            updateUI();
             setDataCalendar();
+        mGetShiftWorkerPresenter.getShiftsWorker(token,locationId,date);
     }
     private void updateUI(){
         if(mWorkerAdapter == null){
@@ -83,21 +95,23 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
         compactCalendarView.setIsRtl(false);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
         compactCalendarView.displayOtherMonthDays(false);
-        loadEvents();
         // can also take a Date object
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                List<Event> events = compactCalendarView.getEvents(dateClicked);
-                if(events.size()==0){
-                    showFilterDateDialog("Không có ca làm vào ngày này");
-                }
+                date = DateManagement.changeDateStringToString(dateClicked.toString());
+                mGetShiftWorkerPresenter.getShiftsWorker(token,locationId,date);
             }
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
                 mTxtTime.setText(dateFormatForMonth.format(firstDayOfNewMonth));
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
     private void loadEvents() {
         addEvents(23,Calendar.JUNE, 2020);
@@ -188,9 +202,43 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
                 finish();
                 break;
             case R.id.lnl_filter_shift_worker:
-                Intent intent = new Intent(WorkerShiftViewActivity.this,ShiftDateFilterActivity.class);
+                Intent intent = new Intent(WorkerShiftViewActivity.this,ShiftFilterChooseLocationActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+    private void loadData(){
+        token = SharePreferenceUtils.getStringSharedPreference(WorkerShiftViewActivity.this,BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerShiftViewActivity.this,BundleString.LOCATIONID);
+        date = BundleString.getSelectedDate(WorkerShiftViewActivity.this);
+        mGetShiftWorkerPresenter.getShiftsWorker(token,locationId,date);
+
+    }
+
+    @Override
+    public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(WorkerShiftViewActivity.this,message);
+    }
+
+    @Override
+    public void getShiftWorkerSuccess(List<ShiftDTO> mShiftDTOList) {
+        if(mShiftDTOList!=null ||mShiftDTOList.size()!=0){
+            mWorkerShiftList = new ArrayList<>();
+            mShiftDTOS = new ArrayList<>();
+            mShiftDTOS = mShiftDTOList;
+            for (int i = 0; i <mShiftDTOList.size() ; i++) {
+                int shiftId = mShiftDTOList.get(i).getShiftId();
+                String locationName = SharePreferenceUtils.getStringSharedPreference(WorkerShiftViewActivity.this,BundleString.LOCATIONNAME);
+                String username =mShiftDTOList.get(i).getUsername();
+                String roomCode = mShiftDTOList.get(i).getRoomCode();
+                String dateShift = mShiftDTOList.get(i).getDate();
+                mWorkerShiftList.add(new WorkerShift(shiftId,roomCode,username,locationName,dateShift));
+
+            }
+            updateUI();
+        }
+        else{
+            DialogNotifyError.showErrorLoginDialog(WorkerShiftViewActivity.this,"No Shift");
         }
     }
 }

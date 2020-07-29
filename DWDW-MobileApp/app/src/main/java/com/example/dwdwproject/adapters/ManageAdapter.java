@@ -1,6 +1,7 @@
 package com.example.dwdwproject.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerViewHolder> implements Filterable {
     private Context mContext;
     private List<Manager> mManagerList;
     private List<Manager> mManagerListFull;
     private OnItemClickListener mListener;
+    private OnItemActiveClickListener mClickListener;
     public ManageAdapter(Context mContext, List<Manager> mManagerList) {
         this.mContext = mContext;
         this.mManagerList = mManagerList;
@@ -51,8 +52,26 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
                     }
                 }
             });
+            holder.mLnlActive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mClickListener!=null){
+                        mClickListener.onItemActiveClick(position);
+                    }
+                }
+            });
             holder.mTxtTime.setText(mManagerList.get(position).getCreateTime());
             holder.mTxtRole.setText(mManagerList.get(position).getRoleName());
+        if(mManagerList.get(position).isActive()){
+            holder.mTxtActive.setText("Active");
+            holder.txtActive.setText("Deactive");
+            holder.mTxtActive.setTextColor(Color.parseColor("#4CAF50"));
+        }else {
+            holder.mTxtActive.setText("Deactive");
+            holder.txtActive.setText("Active");
+
+            holder.mTxtActive.setTextColor(Color.parseColor("#D81B21"));
+        }
         if(mManagerList.get(position).getLocationName()!=null){
             holder.mTxtLocation.setText(mManagerList.get(position).getLocationName());
         }
@@ -101,26 +120,35 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
         notifyDataSetChanged();
     }
     public class WorkerViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivProfile;
         TextView tvName;
         TextView mTxtTime,mTxtRole,mTxtLocation;
-        LinearLayout mLnlnRootManager;
-        TextView tvMobile;
+        LinearLayout mLnlnRootManager,mLnlActive;
+        TextView tvMobile,txtActive;
+        TextView mTxtActive;
         public WorkerViewHolder(View itemView) {
             super(itemView);
-            ivProfile = (ImageView) itemView.findViewById(R.id.image_avata);
             tvName = (TextView) itemView.findViewById(R.id.txt_name_worker);
             tvMobile = (TextView) itemView.findViewById(R.id.txt_phone_worker);
             mLnlnRootManager = itemView.findViewById(R.id.lnl_root_manage_manager);
             mTxtRole = itemView.findViewById(R.id.txt_role_user);
             mTxtTime = itemView.findViewById(R.id.txt_time_user);
             mTxtLocation = itemView.findViewById(R.id.txt_location_user);
+            mLnlActive = itemView.findViewById(R.id.lnl_active_user);
+            mTxtActive = itemView.findViewById(R.id.txt_active_user);
+            txtActive = itemView.findViewById(R.id.txt_name_active_user);
         }
     }
+
     public void OnItemClickListener(OnItemClickListener itemClickListener){
         this.mListener = itemClickListener;
     }
+    public  void OnItemActiveClickListener(OnItemActiveClickListener mListener){
+        this.mClickListener = mListener;
+    }
     public  interface OnItemClickListener{
         void onItemClick(int pos);
+    }
+    public interface  OnItemActiveClickListener{
+        void onItemActiveClick(int pos);
     }
 }

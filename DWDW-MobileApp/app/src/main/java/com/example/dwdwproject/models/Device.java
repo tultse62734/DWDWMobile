@@ -31,6 +31,14 @@ public class Device implements Serializable {
         this.locationDevice = locationDevice;
         this.roomCode = roomCode;
     }
+    public Device(int deviceId, String nameDevice, String createDate, String locationDevice, String roomCode,boolean isActive) {
+        this.deviceId = deviceId;
+        this.nameDevice = nameDevice;
+        this.createDate = createDate;
+        this.locationDevice = locationDevice;
+        this.roomCode = roomCode;
+        this.isActive = isActive;
+    }
 
     public Device(int deviceId, String nameDevice, boolean isActive) {
         this.deviceId = deviceId;

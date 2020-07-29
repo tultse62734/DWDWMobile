@@ -10,7 +10,9 @@ import com.example.dwdwproject.repositories.DWDWRepositories;
 import com.example.dwdwproject.repositories.DWDWRepositoriesImpl;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
+import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.CallBackData;
+import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.roomLocalViews.AddUserToRoomView;
 
 public class AddUserToRoomPresenter {
@@ -32,6 +34,8 @@ public class AddUserToRoomPresenter {
                 mUserItemEntities.setUser(userDTO);
                 mUserItemEntities.setToken(token);
                 addToRoom(mUserItemEntities);
+                SharePreferenceUtils.saveStringSharedPreference(mContext,BundleString.LOCATIONNAME,userDTO.getLocationCode());
+                SharePreferenceUtils.saveIntSharedPreference(mContext,BundleString.LOCATIONID,userDTO.getLocationId());
             }
             @Override
             public void onFail(String message) {

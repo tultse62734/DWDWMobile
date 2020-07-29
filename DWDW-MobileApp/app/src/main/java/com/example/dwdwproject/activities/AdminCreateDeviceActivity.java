@@ -113,8 +113,8 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
         dialog.show();
     }
     private void intentToAdminGetAllDevice(){
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_CANCELED, returnIntent);
+        Intent returnIntent1 = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent1);
         finish();
     }
     private void intentToAdminAssignDevice(DeviceDTO mDeviceDTO){

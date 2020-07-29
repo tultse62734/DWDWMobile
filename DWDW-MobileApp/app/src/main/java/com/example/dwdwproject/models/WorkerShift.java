@@ -3,32 +3,26 @@ package com.example.dwdwproject.models;
 import java.io.Serializable;
 
 public class WorkerShift implements Serializable {
-    private String shiftTime;
+    private int shiftId;
     private String shiftRoom;
-    private String shiftNameManager;
+    private String username;
     private String shiftLocation;
     private String shiftDay;
-    private String shiftStatus;
-    private String shiftStart;
-    private String shiftEnd;
 
-    public WorkerShift(String shiftTime, String shiftRoom, String shiftNameManager, String shiftLocation, String shiftDay, String shiftStatus, String shiftStart, String shiftEnd) {
-        this.shiftTime = shiftTime;
+    public WorkerShift(int shiftId, String shiftRoom, String username, String shiftLocation, String shiftDay) {
+        this.shiftId = shiftId;
         this.shiftRoom = shiftRoom;
-        this.shiftNameManager = shiftNameManager;
+        this.username = username;
         this.shiftLocation = shiftLocation;
         this.shiftDay = shiftDay;
-        this.shiftStatus = shiftStatus;
-        this.shiftStart = shiftStart;
-        this.shiftEnd = shiftEnd;
     }
 
-    public String getShiftTime() {
-        return shiftTime;
+    public int getShiftId() {
+        return shiftId;
     }
 
-    public void setShiftTime(String shiftTime) {
-        this.shiftTime = shiftTime;
+    public void setShiftId(int shiftId) {
+        this.shiftId = shiftId;
     }
 
     public String getShiftRoom() {
@@ -39,12 +33,12 @@ public class WorkerShift implements Serializable {
         this.shiftRoom = shiftRoom;
     }
 
-    public String getShiftNameManager() {
-        return shiftNameManager;
+    public String getUsername() {
+        return username;
     }
 
-    public void setShiftNameManager(String shiftNameManager) {
-        this.shiftNameManager = shiftNameManager;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getShiftLocation() {
@@ -61,29 +55,5 @@ public class WorkerShift implements Serializable {
 
     public void setShiftDay(String shiftDay) {
         this.shiftDay = shiftDay;
-    }
-
-    public String getShiftStatus() {
-        return shiftStatus;
-    }
-
-    public void setShiftStatus(String shiftStatus) {
-        this.shiftStatus = shiftStatus;
-    }
-
-    public String getShiftStart() {
-        return shiftStart;
-    }
-
-    public void setShiftStart(String shiftStart) {
-        this.shiftStart = shiftStart;
-    }
-
-    public String getShiftEnd() {
-        return shiftEnd;
-    }
-
-    public void setShiftEnd(String shiftEnd) {
-        this.shiftEnd = shiftEnd;
     }
 }

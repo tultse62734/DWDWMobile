@@ -23,7 +23,7 @@ public interface ServiceShift {
     Call<ResponseBody> getShiftManager(@HeaderMap Map<String, String> map);
 
     @GET(ConfigAPI.Api.GETSHIFTOFWORKER)
-    Call<ResponseBody> getShiftWorker(@HeaderMap Map<String, String> map);
+    Call<ResponseBody> getShiftWorker(@HeaderMap Map<String, String> map, @Query("locationId") int locationId,@Query("date")String date);
 
     @POST(ConfigAPI.Api.CREATESHIFT)
     @Headers({"Content-Type: application/json"})

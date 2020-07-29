@@ -45,4 +45,7 @@ public interface ServiceUsers {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> assginUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 
+    @PUT(ConfigAPI.Api.UPDATEUSERSTATUS)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> updateUserStatus(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 }

@@ -64,14 +64,12 @@ public class ChooseManagerAdapter extends RecyclerView.Adapter<ChooseManagerAdap
         notifyDataSetChanged();
     }
     public class WorkerViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivProfile;
         TextView tvName;
         TextView mTxtTime,mTxtRole,mTxtLocation;
         LinearLayout mLnlnRootManager;
         TextView tvMobile;
         public WorkerViewHolder(View itemView) {
             super(itemView);
-            ivProfile = (ImageView) itemView.findViewById(R.id.image_avata);
             tvName = (TextView) itemView.findViewById(R.id.txt_name_worker);
             tvMobile = (TextView) itemView.findViewById(R.id.txt_phone_worker);
             mLnlnRootManager = itemView.findViewById(R.id.lnl_root_manage_manager);

@@ -14,20 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RoomDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.adapters.RoomAdapter;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
+import com.example.dwdwproject.presenters.roomPresenters.UpdateRoomPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.roomViews.GetListRoomView;
+import com.example.dwdwproject.views.roomViews.GetRoomView;
+import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
 import java.util.List;
-public class PageRoomFragment extends Fragment implements GetListRoomView {
+public class PageRoomFragment extends Fragment implements GetListRoomView , GetRoomView {
     private View mView;
     private List<Room> mRoomList;
     private RecyclerView mRecyclerView;
@@ -37,6 +40,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
     private SearchView mSearchView;
     private String token ;
     private List<RoomDTO> mRoomDTOS;
+    private UpdateRoomPresenter mUpdateRoomPresenter;
     public PageRoomFragment() {
     }
     @Override
@@ -64,6 +68,7 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        mUpdateRoomPresenter = new UpdateRoomPresenter(getContext(),this);
 //        mRoomList = new ArrayList<>();
 //        mRoomList.add(new Room(1,"100","12-12-2020",true));
 //        mRoomList.add(new Room(2,"200","12-12-2020",false));
@@ -104,6 +109,17 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
                     getActivity().startActivityForResult(intent,ManageRoomActivity.UPDATE_ROOM_CODE);
                 }
             });
+            mRoomAdapter.OnItemActiveClickListerner(new RoomAdapter.OnItemActiveClickListerner() {
+                @Override
+                public void onItemActiveClick(int pos) {
+                    if(mRoomDTOS.get(pos).isActive()){
+                        mRoomDTOS.get(pos).setActive(false);
+                        mUpdateRoomPresenter.updateRoomStatus(token,mRoomDTOS.get(pos));
+                    }else{
+                        mRoomDTOS.get(pos).setActive(true);
+                        mUpdateRoomPresenter.updateRoomStatus(token,mRoomDTOS.get(pos));                    }
+                }
+            });
         }
         else {
             mRoomAdapter.notify(mRoomList);
@@ -133,5 +149,10 @@ public class PageRoomFragment extends Fragment implements GetListRoomView {
         token =  SharePreferenceUtils.getStringSharedPreference(getContext(),BundleString.TOKEN);
         mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(getContext(),this);
         mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
+    }
+    @Override
+    public void getRoomSuccess(RoomDTO mRoomDTO) {
+        mRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
+
     }
 }
