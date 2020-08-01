@@ -69,7 +69,7 @@ public class DateManagement {
         return dateFormat.format(today());
     }
     public static Date toDate(String value) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(value);
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(value);
     }
 
     public static boolean isDateAfter(String startDate, String endDate)
@@ -108,12 +108,12 @@ public class DateManagement {
         return cal.getTime();
     }
     public static String getStartPreviosMonthDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(getStartPreviosMonth());
     }
 
     public static String getEndPreviosMonthDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(getEndPreviosMonth());
     }
 
@@ -177,12 +177,12 @@ public class DateManagement {
     }
 
     public static String getStartPreviosWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(getStartPreviosWeek());
     }
 
     public static String getEndPreviosWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(getEndPreviosWeek());
     }
 
@@ -223,12 +223,12 @@ public class DateManagement {
         }
 
     public static String getStartThisWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         return dateFormat.format(getStartThisWeek());
     }
 
     public static String getEndThisWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         final Calendar cal = Calendar.getInstance();
         int endDay = cal.get(Calendar.DATE-1);
         int endOfThisWeek = cal.getFirstDayOfWeek();

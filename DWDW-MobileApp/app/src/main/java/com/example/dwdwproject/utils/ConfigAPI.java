@@ -57,5 +57,8 @@ public class ConfigAPI {
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationIdAndTime";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
+        String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";
+        //Notify
+        String NOTIFY = "Notification/GetAllNotifications";
     }
 }

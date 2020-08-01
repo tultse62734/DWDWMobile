@@ -140,4 +140,40 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             }
         });
     }
+
+    @Override
+    public void getRecordByWorkerDate(final Context context, String token,int workerID, String date,final CallBackData<List<RecordDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getRecordsByWorkerDate(map,workerID,date);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<List<RecordDTO>>() {
+
+                        }.getType();
+                        //call response to get value data
+                        List<RecordDTO> mRecordDTOS = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(mRecordDTOS);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
 }

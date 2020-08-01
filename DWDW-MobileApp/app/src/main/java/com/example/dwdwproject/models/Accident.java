@@ -19,6 +19,16 @@ public class Accident implements Serializable {
         this.isStatus = isStatus;
     }
 
+    public Accident(int accidentId, String accidentName, String accidentDate, String locationAccident, String image, String roomAccident, boolean isStatus) {
+        this.accidentId = accidentId;
+        this.accidentName = accidentName;
+        this.accidentDate = accidentDate;
+        this.locationAccident = locationAccident;
+        this.image = image;
+        this.roomAccident = roomAccident;
+        this.isStatus = isStatus;
+    }
+
     public int getAccidentId() {
         return accidentId;
     }

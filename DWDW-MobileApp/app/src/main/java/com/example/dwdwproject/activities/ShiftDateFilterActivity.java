@@ -79,10 +79,10 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
     }
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {
-        String starDay = DateManagement.fortmatIntToDate(day) + "-" + DateManagement.fortmatIntToDate((++month)) + "-" + year;
-        String endDay = DateManagement.fortmatIntToDate(dayEnd) + "-" + DateManagement.fortmatIntToDate((++monthEnd)) + "-" + yearEnd;
+        String starDay =year +"/"+DateManagement.fortmatIntToDate((++month)) + "/"+ DateManagement.fortmatIntToDate(day);
+        String endDay =   yearEnd + "/"  + DateManagement.fortmatIntToDate((++monthEnd)) + "/" +DateManagement.fortmatIntToDate(dayEnd);
         if (DateManagement.isDateAfter(starDay, endDay)) {
-            mPickDate = starDay + "-" + endDay;
+            mPickDate = starDay + "- " + endDay;
         } else {
             showFilterDateDialog("Vui lòng chọn lại ngày!!!");
         }
@@ -119,6 +119,7 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
                 mFilterDate = BundleString.getSelectedDate(this);
             } else {
                 mFilterDate = mPickDate;
+                result = mFilterDate;
             }
         } else if (mFilterDate == null) {
             mRadioButton = findViewById(mRadioGroup.getCheckedRadioButtonId());
@@ -150,7 +151,6 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
 
         } else if (mFilterDate.equalsIgnoreCase("This week")) {
             result = DateManagement.getStartThisWeekDateString() + "- " + DateManagement.getEndThisWeekDateString();
-            SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
         }
         SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
         finish();

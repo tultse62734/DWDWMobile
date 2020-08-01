@@ -127,11 +127,10 @@
                     android:textColor="@color/colorWhite"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Thêm"
+                    android:text="Create"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                 </TextView>
             </LinearLayout>
 

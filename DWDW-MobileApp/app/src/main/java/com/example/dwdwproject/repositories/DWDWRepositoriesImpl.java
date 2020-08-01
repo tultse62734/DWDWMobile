@@ -2,6 +2,7 @@ package com.example.dwdwproject.repositories;
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.LoginDTO;
+import com.example.dwdwproject.ResponseDTOs.NotifyDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.ReponseDTO;
@@ -197,6 +198,45 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);
                 mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getNotify(final Context context, String token, final CallBackData<List<NotifyDTO>> mCallBackData) {
+        ClientApi clientApi = new ClientApi();
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        Call<ResponseBody> mBodyCall = clientApi.Services().getMessgae(map);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if (response.code() == 200 && response.body() != null) {
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<List<NotifyDTO>>() {
+
+                        }.getType();
+                        //call response to get value data
+                        List<NotifyDTO> notifyDTO = new Gson().fromJson(result, type);
+                        mCallBackData.onSucess(notifyDTO);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    mCallBackData.onFail(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+
             }
         });
     }

@@ -1,5 +1,4 @@
 package com.example.dwdwproject.presenters.recordsPresenters;
-
 import android.app.Application;
 import android.content.Context;
 
@@ -31,7 +30,19 @@ public class GetRecordsByLocationIdPresenter {
             }
             @Override
             public void onFail(String message) {
-                mGetAllRecordsView.showError("Lấy dữ liệu không thành công");
+                mGetAllRecordsView.showError(message);
+            }
+        });
+    }
+    public void getRecordByWorkerDate(String token,int workerId,String date){
+        this.mRecordRepositories.getRecordByWorkerDate(mContext, token, workerId, date, new CallBackData<List<RecordDTO>>() {
+            @Override
+            public void onSucess(List<RecordDTO> recordDTOS) {
+                mGetAllRecordsView.getAllRecordSuccess(recordDTOS);
+            }
+            @Override
+            public void onFail(String message) {
+                mGetAllRecordsView.showError(message);
             }
         });
     }
