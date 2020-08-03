@@ -85,7 +85,7 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
             mWorkerAdapter = new ShiftWorkerAdapter(WorkerShiftViewActivity.this,mWorkerShiftList);
             mRecyclerView.setAdapter(mWorkerAdapter);
         }else {
-            mWorkerAdapter.notifyDataSetChanged();
+            mWorkerAdapter.notify(mWorkerShiftList);
         }
     }
     public void setDataCalendar() {

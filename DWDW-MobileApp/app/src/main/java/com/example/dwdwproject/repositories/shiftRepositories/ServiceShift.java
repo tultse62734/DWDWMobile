@@ -27,7 +27,7 @@ public interface ServiceShift {
 
     @POST(ConfigAPI.Api.CREATESHIFT)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> createShift(@HeaderMap Map<String, String> map,@Query("locationId") int locationId,@Body RequestBody mRequestBody);
+    Call<ResponseBody> createShift(@HeaderMap Map<String, String> map,@Query("locationID") int locationId,@Body RequestBody mRequestBody);
 
     @PUT(ConfigAPI.Api.UPDATESHIFT)
     @Headers({"Content-Type: application/json"})
