@@ -4,9 +4,12 @@ import android.content.Context;
 import com.example.dwdwproject.ResponseDTOs.LoginDTO;
 import com.example.dwdwproject.ResponseDTOs.NotifyDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.models.ReponseDTO;
 import com.example.dwdwproject.models.ResultReponse;
+import com.example.dwdwproject.models.ResultReponseListNotifyDTO;
 import com.example.dwdwproject.models.ResultReponseUserDTO;
+import com.example.dwdwproject.models.ResultReponseUserDTO1;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -93,17 +96,21 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        callBackData.onSucess(result);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    }.getType();
+                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else {
+                        callBackData.onFail(response.message());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -115,7 +122,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
     }
 
     @Override
-    public void GetUsetInfor(final Context context, String token, final CallBackData<UserDTO> mCallBackData) {
+    public void GetUsetInfor(final Context context, String token, final CallBackData<UserDTO1> mCallBackData) {
         ClientApi clientApi = new ClientApi();
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
@@ -126,23 +133,20 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<ResultReponseUserDTO>() {
-                        }.getType();
-                        ResultReponseUserDTO mResultReponseUserDTO = new Gson().fromJson(result,type);
-                        UserDTO userDTO = mResultReponseUserDTO.getData();
-                        mCallBackData.onSucess(userDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO1>() {
+                    }.getType();
+                    ResultReponseUserDTO1 resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);
@@ -153,7 +157,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
     }
 
     @Override
-    public void UpdateAccout(final Context context, String token, UserDTO mUserDTO, final CallBackData<UserDTO> mCallBackData) {
+    public void UpdateAccout(final Context context, String token, UserDTO1 mUserDTO, final CallBackData<UserDTO1> mCallBackData) {
         ClientApi clientApi = new ClientApi();
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
@@ -174,21 +178,19 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<UserDTO>() {
-                        }.getType();
-                        //call response to get value data
-                        UserDTO userDTO = new Gson().fromJson(result, type);
-                        System.out.println(userDTO.getUserName().toString());
-                        mCallBackData.onSucess(userDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO1>() {
+                    }.getType();
+                    ResultReponseUserDTO1 resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -198,7 +200,6 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             }
         });
     }
-
     @Override
     public void getNotify(final Context context, String token, final CallBackData<List<NotifyDTO>> mCallBackData) {
         ClientApi clientApi = new ClientApi();
@@ -211,24 +212,21 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<NotifyDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<NotifyDTO> notifyDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(notifyDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListNotifyDTO>() {
+                    }.getType();
+                    ResultReponseListNotifyDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);

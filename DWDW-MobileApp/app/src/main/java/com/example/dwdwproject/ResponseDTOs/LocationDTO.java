@@ -35,4 +35,9 @@ public class LocationDTO implements Serializable {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    @Override
+    public String toString() {
+        return locationCode;
+    }
 }

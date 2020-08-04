@@ -5,6 +5,9 @@ import android.content.Context;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.models.ResultReponseListLocationDTO;
+import com.example.dwdwproject.models.ResultReponseListRecordDTO;
+import com.example.dwdwproject.models.ResultReponseLocationDTO;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -40,20 +43,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<LocationDTO>>() {
-                        }.getType();
-                        //call response to get value data
-                        List<LocationDTO>mDeviceList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mDeviceList);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListLocationDTO>() {
+                    }.getType();
+                    ResultReponseListLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -77,21 +79,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<Location>() {
-
-                        }.getType();
-                        //call response to get value data
-                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mLocationDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseLocationDTO>() {
+                    }.getType();
+                    ResultReponseLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -121,21 +121,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<LocationDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mLocationDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseLocationDTO>() {
+                    }.getType();
+                    ResultReponseLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -167,21 +165,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<LocationDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mLocationDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseLocationDTO>() {
+                    }.getType();
+                    ResultReponseLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -204,21 +200,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<LocationDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mLocationDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseLocationDTO>() {
+                    }.getType();
+                    ResultReponseLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -240,20 +234,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<LocationDTO>>() {
-                        }.getType();
-                        //call response to get value data
-                        List<LocationDTO>mDeviceList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mDeviceList);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListLocationDTO>() {
+                    }.getType();
+                    ResultReponseListLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -285,21 +278,19 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<LocationDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        LocationDTO mLocationDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mLocationDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseLocationDTO>() {
+                    }.getType();
+                    ResultReponseLocationDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessgae());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 

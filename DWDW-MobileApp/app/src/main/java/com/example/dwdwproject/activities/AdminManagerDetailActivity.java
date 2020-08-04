@@ -85,8 +85,8 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
             genderId = 0;
             mtxtGender.setText("Choose Gender");
         }
-        roleId= mUserDTO.getRoleId();
-        mTxtRole.setText(mUserDTO.getRoleName());
+        roleId= mUserDTO.getmRole().getRoleId();
+        mTxtRole.setText(mUserDTO.getmRole().getRoleName());
         mUpdateUserPresenter = new UpdateUserPresenter(AdminManagerDetailActivity.this,this);
         mStatusList = new ArrayList<>();
         mStatusList1 = new ArrayList<>();
@@ -182,7 +182,7 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
             mUserDTO.setPhone(mTxtPhone.getText().toString());
             mUserDTO.setDateOfBirth(birthday);
             mUserDTO.setGender(genderId);
-            mUserDTO.setRoleId(roleId);
+            mUserDTO.getmRole().setRoleId(roleId);
             mUpdateUserPresenter.updateUser(token,mUserDTO);
         }
         else {

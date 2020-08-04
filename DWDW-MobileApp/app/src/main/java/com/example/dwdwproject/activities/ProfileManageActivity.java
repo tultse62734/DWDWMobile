@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.GetUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
@@ -23,7 +24,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     private LinearLayout mLnlWorker,mLnlDevice,mBtnClose,mBtnUpdate;
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
-    private UserDTO userDTO;
+    private UserDTO1 userDTO;
     private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
         startActivity(intent);
     }
-    private void intentToUpdateAccount(UserDTO userDTO){
+    private void intentToUpdateAccount(UserDTO1 userDTO){
         Intent intent = new Intent(ProfileManageActivity.this,UpdateInforAccountActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(BundleString.ACCOUNT,userDTO);
@@ -103,7 +104,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         DialogNotifyError.showErrorLoginDialog(ProfileManageActivity.this,"Data fail");
     }
     @Override
-    public void getInforSuccess(UserDTO mUserDTO) {
+    public void getInforSuccess(UserDTO1 mUserDTO) {
         userDTO = mUserDTO;
         initView();
         initData();

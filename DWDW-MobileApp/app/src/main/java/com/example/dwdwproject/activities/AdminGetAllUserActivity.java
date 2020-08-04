@@ -135,8 +135,8 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
-                String location = userDTOList.get(i).getLocationCode();
-                String roleName = userDTOList.get(i).getRoleName();
+                String location = userDTOList.get(i).getmLocationDTO().toString();
+                String roleName = userDTOList.get(i).getmRole().getRoleName();
                 boolean isActive = userDTOList.get(i).isActive();
                 mUserList.add(new Manager(userId,name,phone,roleName,location,creatDate,isActive));
             }

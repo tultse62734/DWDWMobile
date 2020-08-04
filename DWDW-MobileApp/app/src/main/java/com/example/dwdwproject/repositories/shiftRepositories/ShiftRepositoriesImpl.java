@@ -3,6 +3,9 @@ package com.example.dwdwproject.repositories.shiftRepositories;
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.ShiftDTO;
+import com.example.dwdwproject.models.ResultReponseListShiftDTO;
+import com.example.dwdwproject.models.ResultReponseListUserDTO;
+import com.example.dwdwproject.models.ResultReponseShiftDTO;
 import com.example.dwdwproject.models.Shift;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
@@ -40,21 +43,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<ShiftDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<ShiftDTO>mShiftList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mShiftList);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListShiftDTO>() {
+                    }.getType();
+                    ResultReponseListShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -77,21 +78,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<ShiftDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<ShiftDTO>mShiftList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mShiftList);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListShiftDTO>() {
+                    }.getType();
+                    ResultReponseListShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -124,20 +123,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<ShiftDTO>() {
-                        }.getType();
-                        //call response to get value data
-                        ShiftDTO mShiftDTO = new Gson().fromJson(result, type);
-                        CallBackData.onSucess(mShiftDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseShiftDTO>() {
+                    }.getType();
+                    ResultReponseShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        CallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        CallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    CallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -170,21 +168,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<ShiftDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        ShiftDTO mShiftDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mShiftDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseShiftDTO>() {
+                    }.getType();
+                    ResultReponseShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -217,21 +213,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<ShiftDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        ShiftDTO mShiftDTO = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mShiftDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseShiftDTO>() {
+                    }.getType();
+                    ResultReponseShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -253,20 +247,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<ShiftDTO>>() {
-                        }.getType();
-                        //call response to get value data
-                        List<ShiftDTO> mShiftDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mShiftDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListShiftDTO>() {
+                    }.getType();
+                    ResultReponseListShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -288,20 +281,19 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<ShiftDTO>>() {
-                        }.getType();
-                        //call response to get value data
-                        List<ShiftDTO> mShiftDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mShiftDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListShiftDTO>() {
+                    }.getType();
+                    ResultReponseListShiftDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override

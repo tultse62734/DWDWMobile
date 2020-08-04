@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.adapters.ChooseStatusAdapter;
 import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
@@ -42,7 +43,7 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
     private int genderId;
     private int mYear,mMonth,mDay;
     private List<Status> mStatusList1;
-    private UserDTO mUserDTO;
+    private UserDTO1 mUserDTO;
     private GetUserInforTokenPresenter mGetUserInforTokenPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
     private void initData(){
         token = SharePreferenceUtils.getStringSharedPreference(UpdateInforAccountActivity.this, BundleString.TOKEN);
         Bundle bundle = getIntent().getExtras();
-        mUserDTO = (UserDTO) bundle.getSerializable(BundleString.ACCOUNT);
+        mUserDTO = (UserDTO1) bundle.getSerializable(BundleString.ACCOUNT);
         phone = mUserDTO.getPhone()+"";
         mTxtPhone.setText(phone);
         if(mUserDTO.getDateOfBirth()!=null){
@@ -171,7 +172,7 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
         }
     }
     @Override
-    public void getInforSuccess(UserDTO mUserDTO) {
+    public void getInforSuccess(UserDTO1 mUserDTO) {
         finish();
     }
     @Override

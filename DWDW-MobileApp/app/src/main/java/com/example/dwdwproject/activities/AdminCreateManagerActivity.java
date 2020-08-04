@@ -166,7 +166,7 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         userDTO.setPhone(mTxtPhone.getText().toString());
         userDTO.setDateOfBirth(birthday);
         userDTO.setGender(genderId);
-        userDTO.setRoleId(roleId);
+        userDTO.getmRole().setRoleId(roleId);
         mCreateUserPresenter.createUser(token,userDTO);
     }
         @Override

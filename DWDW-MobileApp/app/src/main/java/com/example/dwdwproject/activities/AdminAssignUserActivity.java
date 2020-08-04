@@ -44,7 +44,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
     private ChooseLocationAdapter mLocationAdapter;
-    private int posLocation;
+    private int locationId;
     private UserDTO mUserDTO;
     private String token ;
     private GetAllLocationPresenter mLocationPresenter;
@@ -67,7 +67,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
         mAssignUserPresenter = new AssignUserPresenter(AdminAssignUserActivity.this,this);
         mEdtChooseTime.setText(startTime +" - " + endTime+"");
         mEdtUsername.setText(mUserDTO.getUserName()+"");
-        mEdtChoooseLocation.setText(mUserDTO.getLocationCode()+"");
+        mEdtChoooseLocation.setText(mUserDTO.getmLocationDTO().toString()+"");
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
@@ -95,7 +95,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     }
     private void assignUser(){
             AssignUserDTO userDTO = new AssignUserDTO();
-            userDTO.setLocationId(mUserDTO.getLocationId());
+            userDTO.setLocationId(locationId);
             userDTO.setUserId(mUserDTO.getUserId());
             userDTO.setStartDate(startTime);
             userDTO.setEndDate(endTime);
@@ -176,8 +176,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
             @Override
             public void OnClickItem(int position) {
                 dialog.dismiss();
-                posLocation = mLocationList.get(position).getLocationId();
-                mUserDTO.setLocationId(posLocation);
+                locationId = mLocationList.get(position).getLocationId();
                 mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation());
             }
         });

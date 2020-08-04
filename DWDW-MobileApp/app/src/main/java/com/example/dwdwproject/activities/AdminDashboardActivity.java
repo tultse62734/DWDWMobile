@@ -141,10 +141,10 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         String selectDay = BundleString.getSelectedDate(AdminDashboardActivity.this);
         checkTypeFilterDate(selectDay);
         token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
-        if (mStartTime.equalsIgnoreCase(mEndTime)) {
-            mRecordPresenter.getLocationRecord(token, DateManagement.changeFormatDate(mStartTime), DateManagement.changeFormatDate(mStartTime));
-        } else {
-            mRecordPresenter.getLocationRecord(token, DateManagement.changeFormatDate(mStartTime), DateManagement.changeFormatDate(mEndTime));
+        if(mStartTime.equalsIgnoreCase(mEndTime)){
+            mRecordPresenter.getLocationRecord(token,mStartTime,mStartTime);
+        }else {
+            mRecordPresenter.getLocationRecord(token,mStartTime,mEndTime);
         }
     }
     private void update(){

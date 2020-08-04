@@ -18,9 +18,8 @@ public class ConfigAPI {
         String MANAGERGETDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomManager";
         String ASSIGNDEVICEINTOROOM = "Device/AssignDeviceToRoom";
         String UPDATEDEVICESTATUS = "Device/UpdateDeviceActive";
-
         //Location
-        String GETALLLOCATION = "Location/GetLocations";
+        String GETALLLOCATION = "Location/GetAllActiveLocations";
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";
@@ -36,7 +35,7 @@ public class ConfigAPI {
         String GETROOMFROMLOCATIONBYMANAGER="Room/GetRoomsFromLocationByManager/{locationId}";
         String UPDATEROOMSTATUS = "Room/DeactiveRoom/{roomId}";
         //Users
-        String GETALLUSER  = "User/GetAll";
+        String GETALLUSER  = "User/GetAllByAdmin";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";
         String GETALLUSERBYMANAGER = "User/GetUserFromLocationsByManager";
         String CREATEUSER="User/CreateUserByAdmin";

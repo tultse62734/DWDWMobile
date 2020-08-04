@@ -3,9 +3,8 @@ package com.example.dwdwproject.ResponseDTOs;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class UserDTO implements Serializable,Cloneable {
+public class UserDTO1 implements Serializable {
     @SerializedName("userId")
     private int userId;
     @SerializedName("userName")
@@ -22,10 +21,14 @@ public class UserDTO implements Serializable,Cloneable {
     private String deviceToken;
     @SerializedName("isActive")
     private boolean isActive;
-    @SerializedName("role")
-    private Role mRole;
-    @SerializedName("locations")
-    private List<LocationDTO> mLocationDTO;
+    @SerializedName("roleId")
+    private int roleId;
+    @SerializedName("roleName")
+    private String roleName;
+    @SerializedName("locationId")
+    private int locationId;
+    @SerializedName("locationCode")
+    private String locationCode;
     @SerializedName("startDate")
     private String startDate;
     @SerializedName("endDate")
@@ -70,6 +73,14 @@ public class UserDTO implements Serializable,Cloneable {
         this.gender = gender;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public boolean isActive() {
         return isActive;
     }
@@ -94,20 +105,28 @@ public class UserDTO implements Serializable,Cloneable {
         this.deviceToken = deviceToken;
     }
 
-    public Role getmRole() {
-        return mRole;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setmRole(Role mRole) {
-        this.mRole = mRole;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public List<LocationDTO> getmLocationDTO() {
-        return mLocationDTO;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setmLocationDTO(List<LocationDTO> mLocationDTO) {
-        this.mLocationDTO = mLocationDTO;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getLocationCode() {
+        return locationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        this.locationCode = locationCode;
     }
 
     public String getStartDate() {

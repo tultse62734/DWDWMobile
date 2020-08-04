@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
+
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.utils.DataConvert;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.google.gson.annotations.SerializedName;
@@ -18,7 +20,7 @@ public class UserItemEntities implements Serializable,Cloneable {
     private int accountItemId;
     @TypeConverters(DataConvert.class)
     @ColumnInfo(name = "user")
-    private UserDTO user;
+    private UserDTO1 user;
     @ColumnInfo(name = "token")
     private String token;
 
@@ -26,11 +28,11 @@ public class UserItemEntities implements Serializable,Cloneable {
         return accountItemId;
     }
 
-    public UserDTO getUser() {
+    public UserDTO1 getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserDTO1 user) {
         this.user = user;
     }
     public void setAccountItemId(int accountItemId) {
@@ -43,7 +45,6 @@ public class UserItemEntities implements Serializable,Cloneable {
     public void setToken(String token) {
         this.token = token;
     }
-
     public Object clone() {
         UserItemEntities userItemEntities = new UserItemEntities();
         userItemEntities.setAccountItemId(accountItemId);

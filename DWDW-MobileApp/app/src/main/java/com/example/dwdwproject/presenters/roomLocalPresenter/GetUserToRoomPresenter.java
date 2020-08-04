@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.repositories.DWDWRepositories;
 import com.example.dwdwproject.repositories.DWDWRepositoriesImpl;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
@@ -24,9 +25,9 @@ public class GetUserToRoomPresenter {
         this.mGetUserToRoomView = mGetUserToRoomView;
     }
     public void getUserInfor(final String token){
-        this.mDwdwRepositories.GetUsetInfor(mContext, token, new CallBackData<UserDTO>() {
+        this.mDwdwRepositories.GetUsetInfor(mContext, token, new CallBackData<UserDTO1>() {
             @Override
-            public void onSucess(UserDTO userDTO) {
+            public void onSucess(UserDTO1 userDTO) {
                 UserItemEntities mUserItemEntities = new UserItemEntities();
                 mUserItemEntities.setUser(userDTO);
                 mUserItemEntities.setToken(token);

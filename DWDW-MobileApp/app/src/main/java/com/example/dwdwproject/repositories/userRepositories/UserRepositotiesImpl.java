@@ -7,6 +7,9 @@ import com.example.dwdwproject.ResponseDTOs.AssignUserDTO;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.models.Location;
+import com.example.dwdwproject.models.ResultReponseAssignUserDTO;
+import com.example.dwdwproject.models.ResultReponseListUserDTO;
+import com.example.dwdwproject.models.ResultReponseUserDTO;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -38,29 +41,25 @@ public class UserRepositotiesImpl implements UserRepositories {
         ClientApi clientApi = new ClientApi();
         Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().getAllUser(map);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<UserDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<UserDTO> mUserDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    }.getType();
+                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
@@ -82,21 +81,19 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<UserDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<UserDTO> mUserDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    }.getType();
+                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -120,21 +117,19 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<UserDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<UserDTO> mUserDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    }.getType();
+                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -162,7 +157,7 @@ public class UserRepositotiesImpl implements UserRepositories {
 
             data.put("dateOfBirth",mUserDTO.getDateOfBirth());
             data.put("gender",mUserDTO.getGender());
-            data.put("roleId",mUserDTO.getRoleId());
+            data.put("roleId",mUserDTO.getmRole().getRoleId());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -174,21 +169,19 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<UserDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        UserDTO mUserDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    }.getType();
+                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -213,7 +206,7 @@ public class UserRepositotiesImpl implements UserRepositories {
             data.put("phone",mUserDTO.getPhone());
             data.put("dateOfBirth",mUserDTO.getDateOfBirth());
             data.put("gender",mUserDTO.getGender());
-            data.put("roleId",mUserDTO.getRoleId());
+            data.put("roleId",mUserDTO.getmRole().getRoleId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -224,21 +217,19 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<UserDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        UserDTO mUserDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    }.getType();
+                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -279,22 +270,20 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<AssignUserDTO>() {
-                        }.getType();
-                        //call response to get value data
-                        AssignUserDTO  assignUserDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(assignUserDTO);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseAssignUserDTO>() {
+                    }.getType();
+                    ResultReponseAssignUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);
@@ -322,21 +311,19 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<UserDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        UserDTO mUserDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mUserDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    }.getType();
+                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
