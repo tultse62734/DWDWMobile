@@ -1,5 +1,6 @@
 package com.example.dwdwproject;
 
+import com.example.dwdwproject.activities.LoginActivity;
 import com.example.dwdwproject.activities.SignUpActivity;
 import com.example.dwdwproject.activities.WorkerReportActivity;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -36,7 +37,7 @@ public class FirebaseMessageReceiver extends FirebaseMessagingService {
     //Cách hiển thị Notification
     public void showNotification(String title, String message){
         //Khi ấn vào notify sẽ gửi trả về Intent này
-        Intent intent = new Intent(this, WorkerReportActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         String channel_id = "web_app_channel";
         //Clearing previous activity
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

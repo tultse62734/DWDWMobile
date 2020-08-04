@@ -4,7 +4,7 @@ public class ConfigAPI {
     public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
-        String LOGIN = "User/LoginAsync";
+        String LOGIN = "User/Login";
         String GETUSERINFOR="User/GetUserInfoToken";
         String UPDATEINFOR ="User/UpdatePersonalInfo";
         //Device
