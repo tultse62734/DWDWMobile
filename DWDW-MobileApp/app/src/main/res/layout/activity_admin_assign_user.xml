@@ -90,6 +90,31 @@
                     android:layout_marginBottom="@dimen/dp10"
                     android:textSize="@dimen/sp18"
                     android:textStyle="bold"
+                    android:text="Curret Location :"
+                    android:textColor="@color/colorRed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <TextView
+                    android:gravity="center|left"
+                    android:id="@+id/edt_choose_current_location_assign_admin_add_user"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="italic"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounder_edit_text_1dp"
+                    android:textColorHighlight="@color/colorGreyDark"
+                    android:hint="Input location Code"
+                    android:textColorHint="@color/colorGrey"
+                    android:textColor="@color/colorYellowOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60">
+                </TextView>
+                <TextView
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginBottom="@dimen/dp10"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
                     android:text="Location :"
                     android:textColor="@color/colorRed"
                     android:layout_width="match_parent"

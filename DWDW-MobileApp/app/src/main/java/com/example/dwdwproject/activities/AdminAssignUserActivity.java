@@ -41,6 +41,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     LinearLayout mBtnClose,mBtnAssginUser;
     private EditText mEdtUsername;
     TextView mEdtChoooseLocation,mEdtChooseTime;
+    TextView mEditLocation;
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
     private ChooseLocationAdapter mLocationAdapter;
@@ -58,6 +59,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     }
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_admin_assign_user);
+        mEditLocation = findViewById(R.id.edt_choose_current_location_assign_admin_add_user);
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_assign_admin_add_user);
         mBtnAssginUser = findViewById(R.id.lnl_submit_assign_user_admin);
         mEdtUsername = findViewById(R.id.edit_assign_username);
@@ -67,13 +69,12 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
         mAssignUserPresenter = new AssignUserPresenter(AdminAssignUserActivity.this,this);
         mEdtChooseTime.setText(startTime +" - " + endTime+"");
         mEdtUsername.setText(mUserDTO.getUserName()+"");
-        mEdtChoooseLocation.setText(mUserDTO.getmLocationDTO().toString()+"");
+        mEditLocation.setText(mUserDTO.getmLocationDTO().toString()+"");
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
         mBtnAssginUser.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
-
     }
     @Override
     public void onClick(View v) {
