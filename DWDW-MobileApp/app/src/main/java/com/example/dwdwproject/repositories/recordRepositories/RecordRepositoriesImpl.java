@@ -46,7 +46,6 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                     try {
                         String result = response.body().string();
                         Type type = new TypeToken<List<RecordDTO>>() {
-
                         }.getType();
                         //call response to get value data
                         List<RecordDTO> mRecordDTOS = new Gson().fromJson(result, type);
@@ -58,7 +57,6 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                     mCallBackData.onFail(response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(context, khub);
