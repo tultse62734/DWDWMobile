@@ -1,28 +1,28 @@
 package com.example.dwdwproject.models;
 
-import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.google.gson.annotations.SerializedName;
 
-public class ResultReponseUserDTO {
+public class ResultReponse1<T> {
     @SerializedName("statusCode")
     private int statusCode;
     @SerializedName("data")
-    private UserDTO data;
-    @SerializedName("errorMessage")
+    private T data;
+    @SerializedName("messgae")
     private String errorMessage;
+
     public int getStatusCode() {
         return statusCode;
     }
+
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
 
-
-    public UserDTO getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(UserDTO data) {
+    public void setData(T data) {
         this.data = data;
     }
 
