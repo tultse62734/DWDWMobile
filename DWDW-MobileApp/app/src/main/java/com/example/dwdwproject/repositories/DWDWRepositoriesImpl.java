@@ -5,8 +5,6 @@ import com.example.dwdwproject.ResponseDTOs.LoginDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.ReponseDTO;
-import com.example.dwdwproject.models.ResultReponse;
-import com.example.dwdwproject.models.ResultReponse1;
 import com.example.dwdwproject.models.User;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
@@ -49,23 +47,22 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
+                if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<ResultReponse>() {
+                        Type type = new TypeToken<ReponseDTO>() {
+
                         }.getType();
                         //call response to get value data
-                        ResultReponse resultReponse = new Gson().fromJson(result, type);
-                        if (resultReponse.getStatusCode() == 200) {
-                            ReponseDTO mReponseDTO = new ReponseDTO();
-                            mReponseDTO.setToken(resultReponse.getData());
-                            callBackData.onSucess(mReponseDTO);
-                        }
-                        else {
-                            callBackData.onFail(resultReponse.getErrorMessage());
-                        }
+                        ReponseDTO reponseDTO = new Gson().fromJson(result, type);
+                        callBackData.onSucess(reponseDTO);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    callBackData.onFail(response.message());
+                }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -131,7 +128,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                 if (response.code() == 200 && response.body() != null) {
                     try {
                         String result = response.body().string();
-                        Type type = new TypeToken<ResultReponse1<UserDTO>>() {
+                        Type type = new TypeToken<UserDTO>() {
 
                         }.getType();
                         //call response to get value data
