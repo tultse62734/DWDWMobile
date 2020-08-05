@@ -79,8 +79,8 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
     }
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {
-        String starDay =year +"-"+DateManagement.fortmatIntToDate((++month)) + "-"+ DateManagement.fortmatIntToDate(day);
-        String endDay =   yearEnd + "-"  + DateManagement.fortmatIntToDate((++monthEnd)) + "-" +DateManagement.fortmatIntToDate(dayEnd);
+        String starDay =year +"/"+DateManagement.fortmatIntToDate((++month)) + "/"+ DateManagement.fortmatIntToDate(day);
+        String endDay =   yearEnd + "/"  + DateManagement.fortmatIntToDate((++monthEnd)) + "/" +DateManagement.fortmatIntToDate(dayEnd);
         if (DateManagement.isDateAfter(starDay, endDay)) {
             mPickDate = starDay + "- " + endDay;
         } else {

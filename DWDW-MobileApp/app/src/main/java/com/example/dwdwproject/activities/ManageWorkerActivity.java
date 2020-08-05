@@ -17,7 +17,6 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Manager;
 import com.example.dwdwproject.presenters.userPresenters.GetAllWorkerFromLocationByManagerPresenter;
 import com.example.dwdwproject.utils.BundleString;
-import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.userViews.GetAllListUserView;
@@ -31,7 +30,6 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
     private RecyclerView mRecyclerView;
     private LinearLayout mBtnLose,mBtnAdd;
     private int locationId;
-    private List<UserDTO> mUserDTOList;
     private GetAllWorkerFromLocationByManagerPresenter managerPresenter;
     private String token;
     @Override
@@ -75,6 +73,12 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
         if(manageAdapter ==null){
             manageAdapter = new ManageAdapter(ManageWorkerActivity.this,mManagerList);
             mRecyclerView.setAdapter(manageAdapter);
+            manageAdapter.OnItemClickListener(new ManageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int pos) {
+                    intentToAdminWorkerDetailActivity();
+                }
+            });
         }
         else {
             manageAdapter.notifyDataSetChanged();
@@ -105,21 +109,17 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
     public void getAllUserSuccess(List<UserDTO> userDTOList) {
         if(userDTOList!=null){
             this.mManagerList = new ArrayList<>();
-            mUserDTOList = new ArrayList<>();
-            mUserDTOList = userDTOList;
             for (int i = 0; i <userDTOList.size() ; i++) {
-                int userId = userDTOList.get(i).getUserId();
+                String image = "https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg";
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
-                String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
-                String location = SharePreferenceUtils.getStringSharedPreference(ManageWorkerActivity.this,BundleString.LOCATIONNAME);
-                String roleName = userDTOList.get(i).getRoleName();
-                boolean isActive = userDTOList.get(i).isActive();
-                mManagerList.add(new Manager(userId,name,phone,roleName,location,creatDate ,isActive));
+                String dateOfBirth = userDTOList.get(i).getDateOfBirth();
+                mManagerList.add(new Manager(image,name,phone,dateOfBirth));
             }
             updateUI();
         }
     }
+
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(ManageWorkerActivity.this,message);

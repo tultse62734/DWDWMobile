@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.WorkerShift;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShiftWorkerAdapter extends RecyclerView.Adapter<ShiftWorkerAdapter.ShiftWorkerViewHoler>{
@@ -37,11 +36,6 @@ public class ShiftWorkerAdapter extends RecyclerView.Adapter<ShiftWorkerAdapter.
             holder.mTxtShiftRoom.setText("Room "+mWorkerShiftList.get(position).getShiftRoom());
             holder.mTxtDate.setText(mWorkerShiftList.get(position).getShiftDay());
             holder.mTxtShiftLocation.setText(mWorkerShiftList.get(position).getShiftLocation());
-    }
-    public void notify(List<WorkerShift> workerShiftList){
-        mWorkerShiftList = new ArrayList<>();
-        mWorkerShiftList = workerShiftList;
-        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {

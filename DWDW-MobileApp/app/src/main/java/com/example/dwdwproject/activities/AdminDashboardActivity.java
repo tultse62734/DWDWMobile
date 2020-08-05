@@ -106,17 +106,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         days = tmp[1];
         return days;
     }
-    private String splitToStartDayAndEndDay1(String day) {
-        String days = "";
-        String[] tmp = day.split("- ");
-        days = tmp[0];
-        return days;
-    }
     private void checkTypeFilterDate(String filterDate) {
         if (filterDate.contains(", ")) {
             splitFromToDay(filterDate);
-        }else {
-            mStartTime = splitToStartDayAndEndDay1(filterDate);
+        } else {
+            mStartTime = splitToStartDayAndEndDay(filterDate);
             mEndTime = splitToStartDayAndEndDay(filterDate);
         }
     }
@@ -237,6 +231,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     }
     @Override
     public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminDashboardActivity.this,"Logout Failed");
     }
 
 
