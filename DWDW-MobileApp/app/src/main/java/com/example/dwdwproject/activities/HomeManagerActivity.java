@@ -36,7 +36,7 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         mBtnProfile  = findViewById(R.id.lnl_profile_manage_account);
         mBtnShift = findViewById(R.id.lnl_manage_shift);
         mBtnRoom = findViewById(R.id.lnl_manage_room);
-        mLnlProfile = findViewById(R.id.lnl_message);
+        mLnlProfile = findViewById(R.id.lnl_info_profile_manager);
         mBtnLogout = findViewById(R.id.lnl_log_out_manage);
     }
     private void initData(){
@@ -74,8 +74,8 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
             case R.id.lnl_manage_shift:
                 intenToManageShiftActivty();
                 break;
-            case R.id.lnl_message:
-                intentNotifyMessage();
+            case R.id.lnl_info_profile_manager:
+                intentToProfileActivity();
                 break;
             case R.id.lnl_log_out_manage:
                 showLogoutDialog();
@@ -95,7 +95,7 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         startActivity(intent);
     }
     private void intentToManageAccidentActivity(){
-        Intent intent = new Intent(HomeManagerActivity.this,ManagerUserRecordivity.class);
+        Intent intent = new Intent(HomeManagerActivity.this,ManageAccidentActivity.class);
         startActivity(intent);
     }
     private void intentToManageRoomActivity(){
@@ -104,10 +104,6 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
     }
     private void intenToManageShiftActivty(){
         Intent intent = new Intent(HomeManagerActivity.this,ManagerShiftViewActivity.class);
-        startActivity(intent);
-    }
-    private void intentNotifyMessage(){
-        Intent intent = new Intent(HomeManagerActivity.this,NotifyMessageActivity.class);
         startActivity(intent);
     }
     private void showLogoutDialog() {

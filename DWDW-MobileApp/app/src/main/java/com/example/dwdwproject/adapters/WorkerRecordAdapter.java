@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.WorkerRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkerRecordAdapter extends RecyclerView.Adapter<WorkerRecordAdapter.ViewHolder>{
@@ -35,9 +34,9 @@ public class WorkerRecordAdapter extends RecyclerView.Adapter<WorkerRecordAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-            holder.mTxtNumber.setText(mWorkerRecords.get(position).getLocationCode());
+            holder.mTxtNumber.setText(mWorkerRecords.get(position).getTotalRecord()+"");
             holder.mTxtUsername.setText(mWorkerRecords.get(position).getUsername());
-            holder.mTxtRoomCode.setText("Room " +mWorkerRecords.get(position).getRoomCode());
+            holder.mTxtRoomCode.setText(mWorkerRecords.get(position).getRoomCode());
             holder.mLnlRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,11 +61,6 @@ public class WorkerRecordAdapter extends RecyclerView.Adapter<WorkerRecordAdapte
             mTxtUsername  = itemView.findViewById(R.id.txt_username_worker_record);
             mLnlRoot = itemView.findViewById(R.id.lnl_root_worker_record);
         }
-    }
-    public void notify(List<WorkerRecord> mWorkerRecordList){
-        mWorkerRecords = new ArrayList<>();
-        mWorkerRecords = mWorkerRecordList;
-        notifyDataSetChanged();
     }
     public void OnItemClickListernner(OnItemClickListerner mListerner){
         this.onItemClickListerner = mListerner;

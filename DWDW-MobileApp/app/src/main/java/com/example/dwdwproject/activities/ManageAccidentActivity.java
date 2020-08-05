@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
-import com.example.dwdwproject.ResponseDTOs.ShiftDTO;
 import com.example.dwdwproject.adapters.AccidentAdapter;
 import com.example.dwdwproject.models.Accident;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
@@ -27,10 +26,8 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
     private RecyclerView mRecyclerView;
     private AccidentAdapter mAccidentAdapter;
     private LinearLayout mBtnClose;
-    private String token,locationName,date;
-    private ShiftDTO mShiftDTO;
+    private String token,locationName;
     private int locationId;
-
     private GetRecordsByLocationIdPresenter mGetRecordsByLocationIdPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +43,12 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        Bundle bundle = getIntent().getExtras();
-        mShiftDTO = (ShiftDTO) bundle.getSerializable("WORKERRECORD");
         mBtnClose.setOnClickListener(this);
-        date = BundleString.getSelectedDate(ManageAccidentActivity.this);
         token = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this, BundleString.TOKEN);
         locationId = SharePreferenceUtils.getIntSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONID);
         locationName  = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONNAME);
         mGetRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(ManageAccidentActivity.this,this);
-        mGetRecordsByLocationIdPresenter.getRecordByWorkerDate(token,mShiftDTO.getWorkerId(),date);
+        mGetRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
         }
         private void updateUI(){
             if(mAccidentAdapter == null){
@@ -89,10 +83,9 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                 String image  =mRecordDTOList.get(i).getImage();
                 String locationname = locationName;
                 String recordDate = mRecordDTOList.get(i).getRecordDateTime();
-                String recordName = mShiftDTO.getUsername();
-                String roomCode = mShiftDTO.getRoomCode();
+                String recordName = "Accident" +i;
                 boolean isActive = true;
-                mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,roomCode,isActive));
+                mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,isActive));
             }
             updateUI();
         }

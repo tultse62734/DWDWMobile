@@ -55,7 +55,6 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
                 }
             }
         });
-        holder.mTxtRoomReport.setText(mAccidentList.get(position).getRoomAccident());
     }
     @Override
     public int getItemCount() {
