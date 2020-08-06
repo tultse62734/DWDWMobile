@@ -102,7 +102,7 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
             manageAdapter.OnItemClickListener(new ManageAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int pos) {
-                    Intent intent = new Intent(AdminGetAllUserActivity.this,AdminAssignUserActivity.class);
+                    Intent intent = new Intent(AdminGetAllUserActivity.this,AdminManagerDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(BundleString.MANAGERDETAIL,mDtoList.get(pos));
                     intent.putExtras(bundle);
@@ -112,14 +112,12 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
             manageAdapter.OnItemActiveClickListener(new ManageAdapter.OnItemActiveClickListener() {
                 @Override
                 public void onItemActiveClick(int pos) {
-                    if(mDtoList.get(pos).isActive()){
-                        mUpdateUserPresenter.updateUseStatus(token,mDtoList.get(pos).getUserId(),false);
-                    }else{
-                        mUpdateUserPresenter.updateUseStatus(token,mDtoList.get(pos).getUserId(),true);
-                    }
-                }
+                    Intent intent = new Intent(AdminGetAllUserActivity.this,UserAssginDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.USERASSIGN,mDtoList.get(pos));
+                    intent.putExtras(bundle);
+                    startActivity(intent);                }
             });
-
         }else {
             manageAdapter.notify(mUserList);
         }
@@ -134,11 +132,10 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
                 int userId = userDTOList.get(i).getUserId();
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
-                String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
                 String location = userDTOList.get(i).getmLocationDTO().toString();
                 String roleName = userDTOList.get(i).getmRole().getRoleName();
                 boolean isActive = userDTOList.get(i).isActive();
-                mUserList.add(new Manager(userId,name,phone,roleName,location,creatDate,isActive));
+                mUserList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }
             updateUI();
         }

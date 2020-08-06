@@ -62,16 +62,6 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
             });
             holder.mTxtTime.setText(mManagerList.get(position).getCreateTime());
             holder.mTxtRole.setText(mManagerList.get(position).getRoleName());
-        if(mManagerList.get(position).isActive()){
-            holder.mTxtActive.setText("Active");
-            holder.txtActive.setText("Deactive");
-            holder.mTxtActive.setTextColor(Color.parseColor("#4CAF50"));
-        }else {
-            holder.mTxtActive.setText("Deactive");
-            holder.txtActive.setText("Active");
-
-            holder.mTxtActive.setTextColor(Color.parseColor("#D81B21"));
-        }
         if(mManagerList.get(position).getLocationName()!=null){
             holder.mTxtLocation.setText(mManagerList.get(position).getLocationName());
         }

@@ -68,19 +68,11 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
         if(mDeviceAdapter == null){
             mDeviceAdapter = new DeviceAdapter(ManagerManageDeviceActivity.this,mDeviceList);
             mRecyclerView.setAdapter(mDeviceAdapter);
-            mDeviceAdapter.onItemClickListerner(new DeviceAdapter.OnItemClickListenner() {
-                @Override
-                public void onItemCLick(int pos) {
-                    Intent intent = new Intent(ManagerManageDeviceActivity.this, AdminDeviceDetailActivity.class);
-                    startActivity(intent);
-                }
-            });
         }
         else {
             mDeviceAdapter.notifyDataSetChanged();
         }
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();

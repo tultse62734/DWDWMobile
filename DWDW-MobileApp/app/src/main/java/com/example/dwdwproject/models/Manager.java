@@ -19,23 +19,14 @@ public class Manager  implements Serializable {
         this.email = email;
     }
 
-    public Manager(int userId,String name, String phone, String roleName, String locationName, String createTime, boolean isActive) {
+    public Manager(int userId,String name, String phone, String roleName, String locationName, boolean isActive) {
         this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.roleName = roleName;
         this.locationName = locationName;
-        this.createTime = createTime;
         this.isActive  = isActive;
     }
-    public String getImageResourceId() {
-        return imageResourceId;
-    }
-
-    public void setImageResourceId(String imageResourceId) {
-        this.imageResourceId = imageResourceId;
-    }
-
     public int getUserId() {
         return userId;
     }
@@ -86,10 +77,6 @@ public class Manager  implements Serializable {
 
     public String getCreateTime() {
         return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
     }
 
     public boolean isActive() {

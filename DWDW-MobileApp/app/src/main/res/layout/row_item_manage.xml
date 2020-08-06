@@ -124,7 +124,6 @@
         android:layout_width="0dp"
         android:layout_height="match_parent">
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/lnl_active_user"
             android:background="@drawable/radius_conner_orange"
             android:orientation="vertical"
@@ -136,7 +135,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:text="Active"
+                android:text="Change"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
