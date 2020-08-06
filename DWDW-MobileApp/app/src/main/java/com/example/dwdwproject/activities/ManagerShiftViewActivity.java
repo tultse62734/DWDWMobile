@@ -159,7 +159,8 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                date = DateManagement.changeDateStringToString(dateClicked.toString());
+                String datechoose   = dateFormatForDisplaying.format(dateClicked);
+                date = DateManagement.changeDateStringToString(datechoose);
                 mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
             }
             @Override

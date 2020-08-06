@@ -44,7 +44,7 @@ public class DateManagement {
         return day;
     }
     public static String changeDateStringToString(String input){
-        SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
         Date date = null;
         try {
             date = parser.parse(input);
