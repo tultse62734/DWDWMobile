@@ -44,7 +44,7 @@ public class DateManagement {
         return day;
     }
     public static String changeDateStringToString(String input){
-        SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
         Date date = null;
         try {
             date = parser.parse(input);
@@ -111,12 +111,10 @@ public class DateManagement {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getStartPreviosMonth());
     }
-
     public static String getEndPreviosMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getEndPreviosMonth());
     }
-
     public static String getStartThisMonthDateString() {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);

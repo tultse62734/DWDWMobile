@@ -209,7 +209,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
                 String phone = userDTOList.get(i).getPhone();
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
                 String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONNAME);
-                String roleName = userDTOList.get(i).getmRole().getRoleName();
+                String roleName = userDTOList.get(i).getmRole().getRoleName() +"";
                 boolean isActive = userDTOList.get(i).isActive();
                 managerList.add(new Manager(userId,name,phone,roleName,location,creatDate,isActive));
             }

@@ -113,7 +113,12 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
                 String phone = userDTOList.get(i).getPhone();
                 String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
                 String location = SharePreferenceUtils.getStringSharedPreference(ManageWorkerActivity.this,BundleString.LOCATIONNAME);
-                String roleName = userDTOList.get(i).getmRole().getRoleName();
+                String roleName;
+                if(userDTOList.get(i).getmRole() ==null){
+                    roleName ="";
+                }else{
+                    roleName = userDTOList.get(i).getmRole().getRoleName();
+                }
                 boolean isActive = userDTOList.get(i).isActive();
                 mManagerList.add(new Manager(userId,name,phone,roleName,location,creatDate ,isActive));
             }
