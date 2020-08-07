@@ -55,7 +55,7 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
         token = SharePreferenceUtils.getStringSharedPreference(ManagerManageRoomActivity.this,BundleString.TOKEN);
         locationId = SharePreferenceUtils.getIntSharedPreference(ManagerManageRoomActivity.this, BundleString.LOCATIONID);
         mGetAllRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(ManagerManageRoomActivity.this,this);
-        mGetAllRoomFromLocationPresenter.getAllRoomFromLocation(token,locationId);
+        mGetAllRoomFromLocationPresenter.getAllRoomFromLocationByManager(token,locationId);
     }
     private void updateUI(){
         if(mRoomAdapter == null){

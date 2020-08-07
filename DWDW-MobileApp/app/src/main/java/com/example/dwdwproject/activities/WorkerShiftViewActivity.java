@@ -46,7 +46,7 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
     private RecyclerView mRecyclerView;
     private ShiftWorkerAdapter mWorkerAdapter;
     private CompactCalendarView compactCalendarView;
-    private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("dd-M-yyyy hh:mm:ss a", Locale.getDefault());
+    private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault());
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy", Locale.getDefault());
     private TextView mTxtTime;
     private Calendar currentCalender = Calendar.getInstance(Locale.getDefault());
@@ -99,7 +99,8 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                date = DateManagement.changeDateStringToString(dateClicked.toString());
+                String datechoose   = dateFormatForDisplaying.format(dateClicked);
+                date = DateManagement.changeDateStringToString(datechoose);
                 mGetShiftWorkerPresenter.getShiftsWorker(token,locationId,date);
             }
             @Override

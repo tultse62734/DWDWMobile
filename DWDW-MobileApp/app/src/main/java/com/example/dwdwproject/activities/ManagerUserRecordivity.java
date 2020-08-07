@@ -44,6 +44,8 @@ public class ManagerUserRecordivity extends AppCompatActivity implements View.On
     private String token;
     private List<ShiftDTO> mShiftDTO;
     private int locationId;
+    private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault());
+    private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMM - yyyy", Locale.getDefault());
     private String date;
     private LinearLayout mBtnClose;
     @Override
@@ -111,8 +113,8 @@ public class ManagerUserRecordivity extends AppCompatActivity implements View.On
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                date = DateManagement.changeDateStringToString(dateClicked.toString());
-                SharePreferenceUtils.saveStringSharedPreference(ManagerUserRecordivity.this,BundleString.FILTER_DATE_IS_SELECTE,date);
+                String datechoose   = dateFormatForDisplaying.format(dateClicked);
+                date = DateManagement.changeDateStringToString(datechoose);
                 mGetAllShiftFromLocationPresenter.getAllShiftFromLocation(token,locationId,date);
             }
             @Override

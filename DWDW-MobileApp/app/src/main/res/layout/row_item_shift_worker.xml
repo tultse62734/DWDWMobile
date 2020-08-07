@@ -115,7 +115,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/colorWhite"
                     android:textStyle="bold"
-                    android:textSize="@dimen/sp15"
+                    android:textSize="@dimen/sp12"
                     android:text="View"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
