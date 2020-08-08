@@ -42,8 +42,10 @@ public class ConfigAPI {
         String UPDATEUSER="User/UpdateUserByAdmin";
         String DELETEUSER ="";
         String ASSGINUSER = "User/AssignUserToLocationByAdmin";
+        String DEASSGINUSER ="User/DeassignUserFromLocationByAdmin";
         String GETWORKERFROMLOCATION = "User/GetWorkerFromLocationsByManager";
         String UPDATEUSERSTATUS ="User/UpdateUserActiveByAdmin";
+        String SEARCHUSERBYID ="User/GetByIDAdmin";
         //Shift
         String GETALLSHIFT = "Shift/GetAllShift";
         String GETSHIFTOFMANAGER = "Shift/GetShiftManager";

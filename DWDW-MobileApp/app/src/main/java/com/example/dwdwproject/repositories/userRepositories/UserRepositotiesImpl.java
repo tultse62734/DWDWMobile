@@ -10,6 +10,7 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.ResultReponseAssignUserDTO;
 import com.example.dwdwproject.models.ResultReponseListUserDTO;
 import com.example.dwdwproject.models.ResultReponseUserDTO;
+import com.example.dwdwproject.models.User;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -33,6 +34,85 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepositotiesImpl implements UserRepositories {
+    @Override
+    public void searchUserId(final Context context, String token,int userId, final CallBackData<UserDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().searchUserByAdmin(map,userId);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    }.getType();
+                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getErrorMessage());
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void deassginUserToLocatioṇ(final Context context, String token, int userId, int locationId, final CallBackData<AssignUserDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userId",userId);
+
+            data.put("locationId",locationId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().deassginUser(map,body);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseAssignUserDTO>() {
+                    }.getType();
+                    ResultReponseAssignUserDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
     @Override
     public void getAll(final Context mContext, String token,final CallBackData<List<UserDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
