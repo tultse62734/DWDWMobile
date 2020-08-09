@@ -52,7 +52,7 @@ public interface ServiceUsers {
     @PUT(ConfigAPI.Api.UPDATEUSERSTATUS)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateUserStatus(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
-    @GET(ConfigAPI.Api.GETALLUSERBYMANAGER)
+    @GET(ConfigAPI.Api.SEARCHUSERBYID)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> searchUserByAdmin(@HeaderMap Map<String, String> map,@Query("userId") int id);
 }

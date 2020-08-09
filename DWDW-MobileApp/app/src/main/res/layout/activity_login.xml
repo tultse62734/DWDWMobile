@@ -80,6 +80,7 @@
                  android:layout_height="@dimen/dp60">
              </EditText>
                  <EditText
+                     android:inputType="textPassword"
                      android:id="@+id/edt_password"
                      android:textSize="@dimen/sp18"
                      android:textStyle="italic"

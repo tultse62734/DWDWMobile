@@ -103,6 +103,7 @@
 
 
                     <EditText
+                        android:inputType="textPassword"
                         android:id="@+id/edit_create_password"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"

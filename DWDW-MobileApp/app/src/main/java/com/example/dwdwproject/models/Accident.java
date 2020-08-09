@@ -5,6 +5,8 @@ public class Accident implements Serializable {
     private int accidentId;
     private String accidentName;
     private String accidentDate;
+    private String timeDate;
+    private String username;
     private String locationAccident;
     private String image;
     private String roomAccident;
@@ -23,6 +25,16 @@ public class Accident implements Serializable {
         this.accidentId = accidentId;
         this.accidentName = accidentName;
         this.accidentDate = accidentDate;
+        this.locationAccident = locationAccident;
+        this.image = image;
+        this.roomAccident = roomAccident;
+        this.isStatus = isStatus;
+    }
+    public Accident(int accidentId, String accidentName, String accidentDate,String time,String locationAccident, String image, String roomAccident, boolean isStatus) {
+        this.accidentId = accidentId;
+        this.accidentName = accidentName;
+        this.accidentDate = accidentDate;
+        this.timeDate = time;
         this.locationAccident = locationAccident;
         this.image = image;
         this.roomAccident = roomAccident;
@@ -84,4 +96,13 @@ public class Accident implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getTimeDate() {
+        return timeDate;
+    }
+
+    public void setTimeDate(String timeDate) {
+        this.timeDate = timeDate;
+    }
+
 }

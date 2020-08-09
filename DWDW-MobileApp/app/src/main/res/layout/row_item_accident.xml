@@ -74,6 +74,16 @@
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
+                android:id="@+id/txt_time_accident"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="8:00:00"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                android:textColor="@color/colorBlue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <TextView
                 android:id="@+id/txt_location_accident"
                 android:layout_marginBottom="@dimen/dp5"
                 android:text="Khu A"

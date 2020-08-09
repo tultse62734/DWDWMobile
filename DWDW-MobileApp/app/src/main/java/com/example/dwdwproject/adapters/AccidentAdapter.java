@@ -40,6 +40,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
         holder.mTxtNameReport.setText(mAccidentList.get(position).getAccidentName());
         holder.mTxtDateReport.setText(mAccidentList.get(position).getAccidentDate());
         holder.mTxtLocationReport.setText(mAccidentList.get(position).getLocationAccident());
+        holder.mTxtTime.setText(mAccidentList.get(position).getTimeDate());
         if(mAccidentList.get(position).isStatus()){
             holder.mTxtStatusReport.setText("Active");
             holder.mTxtStatusReport.setTextColor(Color.parseColor("#4CAF50"));
@@ -65,6 +66,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
     public class  AccidentViewHolder extends RecyclerView.ViewHolder{
         private TextView mTxtNumberReport,mTxtNameReport,mTxtDateReport,mTxtLocationReport,mTxtRoomReport,mTxtStatusReport;
         private LinearLayout mLnlRoot;
+        private TextView mTxtTime;
         public AccidentViewHolder(@NonNull View itemView) {
             super(itemView);
            mTxtNumberReport = itemView.findViewById(R.id.txt_number_accident);
@@ -74,6 +76,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
             mTxtRoomReport = itemView.findViewById(R.id.txt_room_accident);
             mTxtStatusReport = itemView.findViewById(R.id.txt_status_accident);
             mLnlRoot = itemView.findViewById(R.id.lnl_root_manage_accident);
+            mTxtTime = itemView.findViewById(R.id.txt_time_accident);
         }
     }
     public void onItemClick(OnItemCkickListerner onItemCkickListerner){
