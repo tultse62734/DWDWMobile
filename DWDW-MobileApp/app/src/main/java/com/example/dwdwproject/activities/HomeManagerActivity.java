@@ -19,8 +19,8 @@ import com.example.dwdwproject.utils.SharePreferenceUtils;
 public class HomeManagerActivity extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout mBtnMManage,mBtnLogout,mBtnProfile,mBtnDevice,mBtnAccident,mBtnShift,mBtnRoom;
     private LinearLayout mLnlProfile;
-    private TextView mtxtTime;
-    private String time;
+    private TextView mtxtTime,mTxtTitle;
+    private String time,title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,13 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         mBtnRoom = findViewById(R.id.lnl_manage_room);
         mLnlProfile = findViewById(R.id.lnl_message);
         mBtnLogout = findViewById(R.id.lnl_log_out_manage);
+        mTxtTitle = findViewById(R.id.txt_title_home_manager);
+
     }
     private void initData(){
         time = BundleString.getSelectedDate(HomeManagerActivity.this);
+        title = SharePreferenceUtils.getStringSharedPreference(HomeManagerActivity.this,BundleString.LOCATIONNAME);
+        mTxtTitle.setText(title);
         mtxtTime.setText(time);
         mBtnLogout.setOnClickListener(this);
         mBtnRoom.setOnClickListener(this);

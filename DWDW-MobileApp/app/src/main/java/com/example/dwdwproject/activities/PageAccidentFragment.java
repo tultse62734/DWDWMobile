@@ -77,11 +77,14 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
                 @Override
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AccidentReportDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.RECORDDETAIL,mAccidentList.get(pos));
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });
         }else {
-            mAccidentAdapter.notifyDataSetChanged();
+            mAccidentAdapter.notify(mAccidentList);
         }
     }
 

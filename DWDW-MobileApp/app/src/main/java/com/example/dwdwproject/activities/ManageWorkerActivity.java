@@ -116,7 +116,7 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
                 if(userDTOList.get(i).getmRole() ==null){
                     roleName ="";
                 }else{
-                    roleName = userDTOList.get(i).getmRole().getRoleName();
+                    roleName = "Worker";
                 }
                 boolean isActive = userDTOList.get(i).isActive();
                 mManagerList.add(new Manager(userId,name,phone,roleName,location,isActive));

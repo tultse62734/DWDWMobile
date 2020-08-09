@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.models.Accident;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.AccidentViewHolder>{
@@ -57,6 +58,11 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
             }
         });
         holder.mTxtRoomReport.setText(mAccidentList.get(position).getRoomAccident());
+    }
+    public void notify(List<Accident> mAccidents){
+        mAccidentList = new ArrayList<>();
+        mAccidentList = mAccidents;
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
