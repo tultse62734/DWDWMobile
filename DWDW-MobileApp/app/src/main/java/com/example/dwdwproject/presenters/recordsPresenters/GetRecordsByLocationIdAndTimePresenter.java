@@ -15,13 +15,11 @@ import java.util.List;
 public class GetRecordsByLocationIdAndTimePresenter {
     private Context mContext;
     private GetAllRecordsView mGetAllRecordsView;
-    private DWDWManagement dwdwManagement;
     private RecordRepositories mRecordRepositories;
 
-    public GetRecordsByLocationIdAndTimePresenter(Context mContext, Application mApplication, GetAllRecordsView mGetAllRecordsView) {
+    public GetRecordsByLocationIdAndTimePresenter(Context mContext, GetAllRecordsView mGetAllRecordsView) {
         this.mContext = mContext;
         this.mGetAllRecordsView = mGetAllRecordsView;
-        this.dwdwManagement = new DWDWManagement(mApplication);
         this.mRecordRepositories = new RecordRepositoriesImpl();
     }
     public void getRecordsByLocationIdAndTime(String token, int locationID, String start, String end){

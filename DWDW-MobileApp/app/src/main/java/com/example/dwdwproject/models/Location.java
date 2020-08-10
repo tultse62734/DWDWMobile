@@ -10,6 +10,8 @@ public class Location implements Serializable {
     @SerializedName("locationCode")
     private String nameLocation;
     private String createDate;
+    private String startDate;
+    private String endDate;
     @SerializedName("isActive")
     private boolean isStatus;
     private List<Room> roomList;
@@ -23,6 +25,14 @@ public class Location implements Serializable {
     public Location(int locationId, String nameLocation, boolean isStatus) {
         this.locationId = locationId;
         this.nameLocation = nameLocation;
+        this.isStatus = isStatus;
+    }
+
+    public Location(int locationId, String nameLocation, String startDate, String endDate, boolean isStatus) {
+        this.locationId = locationId;
+        this.nameLocation = nameLocation;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.isStatus = isStatus;
     }
 
@@ -63,5 +73,21 @@ public class Location implements Serializable {
     }
     public void setRoomList(List<Room> roomList) {
         this.roomList = roomList;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

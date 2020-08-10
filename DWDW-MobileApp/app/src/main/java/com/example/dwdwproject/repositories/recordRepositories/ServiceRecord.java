@@ -13,8 +13,8 @@ import retrofit2.http.Query;
 
 public interface ServiceRecord {
     @GET(ConfigAPI.Api.GETRECORDSBYLOCATIONIDANDTIME)
-    Call<ResponseBody> getRecordsByLocationIdAndTime(@HeaderMap Map<String, String> map,@Path("locationId") int id,
-                                                     @Path("start") String start,@Path("end ") String end);
+    Call<ResponseBody> getRecordsByLocationIdAndTime(@HeaderMap Map<String, String> map,@Query("locationId") int id,
+                                                     @Query("start") String start,@Query("end ") String end);
     @GET(ConfigAPI.Api.GETRECORDBYLOCATION)
     Call<ResponseBody> getRecordsByLocationId(@HeaderMap Map<String, String> map,@Query("locationId") int id);
 

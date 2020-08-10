@@ -71,6 +71,17 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
         if(mLocationAdapter ==null){
             mLocationAdapter = new LocationAdapter(UserAssginDetailActivity.this,mLocationList);
             mRecyclerView.setAdapter(mLocationAdapter);
+            mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
+                @Override
+                public void OnClickItem(int position) {
+                    Intent intent = new Intent(UserAssginDetailActivity.this,AdminAssignUserActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.MANAGERDETAIL,mUserDTO);
+                    bundle.putInt(BundleString.USERASSIGN,position);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
             mLocationAdapter.OnClickDeleteItemListener(new LocationAdapter.OnClickDeleteItem() {
                 @Override
                 public void OnClickDeleteItem(int position) {
@@ -111,7 +122,8 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
                 int locationId  = mLocationDTOS.get(i).getLocationId();
                 String locationName = mLocationDTOS.get(i).getLocationCode();
                 boolean isactive = mLocationDTOS.get(i).isActive();
-                this.mLocationList.add(new Location(locationId,locationName,isactive));
+                String date = mLocationDTOS.get(i).getStartDate() + "to" +mLocationDTOS.get(i).getEndDate();
+                this.mLocationList.add(new Location(locationId,locationName,date,isactive));
             }
             updateUI();
         }

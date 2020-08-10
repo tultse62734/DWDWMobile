@@ -19,6 +19,7 @@ import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.adapters.AccidentAdapter;
 import com.example.dwdwproject.models.Accident;
+import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdAndTimePresenter;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
@@ -32,10 +33,12 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
     private List<Accident> mAccidentList;
     private RecyclerView mRecyclerView;
     private AccidentAdapter mAccidentAdapter;
-    private GetRecordsByLocationIdPresenter mRecordsByLocationIdPresenter;
+    private GetRecordsByLocationIdAndTimePresenter mIdAndTimePresenter;
     private int locationId;
     private String locationName;
     private String token;
+    private String mStartTime = "";
+    private String mEndTime = "";
     public PageAccidentFragment() {
         // Required empty public constructor
     }
@@ -65,9 +68,15 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
+        mIdAndTimePresenter = new GetRecordsByLocationIdAndTimePresenter(getContext(),this);
+        String selectDay = BundleString.getSelectedDate(getContext());
+        checkTypeFilterDate(selectDay);
         token = SharePreferenceUtils.getStringSharedPreference(getContext(), BundleString.TOKEN);
-        mRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(getContext(),this);
-        mRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
+        if(mStartTime.equalsIgnoreCase(mEndTime)){
+            mIdAndTimePresenter.getRecordsByLocationIdAndTime(token,locationId,mStartTime,mStartTime);
+        }else {
+            mIdAndTimePresenter.getRecordsByLocationIdAndTime(token,locationId,mStartTime,mEndTime);
+        }
     }
     private void updateUI(){
         if(mAccidentAdapter == null){
@@ -108,9 +117,37 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(getContext(),message);
     }
-    public void reloadPage(){
+    public void reloadPage() {
         token = SharePreferenceUtils.getStringSharedPreference(getContext(), BundleString.TOKEN);
-        mRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(getContext(),this);
-        mRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
+        if (mStartTime.equalsIgnoreCase(mEndTime)) {
+            mIdAndTimePresenter.getRecordsByLocationIdAndTime(token, locationId, mStartTime, mStartTime);
+        } else {
+            mIdAndTimePresenter.getRecordsByLocationIdAndTime(token, locationId, mStartTime, mEndTime);
+        }
+    }
+    private String splitToStartDayAndEndDay(String day) {
+        String days = "";
+        String[] tmp = day.split("- ");
+        days = tmp[1];
+        return days;
+    }
+    private String splitToStartDayAndEndDay1(String day) {
+        String days = "";
+        String[] tmp = day.split("- ");
+        days = tmp[0];
+        return days;
+    }
+    private void checkTypeFilterDate(String filterDate) {
+        if (filterDate.contains(", ")) {
+            splitFromToDay(filterDate);
+        }else {
+            mStartTime = splitToStartDayAndEndDay1(filterDate);
+            mEndTime = splitToStartDayAndEndDay(filterDate);
+        }
+    }
+    private void splitFromToDay(String filterDate) {
+        String[] tmp = filterDate.split(", ");
+        mStartTime = tmp[1];
+        mEndTime = tmp[1];
     }
 }

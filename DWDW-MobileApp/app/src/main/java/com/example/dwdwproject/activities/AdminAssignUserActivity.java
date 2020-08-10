@@ -45,7 +45,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
     private ChooseLocationAdapter mLocationAdapter;
-    private int locationId;
+    private int locationId,poslocation;
     private UserDTO mUserDTO;
     private String token ;
     private GetAllLocationPresenter mLocationPresenter;
@@ -69,7 +69,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
         mAssignUserPresenter = new AssignUserPresenter(AdminAssignUserActivity.this,this);
         mEdtChooseTime.setText(startTime +" - " + endTime+"");
         mEdtUsername.setText(mUserDTO.getUserName()+"");
-        mEditLocation.setText(mUserDTO.getmLocationDTO().toString()+"");
+        mEditLocation.setText(mUserDTO.getmLocationDTO().get(poslocation).toString()+"");
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
@@ -105,6 +105,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     private void getDataLocation(){
         Bundle bundle = getIntent().getExtras();
         mUserDTO  = (UserDTO) bundle.getSerializable(BundleString.MANAGERDETAIL);
+        poslocation = (int)bundle.getInt(BundleString.USERASSIGNPOSTION,0);
         token = SharePreferenceUtils.getStringSharedPreference(AdminAssignUserActivity.this,BundleString.TOKEN);
         mLocationPresenter = new GetAllLocationPresenter(AdminAssignUserActivity.this,this);
         mLocationPresenter.getAllLocation(token);
