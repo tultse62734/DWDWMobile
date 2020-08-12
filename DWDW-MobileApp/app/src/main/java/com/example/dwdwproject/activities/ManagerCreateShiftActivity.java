@@ -208,7 +208,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
                 String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONNAME);
-                String roleName = userDTOList.get(i).getmRole().getRoleName() +"";
+                String roleName = "Worker";
                 boolean isActive = userDTOList.get(i).isActive();
                 managerList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }

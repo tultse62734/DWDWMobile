@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -49,6 +50,8 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
     private List<Status> mStatusList1;
     private UserDTO mUserDTO;
     private UpdateUserPresenter mUpdateUserPresenter;
+    private LinearLayout mBtnUpdateStatus;
+    private ImageView mImgUpdateStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +66,19 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
         mBtnUpdateManager = findViewById(R.id.lnl_submit_update_user_admin);
         token = SharePreferenceUtils.getStringSharedPreference(AdminManagerDetailActivity.this, BundleString.TOKEN);
         mTxtUsername = findViewById(R.id.edit_update_username);
+        mBtnUpdateStatus = findViewById(R.id.lnl_btn_update_status_user);
+        mImgUpdateStatus = findViewById(R.id.image_btn_update_status_user);
         mTxtPhone = findViewById(R.id.edit_update_phone);
         mTxtBirthDay = findViewById(R.id.edt_choose_date_update_manager_admin);
         mTxtRole = findViewById(R.id.edt_choose_role_update_manager_admin);
         mtxtGender = findViewById(R.id.edt_choose_gender_update_manager_admin);
     }
     private void initData(){
+        if(mUserDTO.isActive()){
+            mImgUpdateStatus.setImageResource(R.mipmap.ic_minus_1);
+        }else{
+            mImgUpdateStatus.setImageResource(R.mipmap.ic_tick);
+        }
         mTxtUsername.setText(mUserDTO.getUserName());
         mTxtPhone.setText(mUserDTO.getPhone());
         if(mUserDTO.getDateOfBirth()!=null){
@@ -99,6 +109,7 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
         mtxtGender.setOnClickListener(this);
         mTxtBirthDay.setOnClickListener(this);
         mTxtRole.setOnClickListener(this);
+        mBtnUpdateStatus.setOnClickListener(this);
     }
     private void showChooseRoleDialog(){
         final Dialog dialog = new Dialog(AdminManagerDetailActivity.this);
@@ -209,9 +220,11 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
             case R.id.edt_choose_date_update_manager_admin:
                 chooseTimeBirthDay();
                 break;
+            case R.id.lnl_btn_update_status_user:
+                updateUserStatus();
+                break;
         }
     }
-
     @Override
     public void getUserSuccess(UserDTO userDTO) {
         Intent returnIntent = new Intent();
@@ -221,5 +234,14 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminManagerDetailActivity.this,message);
+    }
+
+    private void updateUserStatus(){
+            if(mUserDTO.isActive()){
+                mUpdateUserPresenter.updateUseStatus(token,mUserDTO.getUserId(),false);
+            }else{
+                mUpdateUserPresenter.updateUseStatus(token,mUserDTO.getUserId(),true);
+            }
+
     }
 }

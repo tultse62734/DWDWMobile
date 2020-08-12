@@ -69,7 +69,11 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
         mAssignUserPresenter = new AssignUserPresenter(AdminAssignUserActivity.this,this);
         mEdtChooseTime.setText(startTime +" - " + endTime+"");
         mEdtUsername.setText(mUserDTO.getUserName()+"");
-        mEditLocation.setText(mUserDTO.getmLocationDTO().get(poslocation).toString()+"");
+        if(mUserDTO.getmLocationDTO().isEmpty()){
+           mEditLocation.setText("No assgin into location");
+        }else{
+            mEditLocation.setText(mUserDTO.getmLocationDTO().get(poslocation).toString()+"");
+        }
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);

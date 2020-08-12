@@ -11,7 +11,7 @@ public class RecordDTO implements Serializable {
     private int deviceId;
     @SerializedName("recordDateTime")
     private String recordDateTime;
-    @SerializedName("image")
+    @SerializedName("imageByte")
     private String image;
 
     public int getRecordId() {

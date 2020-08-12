@@ -132,11 +132,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         mBtnFilter.setOnClickListener(this);
         itemDashBoards = new ArrayList<>();
         itemDashBoards.add(new ItemDashBoard("Profile", R.mipmap.ic_worker));
-        itemDashBoards.add(new ItemDashBoard("18 Locations", R.mipmap.ic_project_management));
-        itemDashBoards.add(new ItemDashBoard("17 Devices", R.mipmap.ic_security_camera));
-        itemDashBoards.add(new ItemDashBoard("30 Workers", R.mipmap.ic_collaboration));
-        itemDashBoards.add(new ItemDashBoard("15 Rooms", R.mipmap.ic_search_home));
-        itemDashBoards.add(new ItemDashBoard("5 Record", R.mipmap.ic_emergency));
+        itemDashBoards.add(new ItemDashBoard("Locations", R.mipmap.ic_project_management));
+        itemDashBoards.add(new ItemDashBoard("Devices", R.mipmap.ic_security_camera));
+        itemDashBoards.add(new ItemDashBoard("Workers", R.mipmap.ic_collaboration));
+        itemDashBoards.add(new ItemDashBoard("Rooms", R.mipmap.ic_search_home));
+        itemDashBoards.add(new ItemDashBoard("Record", R.mipmap.ic_emergency));
         update();
         String selectDay = BundleString.getSelectedDate(AdminDashboardActivity.this);
         checkTypeFilterDate(selectDay);

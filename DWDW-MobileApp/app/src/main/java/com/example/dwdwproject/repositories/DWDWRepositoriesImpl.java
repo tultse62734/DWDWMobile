@@ -44,29 +44,30 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             e.printStackTrace();
         }
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-        Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
+        final Call<ResponseBody> mBodyCall = clientApi.Services().login(body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                KProgressHUDManager.dismiss(mContext, khub);
+                if(response.code()==200& response.body()!=null){
+                    KProgressHUDManager.dismiss(mContext, khub);
                     try {
                         String result = response.body().string();
                         Type type = new TypeToken<ResultReponse>() {
                         }.getType();
                         //call response to get value data
                         ResultReponse resultReponse = new Gson().fromJson(result, type);
-                        if (resultReponse.getStatusCode() == 200) {
                             ReponseDTO mReponseDTO = new ReponseDTO();
                             mReponseDTO.setToken(resultReponse.getData());
                             callBackData.onSucess(mReponseDTO);
-                        }
-                        else {
-                            callBackData.onFail(resultReponse.getErrorMessage());
-                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else{
+                    KProgressHUDManager.dismiss(mContext, khub);
+                    callBackData.onFail("Invalid username password!");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {

@@ -10,7 +10,7 @@ public class ResultReponnseListLocationRecordDTO {
     private int statusCode;
     @SerializedName("data")
     private List<LocationRecord> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String messgae;
 
     public int getStatusCode() {

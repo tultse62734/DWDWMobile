@@ -33,15 +33,14 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
         AccidentViewHolder viewHolder = new AccidentViewHolder(view);
         return viewHolder;
     }
-
     @Override
     public void onBindViewHolder(@NonNull AccidentViewHolder holder, final int position) {
         int number = position + 1;
         holder.mTxtNumberReport.setText("Report "+ number);
         holder.mTxtNameReport.setText(mAccidentList.get(position).getAccidentName());
-        holder.mTxtDateReport.setText(mAccidentList.get(position).getAccidentDate());
+        holder.mTxtDateReport.setText("Day : " + mAccidentList.get(position).getAccidentDate());
         holder.mTxtLocationReport.setText(mAccidentList.get(position).getLocationAccident());
-        holder.mTxtTime.setText(mAccidentList.get(position).getTimeDate());
+        holder.mTxtTime.setText("Time : "+ mAccidentList.get(position).getTimeDate());
         if(mAccidentList.get(position).isStatus()){
             holder.mTxtStatusReport.setText("Active");
             holder.mTxtStatusReport.setTextColor(Color.parseColor("#4CAF50"));

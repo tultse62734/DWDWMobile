@@ -10,7 +10,7 @@ public class ResultReponseListUserDTO{
     private int statusCode;
     @SerializedName("data")
     private List<UserDTO> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

@@ -8,7 +8,7 @@ public class ResultReponseUserDTO {
     private int statusCode;
     @SerializedName("data")
     private UserDTO data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String errorMessage;
     public int getStatusCode() {
         return statusCode;

@@ -69,10 +69,10 @@
                         app:cardCornerRadius="@dimen/dp10"
                         android:layout_margin="2dp">
                         <ImageView
-                            android:id="@+id/image_product_detail"
+                            android:id="@+id/image_accident_detail"
                             android:src="@drawable/bg_login"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="300dp"
                             android:scaleType="fitXY"
                             >
                         </ImageView>

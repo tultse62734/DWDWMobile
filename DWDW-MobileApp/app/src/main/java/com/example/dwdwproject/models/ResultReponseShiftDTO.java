@@ -9,7 +9,7 @@ public class ResultReponseShiftDTO {
     private int statusCode;
     @SerializedName("data")
     private ShiftDTO data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

@@ -57,10 +57,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         username  = mEdtUsername.getText().toString();
         password = mEdtPassword.getText().toString();
         if(username.length()== 0 && username.equalsIgnoreCase("")){
-            showErrorLoginDialog("Tài khoản không được để trống");
+            showErrorLoginDialog("Usernam is't null");
         }
         else if(password.length()==0 && password.equalsIgnoreCase("")){
-            showErrorLoginDialog("Mẩu khẩu không được để trống");
+            showErrorLoginDialog("Password is't null");
         }
         else {
 //            if(username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("123")){
@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void showError(String message) {
-        showErrorLoginDialog("Đăng nhập không thành công");
+        showErrorLoginDialog("Login fail");
     }
     private void intentToHomeActivityByRole(int role){
             if(role ==1){
@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 intentToHomeManageActivity();
             }
             else {
-                showErrorLoginDialog("Không có role tồn tại");
+                showErrorLoginDialog("Role is not working");
             }
     }
     @Override

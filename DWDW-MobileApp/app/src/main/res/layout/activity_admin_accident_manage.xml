@@ -50,6 +50,24 @@
             android:layout_marginTop="@dimen/dp50"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <LinearLayout
+                android:gravity="right"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/lnl_filter_manage_record"
+                    android:layout_margin="@dimen/dp10"
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40">
+                    <ImageView
+                        android:src="@mipmap/ic_filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
             <com.ogaclejapan.smarttablayout.SmartTabLayout
                 android:layout_marginTop="@dimen/dp10"
                 android:layout_marginLeft="@dimen/dp10"

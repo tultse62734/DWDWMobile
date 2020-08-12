@@ -29,7 +29,7 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
     private List<Manager> mManagerList;
     private ManageAdapter manageAdapter;
     private RecyclerView mRecyclerView;
-    private LinearLayout mBtnLose,mBtnAdd;
+    private LinearLayout mBtnLose;
     private int locationId;
     private List<UserDTO> mUserDTOList;
     private GetAllWorkerFromLocationByManagerPresenter managerPresenter;
@@ -42,7 +42,6 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
         initData();
     }
     private void initView(){
-        mBtnAdd = findViewById(R.id.lnl_add_worker_admin);
         mBtnLose = findViewById(R.id.lnl_close_manage_worker);
         mRecyclerView = findViewById(R.id.rcv_worker);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ManageWorkerActivity.this,LinearLayoutManager.VERTICAL, false);
@@ -50,7 +49,6 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
     }
     private void initData(){
         managerPresenter = new GetAllWorkerFromLocationByManagerPresenter(ManageWorkerActivity.this,this);
-        mBtnAdd.setOnClickListener(this);
         mBtnLose.setOnClickListener(this);
 //        mManagerList = new ArrayList<>();
 //        mManagerList.add(new Manager("https://secure.img1-fg.wfcdn.com/im/02238154/compr-r85/8470/84707680/pokemon-pikachu-wall-decal.jpg","A","01224959623","tultse62734@fpt.edu.vn"));
@@ -80,10 +78,7 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
             manageAdapter.notifyDataSetChanged();
         }
     }
-    private void intentToAdminWorkerDetailActivity(){
-        Intent intent = new Intent(ManageWorkerActivity.this,AdminWorkerDetailActivity.class);
-        startActivity(intent);
-    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -91,15 +86,10 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
             case R.id.lnl_close_manage_worker:
                 finish();
                 break;
-            case R.id.lnl_add_worker_admin:
-                intentToAddManagerActivty();
-                break;
+
         }
     }
-    private void intentToAddManagerActivty(){
-        Intent intent = new Intent(ManageWorkerActivity.this,AdminCreateManagerActivity.class);
-        startActivity(intent);
-    }
+
 
     @Override
     public void getAllUserSuccess(List<UserDTO> userDTOList) {

@@ -11,7 +11,7 @@ public class ResultReponseListLocationDTO {
     private int statusCode;
     @SerializedName("data")
     private List<LocationDTO> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String messgae;
 
     public int getStatusCode() {

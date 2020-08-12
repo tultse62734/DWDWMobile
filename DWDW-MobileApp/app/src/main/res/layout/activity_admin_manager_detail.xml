@@ -70,13 +70,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp50">
                     <LinearLayout
+                        android:id="@+id/lnl_btn_update_status_user"
                         android:orientation="horizontal"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:src="@mipmap/ic_cancel"
+                            android:id="@+id/image_btn_update_status_user"
+                            android:src="@mipmap/ic_minus_1"
                             android:layout_width="@dimen/dp40"
                             android:layout_height="@dimen/dp40">
 

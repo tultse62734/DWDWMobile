@@ -11,7 +11,7 @@ public class ResultReponseListNotifyDTO {
     private int statusCode;
     @SerializedName("data")
     private List<NotifyDTO> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

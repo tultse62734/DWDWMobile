@@ -11,9 +11,8 @@ public class ResultReponseUserDTO1 {
     private int statusCode;
     @SerializedName("data")
     private UserDTO1 data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
-
     public int getStatusCode() {
         return statusCode;
     }

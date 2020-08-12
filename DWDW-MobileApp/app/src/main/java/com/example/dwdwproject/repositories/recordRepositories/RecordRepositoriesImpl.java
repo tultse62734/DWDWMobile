@@ -7,6 +7,7 @@ import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.ResponseDTOs.RoomDTO;
 import com.example.dwdwproject.models.ResultReponnseListLocationRecordDTO;
 import com.example.dwdwproject.models.ResultReponseListRecordDTO;
+import com.example.dwdwproject.models.ResultReponseRecordDTO;
 import com.example.dwdwproject.models.ResultReponseRoomDTO;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
@@ -31,7 +32,38 @@ public class RecordRepositoriesImpl implements RecordRepositories {
     public void getAllRecord(Context context, String token, CallBackData<RecordDTO> mCallBackData) {
     }
     @Override
-    public void getRecordDetailById(Context context, String token, int recordID, CallBackData<RecordDTO> mCallBackData) {
+    public void getRecordDetailById(final Context context, String token, int recordID, final CallBackData<RecordDTO> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getRecordsById(map,recordID);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseRecordDTO>() {
+                    }.getType();
+                    ResultReponseRecordDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
     }
     @Override
     public void getRecordByLocationId(final Context context, String token, int locationId, final CallBackData<List<RecordDTO>> mCallBackData) {

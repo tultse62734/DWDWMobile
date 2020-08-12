@@ -9,7 +9,7 @@ public class ResultReponseAssignDeviceDTO {
     private int statusCode;
     @SerializedName("data")
     private AssignDeviceDTO data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

@@ -55,6 +55,7 @@ public class ConfigAPI {
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
         String GETSHIFTFROMLOCATION = "Shift/GetShiftFromLocationByDateManager";
         //Record
+        String GETRECORDBYID = "Record/GetRecordById";
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationDate";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";

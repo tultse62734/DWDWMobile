@@ -2,7 +2,9 @@ package com.example.dwdwproject.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResultReponse {
+import java.io.Serializable;
+
+public class ResultReponse implements Serializable {
     @SerializedName("statusCode")
     private int statusCode;
     @SerializedName("data")
@@ -18,7 +20,6 @@ public class ResultReponse {
     public String getData() {
         return data;
     }
-
     public void setData(String data) {
         this.data = data;
     }

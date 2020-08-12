@@ -1,6 +1,8 @@
 package com.example.dwdwproject.activities;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,6 +28,7 @@ import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 public class PageAccidentFragment extends Fragment implements GetAllRecordsView {
@@ -87,6 +90,7 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AccidentReportDetailActivity.class);
                     Bundle bundle = new Bundle();
+                    mAccidentList.get(pos).setImage(parseBitmapToBytes());
                     bundle.putSerializable(BundleString.RECORDDETAIL,mAccidentList.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -96,7 +100,13 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
             mAccidentAdapter.notify(mAccidentList);
         }
     }
-
+    private String parseBitmapToBytes(){
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.bg_login);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray.toString();
+    }
     @Override
     public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
             if(mRecordDTOList!=null){

@@ -11,7 +11,7 @@ public class ResultReponseListShiftDTO {
     private int statusCode;
     @SerializedName("data")
     private List<ShiftDTO> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

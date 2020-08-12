@@ -9,7 +9,7 @@ public class ResultReponseAssignUserDTO {
     private int statusCode;
     @SerializedName("data")
     private AssignUserDTO data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

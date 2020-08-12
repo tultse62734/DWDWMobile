@@ -20,13 +20,14 @@ import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminAccidentManageActivity extends AppCompatActivity implements View.OnClickListener, GetAllLocatonView {
-    LinearLayout mBtnClose;
-    private FragmentPagerItemAdapter mAdapter;
+    LinearLayout mBtnClose,mBtnFilter;
+    private FragmentStatePagerItemAdapter mAdapter;
     private ViewPager mViewPager;
     private List<Location> mLocationList;
     private SmartTabLayout mViewPagerTab;
@@ -41,9 +42,11 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
     }
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_manage_accident_admin);
+        mBtnFilter = findViewById(R.id.lnl_filter_manage_record);
     }
     private void initData(){
         mBtnClose.setOnClickListener(this);
+        mBtnFilter.setOnClickListener(this);
         token = SharePreferenceUtils.getStringSharedPreference(AdminAccidentManageActivity.this,BundleString.TOKEN);
         mGetAllLocationPresenter = new GetAllLocationPresenter(AdminAccidentManageActivity.this,this);
         mGetAllLocationPresenter.getAllLocation(token);
@@ -62,7 +65,7 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
             bundle.putString(BundleString.LOCATIONNAME,locationList.get(i).getNameLocation());
             creator.add(locationList.get(i).getNameLocation(), PageAccidentFragment.class, bundle);
         }
-        mAdapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+        mAdapter = new FragmentStatePagerItemAdapter(getSupportFragmentManager(),
                 creator.create());
         mViewPager = (ViewPager) findViewById(R.id.viewpager_admin_accident);
         mViewPager.setOffscreenPageLimit(locationList.size());
@@ -107,9 +110,14 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
             case R.id.lnl_close_manage_accident_admin:
                 finish();
                 break;
+            case R.id.lnl_filter_manage_record:
+                Intent intent = new Intent(AdminAccidentManageActivity.this,ShiftDateFilterActivity.class);
+                startActivity(intent);
+                break;
 
         }
     }
+
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList!=null){

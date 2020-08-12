@@ -11,7 +11,7 @@ public class ResultReponseListDeviceDTO {
     private int statusCode;
     @SerializedName("data")
     private List<DeviceDTO> data;
-    @SerializedName("errorMessage")
+    @SerializedName("message")
     private String message;
 
     public int getStatusCode() {

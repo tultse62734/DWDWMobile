@@ -21,7 +21,7 @@ import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
 
 public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetUserInforTokenView {
-    private LinearLayout mLnlWorker,mLnlDevice,mBtnClose,mBtnUpdate;
+    private LinearLayout mBtnClose,mBtnUpdate;
     private String token;
     private TextView mTxtNameProfile,mTxtBirthDayProfile,mTxtPhoneProfile,mTxtRoleProfile;
     private UserDTO1 userDTO;
@@ -33,8 +33,6 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         getDateServer();
     }
     private void initView(){
-        mLnlWorker = findViewById(R.id.lnl_profile_admin_worker);
-        mLnlDevice = findViewById(R.id.lnl_profile_admin_device);
         mBtnClose = findViewById(R.id.lnl_close_manage_profile);
         mTxtNameProfile = findViewById(R.id.txt_name_profile);
         mTxtBirthDayProfile = findViewById(R.id.txt_email_profile);
@@ -60,8 +58,7 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         if(userDTO.getRoleId() == 3){
             mTxtRoleProfile.setText("Worker");
         }
-        mLnlWorker.setOnClickListener(this);
-        mLnlDevice.setOnClickListener(this);
+
         mBtnClose.setOnClickListener(this);
         mBtnUpdate.setOnClickListener(this);
 
@@ -70,12 +67,6 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.lnl_profile_admin_worker:
-                intentToManageWorkerActivty();
-                break;
-            case R.id.lnl_profile_admin_device:
-                intentToManageDeviceActivity();
-                break;
             case R.id.lnl_close_manage_profile:
                 finish();
                 break;
@@ -83,14 +74,6 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
                 intentToUpdateAccount(userDTO);
                 break;
         }
-    }
-    private void intentToManageWorkerActivty(){
-            Intent intent = new Intent(ProfileManageActivity.this, ManageManagerActivity.class);
-            startActivity(intent);
-    }
-    private void intentToManageDeviceActivity(){
-        Intent intent = new Intent(ProfileManageActivity.this,ManageDeviceActivity.class);
-        startActivity(intent);
     }
     private void intentToUpdateAccount(UserDTO1 userDTO){
         Intent intent = new Intent(ProfileManageActivity.this,UpdateInforAccountActivity.class);

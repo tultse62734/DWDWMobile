@@ -17,19 +17,19 @@ public class DateManagement {
                 convert = "Monday";
                 break;
             case 3:
-                convert = "Thứ 3";
+                convert = "Tuesday";
                 break;
             case 4:
-                convert = "Thứ 4";
+                convert = "Wednesday ";
                 break;
             case 5:
-                convert = "Thứ 5";
+                convert = "Thursday";
                 break;
             case 6:
                 convert = "Friday";
                 break;
             case 7:
-                convert = "Satuday";
+                convert = "Saturday";
                 break;
         }
         return convert;

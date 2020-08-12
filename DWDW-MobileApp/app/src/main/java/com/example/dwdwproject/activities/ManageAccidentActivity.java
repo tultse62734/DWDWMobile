@@ -4,6 +4,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -17,9 +19,11 @@ import com.example.dwdwproject.models.Accident;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
+import com.example.dwdwproject.utils.ParseBytes;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 public class ManageAccidentActivity extends AppCompatActivity implements View.OnClickListener, GetAllRecordsView {
