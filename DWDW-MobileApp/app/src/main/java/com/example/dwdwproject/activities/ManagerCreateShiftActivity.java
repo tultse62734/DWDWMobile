@@ -205,13 +205,12 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
             this.managerList = new ArrayList<>();
             for (int i = 0; i <userDTOList.size() ; i++) {
                 int userId = userDTOList.get(i).getUserId();
-                String name = userDTOList.get(i).getUserName();
+                String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
-                String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) + " - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
-                String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this, BundleString.LOCATIONNAME);
-                String roleName = "Worker";
+                String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONNAME);
+                String roleName = userDTOList.get(i).getmRole().getRoleName() +"";
                 boolean isActive = userDTOList.get(i).isActive();
-                managerList.add(new Manager(userId, name, phone, roleName, location, creatDate, isActive));
+                managerList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }
             mGetAllRoomFromLocationPresenter.getAllRoomFromLocationByManager(token,locationId);
         }

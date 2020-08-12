@@ -16,6 +16,8 @@ public class BundleString {
     public static final String TOKEN = "TOKEN";
     public static final String DEVICEASSGINT = "DEVICEASSGINT";
     public static final String INTENTHOME = "INTENTHOME";
+    public static final String USERASSIGN = "USERASSIGN";
+    public static final String USERASSIGNPOSTION = "USERASSIGN";
     public static String getSelectedDate(Context context){
         return SharePreferenceUtils.getStringSharedPreference(context, BundleString.FILTER_DATE_IS_SELECTE);
     }

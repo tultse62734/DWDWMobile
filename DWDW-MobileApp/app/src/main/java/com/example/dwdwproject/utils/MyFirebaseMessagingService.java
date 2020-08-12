@@ -9,9 +9,9 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import com.example.dwdwproject.MainActivity;
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.activities.LoginActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
     private static final int REQUEST_CODE = 0;
     @Override
@@ -32,7 +32,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
 
     }
     public void sendNotification(String title, String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, REQUEST_CODE /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

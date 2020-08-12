@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.ResponseDTOs.UserDTO1;
 import com.example.dwdwproject.repositories.DWDWRepositories;
 import com.example.dwdwproject.repositories.DWDWRepositoriesImpl;
 import com.example.dwdwproject.rooms.managements.DWDWManagement;
@@ -19,9 +20,9 @@ public class GetUserInforTokenPresenter {
         this.mDwdwRepositories = new DWDWRepositoriesImpl();
     }
     public void getInforToken(String token){
-        mDwdwRepositories.GetUsetInfor(mContext, token, new CallBackData<UserDTO>() {
+        mDwdwRepositories.GetUsetInfor(mContext, token, new CallBackData<UserDTO1>() {
             @Override
-            public void onSucess(UserDTO userDTO) {
+            public void onSucess(UserDTO1 userDTO) {
                 mGetUserInforTokenView.getInforSuccess(userDTO);
             }
 
@@ -31,10 +32,10 @@ public class GetUserInforTokenPresenter {
             }
         });
     }
-    public void updateInfor(String token,UserDTO mUserDTO){
-        mDwdwRepositories.UpdateAccout(mContext, token, mUserDTO, new CallBackData<UserDTO>() {
+    public void updateInfor(String token,UserDTO1 mUserDTO){
+        mDwdwRepositories.UpdateAccout(mContext, token, mUserDTO, new CallBackData<UserDTO1>() {
             @Override
-            public void onSucess(UserDTO userDTO) {
+            public void onSucess(UserDTO1 userDTO) {
                 mGetUserInforTokenView.getInforSuccess(userDTO);
             }
 

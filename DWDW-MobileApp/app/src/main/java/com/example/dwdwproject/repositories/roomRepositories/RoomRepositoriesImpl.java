@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.RoomDTO;
+import com.example.dwdwproject.models.ResultReponseListRoomDTO;
+import com.example.dwdwproject.models.ResultReponseListShiftDTO;
+import com.example.dwdwproject.models.ResultReponseRoomDTO;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -39,21 +42,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<RoomDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<RoomDTO>mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    }.getType();
+                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -76,21 +77,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<RoomDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<RoomDTO>mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    }.getType();
+                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -123,21 +122,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<RoomDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        RoomDTO mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    }.getType();
+                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -170,21 +167,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<RoomDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        RoomDTO mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    }.getType();
+                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -207,21 +202,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<RoomDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<RoomDTO>mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    }.getType();
+                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -246,21 +239,19 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<RoomDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        RoomDTO mRoomDTOS = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mRoomDTOS);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    }.getType();
+                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override

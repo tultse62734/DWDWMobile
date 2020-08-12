@@ -19,7 +19,6 @@ import com.example.dwdwproject.models.Location;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> implements Filterable {
     private Context mContext;
     private List<Device> mDeviceList;

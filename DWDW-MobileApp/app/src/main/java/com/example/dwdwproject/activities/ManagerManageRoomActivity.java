@@ -61,13 +61,6 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
         if(mRoomAdapter == null){
             mRoomAdapter = new RoomAdapter(ManagerManageRoomActivity.this,mRoomList);
             mRecyclerView.setAdapter(mRoomAdapter);
-            mRoomAdapter.OnItemClickListerner(new RoomAdapter.OnItemClickListerner() {
-                @Override
-                public void onItemClick(int pos) {
-                    Intent intent = new Intent(ManagerManageRoomActivity.this,AdminRoomDetailActivity.class);
-                    startActivity(intent);
-                }
-            });
         }else {
             mRoomAdapter.notifyDataSetChanged();
         }
@@ -89,11 +82,11 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
         if(mRoomDTOList!=null){
             mRoomList = new ArrayList<>();
             for (int i = 0; i < mRoomDTOList.size(); i++) {
-
                 int roomId = mRoomDTOList.get(i).getRoomId();
                 String roomName = mRoomDTOList.get(i).getRoomCode();
+                String location = SharePreferenceUtils.getStringSharedPreference(ManagerManageRoomActivity.this,BundleString.LOCATIONNAME);
                 boolean isActive = mRoomDTOList.get(i).isActive();
-                mRoomList.add(new Room(roomId,roomName,isActive));
+                mRoomList.add(new Room(roomId,roomName,location,isActive));
             }
             updateUI();
         }

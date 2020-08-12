@@ -9,6 +9,10 @@ public class LocationDTO implements Serializable {
     private int locationId;
     @SerializedName("locationCode")
     private String locationCode;
+    @SerializedName("startDate")
+    private String startDate;
+    @SerializedName("endDate")
+    private String endDate;
     @SerializedName("isActive")
     private boolean isActive;
 
@@ -34,5 +38,26 @@ public class LocationDTO implements Serializable {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return locationCode;
     }
 }

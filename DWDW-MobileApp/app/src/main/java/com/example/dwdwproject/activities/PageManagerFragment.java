@@ -131,12 +131,11 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView,
             manageAdapter.OnItemActiveClickListener(new ManageAdapter.OnItemActiveClickListener() {
                 @Override
                 public void onItemActiveClick(int pos) {
-                    if(mUserDTOList.get(pos).isActive()){
-                        mUpdateUserPresenter.updateUseStatus(token,mUserDTOList.get(pos).getUserId(),false);
-                    }else{
-                        mUpdateUserPresenter.updateUseStatus(token,mUserDTOList.get(pos).getUserId(),true);
-                    }
-
+                    Intent intent = new Intent(getContext(),UserAssginDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.USERASSIGN,mUserDTOList.get(pos));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
         }else {
@@ -153,11 +152,10 @@ public class PageManagerFragment extends Fragment implements GetAllListUserView,
                 int userId = userDTOList.get(i).getUserId();
                 String name  = userDTOList.get(i).getUserName();
                 String phone = userDTOList.get(i).getPhone();
-                String creatDate = DateManagement.changeFormatDate1(userDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(userDTOList.get(i).getEndDate());
-                String location = userDTOList.get(i).getLocationCode();
-                String roleName = userDTOList.get(i).getRoleName();
+                String location = userDTOList.get(i).getmLocationDTO().toString();
+                String roleName = userDTOList.get(i).getmRole().getRoleName();
                 boolean isActive = userDTOList.get(i).isActive();
-                mManagerList.add(new Manager(userId,name,phone,roleName,location,creatDate ,isActive));
+                mManagerList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }
             updateUI();
         }

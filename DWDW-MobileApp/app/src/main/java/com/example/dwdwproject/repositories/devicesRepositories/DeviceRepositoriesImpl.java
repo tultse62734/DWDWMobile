@@ -6,6 +6,10 @@ import com.example.dwdwproject.ResponseDTOs.AssignDeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
 import com.example.dwdwproject.ResponseDTOs.ShiftDTO;
 import com.example.dwdwproject.models.Device;
+import com.example.dwdwproject.models.ResultReponseAssignDeviceDTO;
+import com.example.dwdwproject.models.ResultReponseDeviceDTO;
+import com.example.dwdwproject.models.ResultReponseListDeviceDTO;
+import com.example.dwdwproject.models.ResultReponseListLocationDTO;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.utils.ClientApi;
 import com.example.dwdwproject.utils.KProgressHUDManager;
@@ -41,21 +45,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<DeviceDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mDeviceList);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    }.getType();
+                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -80,21 +82,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<DeviceDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        DeviceDTO mDevice = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mDevice);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    }.getType();
+                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -124,22 +124,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<DeviceDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        DeviceDTO mDevice = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mDevice);
-
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    }.getType();
+                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -172,22 +169,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<DeviceDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        DeviceDTO mDevice = new Gson().fromJson(result, type);
-                        callBackData.onSucess(mDevice);
-
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    }.getType();
+                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        callBackData.onSucess(resultReponse.getData());
+                    } else {
+                        callBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    callBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -210,20 +204,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<DeviceDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mDeviceList);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    }.getType();
+                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -247,20 +240,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<List<DeviceDTO>>() {
-
-                        }.getType();
-                        //call response to get value data
-                        List<DeviceDTO>mDeviceList = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(mDeviceList);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    }.getType();
+                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -299,19 +291,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<AssignDeviceDTO>() {
-                        }.getType();
-                        //call response to get value data
-                       AssignDeviceDTO  assignDeviceDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(assignDeviceDTO);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseAssignDeviceDTO>() {
+                    }.getType();
+                    ResultReponseAssignDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail("Dont' Assgin Device");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override
@@ -342,21 +334,19 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                if (response.code() == 200 && response.body() != null) {
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<DeviceDTO>() {
-
-                        }.getType();
-                        //call response to get value data
-                        DeviceDTO deviceDTO = new Gson().fromJson(result, type);
-                        mCallBackData.onSucess(deviceDTO);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    }.getType();
+                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData());
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
                     }
-                } else {
-                    mCallBackData.onFail(response.message());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             @Override

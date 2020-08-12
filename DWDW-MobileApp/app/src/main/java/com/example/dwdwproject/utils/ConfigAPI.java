@@ -4,7 +4,7 @@ public class ConfigAPI {
     public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
-        String LOGIN = "User/LoginAsync";
+        String LOGIN = "User/Login";
         String GETUSERINFOR="User/GetUserInfoToken";
         String UPDATEINFOR ="User/UpdatePersonalInfo";
         //Device
@@ -18,9 +18,8 @@ public class ConfigAPI {
         String MANAGERGETDEVICEFROMROOM = "Device/GetActiveDeviceFromRoomManager";
         String ASSIGNDEVICEINTOROOM = "Device/AssignDeviceToRoom";
         String UPDATEDEVICESTATUS = "Device/UpdateDeviceActive";
-
         //Location
-        String GETALLLOCATION = "Location/GetLocations";
+        String GETALLLOCATION = "Location/GetAllActiveLocations";
         String GETLOCATIONBYID ="Location/GetLocationById";
         String CREATELOCATION ="Location/CreateLocation";
         String UPDATELOCATION = "Location/UpdateLocation";
@@ -36,15 +35,17 @@ public class ConfigAPI {
         String GETROOMFROMLOCATIONBYMANAGER="Room/GetRoomsFromLocationByManager/{locationId}";
         String UPDATEROOMSTATUS = "Room/DeactiveRoom/{roomId}";
         //Users
-        String GETALLUSER  = "User/GetAll";
+        String GETALLUSER  = "User/GetAllByAdmin";
         String GETALLUSERBYADMIN = "User/GetUserFromLocationByAdmin";
         String GETALLUSERBYMANAGER = "User/GetUserFromLocationsByManager";
         String CREATEUSER="User/CreateUserByAdmin";
         String UPDATEUSER="User/UpdateUserByAdmin";
         String DELETEUSER ="";
         String ASSGINUSER = "User/AssignUserToLocationByAdmin";
+        String DEASSGINUSER ="User/DeassignUserFromLocationByAdmin";
         String GETWORKERFROMLOCATION = "User/GetWorkerFromLocationsByManager";
         String UPDATEUSERSTATUS ="User/UpdateUserActiveByAdmin";
+        String SEARCHUSERBYID ="User/GetByIDAdmin";
         //Shift
         String GETALLSHIFT = "Shift/GetAllShift";
         String GETSHIFTOFMANAGER = "Shift/GetShiftManager";
@@ -54,7 +55,7 @@ public class ConfigAPI {
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
         String GETSHIFTFROMLOCATION = "Shift/GetShiftFromLocationByDateManager";
         //Record
-        String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationIdAndTime";
+        String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationDate";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
         String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";

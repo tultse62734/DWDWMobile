@@ -111,12 +111,10 @@ public class DateManagement {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getStartPreviosMonth());
     }
-
     public static String getEndPreviosMonthDateString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getEndPreviosMonth());
     }
-
     public static String getStartThisMonthDateString() {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DATE, 1);

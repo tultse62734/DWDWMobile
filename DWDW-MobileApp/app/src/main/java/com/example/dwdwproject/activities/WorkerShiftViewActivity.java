@@ -99,8 +99,8 @@ public class WorkerShiftViewActivity extends AppCompatActivity implements View.O
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                String datechoose   = dateFormatForDisplaying.format(dateClicked);
-                date = DateManagement.changeDateStringToString(datechoose);
+                String dateChoose = dateFormatForDisplaying.format(dateClicked.toString());
+                date = DateManagement.changeDateStringToString(dateChoose);
                 mGetShiftWorkerPresenter.getShiftsWorker(token,locationId,date);
             }
             @Override

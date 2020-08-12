@@ -16,6 +16,7 @@ import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.devicesPresenters.GetDeviceForManagerPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.devicesViews.GetAllDeviceView;
@@ -68,19 +69,11 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
         if(mDeviceAdapter == null){
             mDeviceAdapter = new DeviceAdapter(ManagerManageDeviceActivity.this,mDeviceList);
             mRecyclerView.setAdapter(mDeviceAdapter);
-            mDeviceAdapter.onItemClickListerner(new DeviceAdapter.OnItemClickListenner() {
-                @Override
-                public void onItemCLick(int pos) {
-                    Intent intent = new Intent(ManagerManageDeviceActivity.this, AdminDeviceDetailActivity.class);
-                    startActivity(intent);
-                }
-            });
         }
         else {
             mDeviceAdapter.notifyDataSetChanged();
         }
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -97,8 +90,11 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
             for (int i = 0; i < mDeviceDTOList.size(); i++) {
                 int deviceId = mDeviceDTOList.get(i).getDeviceId();
                 String deviceName = mDeviceDTOList.get(i).getDeviceCode();
+                String locationName = mDeviceDTOList.get(i).getLocationCode();
                 boolean isActive = mDeviceDTOList.get(i).isActive();
-                mDeviceList.add(new Device(deviceId,deviceName,isActive));
+                String roomName = mDeviceDTOList.get(i).getRoomCode();
+                String creatDate = DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getStartDate()) +" - " + DateManagement.changeFormatDate1(mDeviceDTOList.get(i).getEndDate());
+                mDeviceList.add(new Device(deviceId,deviceName,creatDate,locationName,roomName,isActive));
             }
             updateUI();
         }

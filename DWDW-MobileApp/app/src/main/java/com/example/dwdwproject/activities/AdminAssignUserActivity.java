@@ -41,10 +41,11 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     LinearLayout mBtnClose,mBtnAssginUser;
     private EditText mEdtUsername;
     TextView mEdtChoooseLocation,mEdtChooseTime;
+    TextView mEditLocation;
     private List<Location> mLocationList;
     RecyclerView mRecyclerView;
     private ChooseLocationAdapter mLocationAdapter;
-    private int posLocation;
+    private int locationId,poslocation;
     private UserDTO mUserDTO;
     private String token ;
     private GetAllLocationPresenter mLocationPresenter;
@@ -58,6 +59,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     }
     private void initView(){
         mBtnClose = findViewById(R.id.lnl_close_admin_assign_user);
+        mEditLocation = findViewById(R.id.edt_choose_current_location_assign_admin_add_user);
         mEdtChoooseLocation = findViewById(R.id.edt_choose_location_assign_admin_add_user);
         mBtnAssginUser = findViewById(R.id.lnl_submit_assign_user_admin);
         mEdtUsername = findViewById(R.id.edit_assign_username);
@@ -67,13 +69,12 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
         mAssignUserPresenter = new AssignUserPresenter(AdminAssignUserActivity.this,this);
         mEdtChooseTime.setText(startTime +" - " + endTime+"");
         mEdtUsername.setText(mUserDTO.getUserName()+"");
-        mEdtChoooseLocation.setText(mUserDTO.getLocationCode()+"");
+        mEditLocation.setText(mUserDTO.getmLocationDTO().get(poslocation).toString()+"");
         mBtnClose.setOnClickListener(this);
         mEdtChoooseLocation.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
         mBtnAssginUser.setOnClickListener(this);
         mEdtChooseTime.setOnClickListener(this);
-
     }
     @Override
     public void onClick(View v) {
@@ -95,7 +96,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     }
     private void assignUser(){
             AssignUserDTO userDTO = new AssignUserDTO();
-            userDTO.setLocationId(mUserDTO.getLocationId());
+            userDTO.setLocationId(locationId);
             userDTO.setUserId(mUserDTO.getUserId());
             userDTO.setStartDate(startTime);
             userDTO.setEndDate(endTime);
@@ -104,6 +105,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     private void getDataLocation(){
         Bundle bundle = getIntent().getExtras();
         mUserDTO  = (UserDTO) bundle.getSerializable(BundleString.MANAGERDETAIL);
+        poslocation = (int)bundle.getInt(BundleString.USERASSIGNPOSTION,0);
         token = SharePreferenceUtils.getStringSharedPreference(AdminAssignUserActivity.this,BundleString.TOKEN);
         mLocationPresenter = new GetAllLocationPresenter(AdminAssignUserActivity.this,this);
         mLocationPresenter.getAllLocation(token);
@@ -176,8 +178,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
             @Override
             public void OnClickItem(int position) {
                 dialog.dismiss();
-                posLocation = mLocationList.get(position).getLocationId();
-                mUserDTO.setLocationId(posLocation);
+                locationId = mLocationList.get(position).getLocationId();
                 mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation());
             }
         });

@@ -45,7 +45,14 @@ public interface ServiceUsers {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> assginUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
 
+    @PUT(ConfigAPI.Api.DEASSGINUSER)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> deassginUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+
     @PUT(ConfigAPI.Api.UPDATEUSERSTATUS)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateUserStatus(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
+    @GET(ConfigAPI.Api.SEARCHUSERBYID)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> searchUserByAdmin(@HeaderMap Map<String, String> map,@Query("userId") int id);
 }

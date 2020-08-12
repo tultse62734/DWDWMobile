@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.AccidentReportDetailActivity">
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -33,6 +32,7 @@
                     android:orientation="horizontal"
                     android:weightSum="5">
                     <TextView
+                        android:id="@+id/txt_title_report_detail"
                         android:layout_marginBottom="@dimen/dp20"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -125,17 +125,19 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
-                                android:textColor="@color/colorBlack"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/sp18"
-                                android:text="Room :"
-                                android:layout_weight="4"
                                 android:layout_width="0dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                android:text="Room :"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/sp18"
+                                android:textStyle="bold">
 
                             </TextView>
                             <TextView
+                                android:id="@+id/txt_record_room_detail"
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
@@ -159,13 +161,14 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Device :"
+                                android:text="Worker :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
 
                             </TextView>
                             <TextView
+                                android:id="@+id/txt_record_device_detail"
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
@@ -189,13 +192,14 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Time:"
+                                android:text="Day:"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
 
                             </TextView>
                             <TextView
+                                android:id="@+id/txt_record_day_detail"
                                 android:textColor="@color/colorRed"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
@@ -225,6 +229,7 @@
 
                             </TextView>
                             <TextView
+                                android:id="@+id/txt_record_location_detail"
                                 android:textColor="@color/colorOrange"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
@@ -248,17 +253,18 @@
                                 android:textColor="@color/colorBlack"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Manager  :"
+                                android:text="Time  :"
                                 android:layout_weight="4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">
 
                             </TextView>
                             <TextView
+                                android:id="@+id/txt_record_time_detail"
                                 android:textColor="@color/colorGreen"
                                 android:textStyle="bold"
                                 android:textSize="@dimen/sp18"
-                                android:text="Nguyễn Văn A"
+                                android:text="8:00:00"
                                 android:layout_weight="6"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content">

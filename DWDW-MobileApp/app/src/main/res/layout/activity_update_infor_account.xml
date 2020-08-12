@@ -99,11 +99,9 @@
                         android:textColor="@color/colorRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                     </TextView>
-
-
                     <EditText
+                        android:inputType="textPassword"
                         android:id="@+id/edit_update_password_account"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"
@@ -114,7 +112,6 @@
                         android:textColor="@color/colorYellowOrange"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp60">
-
                     </EditText>
                     <TextView
                         android:layout_marginBottom="@dimen/dp10"
@@ -124,10 +121,7 @@
                         android:textColor="@color/colorRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                     </TextView>
-
-
                     <EditText
                         android:id="@+id/edit_update_phone_account"
                         android:textSize="@dimen/sp18"
@@ -139,7 +133,6 @@
                         android:textColor="@color/colorYellowOrange"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp60">
-
                     </EditText>
                     <TextView
                         android:layout_marginBottom="@dimen/dp10"

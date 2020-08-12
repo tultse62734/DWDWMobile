@@ -68,6 +68,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </TextView>
+            <TextView
+                android:id="@+id/txt_title_home_manager"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="Home"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

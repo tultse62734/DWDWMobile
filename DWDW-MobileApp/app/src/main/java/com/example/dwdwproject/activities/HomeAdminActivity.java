@@ -20,7 +20,6 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
     private LinearLayout mBtnMManageWorker,mBtnLogout,mBtnProfile,mBtnLocation,mBtnDevice;
     private LinearLayout mBtnManageRoom,mBtnManageAccident,mBtnManageProfile;
     private DeleteUserToRoomPresenter mDeleteUserToRoomPresenter;
-    private DeleteUserView deleteUserView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
