@@ -5,12 +5,10 @@ import java.io.Serializable;
 public class NotifyMessage implements Serializable {
     private String header;
     private String message;
-    private String minute;
 
-    public NotifyMessage(String header, String message, String minute) {
+    public NotifyMessage(String header, String message) {
         this.header = header;
         this.message = message;
-        this.minute = minute;
     }
 
     public String getHeader() {
@@ -27,13 +25,5 @@ public class NotifyMessage implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getMinute() {
-        return minute;
-    }
-
-    public void setMinute(String minute) {
-        this.minute = minute;
     }
 }

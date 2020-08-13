@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 public class WorkerRecord implements Serializable {
     private String username;
+    private int totalRecord;
     private String locationCode;
     private String RoomCode;
-    public WorkerRecord(String username, String locationCode, String roomCode) {
+    public WorkerRecord(String username, int totalRecord, String locationCode, String roomCode) {
         this.username = username;
+        this.totalRecord = totalRecord;
         this.locationCode = locationCode;
         RoomCode = roomCode;
     }
@@ -17,6 +19,14 @@ public class WorkerRecord implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getTotalRecord() {
+        return totalRecord;
+    }
+
+    public void setTotalRecord(int totalRecord) {
+        this.totalRecord = totalRecord;
     }
 
     public String getLocationCode() {

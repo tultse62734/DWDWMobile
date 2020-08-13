@@ -312,7 +312,7 @@
                             android:layout_marginTop="@dimen/dp10"
                             android:layout_marginBottom="@dimen/dp10"
                             android:gravity="center"
-                            android:text="Manage Record"
+                            android:text="Manage Shift"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp15"
                             android:textStyle="bold">
@@ -333,14 +333,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/lnl_message"
+                    android:id="@+id/lnl_info_profile_manager"
                     android:orientation="vertical"
                     android:layout_width="@dimen/dp60"
                     android:layout_height="@dimen/dp60">
                     <ImageView
-                        android:tint="@color/colorOrange"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/ic_bell"
+                        android:src="@mipmap/ic_architecture_city"
                         android:id="@+id/tapBarMenu"
                         android:layout_width="@dimen/dp60"
                         android:layout_height="@dimen/dp60"

@@ -95,39 +95,34 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
         checkTypeFilterDate(selectDay);
         token = SharePreferenceUtils.getStringSharedPreference(AdminDashboardActivity.this, BundleString.TOKEN);
         if(mStartTime.equalsIgnoreCase(mEndTime)){
-            mRecordPresenter.getLocationRecord(token,mStartTime,mStartTime);
+            mRecordPresenter.getLocationRecord(token,DateManagement.changeFormatDate(mStartTime),DateManagement.changeFormatDate(mStartTime));
         }else {
-            mRecordPresenter.getLocationRecord(token,mStartTime,mEndTime);
+            mRecordPresenter.getLocationRecord(token,DateManagement.changeFormatDate(mStartTime),DateManagement.changeFormatDate(mEndTime));
         }
     }
     private String splitToStartDayAndEndDay(String day) {
         String days = "";
-        String[] tmp = day.split("- ");
+        String[] tmp = day.split(", ");
         days = tmp[1];
         return days;
     }
-    private String splitToStartDayAndEndDay1(String day) {
-        String days = "";
-        String[] tmp = day.split("- ");
-        days = tmp[0];
-        return days;
-    }
     private void checkTypeFilterDate(String filterDate) {
-        if (filterDate.contains(", ")) {
+        if (filterDate.contains("-")) {
             splitFromToDay(filterDate);
-        }else {
-            mStartTime = splitToStartDayAndEndDay1(filterDate);
+        } else {
+            mStartTime = splitToStartDayAndEndDay(filterDate);
             mEndTime = splitToStartDayAndEndDay(filterDate);
         }
     }
     private void splitFromToDay(String filterDate) {
-        String[] tmp = filterDate.split(", ");
-        mStartTime = tmp[1];
+        String[] tmp = filterDate.split("- ");
+        mStartTime = tmp[0];
         mEndTime = tmp[1];
     }
     private void initData() {
         mDeleteUserToRoomPresenter = new DeleteUserToRoomPresenter(getApplication(), this);
         mRecordPresenter = new GetLocationRecordPresenter(AdminDashboardActivity.this, this);
+
         mBtnLogout.setOnClickListener(this);
         mBtnFilter.setOnClickListener(this);
         itemDashBoards = new ArrayList<>();
@@ -237,6 +232,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements View.On
     }
     @Override
     public void showError(String message) {
+        DialogNotifyError.showErrorLoginDialog(AdminDashboardActivity.this,"Logout Failed");
     }
 
 

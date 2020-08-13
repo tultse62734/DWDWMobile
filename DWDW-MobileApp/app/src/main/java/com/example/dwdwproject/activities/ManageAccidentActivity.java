@@ -1,4 +1,5 @@
 package com.example.dwdwproject.activities;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,11 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
-import com.example.dwdwproject.ResponseDTOs.ShiftDTO;
 import com.example.dwdwproject.adapters.AccidentAdapter;
 import com.example.dwdwproject.models.Accident;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdPresenter;
@@ -27,13 +26,9 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
     private RecyclerView mRecyclerView;
     private AccidentAdapter mAccidentAdapter;
     private LinearLayout mBtnClose;
-    private String token,locationName,date;
-    private ShiftDTO mShiftDTO;
-    private List<RecordDTO> mRecordDTO;
+    private String token,locationName;
     private int locationId;
-    private String day,time;
     private GetRecordsByLocationIdPresenter mGetRecordsByLocationIdPresenter;
-    private TextView mTxtTilte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,23 +37,18 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
         initData();
     }
     private void initView(){
-        mTxtTilte = findViewById(R.id.txt_title_report);
         mRecyclerView = findViewById(R.id.rcv_accident);
         mBtnClose = findViewById(R.id.lnl_close_manage_accident);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        Bundle bundle = getIntent().getExtras();
-        mShiftDTO = (ShiftDTO) bundle.getSerializable("WORKERRECORD");
         mBtnClose.setOnClickListener(this);
-        date = BundleString.getSelectedDate(ManageAccidentActivity.this);
         token = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this, BundleString.TOKEN);
         locationId = SharePreferenceUtils.getIntSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONID);
         locationName  = SharePreferenceUtils.getStringSharedPreference(ManageAccidentActivity.this,BundleString.LOCATIONNAME);
-        mTxtTilte.setText(locationName);
         mGetRecordsByLocationIdPresenter = new GetRecordsByLocationIdPresenter(ManageAccidentActivity.this,this);
-        mGetRecordsByLocationIdPresenter.getRecordByWorkerDate(token,mShiftDTO.getWorkerId(),date);
+        mGetRecordsByLocationIdPresenter.getRecordsByLocationId(token,locationId);
         }
         private void updateUI(){
             if(mAccidentAdapter == null){
@@ -68,9 +58,6 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onItemClick(int pos) {
                         Intent intent = new Intent(ManageAccidentActivity.this,AccidentReportDetailActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(BundleString.RECORDDETAIL,mAccidentList.get(pos));
-                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                 });
@@ -91,31 +78,17 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
     public void getAllRecordSuccess(List<RecordDTO> mRecordDTOList) {
         if(mRecordDTOList!=null){
             mAccidentList = new ArrayList<>();
-            mRecordDTO = new ArrayList<>();
-            mRecordDTO = mRecordDTOList;
             for (int i = 0; i <mRecordDTOList.size() ; i++) {
                 int recordId= mRecordDTOList.get(i).getRecordId();
                 String image  =mRecordDTOList.get(i).getImage();
                 String locationname = locationName;
-                String recordDate = splitFromToDay(mRecordDTOList.get(i).getRecordDateTime());
-                String recordTime = splitFromToTime(mRecordDTOList.get(i).getRecordDateTime());
-                String recordName = mShiftDTO.getUsername();
-                String roomCode = mShiftDTO.getRoomCode();
+                String recordDate = mRecordDTOList.get(i).getRecordDateTime();
+                String recordName = "Accident" +i;
                 boolean isActive = true;
-                mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,roomCode,isActive));
+                mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,isActive));
             }
             updateUI();
         }
-    }
-    private String splitFromToDay(String filterDate) {
-        String[] tmp = filterDate.split("T");
-        day = tmp[0];
-        return day;
-    }
-    private String splitFromToTime(String filterDate) {
-        String[] tmp = filterDate.split("T");
-        time = tmp[1];
-        return time;
     }
     @Override
     public void showError(String message) {

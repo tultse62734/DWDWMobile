@@ -25,10 +25,6 @@ public interface Service {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getUserInfor(@HeaderMap Map<String, String> map);
 
-    @GET(ConfigAPI.Api.NOTIFY)
-    @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getMessgae(@HeaderMap Map<String, String> map);
-
     @PUT(ConfigAPI.Api.UPDATEINFOR)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateInfo(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

@@ -4,7 +4,7 @@ public class ConfigAPI {
     public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
-        String LOGIN = "User/Login";
+        String LOGIN = "User/LoginAsync";
         String GETUSERINFOR="User/GetUserInfoToken";
         String UPDATEINFOR ="User/UpdatePersonalInfo";
         //Device
@@ -58,8 +58,5 @@ public class ConfigAPI {
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationDate";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
-        String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";
-        //Notify
-        String NOTIFY = "Notification/GetAllNotifications";
     }
 }
