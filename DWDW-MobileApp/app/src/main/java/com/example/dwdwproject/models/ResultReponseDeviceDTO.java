@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ResultReponseDeviceDTO {
+public class ResultReponseDeviceDTO<T> {
     @SerializedName("statusCode")
     private int statusCode;
     @SerializedName("data")
-    private DeviceDTO data;
+    private List<T> data;
     @SerializedName("message")
     private String message;
 
@@ -22,11 +22,11 @@ public class ResultReponseDeviceDTO {
         this.statusCode = statusCode;
     }
 
-    public DeviceDTO getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(DeviceDTO data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 

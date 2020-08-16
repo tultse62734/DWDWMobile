@@ -3,11 +3,13 @@ package com.example.dwdwproject.models;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.google.gson.annotations.SerializedName;
 
-public class ResultReponseUserDTO {
+import java.util.List;
+
+public class ResultReponseUserDTO<T> {
     @SerializedName("statusCode")
     private int statusCode;
     @SerializedName("data")
-    private UserDTO data;
+    private List<T> data;
     @SerializedName("message")
     private String errorMessage;
     public int getStatusCode() {
@@ -17,12 +19,11 @@ public class ResultReponseUserDTO {
         this.statusCode = statusCode;
     }
 
-
-    public UserDTO getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(UserDTO data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 

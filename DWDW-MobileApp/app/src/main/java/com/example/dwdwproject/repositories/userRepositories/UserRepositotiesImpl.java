@@ -48,11 +48,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
                     }.getType();
-                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
@@ -93,11 +93,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseAssignUserDTO>() {
+                    Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
                     }.getType();
-                    ResultReponseAssignUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -127,11 +127,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    Type type = new TypeToken<ResultReponseListUserDTO<List<UserDTO>>>() {
                     }.getType();
-                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListUserDTO<List<UserDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -163,11 +163,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    Type type = new TypeToken<ResultReponseListUserDTO<List<UserDTO>>>() {
                     }.getType();
-                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListUserDTO<List<UserDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -199,11 +199,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListUserDTO>() {
+                    Type type = new TypeToken<ResultReponseListUserDTO<List<UserDTO>>>() {
                     }.getType();
-                    ResultReponseListUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListUserDTO<List<UserDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -251,11 +251,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
                     }.getType();
-                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
@@ -299,11 +299,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO>() {
+                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
                     }.getType();
-                    ResultReponseUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getErrorMessage());
                     }
@@ -352,11 +352,11 @@ public class UserRepositotiesImpl implements UserRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseAssignUserDTO>() {
+                    Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
                     }.getType();
-                    ResultReponseAssignUserDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }

@@ -14,8 +14,8 @@ import retrofit2.http.Query;
 public interface ServiceRecord {
 
     @GET(ConfigAPI.Api.GETRECORDSBYLOCATIONIDANDTIME)
-    Call<ResponseBody> getRecordsByLocationIdAndTime(@HeaderMap Map<String, String> map,@Query("LocationId ") int id,
-                                                     @Query("startDate") String start,@Query("endDate") String end);
+    Call<ResponseBody> getRecordsByLocationIdAndTime(@HeaderMap Map<String, String> map,@Query("LocationId") int id,
+                                                     @Query("StartDate") String start,@Query("EndDate") String end);
     @GET(ConfigAPI.Api.GETRECORDBYLOCATION)
     Call<ResponseBody> getRecordsByLocationId(@HeaderMap Map<String, String> map,@Query("locationId") int id);
 

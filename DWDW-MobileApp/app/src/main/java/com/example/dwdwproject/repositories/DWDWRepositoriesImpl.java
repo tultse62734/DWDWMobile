@@ -49,23 +49,22 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code()==200& response.body()!=null){
-                    KProgressHUDManager.dismiss(mContext, khub);
-                    try {
-                        String result = response.body().string();
-                        Type type = new TypeToken<ResultReponse>() {
-                        }.getType();
-                        //call response to get value data
-                        ResultReponse resultReponse = new Gson().fromJson(result, type);
-                            ReponseDTO mReponseDTO = new ReponseDTO();
-                            mReponseDTO.setToken(resultReponse.getData());
-                            callBackData.onSucess(mReponseDTO);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                KProgressHUDManager.dismiss(mContext, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponse>() {
+                    }.getType();
+                    ResultReponse resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        ReponseDTO reponseDTO = new ReponseDTO();
+                        reponseDTO.setToken(resultReponse.getData().get(0));
+                        callBackData.onSucess(reponseDTO);
+                    } else {
+                        callBackData.onFail(response.message());
                     }
-                }else{
-                    KProgressHUDManager.dismiss(mContext, khub);
-                    callBackData.onFail("Invalid username password!");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -136,11 +135,11 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO1>() {
+                    Type type = new TypeToken<ResultReponseUserDTO1<UserDTO1>>() {
                     }.getType();
-                    ResultReponseUserDTO1 resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseUserDTO1<UserDTO1> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -181,11 +180,11 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO1>() {
+                    Type type = new TypeToken<ResultReponseUserDTO1<UserDTO1>>() {
                     }.getType();
-                    ResultReponseUserDTO1 resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseUserDTO1<UserDTO1> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }

@@ -47,11 +47,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseListDeviceDTO<List<DeviceDTO>>>() {
                     }.getType();
-                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListDeviceDTO<List<DeviceDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -84,11 +84,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
                     }.getType();
-                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData());
+                        callBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         callBackData.onFail(resultReponse.getMessage());
                     }
@@ -126,11 +126,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
                     }.getType();
-                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData());
+                        callBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         callBackData.onFail(resultReponse.getMessage());
                     }
@@ -171,11 +171,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
                     }.getType();
-                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData());
+                        callBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         callBackData.onFail(resultReponse.getMessage());
                     }
@@ -206,11 +206,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseListDeviceDTO<List<DeviceDTO>>>() {
                     }.getType();
-                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListDeviceDTO<List<DeviceDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -242,11 +242,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseListDeviceDTO<List<DeviceDTO>>>() {
                     }.getType();
-                    ResultReponseListDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListDeviceDTO<List<DeviceDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -293,11 +293,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseAssignDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseAssignDeviceDTO<AssignDeviceDTO>>() {
                     }.getType();
-                    ResultReponseAssignDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseAssignDeviceDTO<AssignDeviceDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -336,11 +336,11 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                 KProgressHUDManager.dismiss(mContext, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseDeviceDTO>() {
+                    Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
                     }.getType();
-                    ResultReponseDeviceDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }

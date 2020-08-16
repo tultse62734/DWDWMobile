@@ -4,11 +4,13 @@ import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.google.gson.annotations.SerializedName;
 
-public class ResultReponseRecordDTO {
+import java.util.List;
+
+public class ResultReponseRecordDTO<T>{
     @SerializedName("statusCode")
     private int statusCode;
     @SerializedName("data")
-    private RecordDTO data;
+    private List<T> data;
     @SerializedName("message")
     private String message;
 
@@ -20,11 +22,11 @@ public class ResultReponseRecordDTO {
         this.statusCode = statusCode;
     }
 
-    public RecordDTO getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(RecordDTO data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 

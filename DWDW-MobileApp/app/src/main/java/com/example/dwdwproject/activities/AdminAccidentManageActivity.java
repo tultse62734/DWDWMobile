@@ -1,8 +1,10 @@
 package com.example.dwdwproject.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +35,8 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
     private SmartTabLayout mViewPagerTab;
     private GetAllLocationPresenter mGetAllLocationPresenter;
     private  String token ;
+    public final static int UPDATE_DATE = 411;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +94,8 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
             public void onPageScrollStateChanged(int state) {
             }
         });
+        reloadDataFragment();
+
     }
     //set color for tab
     private void setColorForTab(int position) {
@@ -112,12 +118,22 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
                 break;
             case R.id.lnl_filter_manage_record:
                 Intent intent = new Intent(AdminAccidentManageActivity.this,ShiftDateFilterActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,UPDATE_DATE);
                 break;
 
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == UPDATE_DATE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+                mGetAllLocationPresenter.getAllLocation(token);
+            }
+        }
+    }
     @Override
     public void getAllLocationSuccess(List<LocationDTO> mLocationDTOList) {
         if(mLocationDTOList!=null){
@@ -129,7 +145,6 @@ public class AdminAccidentManageActivity extends AppCompatActivity implements Vi
                 this.mLocationList.add(new Location(locationId,locationName,isactive));
             }
             getCategoryData(mLocationList);
-            reloadDataFragment();
         }
     }
     @Override

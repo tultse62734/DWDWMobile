@@ -39,13 +39,6 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
         mLnlClose.setOnClickListener(this);
         mLnlFilter.setOnClickListener(this);
         mAccidentList = new ArrayList<>();
-        mAccidentList.add(new Accident(1,"Accident1","18-11-2020","Khu A","100",true));
-        mAccidentList.add(new Accident(2,"Accident2","18-11-2020","Khu B","200",false));
-        mAccidentList.add(new Accident(3,"Accident3","18-11-2020","Khu C","300",true));
-        mAccidentList.add(new Accident(4,"Accident4","18-11-2020","Khu D","400",false));
-        mAccidentList.add(new Accident(5,"Accident5","18-11-2020","Khu B","200",true));
-        mAccidentList.add(new Accident(6,"Accident6","18-11-2020","Khu A","100",false));
-        mAccidentList.add(new Accident(7,"Accident7","18-11-2020","Khu C","300",true));
         updateUI();
     }
     private void updateUI(){

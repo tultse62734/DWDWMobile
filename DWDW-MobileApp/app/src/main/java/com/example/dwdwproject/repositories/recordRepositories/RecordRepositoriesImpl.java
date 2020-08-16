@@ -45,11 +45,11 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRecordDTO>() {
+                    Type type = new TypeToken<ResultReponseRecordDTO<RecordDTO>>() {
                     }.getType();
-                    ResultReponseRecordDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseRecordDTO<RecordDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -79,11 +79,11 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO>() {
+                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
                     }.getType();
-                    ResultReponseListRecordDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMesssage());
                     }
@@ -114,11 +114,11 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponnseListLocationRecordDTO>() {
+                    Type type = new TypeToken<ResultReponnseListLocationRecordDTO<List<LocationRecord>>>() {
                     }.getType();
-                    ResultReponnseListLocationRecordDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponnseListLocationRecordDTO<List<LocationRecord>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessgae());
                     }
@@ -135,7 +135,6 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             }
         });
     }
-
     @Override
     public void getRecordsByLocationIdAndTime(final Context mContext, String token, int locationID, String start, String end, final CallBackData<List<RecordDTO>> mCallBackData) {
         String hearder = "Bearer " + token;
@@ -148,22 +147,24 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO>() {
-                    }.getType();
-                    ResultReponseListRecordDTO resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMesssage());
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                mCallBackData.onFail("Location has no device");
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 KProgressHUDManager.dismiss(mContext, khub);
@@ -186,11 +187,11 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO>() {
+                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
                     }.getType();
-                    ResultReponseListRecordDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMesssage());
                     }

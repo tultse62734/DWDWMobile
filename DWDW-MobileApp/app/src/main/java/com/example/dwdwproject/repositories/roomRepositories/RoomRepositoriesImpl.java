@@ -44,11 +44,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseListRoomDTO<List<RoomDTO>>>() {
                     }.getType();
-                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListRoomDTO<List<RoomDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -79,11 +79,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseListRoomDTO<List<RoomDTO>>>() {
                     }.getType();
-                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListRoomDTO<List<RoomDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -124,11 +124,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
                     }.getType();
-                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -169,11 +169,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
                     }.getType();
-                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -204,11 +204,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseListRoomDTO<List<RoomDTO>>>() {
                     }.getType();
-                    ResultReponseListRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseListRoomDTO<List<RoomDTO>> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }
@@ -241,11 +241,11 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 KProgressHUDManager.dismiss(context, khub);
                 try {
                     String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO>() {
+                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
                     }.getType();
-                    ResultReponseRoomDTO resultReponse = new Gson().fromJson(result,type);
+                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
                     if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData());
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
                     } else {
                         mCallBackData.onFail(resultReponse.getMessage());
                     }

@@ -2,7 +2,9 @@ package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -153,8 +155,11 @@ public class ShiftDateFilterActivity extends AppCompatActivity implements com.bo
             result = DateManagement.getStartThisWeekDateString() + "- " + DateManagement.getEndThisWeekDateString();
         }
         SharePreferenceUtils.saveStringSharedPreference(this, BundleString.FILTER_DATE_IS_SELECTE, result);
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_CANCELED, intent);
         finish();
     }
     private void initData(){
+    
     }
 }

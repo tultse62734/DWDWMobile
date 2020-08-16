@@ -1,6 +1,5 @@
 package com.example.dwdwproject.utils;
 public class ConfigAPI {
-
     public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
     public interface Api {
         //User
@@ -54,7 +53,7 @@ public class ConfigAPI {
         String UPDATESHIFT = "Shift/UpdateShift";
         String UPDATESHIFTACTIVE = "Shift/UpdateShiftActive";
         String GETSHIFTFROMLOCATION = "Shift/GetShiftFromLocationByDateManager";
-        //Record
+        //Recordg
         String GETRECORDBYID = "Record/GetRecordById";
         String GETRECORDSBYLOCATIONIDANDTIME = "Record/GetRecordsByLocationDate";
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";

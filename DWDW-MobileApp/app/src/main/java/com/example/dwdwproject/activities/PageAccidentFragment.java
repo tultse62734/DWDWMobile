@@ -42,6 +42,7 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
     private String token;
     private String mStartTime = "";
     private String mEndTime = "";
+    private String time,day;
     public PageAccidentFragment() {
         // Required empty public constructor
     }
@@ -115,17 +116,18 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
                         int recordId= mRecordDTOList.get(i).getRecordId();
                         String image  =mRecordDTOList.get(i).getImage();
                         String locationname = locationName;
-                        String recordDate = mRecordDTOList.get(i).getRecordDateTime();
+                        String recordDate = splitFromDay(mRecordDTOList.get(i).getRecordDateTime());
+                        String recordTime = splitFromToTime(mRecordDTOList.get(i).getRecordDateTime());
                         String recordName = "Accident" +i;
                         boolean isActive = true;
-                        mAccidentList.add(new Accident(recordId,recordName,locationname,recordDate,image,isActive));
+                        mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,isActive));
                 }
                 updateUI();
             }
     }
+
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(getContext(),message);
     }
     public void reloadPage() {
         token = SharePreferenceUtils.getStringSharedPreference(getContext(), BundleString.TOKEN);
@@ -146,6 +148,16 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
         String[] tmp = day.split("- ");
         days = tmp[0];
         return days;
+    }
+    private String splitFromDay(String filterDate) {
+        String[] tmp = filterDate.split("T");
+        day = tmp[0];
+        return day;
+    }
+    private String splitFromToTime(String filterDate) {
+        String[] tmp = filterDate.split("T");
+        time = tmp[1];
+        return time;
     }
     private void checkTypeFilterDate(String filterDate) {
         if (filterDate.contains(", ")) {

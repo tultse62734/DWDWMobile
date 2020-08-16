@@ -12,24 +12,17 @@ public class Accident implements Serializable {
     private String roomAccident;
     private boolean isStatus;
 
-    public Accident(int accidentId, String accidentName, String accidentDate, String locationAccident, String image, boolean isStatus) {
+    public Accident(int accidentId, String accidentName, String accidentDate, String time,String locationAccident, String image, boolean isStatus) {
         this.accidentId = accidentId;
         this.accidentName = accidentName;
+        this.timeDate = time;
         this.accidentDate = accidentDate;
         this.locationAccident = locationAccident;
         this.image = image;
         this.isStatus = isStatus;
     }
 
-    public Accident(int accidentId, String accidentName, String accidentDate, String locationAccident, String image, String roomAccident, boolean isStatus) {
-        this.accidentId = accidentId;
-        this.accidentName = accidentName;
-        this.accidentDate = accidentDate;
-        this.locationAccident = locationAccident;
-        this.image = image;
-        this.roomAccident = roomAccident;
-        this.isStatus = isStatus;
-    }
+
     public Accident(int accidentId, String accidentName, String accidentDate,String time,String locationAccident, String image, String roomAccident, boolean isStatus) {
         this.accidentId = accidentId;
         this.accidentName = accidentName;
