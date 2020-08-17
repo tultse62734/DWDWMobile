@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
+import com.example.dwdwproject.ResponseDTOs.Role;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.ChooseStatusAdapter;
@@ -77,6 +78,10 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         mStatusList.add(new Status("Worker",false,3));
         mStatusList1.add(new Status("Women",true,1));
         mStatusList1.add(new Status("Men",false,2));
+        genderId = 2;
+        roleId = 3;
+        mTxtRole.setText("Worker");
+        mtxtGender.setText("Mem");
         mBtnClose.setOnClickListener(this);
         mBtnCreateManager.setOnClickListener(this);
         mtxtGender.setOnClickListener(this);
@@ -166,7 +171,9 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         userDTO.setPhone(mTxtPhone.getText().toString());
         userDTO.setDateOfBirth(birthday);
         userDTO.setGender(genderId);
-        userDTO.getmRole().setRoleId(roleId);
+        Role role = new Role();
+        role.setRoleId(roleId);
+        userDTO.setmRole(role);
         mCreateUserPresenter.createUser(token,userDTO);
     }
         @Override

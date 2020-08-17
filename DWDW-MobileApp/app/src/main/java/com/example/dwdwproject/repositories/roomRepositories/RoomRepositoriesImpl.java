@@ -122,20 +122,26 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
-                    }.getType();
-                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
-                    }
+                if(response.code()==200&& response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
+                        }.getType();
+                        ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else {
+                    mCallBackData.onFail("Room is existed");
+                }
+
             }
 
             @Override
@@ -167,20 +173,26 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
-                    }.getType();
-                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
-                    }
+                if(response.code()==200&& response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
+                        }.getType();
+                        ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else {
+                    mCallBackData.onFail("Room is existed");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -239,20 +251,26 @@ public class RoomRepositoriesImpl implements RoomRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
-                    }.getType();
-                    ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseRoomDTO<RoomDTO>>() {
+                        }.getType();
+                        ResultReponseRoomDTO<RoomDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else{
+                    mCallBackData.onFail("Update Room Status Fail");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {

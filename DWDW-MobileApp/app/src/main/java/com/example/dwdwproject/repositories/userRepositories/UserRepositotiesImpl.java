@@ -46,20 +46,25 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
-                    }.getType();
-                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getErrorMessage());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
+                        }.getType();
+                        ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getErrorMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    mCallBackData.onFail("User is not found");
                 }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -249,20 +254,26 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
-                    }.getType();
-                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getErrorMessage());
-                    }
+                if(response.code()==200&&response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
+                        }.getType();
+                        ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getErrorMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else{
+                    mCallBackData.onFail("User is existed");
+                }
+
             }
 
             @Override
@@ -297,20 +308,25 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
-                    }.getType();
-                    ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getErrorMessage());
-                    }
+                if(response.code()==200&& response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseUserDTO<UserDTO>>() {
+                        }.getType();
+                        ResultReponseUserDTO<UserDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getErrorMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    mCallBackData.onFail("User is existed");
                 }
+
             }
 
             @Override
@@ -350,19 +366,26 @@ public class UserRepositotiesImpl implements UserRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
-                    }.getType();
-                    ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
+                if(response.code()==200&&response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
+                        }.getType();
+                        ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+                else {
+                    mCallBackData.onFail("Assign User is fail");
+                }
+
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {

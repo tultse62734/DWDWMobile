@@ -164,7 +164,7 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
     }
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Don't create Room successfully");
+        DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,message);
     }
 
     @Override

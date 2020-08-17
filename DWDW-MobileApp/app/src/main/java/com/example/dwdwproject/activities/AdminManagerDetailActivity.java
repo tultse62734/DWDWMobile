@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.Role;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
 import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.ChooseStatusAdapter;
@@ -193,6 +194,8 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
             mUserDTO.setPhone(mTxtPhone.getText().toString());
             mUserDTO.setDateOfBirth(birthday);
             mUserDTO.setGender(genderId);
+            Role role = new Role();
+            role.setRoleId(roleId);
             mUserDTO.getmRole().setRoleId(roleId);
             mUpdateUserPresenter.updateUser(token,mUserDTO);
         }

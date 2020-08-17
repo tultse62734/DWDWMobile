@@ -121,20 +121,26 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseLocationDTO<LocationDTO>>() {
-                    }.getType();
-                    ResultReponseLocationDTO<LocationDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        callBackData.onFail(resultReponse.getMessgae());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseLocationDTO<LocationDTO>>() {
+                        }.getType();
+                        ResultReponseLocationDTO<LocationDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            callBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            callBackData.onFail(resultReponse.getMessgae());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else {
+                    callBackData.onFail("Location is existed");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -165,20 +171,27 @@ public class LocationRepositoriesImpl implements LocationRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseLocationDTO<LocationDTO>>() {
-                    }.getType();
-                    ResultReponseLocationDTO<LocationDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        callBackData.onFail(resultReponse.getMessgae());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseLocationDTO<LocationDTO>>() {
+                        }.getType();
+                        ResultReponseLocationDTO<LocationDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            callBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            callBackData.onFail(resultReponse.getMessgae());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else {
+                    callBackData.onFail("Location is't existed");
+
+                }
+
             }
 
             @Override
