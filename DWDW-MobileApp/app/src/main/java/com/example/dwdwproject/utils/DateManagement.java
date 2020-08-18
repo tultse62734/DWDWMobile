@@ -223,7 +223,6 @@ public class DateManagement {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getStartThisWeek());
     }
-
     public static String getEndThisWeekDateString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final Calendar cal = Calendar.getInstance();
