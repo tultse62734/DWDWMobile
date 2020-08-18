@@ -46,11 +46,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initView(){
         mEdtUsername = findViewById(R.id.edt_username);
         mEdtPassword = findViewById(R.id.edt_password);
-        mBtnSignUp = findViewById(R.id.lnl_sign_up);
         mBtnSignIn = findViewById(R.id.lnl_sign_in);
     }
     private void initData(){
-        mBtnSignUp.setOnClickListener(this);
         mBtnSignIn.setOnClickListener(this);
     }
     private void checkLogin(){
@@ -105,10 +103,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.lnl_sign_up:
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                startActivity(intent);
-                break;
             case R.id.lnl_sign_in:
                 checkLogin();
                 break;

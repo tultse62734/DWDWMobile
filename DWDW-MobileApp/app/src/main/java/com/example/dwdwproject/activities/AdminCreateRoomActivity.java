@@ -40,7 +40,7 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
     private List<Location> mLocationList;
     private List<Status> mStatusList;
     private RecyclerView mRecyclerView,mRecyclerView1;
-    private int posLocation = 0;
+    private int posLocation,locationIdChoose = 0;
     private LinearLayout mBtnAddCreateRoom;
     private EditText mEdtRoomCode;
     private GetAllLocationPresenter mGetAllLocationPresenter;
@@ -149,7 +149,8 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
             @Override
             public void OnClickItem(int position) {
                 dialog.dismiss();
-                posLocation = position;
+                posLocation = mLocationList.get(position).getLocationId();
+                locationIdChoose  = mLocationList.get(position).getLocationId();
                 mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation()+"");
             }
         });
@@ -184,10 +185,10 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
         if(posLocation ==0){
             DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Choose location");
         }else if(CheckVaildateEditTexxt.checkEditTextNull(mEdtRoomCode.getText().toString())){
-            DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Choose room");
+            DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"RoomCode is't blank");
         }else {
             RoomDTO mRoomDTO = new RoomDTO();
-            mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
+            mRoomDTO.setLocationId(locationIdChoose);
             mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString()+ "");
             mRoomDTO.setActive(mStatusList.get(posStatus).isStatus());
             mCreateRoomPresenter.createRoom(token,mRoomDTO);

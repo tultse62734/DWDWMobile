@@ -53,9 +53,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/button_sign_up"
+                    android:text="Login"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp15"
+                    android:textSize="@dimen/sp18"
                     android:textStyle="bold">
 
                 </TextView>
@@ -95,6 +95,7 @@
                  </EditText>
              </LinearLayout>
                 <LinearLayout
+                    android:layout_marginBottom="@dimen/dp20"
                     android:id="@+id/lnl_sign_in"
                     android:layout_marginRight="@dimen/dp20"                android:layout_marginTop="@dimen/dp20"
                     android:layout_marginLeft="@dimen/dp20"
@@ -112,8 +113,10 @@
                         android:layout_height="wrap_content">
 
                     </TextView>
+
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_marginRight="@dimen/dp20"                android:layout_marginTop="@dimen/dp20"
                     android:layout_marginLeft="@dimen/dp20"
                     android:background="@color/colorWhite"

@@ -50,21 +50,26 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponse>() {
-                    }.getType();
-                    ResultReponse resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        ReponseDTO reponseDTO = new ReponseDTO();
-                        reponseDTO.setToken(resultReponse.getData().get(0));
-                        callBackData.onSucess(reponseDTO);
-                    } else {
-                        callBackData.onFail(response.message());
-                    }
+                if(response.code()==200 && response.body()!=null){
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponse>() {
+                        }.getType();
+                        ResultReponse resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            ReponseDTO reponseDTO = new ReponseDTO();
+                            reponseDTO.setToken(resultReponse.getData().get(0));
+                            callBackData.onSucess(reponseDTO);
+                        } else {
+                            callBackData.onFail(response.message());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    callBackData.onFail("Username or Password error");
                 }
 
             }

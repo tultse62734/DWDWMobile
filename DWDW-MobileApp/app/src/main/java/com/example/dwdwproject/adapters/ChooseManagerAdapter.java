@@ -29,7 +29,7 @@ public class ChooseManagerAdapter extends RecyclerView.Adapter<ChooseManagerAdap
     @NonNull
     @Override
     public WorkerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_manage, parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_choose_manager, parent,false);
         WorkerViewHolder viewHolder = new WorkerViewHolder(view);
         return viewHolder;
     }
@@ -70,12 +70,12 @@ public class ChooseManagerAdapter extends RecyclerView.Adapter<ChooseManagerAdap
         TextView tvMobile;
         public WorkerViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.txt_name_worker);
-            tvMobile = (TextView) itemView.findViewById(R.id.txt_phone_worker);
-            mLnlnRootManager = itemView.findViewById(R.id.lnl_root_manage_manager);
-            mTxtRole = itemView.findViewById(R.id.txt_role_user);
-            mTxtTime = itemView.findViewById(R.id.txt_time_user);
-            mTxtLocation = itemView.findViewById(R.id.txt_location_user);
+            tvName = (TextView) itemView.findViewById(R.id.txt_choose_name_worker);
+            tvMobile = (TextView) itemView.findViewById(R.id.txt_choose_phone_worker);
+            mLnlnRootManager = itemView.findViewById(R.id.lnl_choose_root_manage_manager);
+            mTxtRole = itemView.findViewById(R.id.txt_choose_role_user);
+            mTxtTime = itemView.findViewById(R.id.txt_choose_time_user);
+            mTxtLocation = itemView.findViewById(R.id.txt_choose_location_user);
         }
     }
     public void OnItemClickListener(ManageAdapter.OnItemClickListener itemClickListener){

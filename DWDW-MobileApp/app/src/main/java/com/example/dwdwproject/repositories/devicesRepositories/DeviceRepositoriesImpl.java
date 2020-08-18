@@ -124,19 +124,25 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
-                    }.getType();
-                    ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        callBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        callBackData.onFail(resultReponse.getMessage());
-                    }
+                if(response.code()==200 && response.body()!=null){
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
+                        }.getType();
+                        ResultReponseDeviceDTO<DeviceDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            callBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            callBackData.onFail(resultReponse.getMessage());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    callBackData.onFail("Device is existed");
+
                 }
             }
 
@@ -292,7 +298,6 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
         Call<ResponseBody> mBodyCall = clientApi.ServicesDevice().assginDevice(map,body);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(mContext);
-
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

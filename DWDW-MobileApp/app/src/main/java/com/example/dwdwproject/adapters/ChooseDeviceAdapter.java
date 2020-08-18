@@ -33,7 +33,7 @@ public class ChooseDeviceAdapter extends RecyclerView.Adapter<ChooseDeviceAdapte
     @NonNull
     @Override
     public DeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_device, parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.row_item_choose_device, parent,false);
         DeviceViewHolder viewHolder = new DeviceViewHolder(view);
         return viewHolder;
     }
@@ -120,14 +120,14 @@ public class ChooseDeviceAdapter extends RecyclerView.Adapter<ChooseDeviceAdapte
         TextView mTxtActive,mTxtActiveDevive;
         public DeviceViewHolder(View itemView) {
             super(itemView);
-            mLnlRoot = itemView.findViewById(R.id.lnl_root_manage_device);
-            mTxtNameDevice = itemView.findViewById(R.id.txt_name_device);
-            mTxtCreateDateDevice = itemView.findViewById(R.id.txt_create_date_device);
-            mTxtLocationDevice = itemView.findViewById(R.id.txt_location_device);
-            mTxtRoomCode = itemView.findViewById(R.id.txt_room_device);
-            mTxtActive = itemView.findViewById(R.id.txt_name_active_device);
-            mTxtActiveDevive = itemView.findViewById(R.id.txt_active_device);
-            mLnlActive = itemView.findViewById(R.id.lnl_active_device);
+            mLnlRoot = itemView.findViewById(R.id.lnl_choose_root_manage_device);
+            mTxtNameDevice = itemView.findViewById(R.id.txt_choose_name_device);
+            mTxtCreateDateDevice = itemView.findViewById(R.id.txt_choose_create_date_device);
+            mTxtLocationDevice = itemView.findViewById(R.id.txt_choose_location_device);
+            mTxtRoomCode = itemView.findViewById(R.id.txt_choose_room_device);
+            mTxtActive = itemView.findViewById(R.id.txt_choose_name_active_device);
+            mTxtActiveDevive = itemView.findViewById(R.id.txt_choose_active_device);
+            mLnlActive = itemView.findViewById(R.id.lnl_choose_active_device);
         }
     }
     public void onItemClickListerner(OnItemClickListenner mListenner){
