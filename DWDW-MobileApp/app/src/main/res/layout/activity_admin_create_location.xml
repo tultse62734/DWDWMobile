@@ -79,7 +79,7 @@
                     android:textStyle="italic"
                     android:background="@drawable/rounder_edit_text_1dp"
                     android:textColorHighlight="@color/colorGreyDark"
-                    android:hint="Choose Location"
+                    android:hint="Input Location"
                     android:textColorHint="@color/colorGrey"
                     android:textColor="@color/colorYellowOrange"
                     android:layout_width="match_parent"
