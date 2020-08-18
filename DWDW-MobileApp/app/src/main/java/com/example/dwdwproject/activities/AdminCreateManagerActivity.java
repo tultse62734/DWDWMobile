@@ -27,6 +27,7 @@ import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.userPresenters.CreateUserPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -35,10 +36,11 @@ import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 public class AdminCreateManagerActivity extends AppCompatActivity implements View.OnClickListener,GetUserView{
     private LinearLayout mBtnClose,mBtnCreateManager;
-    private EditText mTxtUsername,mTxtPassword,mTxtPhone;
+    private EditText mTxtUsername,mTxtPassword,mTxtPhone,mTxtConfirmPassword,mTxtFullname;
     private TextView mTxtBirthDay,mTxtRole,mtxtGender;
     private String token;
     private RecyclerView mRecyclerView;
@@ -64,11 +66,13 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         mBtnCreateManager = findViewById(R.id.lnl_submit_create_manager);
         token = SharePreferenceUtils.getStringSharedPreference(AdminCreateManagerActivity.this, BundleString.TOKEN);
         mTxtUsername = findViewById(R.id.edit_create_username);
+        mTxtConfirmPassword  = findViewById(R.id.edit_create_confirm_password);
         mTxtPassword = findViewById(R.id.edit_create_password);
         mTxtPhone = findViewById(R.id.edit_create_phone);
         mTxtBirthDay = findViewById(R.id.edt_choose_birthday_add__manager_admin);
         mTxtRole = findViewById(R.id.edt_choose_role_add__manager_admin);
         mtxtGender = findViewById(R.id.edt_choose_gender_add__manager_admin);
+        mTxtFullname = findViewById(R.id.edit_create_fullname);
     }
     private void initData(){
         mCreateUserPresenter = new CreateUserPresenter(AdminCreateManagerActivity.this,this);
@@ -81,7 +85,7 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         genderId = 2;
         roleId = 3;
         mTxtRole.setText("Worker");
-        mtxtGender.setText("Mem");
+        mtxtGender.setText("Men");
         mBtnClose.setOnClickListener(this);
         mBtnCreateManager.setOnClickListener(this);
         mtxtGender.setOnClickListener(this);
@@ -134,6 +138,7 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
                     mTxtBirthDay.setText(birthday);
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
     private void showChooseGenderDialog(){
@@ -165,16 +170,42 @@ public class AdminCreateManagerActivity extends AppCompatActivity implements Vie
         dialog.show();
     }
     private void createUser(){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserName(mTxtUsername.getText().toString());
-        userDTO.setPassword(mTxtPassword.getText().toString());
-        userDTO.setPhone(mTxtPhone.getText().toString());
-        userDTO.setDateOfBirth(birthday);
-        userDTO.setGender(genderId);
-        Role role = new Role();
-        role.setRoleId(roleId);
-        userDTO.setmRole(role);
-        mCreateUserPresenter.createUser(token,userDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(mTxtUsername.getText().toString())) {
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Username is't blank");
+        }
+        else if(CheckVaildateEditTexxt.checkEditTextNull(mTxtPassword.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Password is't blank");
+        }
+
+        else if(CheckVaildateEditTexxt.checkEditTextNull(mTxtConfirmPassword.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Confirm Password is't blank");
+        }
+
+        else if(CheckVaildateEditTexxt.checkEditTextNull(mTxtFullname.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Fullname is't blank");
+        }
+        else if(genderId ==0){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Choose gender");
+        }
+        else if(roleId==0){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Choose role");
+        }
+        else if(!mTxtPassword.getText().toString().contentEquals(mTxtConfirmPassword.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateManagerActivity.this, "Input confirm password");
+        }
+        else{
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserName(mTxtUsername.getText().toString());
+            userDTO.setPassword(mTxtPassword.getText().toString());
+            userDTO.setPhone(mTxtPhone.getText().toString());
+            userDTO.setFullname(mTxtFullname.getText().toString());
+            userDTO.setDateOfBirth(birthday);
+            userDTO.setGender(genderId);
+            Role role = new Role();
+            role.setRoleId(roleId);
+            userDTO.setmRole(role);
+            mCreateUserPresenter.createUser(token,userDTO);
+        }
     }
         @Override
     public void onClick(View v) {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RoomDTO;
+import com.example.dwdwproject.adapters.ChooseRoomAdapter;
 import com.example.dwdwproject.adapters.RoomAdapter;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class ManagerManageRoomActivity extends AppCompatActivity implements View.OnClickListener, GetListRoomView {
     private RecyclerView mRecyclerView;
-    private RoomAdapter mRoomAdapter;
+    private ChooseRoomAdapter mRoomAdapter;
     private List<Room> mRoomList;
     private String token;
     private LinearLayout mBtnClose;
@@ -59,7 +60,7 @@ public class ManagerManageRoomActivity extends AppCompatActivity implements View
     }
     private void updateUI(){
         if(mRoomAdapter == null){
-            mRoomAdapter = new RoomAdapter(ManagerManageRoomActivity.this,mRoomList);
+            mRoomAdapter = new ChooseRoomAdapter(ManagerManageRoomActivity.this,mRoomList);
             mRecyclerView.setAdapter(mRoomAdapter);
         }else {
             mRoomAdapter.notifyDataSetChanged();

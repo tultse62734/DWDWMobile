@@ -25,6 +25,7 @@ import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.roomPresenters.CreateRoomPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
@@ -39,7 +40,7 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
     private List<Location> mLocationList;
     private List<Status> mStatusList;
     private RecyclerView mRecyclerView,mRecyclerView1;
-    private int posLocation;
+    private int posLocation = 0;
     private LinearLayout mBtnAddCreateRoom;
     private EditText mEdtRoomCode;
     private GetAllLocationPresenter mGetAllLocationPresenter;
@@ -180,10 +181,17 @@ public class AdminCreateRoomActivity extends AppCompatActivity implements View.O
             }
     }
     private void createRoom(){
-        RoomDTO mRoomDTO = new RoomDTO();
-        mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
-        mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString()+ "");
-        mRoomDTO.setActive(mStatusList.get(posStatus).isStatus());
-        mCreateRoomPresenter.createRoom(token,mRoomDTO);
+        if(posLocation ==0){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Choose location");
+        }else if(CheckVaildateEditTexxt.checkEditTextNull(mEdtRoomCode.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateRoomActivity.this,"Choose room");
+        }else {
+            RoomDTO mRoomDTO = new RoomDTO();
+            mRoomDTO.setLocationId(mLocationList.get(posLocation).getLocationId());
+            mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString()+ "");
+            mRoomDTO.setActive(mStatusList.get(posStatus).isStatus());
+            mCreateRoomPresenter.createRoom(token,mRoomDTO);
+        }
+
     }
 }

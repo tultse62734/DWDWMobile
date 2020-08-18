@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content">
             </TextView>
             <TextView
+                android:visibility="gone"
                 android:id="@+id/txt_choose_create_date_location"
                 android:text="18-11-2011 11:30 pm"
                 android:textColor="@color/colorGreyDark"

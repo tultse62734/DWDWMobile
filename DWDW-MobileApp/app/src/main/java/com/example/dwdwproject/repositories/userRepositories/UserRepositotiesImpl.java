@@ -237,7 +237,7 @@ public class UserRepositotiesImpl implements UserRepositories {
             data.put("userName",mUserDTO.getUserName());
 
             data.put("password",mUserDTO.getPassword());
-
+            data.put("fullName",mUserDTO.getFullname());
             data.put("phone",mUserDTO.getPhone());
 
             data.put("dateOfBirth",mUserDTO.getDateOfBirth());
@@ -293,7 +293,7 @@ public class UserRepositotiesImpl implements UserRepositories {
         JSONObject data = new JSONObject();
         try {
             data.put("userId",mUserDTO.getUserId());
-            data.put("userName",mUserDTO.getUserName());
+            data.put("fullName",mUserDTO.getFullname());
             data.put("phone",mUserDTO.getPhone());
             data.put("dateOfBirth",mUserDTO.getDateOfBirth());
             data.put("gender",mUserDTO.getGender());

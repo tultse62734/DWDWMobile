@@ -19,6 +19,7 @@ import com.example.dwdwproject.adapters.ChooseStatusAdapter;
 import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.CreateLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.CreateLocatonView;
@@ -62,11 +63,16 @@ public class AdminCreateLocationActivity extends AppCompatActivity implements Vi
     }
     private void createLocation (){
         String locationCode = mEdtLocationCode.getText().toString();
-        LocationDTO mLocationDTO = new LocationDTO();
-        mLocationDTO.setLocationCode(locationCode);
-        token = SharePreferenceUtils.getStringSharedPreference(AdminCreateLocationActivity.this, BundleString.TOKEN);
-        mCreateLocationPresenter = new CreateLocationPresenter(AdminCreateLocationActivity.this,getApplication(), this);
-        mCreateLocationPresenter.createLocation(token,mLocationDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(mEdtLocationCode.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminCreateLocationActivity.this,"LocationCode is't blank");
+        }else{
+            LocationDTO mLocationDTO = new LocationDTO();
+            mLocationDTO.setLocationCode(locationCode);
+            token = SharePreferenceUtils.getStringSharedPreference(AdminCreateLocationActivity.this, BundleString.TOKEN);
+            mCreateLocationPresenter = new CreateLocationPresenter(AdminCreateLocationActivity.this,getApplication(), this);
+            mCreateLocationPresenter.createLocation(token,mLocationDTO);
+        }
+
     }
     @Override
     public void onClick(View v) {

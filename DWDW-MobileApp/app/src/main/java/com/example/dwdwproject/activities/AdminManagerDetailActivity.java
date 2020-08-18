@@ -80,7 +80,7 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
         }else{
             mImgUpdateStatus.setImageResource(R.mipmap.ic_tick);
         }
-        mTxtUsername.setText(mUserDTO.getUserName());
+        mTxtUsername.setText(mUserDTO.getFullname());
         mTxtPhone.setText(mUserDTO.getPhone());
         if(mUserDTO.getDateOfBirth()!=null){
             birthday = mUserDTO.getDateOfBirth()+"";
@@ -190,7 +190,7 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
     }
     private void updateUser(){
         if(genderId!=0){
-            mUserDTO.setUserName(mTxtUsername.getText().toString());
+            mUserDTO.setFullname(mTxtUsername.getText().toString());
             mUserDTO.setPhone(mTxtPhone.getText().toString());
             mUserDTO.setDateOfBirth(birthday);
             mUserDTO.setGender(genderId);

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.DeviceDTO;
+import com.example.dwdwproject.adapters.ChooseDeviceAdapter;
 import com.example.dwdwproject.adapters.DeviceAdapter;
 import com.example.dwdwproject.models.Device;
 import com.example.dwdwproject.models.Room;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class ManagerManageDeviceActivity extends AppCompatActivity implements View.OnClickListener, GetAllDeviceView {
     private RecyclerView mRecyclerView;
-    private DeviceAdapter mDeviceAdapter;
+    private ChooseDeviceAdapter mDeviceAdapter;
     private List<Device> mDeviceList;
     private GetDeviceForManagerPresenter deviceForManagerPresenter;
     private LinearLayout mBtnClose;
@@ -67,7 +68,7 @@ public class ManagerManageDeviceActivity extends AppCompatActivity implements Vi
     }
     private void updateUI(){
         if(mDeviceAdapter == null){
-            mDeviceAdapter = new DeviceAdapter(ManagerManageDeviceActivity.this,mDeviceList);
+            mDeviceAdapter = new ChooseDeviceAdapter(ManagerManageDeviceActivity.this,mDeviceList);
             mRecyclerView.setAdapter(mDeviceAdapter);
         }
         else {

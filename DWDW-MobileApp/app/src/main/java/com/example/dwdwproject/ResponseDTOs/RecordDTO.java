@@ -13,7 +13,10 @@ public class RecordDTO implements Serializable {
     private String recordDateTime;
     @SerializedName("imageByte")
     private String image;
-
+    @SerializedName("roomCode")
+    private String roomCode;
+    @SerializedName("fullName")
+    private String fullname;
     public int getRecordId() {
         return recordId;
     }
@@ -44,5 +47,21 @@ public class RecordDTO implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

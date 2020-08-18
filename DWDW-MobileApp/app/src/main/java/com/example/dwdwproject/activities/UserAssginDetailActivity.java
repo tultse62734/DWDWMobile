@@ -112,7 +112,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
 
     @Override
     public void getUserSuccess(UserDTO userDTO) {
-        mTxtUsername.setText(mUserDTO.getUserName());
+        mTxtUsername.setText(mUserDTO.getFullname());
         mUserDTO = userDTO;
         mLocationDTOS = new ArrayList<>();
         mLocationList =new ArrayList<>();

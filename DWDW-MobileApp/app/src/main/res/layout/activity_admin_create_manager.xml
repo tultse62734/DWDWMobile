@@ -116,7 +116,53 @@
                         android:layout_height="@dimen/dp60">
 
                     </EditText>
+                    <TextView
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold"
+                        android:text="Confirm_password"
+                        android:textColor="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </TextView>
 
+
+                    <EditText
+                        android:inputType="textPassword"
+                        android:id="@+id/edit_create_confirm_password"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="italic"
+                        android:background="@drawable/rounder_edit_text_1dp"
+                        android:textColorHighlight="@color/colorGreyDark"
+                        android:hint="Input Confirm Password"
+                        android:textColorHint="@color/colorGrey"
+                        android:textColor="@color/colorYellowOrange"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp60">
+
+                    </EditText>
+                    <TextView
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold"
+                        android:text="Fullname"
+                        android:textColor="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </TextView>
+                    <EditText
+                        android:id="@+id/edit_create_fullname"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="italic"
+                        android:background="@drawable/rounder_edit_text_1dp"
+                        android:textColorHighlight="@color/colorGreyDark"
+                        android:hint="Input Fullname"
+                        android:textColorHint="@color/colorGrey"
+                        android:textColor="@color/colorYellowOrange"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp60">
+
+                    </EditText>
                     <TextView
                         android:layout_marginBottom="@dimen/dp10"
                         android:textSize="@dimen/sp18"
@@ -128,6 +174,7 @@
 
                     </TextView>
                     <EditText
+                        android:inputType="phone"
                         android:id="@+id/edit_create_phone"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"

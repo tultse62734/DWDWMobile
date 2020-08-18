@@ -24,6 +24,7 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.devicesPresenters.UpdateDevicePresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -135,8 +136,12 @@ public class AdminDeviceDetailActivity extends AppCompatActivity implements View
     }
     public void updateDevice(){
         token = SharePreferenceUtils.getStringSharedPreference(AdminDeviceDetailActivity.this, BundleString.TOKEN);
-        mDeviceDTO.setDeviceCode(mEdtDeviceCode.getText().toString());
-        mUpdateDevicePresenter.updateDevice(token,mDeviceDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(mEdtDeviceCode.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminDeviceDetailActivity.this,"DeviceCode is's blank");
+        }else {
+            mDeviceDTO.setDeviceCode(mEdtDeviceCode.getText().toString());
+            mUpdateDevicePresenter.updateDevice(token,mDeviceDTO);
+        }
     }
     @Override
     public void onDateSet(com.borax12.materialdaterangepicker.date.DatePickerDialog view, int year, int month, int day, int yearEnd, int monthEnd, int dayEnd) {

@@ -25,6 +25,7 @@ import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.roomPresenters.UpdateRoomPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetAllLocatonView;
@@ -181,11 +182,16 @@ public class AdminRoomDetailActivity extends AppCompatActivity implements View.O
         }
     }
     private void updateRoom(){
-        token = SharePreferenceUtils.getStringSharedPreference(AdminRoomDetailActivity.this,BundleString.TOKEN);
-        mUpdateRoomPresenter = new UpdateRoomPresenter(AdminRoomDetailActivity.this,this);
-        mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString());
-        mRoomDTO.setLocationId(mRoomDTO.getLocationId());
-        mUpdateRoomPresenter.updateRoom(token,mRoomDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(mEdtRoomCode.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminRoomDetailActivity.this,"RoomCode is't blank");
+        }
+        else{
+            token = SharePreferenceUtils.getStringSharedPreference(AdminRoomDetailActivity.this,BundleString.TOKEN);
+            mUpdateRoomPresenter = new UpdateRoomPresenter(AdminRoomDetailActivity.this,this);
+            mRoomDTO.setRoomCode(mEdtRoomCode.getText().toString());
+            mRoomDTO.setLocationId(mRoomDTO.getLocationId());
+            mUpdateRoomPresenter.updateRoom(token,mRoomDTO);
+        }
     }
     @Override
     public void showError(String message) {

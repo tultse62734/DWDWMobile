@@ -11,6 +11,8 @@ public class UserDTO1 implements Serializable {
     private String userName;
     @SerializedName("password")
     private String password;
+    @SerializedName("fullName")
+    private String fullName;
     @SerializedName("phone")
     private String phone;
     @SerializedName("dateOfBirth")
@@ -143,5 +145,13 @@ public class UserDTO1 implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

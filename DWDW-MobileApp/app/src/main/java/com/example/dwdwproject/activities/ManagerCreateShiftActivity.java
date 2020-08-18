@@ -27,6 +27,7 @@ import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationP
 import com.example.dwdwproject.presenters.shiftPresenters.CreateShiftPresenter;
 import com.example.dwdwproject.presenters.userPresenters.GetAllWorkerFromLocationByManagerPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -45,7 +46,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
     private String locationCode;
     private String date;
     private int mYear,mMonth,mDay;
-    private int roomId,workerId;
+    private int roomId = 0,workerId = 0;
     private GetAllRoomFromLocationPresenter mGetAllRoomFromLocationPresenter;
     private GetAllWorkerFromLocationByManagerPresenter managerPresenter;
     private RecyclerView mRecyclerView,mRecyclerView1;
@@ -109,11 +110,22 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
         }
     }
     private void createShift(){
-        ShiftDTO mShiftDTO = new ShiftDTO();
-        mShiftDTO.setWorkerId(workerId);
-        mShiftDTO.setDate(date);
-        mShiftDTO.setRoomId(roomId);
-        mCreateShiftPresenter.createShifts(token,locationId,mShiftDTO);
+        if(workerId ==0){
+            DialogNotifyError.showErrorLoginDialog(ManagerCreateShiftActivity.this,"Choose Worker");
+        }else if(roomId ==0){
+            DialogNotifyError.showErrorLoginDialog(ManagerCreateShiftActivity.this,"Choose Room");
+        }
+        else if(CheckVaildateEditTexxt.checkEditTextNull(date)){
+            DialogNotifyError.showErrorLoginDialog(ManagerCreateShiftActivity.this,"Choose date to create shift");
+        }
+        else {
+            ShiftDTO mShiftDTO = new ShiftDTO();
+            mShiftDTO.setWorkerId(workerId);
+            mShiftDTO.setDate(date);
+            mShiftDTO.setRoomId(roomId);
+            mCreateShiftPresenter.createShifts(token, locationId, mShiftDTO);
+
+        }
     }
     private void showChooseRoomDialog() {
         final Dialog dialog = new Dialog(ManagerCreateShiftActivity.this);
@@ -205,7 +217,7 @@ public class ManagerCreateShiftActivity extends AppCompatActivity implements Vie
             this.managerList = new ArrayList<>();
             for (int i = 0; i <userDTOList.size() ; i++) {
                 int userId = userDTOList.get(i).getUserId();
-                String name  = userDTOList.get(i).getUserName();
+                String name  = userDTOList.get(i).getFullname();
                 String phone = userDTOList.get(i).getPhone();
                 String location = SharePreferenceUtils.getStringSharedPreference(ManagerCreateShiftActivity.this,BundleString.LOCATIONNAME);
                 String roleName = "Worker";

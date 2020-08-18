@@ -23,6 +23,7 @@ import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.userPresenters.UpdateUserPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -31,6 +32,7 @@ import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 public class UpdateInforAccountActivity extends AppCompatActivity implements View.OnClickListener, GetUserInforTokenView {
     private LinearLayout mBtnClose,mBtnUpdateManager;
@@ -68,8 +70,8 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
         phone = mUserDTO.getPhone()+"";
         mTxtPhone.setText(phone);
         if(mUserDTO.getDateOfBirth()!=null){
-            birthday = mUserDTO.getDateOfBirth()+"";
-            mTxtBirthDay.setText(birthday);
+            birthday = mUserDTO.getDateOfBirth();
+            mTxtBirthDay.setText(DateManagement.changeFormatDate1(birthday));
         }
         if(mUserDTO.getGender()==1){
             mtxtGender.setText("Women");
@@ -81,6 +83,7 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
             genderId = 0;
             mtxtGender.setText("Choose Gender");
         }
+        mTxtPassword.setText(mUserDTO.getFullName());
         mTxtRole.setText(mUserDTO.getRoleName());
         mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(UpdateInforAccountActivity.this,this);
         mStatusList1 = new ArrayList<>();
@@ -110,6 +113,8 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
                         mTxtBirthDay.setText(birthday);
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+
         datePickerDialog.show();
     }
     private void showChooseGenderDialog(){
@@ -141,17 +146,24 @@ public class UpdateInforAccountActivity extends AppCompatActivity implements Vie
         dialog.show();
     }
     private void updateUser(){
-        if(genderId!=0){
-            mUserDTO.setPassword(mTxtPassword.getText().toString());
+        if(CheckVaildateEditTexxt.checkEditTextNull(mTxtPassword.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(UpdateInforAccountActivity.this,"FullName is't blank");
+        }
+        else if(!CheckVaildateEditTexxt.checkValidatePhone(mTxtPhone.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(UpdateInforAccountActivity.this,"Not Valid Number Phone");
+        }else if(CheckVaildateEditTexxt.checkEditTextNull(birthday)){
+            DialogNotifyError.showErrorLoginDialog(UpdateInforAccountActivity.this,"Must to choose birday");
+        }
+        else if(genderId==0){
+            DialogNotifyError.showErrorLoginDialog(UpdateInforAccountActivity.this,"Choose Gender First");
+        }
+        else {
+            mUserDTO.setFullName(mTxtPassword.getText().toString());
             mUserDTO.setPhone(mTxtPhone.getText().toString());
             mUserDTO.setDateOfBirth(birthday);
             mUserDTO.setGender(genderId);
             mGetUserInforTokenPresenter.updateInfor(token,mUserDTO);
         }
-        else {
-            DialogNotifyError.showErrorLoginDialog(UpdateInforAccountActivity.this,"Choose Gender First");
-        }
-
     }
     @Override
     public void onClick(View v) {

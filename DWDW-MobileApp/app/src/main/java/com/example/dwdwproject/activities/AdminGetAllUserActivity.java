@@ -130,7 +130,7 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
             mDtoList = userDTOList;
             for (int i = 0; i <userDTOList.size() ; i++) {
                 int userId = userDTOList.get(i).getUserId();
-                String name  = userDTOList.get(i).getUserName();
+                String name  = userDTOList.get(i).getFullname();
                 String phone = userDTOList.get(i).getPhone();
                 String location = userDTOList.get(i).getmLocationDTO().toString();
                 String roleName = userDTOList.get(i).getmRole().getRoleName();
@@ -140,7 +140,6 @@ public class AdminGetAllUserActivity extends AppCompatActivity implements View.O
             updateUI();
         }
     }
-
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(AdminGetAllUserActivity.this,message);

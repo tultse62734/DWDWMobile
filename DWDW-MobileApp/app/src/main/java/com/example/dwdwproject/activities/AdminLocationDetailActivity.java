@@ -20,6 +20,7 @@ import com.example.dwdwproject.adapters.ChooseStatusAdapter;
 import com.example.dwdwproject.models.Status;
 import com.example.dwdwproject.presenters.locationsPresenters.UpdateLocationPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.locationsViews.GetLocationView;
@@ -76,10 +77,15 @@ public class AdminLocationDetailActivity extends AppCompatActivity implements Vi
         mStatusList.add(new Status("Không hoạt động",false));
     }
     private void updateLocation(){
-        String locationCode = mTxtLocationCode.getText().toString();
-        token = SharePreferenceUtils.getStringSharedPreference(AdminLocationDetailActivity.this,BundleString.TOKEN);
-        mLocationDTO.setLocationCode(locationCode);
-        mUpdateLocationPresenter.updateLocation(token,mLocationDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(mTxtLocationCode.getText().toString())){
+            DialogNotifyError.showErrorLoginDialog(AdminLocationDetailActivity.this,"LocationCode is't blank");
+        }
+        else {
+            String locationCode = mTxtLocationCode.getText().toString();
+            token = SharePreferenceUtils.getStringSharedPreference(AdminLocationDetailActivity.this,BundleString.TOKEN);
+            mLocationDTO.setLocationCode(locationCode);
+            mUpdateLocationPresenter.updateLocation(token,mLocationDTO);
+        }
     }
     @Override
     public void onClick(View v) {

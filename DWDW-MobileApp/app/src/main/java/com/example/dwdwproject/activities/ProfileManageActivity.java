@@ -15,11 +15,11 @@ import com.example.dwdwproject.presenters.GetUserInforTokenPresenter;
 import com.example.dwdwproject.presenters.roomLocalPresenter.GetUserToRoomPresenter;
 import com.example.dwdwproject.rooms.entities.UserItemEntities;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.GetUserInforTokenView;
 import com.example.dwdwproject.views.roomLocalViews.GetInfoUserView;
-
 public class ProfileManageActivity extends AppCompatActivity implements View.OnClickListener,GetUserInforTokenView {
     private LinearLayout mBtnClose,mBtnUpdate;
     private String token;
@@ -45,9 +45,16 @@ public class ProfileManageActivity extends AppCompatActivity implements View.OnC
         mGetUserInforTokenPresenter = new GetUserInforTokenPresenter(ProfileManageActivity.this,this);
         mGetUserInforTokenPresenter.getInforToken(token);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGetUserInforTokenPresenter.getInforToken(token);
+    }
+
     private void initData(){
-        mTxtNameProfile.setText(userDTO.getUserName()+"");
-        mTxtBirthDayProfile.setText(userDTO.getDateOfBirth()+"");
+        mTxtNameProfile.setText(userDTO.getFullName()+"");
+        mTxtBirthDayProfile.setText(DateManagement.changeFormatDate1(userDTO.getDateOfBirth()));
         mTxtPhoneProfile.setText(userDTO.getPhone()+"");
         if(userDTO.getRoleId() == 1){
             mTxtRoleProfile.setText("Admin");

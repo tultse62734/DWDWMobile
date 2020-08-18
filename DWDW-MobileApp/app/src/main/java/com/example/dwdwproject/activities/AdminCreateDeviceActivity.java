@@ -27,6 +27,7 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.models.Room;
 import com.example.dwdwproject.presenters.devicesPresenters.CreateDevivePresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -67,10 +68,15 @@ public class AdminCreateDeviceActivity extends AppCompatActivity implements View
     }
     private void createDevice(){
         String deviceCode = mEdtDeviceCode.getText().toString();
-        mDeviceDTO = new DeviceDTO();
-        mDeviceDTO.setDeviceCode(deviceCode);
-        token = SharePreferenceUtils.getStringSharedPreference(AdminCreateDeviceActivity.this, BundleString.TOKEN);
-        mCreateDevivePresenter.createDevice(token,mDeviceDTO);
+        if(CheckVaildateEditTexxt.checkEditTextNull(deviceCode)){
+               DialogNotifyError.showErrorLoginDialog(AdminCreateDeviceActivity.this,"DeviceCode is't blank");
+        }
+        else {
+            mDeviceDTO = new DeviceDTO();
+            mDeviceDTO.setDeviceCode(deviceCode);
+            token = SharePreferenceUtils.getStringSharedPreference(AdminCreateDeviceActivity.this, BundleString.TOKEN);
+            mCreateDevivePresenter.createDevice(token,mDeviceDTO);
+        }
     }
     @Override
     public void onClick(View v) {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.adapters.ChooseManagerAdapter;
 import com.example.dwdwproject.adapters.LocationAdapter;
 import com.example.dwdwproject.adapters.ManageAdapter;
 import com.example.dwdwproject.models.Location;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class ManageWorkerActivity extends AppCompatActivity implements View.OnClickListener, GetAllListUserView {
     private List<Manager> mManagerList;
-    private ManageAdapter manageAdapter;
+    private ChooseManagerAdapter manageAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayout mBtnLose;
     private int locationId;
@@ -71,7 +72,7 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
     }
     private void updateUI(){
         if(manageAdapter ==null){
-            manageAdapter = new ManageAdapter(ManageWorkerActivity.this,mManagerList);
+            manageAdapter = new ChooseManagerAdapter(ManageWorkerActivity.this,mManagerList);
             mRecyclerView.setAdapter(manageAdapter);
         }
         else {
@@ -99,15 +100,11 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
             mUserDTOList = userDTOList;
             for (int i = 0; i <userDTOList.size() ; i++) {
                 int userId = userDTOList.get(i).getUserId();
-                String name  = userDTOList.get(i).getUserName();
+                String name  = userDTOList.get(i).getFullname();
                 String phone = userDTOList.get(i).getPhone();
                 String location = SharePreferenceUtils.getStringSharedPreference(ManageWorkerActivity.this,BundleString.LOCATIONNAME);
-                String roleName;
-                if(userDTOList.get(i).getmRole() ==null){
-                    roleName ="";
-                }else{
-                    roleName = "Worker";
-                }
+                String roleName = "Worker";
+
                 boolean isActive = userDTOList.get(i).isActive();
                 mManagerList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }

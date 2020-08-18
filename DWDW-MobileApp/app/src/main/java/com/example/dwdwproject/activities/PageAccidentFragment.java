@@ -119,8 +119,9 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
                         String recordDate = splitFromDay(mRecordDTOList.get(i).getRecordDateTime());
                         String recordTime = splitFromToTime(mRecordDTOList.get(i).getRecordDateTime());
                         String recordName = "Accident" +i;
+                        String roomCode = mRecordDTOList.get(i).getRoomCode();
                         boolean isActive = true;
-                        mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,isActive));
+                        mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,roomCode,isActive));
                 }
                 updateUI();
             }

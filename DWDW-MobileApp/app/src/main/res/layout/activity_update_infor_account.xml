@@ -95,19 +95,17 @@
                         android:layout_marginBottom="@dimen/dp10"
                         android:textSize="@dimen/sp18"
                         android:textStyle="bold"
-                        android:text="Password:"
+                        android:text="FullName:"
                         android:textColor="@color/colorRed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     </TextView>
                     <EditText
-                        android:inputType="textPassword"
                         android:id="@+id/edit_update_password_account"
                         android:textSize="@dimen/sp18"
                         android:textStyle="italic"
                         android:background="@drawable/rounder_edit_text_1dp"
                         android:textColorHighlight="@color/colorGreyDark"
-                        android:hint="Input Password"
                         android:textColorHint="@color/colorGrey"
                         android:textColor="@color/colorYellowOrange"
                         android:layout_width="match_parent"

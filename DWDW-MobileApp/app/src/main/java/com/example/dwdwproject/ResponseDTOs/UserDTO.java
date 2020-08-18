@@ -10,6 +10,8 @@ public class UserDTO implements Serializable,Cloneable {
     private int userId;
     @SerializedName("userName")
     private String userName;
+    @SerializedName("fullName")
+    private String fullname;
     @SerializedName("password")
     private String password;
     @SerializedName("phone")
@@ -124,5 +126,13 @@ public class UserDTO implements Serializable,Cloneable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

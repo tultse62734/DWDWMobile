@@ -264,7 +264,7 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
             for (int i = 0; i <mShiftDTOList.size() ; i++) {
                  int shiftId = mShiftDTOList.get(i).getShiftId();
                  String locationName = SharePreferenceUtils.getStringSharedPreference(ManagerShiftViewActivity.this,BundleString.LOCATIONNAME);
-                 String username =mShiftDTOList.get(i).getUsername();
+                 String username =mShiftDTOList.get(i).getFullname();
                  String roomCode = mShiftDTOList.get(i).getRoomCode();
                  boolean isActive = mShiftDTOList.get(i).isActive();
                 mShiftList.add(new Shift(shiftId,username,locationName,roomCode,isActive));

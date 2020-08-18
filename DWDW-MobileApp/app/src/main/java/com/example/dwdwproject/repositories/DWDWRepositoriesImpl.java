@@ -164,7 +164,7 @@ public class DWDWRepositoriesImpl implements DWDWRepositories {
         map.put("Authorization", hearder);
         JSONObject jsonObject =  new JSONObject();
         try {
-            jsonObject.put("password",mUserDTO.getPassword());
+            jsonObject.put("fullName",mUserDTO.getFullName());
             jsonObject.put("phone",mUserDTO.getPhone());
             jsonObject.put("dateOfBirth",mUserDTO.getDateOfBirth());
             jsonObject.put("gender",mUserDTO.getGender());

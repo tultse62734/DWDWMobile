@@ -220,12 +220,12 @@ public class DateManagement {
         }
 
     public static String getStartThisWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getStartThisWeek());
     }
 
     public static String getEndThisWeekDateString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final Calendar cal = Calendar.getInstance();
         int endDay = cal.get(Calendar.DATE-1);
         int endOfThisWeek = cal.getFirstDayOfWeek();

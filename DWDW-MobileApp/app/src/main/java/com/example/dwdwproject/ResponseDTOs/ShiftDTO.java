@@ -10,7 +10,10 @@ public class ShiftDTO implements Serializable {
     @SerializedName("arrangementId")
     private int arrangementId;
     @SerializedName("userName")
+
     private String username;
+    @SerializedName("fullName")
+    private String fullname;
     @SerializedName("date")
     private String date;
     @SerializedName("roomId")
@@ -84,5 +87,13 @@ public class ShiftDTO implements Serializable {
 
     public void setRoomCode(String roomCode) {
         this.roomCode = roomCode;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }

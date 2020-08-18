@@ -72,9 +72,9 @@ public class AccidentReportDetailActivity extends AppCompatActivity implements V
     @Override
     public void getRecodeSucessfull(RecordDTO mRecordDTO) {
         this.recordDTO = mRecordDTO;
-        mTxtRoom.setText(mAccident.getRoomAccident());
+        mTxtRoom.setText(recordDTO.getRoomCode());
         mTxtLocation.setText(mAccident.getLocationAccident());
-        mTxtDevice.setText(mAccident.getAccidentName());
+        mTxtDevice.setText(recordDTO.getFullname());
         mTxtDay.setText(mAccident.getAccidentDate());
         mTxtTime.setText(mAccident.getTimeDate());
         mTitle.setText(title);
