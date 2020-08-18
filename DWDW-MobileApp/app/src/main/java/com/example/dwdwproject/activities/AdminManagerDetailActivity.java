@@ -83,8 +83,8 @@ public class AdminManagerDetailActivity extends AppCompatActivity implements Vie
         mTxtUsername.setText(mUserDTO.getFullname());
         mTxtPhone.setText(mUserDTO.getPhone());
         if(mUserDTO.getDateOfBirth()!=null){
-            birthday = mUserDTO.getDateOfBirth()+"";
-            mTxtBirthDay.setText(birthday);
+            birthday = mUserDTO.getDateOfBirth();
+            mTxtBirthDay.setText(DateManagement.changeFormatDate1(birthday));
         }
         if(mUserDTO.getGender()==1){
             mtxtGender.setText("Women");

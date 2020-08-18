@@ -99,14 +99,12 @@ public class ManageAdapter extends RecyclerView.Adapter<ManageAdapter.WorkerView
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mManagerList.clear();
             mManagerList.addAll((List) results.values);
-            mManagerListFull = new ArrayList<>(mManagerList);
             notifyDataSetChanged();
         }
     };
     public void notify(List<Manager> managerList){
         mManagerList = new ArrayList<>();
         mManagerList = managerList;
-        mManagerListFull = new ArrayList<>(managerList);
         notifyDataSetChanged();
     }
     public class WorkerViewHolder extends RecyclerView.ViewHolder {

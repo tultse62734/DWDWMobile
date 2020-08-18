@@ -105,7 +105,6 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mDeviceList.clear();
             mDeviceList.addAll((List) results.values);
-            mLDeviceListFull = new ArrayList<>(mDeviceList);
             notifyDataSetChanged();
         }
     };
@@ -145,7 +144,6 @@ public class DeviceAdapter  extends RecyclerView.Adapter<DeviceAdapter.DeviceVie
     public void notifyChange(List<Device> mDevices){
         mDeviceList = new ArrayList<>();
         mDeviceList = mDevices;
-        mLDeviceListFull = new ArrayList<>(mDeviceList);
         notifyDataSetChanged();
     }
 }

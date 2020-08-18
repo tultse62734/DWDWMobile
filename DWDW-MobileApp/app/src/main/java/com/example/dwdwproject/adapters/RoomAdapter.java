@@ -100,7 +100,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mRoomList.clear();
             mRoomList.addAll((List) results.values);
-            mRoomListFull = new ArrayList<>(mRoomList);
             notifyDataSetChanged();
         }
     };
@@ -133,7 +132,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     public void notify(List<Room> roomList){
         mRoomList = new ArrayList<>();
         mRoomList = roomList;
-        mRoomListFull = new ArrayList<>(mRoomList);
         notifyDataSetChanged();
     }
 }

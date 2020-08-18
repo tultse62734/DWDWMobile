@@ -150,7 +150,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     public void notify(List<Location> locationList){
         mLocationList = new ArrayList<>();
         mLocationList  = locationList;
-        mLocationListFull = new ArrayList<>(mLocationList);
         notifyDataSetChanged();
     }
 }
