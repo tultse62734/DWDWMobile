@@ -28,6 +28,7 @@ import com.example.dwdwproject.presenters.devicesPresenters.AssignDevicePresente
 import com.example.dwdwproject.presenters.devicesPresenters.CreateDevivePresenter;
 import com.example.dwdwproject.presenters.locationsPresenters.GetAllLocationPresenter;
 import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomFromLocationPresenter;
+import com.example.dwdwproject.presenters.roomPresenters.GetAllRoomPresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
@@ -56,7 +57,7 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
     private String token ;
     private int roomId;
     private GetAllLocationPresenter mLocationPresenter;
-    private GetAllRoomFromLocationPresenter mRoomFromLocationPresenter;
+    private GetAllRoomPresenter mRoomFromLocationPresenter;
     private AssignDevicePresenter mAssignDevicePresenter;
     private String startTime,endTime;
     @Override
@@ -70,7 +71,7 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
         mDeviceDTO  = (DeviceDTO) bundle.getSerializable(BundleString.DEVICEASSGINT);
         token = SharePreferenceUtils.getStringSharedPreference(AdminAssignDeviceActivity.this,BundleString.TOKEN);
         mLocationPresenter = new GetAllLocationPresenter(AdminAssignDeviceActivity.this,this);
-        mRoomFromLocationPresenter = new GetAllRoomFromLocationPresenter(AdminAssignDeviceActivity.this,this);
+        mRoomFromLocationPresenter = new GetAllRoomPresenter(AdminAssignDeviceActivity.this,this);
         mAssignDevicePresenter = new AssignDevicePresenter(AdminAssignDeviceActivity.this,this);
         mLocationPresenter.getAllLocation(token);
         startTime = DateManagement.changeFormatDate1(mDeviceDTO.getStartDate())+"";
@@ -179,7 +180,7 @@ public class AdminAssignDeviceActivity extends AppCompatActivity implements  Vie
                 dialog.dismiss();
                 posLocation = position;
                 mEdtChoooseLocation.setText(mLocationList.get(position).getNameLocation());
-                mRoomFromLocationPresenter.getAllRoomFromLocation(token,mLocationList.get(position).getLocationId());
+                mRoomFromLocationPresenter.getAllRoom(token,mLocationList.get(position).getLocationId());
             }
         });
         dialog.show();

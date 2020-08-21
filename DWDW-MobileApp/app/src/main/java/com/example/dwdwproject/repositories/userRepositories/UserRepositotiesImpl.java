@@ -61,10 +61,14 @@ public class UserRepositotiesImpl implements UserRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
-                    mCallBackData.onFail("User is not found");
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
-
+                else{
+                    mCallBackData.onFail("User is't found");
+                }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -269,6 +273,10 @@ public class UserRepositotiesImpl implements UserRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
                 else{
                     mCallBackData.onFail("User is existed");
@@ -323,7 +331,12 @@ public class UserRepositotiesImpl implements UserRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
                     mCallBackData.onFail("User is existed");
                 }
 
@@ -380,11 +393,15 @@ public class UserRepositotiesImpl implements UserRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                else {
-                    mCallBackData.onFail("Assign User is fail");
-                }
 
+            }else if(response.code()==403 && response.body()!=null){
+                mCallBackData.onFail("Foriden Authorization");
+            }else if(response.code() ==500){
+                mCallBackData.onFail("Server is error");
+            }
+                else{
+                mCallBackData.onFail("User is existed relationship in other location");
+            }
 
             }
             @Override

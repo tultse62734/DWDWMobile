@@ -91,7 +91,7 @@ public class PageAccidentFragment extends Fragment implements GetAllRecordsView 
                 public void onItemClick(int pos) {
                     Intent intent = new Intent(getContext(),AccidentReportDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    mAccidentList.get(pos).setImage(parseBitmapToBytes());
+                    mAccidentList.get(pos).setImage(mAccidentList.get(pos).getImage());
                     bundle.putSerializable(BundleString.RECORDDETAIL,mAccidentList.get(pos));
                     intent.putExtras(bundle);
                     startActivity(intent);

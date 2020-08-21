@@ -22,7 +22,7 @@ public interface ServiceRoom {
 
     @GET(ConfigAPI.Api.GETALLROOM)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getRoomById(@HeaderMap Map<String, String> map,@Path("id") int id);
+    Call<ResponseBody> getRoomById(@HeaderMap Map<String, String> map,@Path("locationId") int id);
 
     @GET(ConfigAPI.Api.GETROOMFROMLOCATION)
     @Headers({"Content-Type: application/json"})

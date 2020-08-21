@@ -125,7 +125,6 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(mContext, khub);
                 if(response.code()==200 && response.body()!=null){
-
                     try {
                         String result = response.body().string();
                         Type type = new TypeToken<ResultReponseDeviceDTO<DeviceDTO>>() {
@@ -140,9 +139,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else{
+                }else if(response.code()==403 && response.body()!=null){
+                    callBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    callBackData.onFail("Server is error");
+                }
+                else{
                     callBackData.onFail("Device is existed");
-
                 }
             }
 
@@ -190,9 +193,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    callBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    callBackData.onFail("Server is error");
                 }
-                else {
-                    callBackData.onFail("Device is Existed");
+                else{
+                    callBackData.onFail("Device is existed");
                 }
 
             }
@@ -317,9 +324,13 @@ public class DeviceRepositoriesImpl implements DeviceRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else{
-                    mCallBackData.onFail("Assgin device is fail");
-
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
+                    mCallBackData.onFail("Device is existed in room");
                 }
             }
             @Override

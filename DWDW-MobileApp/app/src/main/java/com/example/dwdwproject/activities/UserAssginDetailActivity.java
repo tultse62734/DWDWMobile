@@ -18,7 +18,9 @@ import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.AssignUserDTO;
 import com.example.dwdwproject.ResponseDTOs.LocationDTO;
 import com.example.dwdwproject.ResponseDTOs.UserDTO;
+import com.example.dwdwproject.adapters.ChooseLocationAdapter;
 import com.example.dwdwproject.adapters.LocationAdapter;
+import com.example.dwdwproject.adapters.LocationAssginAdapter;
 import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.userPresenters.DeAssignUsrToLocationPresenter;
 import com.example.dwdwproject.presenters.userPresenters.SearchUserByIdPresenter;
@@ -30,7 +32,6 @@ import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class UserAssginDetailActivity extends AppCompatActivity implements View.OnClickListener, GetUserView, AssignUserView {
     private UserDTO mUserDTO;
     private LinearLayout mBtnClose,mBtnAdd;
@@ -38,7 +39,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
     private List<Location> mLocationList;
     private List<LocationDTO> mLocationDTOS;
     private RecyclerView mRecyclerView;
-    private LocationAdapter mLocationAdapter;
+    private LocationAssginAdapter mLocationAdapter;
     private SearchUserByIdPresenter mSearchUserByIdPresenter;
     private String token;
     private DeAssignUsrToLocationPresenter mAssignUsrToLocationPresenter;
@@ -69,23 +70,12 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
     }
     private void updateUI(){
         if(mLocationAdapter ==null){
-            mLocationAdapter = new LocationAdapter(UserAssginDetailActivity.this,mLocationList);
+            mLocationAdapter = new LocationAssginAdapter(UserAssginDetailActivity.this,mLocationList);
             mRecyclerView.setAdapter(mLocationAdapter);
-            mLocationAdapter.OnClickItemListener(new LocationAdapter.OnClickItem() {
-                @Override
-                public void OnClickItem(int position) {
-                    Intent intent = new Intent(UserAssginDetailActivity.this,AdminAssignUserActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(BundleString.MANAGERDETAIL,mUserDTO);
-                    bundle.putInt(BundleString.USERASSIGN,position);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-            mLocationAdapter.OnClickDeleteItemListener(new LocationAdapter.OnClickDeleteItem() {
+            mLocationAdapter.OnClickDeleteItemListener(new LocationAssginAdapter.OnClickDeleteItem() {
                 @Override
                 public void OnClickDeleteItem(int position) {
-                    showDeactivetDialog("Do you want to deassgin location ",mLocationList.get(position).getLocationId());
+                    showDeactivetDialog("Do you want to deassgin user into location ?",mUserDTO.getmLocationDTO().get(position).getLocationId());
                 }
             });
         }

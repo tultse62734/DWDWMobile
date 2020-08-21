@@ -14,4 +14,5 @@ public interface RoomRepositories {
     void updateRoomById(Context context,String token,RoomDTO mRoomDTO,CallBackData<RoomDTO>mCallBackData);
     void getAllRoomfromLocationByManager(Context context, String token, int locationId, CallBackData<List<RoomDTO>> mCallBackData);
     void getRoomStatus(Context context,String token,RoomDTO mRoomDTO,CallBackData<RoomDTO> mCallBackData);
+    void getUnassignedRoomsFromLocation(Context context,String token,int locationId,CallBackData<List<RoomDTO>> mCallBackData);
 }

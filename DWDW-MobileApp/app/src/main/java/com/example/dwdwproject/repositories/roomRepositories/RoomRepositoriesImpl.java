@@ -137,11 +137,14 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
-                else {
-                    mCallBackData.onFail("Room is existed");
+                else{
+                    mCallBackData.onFail("Room is existed ");
                 }
-
             }
 
             @Override
@@ -188,9 +191,13 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
-                else {
-                    mCallBackData.onFail("Room is existed");
+                else{
+                    mCallBackData.onFail("Room is existed ");
                 }
 
             }
@@ -278,5 +285,42 @@ public class RoomRepositoriesImpl implements RoomRepositories {
                 mCallBackData.onFail(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void getUnassignedRoomsFromLocation( final Context context, String token, int locationId,  final CallBackData<List<RoomDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServicesRoom().getRoomById(map,locationId);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListRoomDTO<List<RoomDTO>>>() {
+                    }.getType();
+                    ResultReponseListRoomDTO<List<RoomDTO>> resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMessage());
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+
     }
 }

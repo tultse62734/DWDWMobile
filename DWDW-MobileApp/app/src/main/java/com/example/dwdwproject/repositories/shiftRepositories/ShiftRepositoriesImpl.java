@@ -138,9 +138,13 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else{
-                    CallBackData.onFail("Create Shift Fail");
-
+                }else if(response.code()==403 && response.body()!=null){
+                    CallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    CallBackData.onFail("Server is error");
+                }
+                else{
+                    CallBackData.onFail("Shift is existed ");
                 }
 
             }
@@ -190,8 +194,13 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }else {
-                    callBackData.onFail("Update Shift Fail");
+                }else if(response.code()==403 && response.body()!=null){
+                    callBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    callBackData.onFail("Server is error");
+                }
+                else{
+                    callBackData.onFail("Shift is existed ");
                 }
             }
 

@@ -136,9 +136,13 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    callBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    callBackData.onFail("Server is error");
                 }
-                else {
-                    callBackData.onFail("Location is existed");
+                else{
+                    callBackData.onFail("Location is existed ");
                 }
 
             }
@@ -186,12 +190,14 @@ public class LocationRepositoriesImpl implements LocationRepositories {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                }else if(response.code()==403 && response.body()!=null){
+                    callBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    callBackData.onFail("Server is error");
                 }
-                else {
-                    callBackData.onFail("Location is't existed");
-
+                else{
+                    callBackData.onFail("Location is existed ");
                 }
-
             }
 
             @Override

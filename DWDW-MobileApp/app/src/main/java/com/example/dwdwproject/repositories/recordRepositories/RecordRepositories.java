@@ -17,4 +17,5 @@ public interface RecordRepositories {
     void getRecordsByLocationIdAndTime
             (Context mContext, String token, int locationID, String start, String end, CallBackData<List<RecordDTO>> mCallBackData);
     void getRecordByWorkerDate(Context context,String token,int workerID,String date,CallBackData<List<RecordDTO>> mCallBackData);
+    void getRecordByWorker(Context context,String token,int locationId,String date,CallBackData<List<RecordDTO>> mCallBackData);
 }

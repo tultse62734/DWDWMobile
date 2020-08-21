@@ -166,9 +166,7 @@
                 android:layout_marginBottom="@dimen/dp20"
                 android:orientation="vertical">
 
-
                 <LinearLayout
-                    android:visibility="gone"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/dp20"
                     android:layout_width="match_parent"

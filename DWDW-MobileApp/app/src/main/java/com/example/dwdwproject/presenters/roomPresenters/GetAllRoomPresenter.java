@@ -16,17 +16,14 @@ import java.util.List;
 public class GetAllRoomPresenter {
     private Context mContext;
     private GetListRoomView mListRoomView;
-    private DWDWManagement dwdwManagement;
     private RoomRepositories mRoomRepositories;
-
-    public GetAllRoomPresenter(Context mContext, Application mappApplication,GetListRoomView mListRoomView) {
+    public GetAllRoomPresenter(Context mContext,GetListRoomView mListRoomView) {
         this.mContext = mContext;
         this.mListRoomView = mListRoomView;
-        this.dwdwManagement = new DWDWManagement(mappApplication);
         this.mRoomRepositories = new RoomRepositoriesImpl();
     }
-    public void getAllDevice(String token){
-        this.mRoomRepositories.getAllRoom(mContext, token, new CallBackData<List<RoomDTO>>() {
+    public void getAllRoom(String token,int locationId){
+        this.mRoomRepositories.getUnassignedRoomsFromLocation(mContext, token,locationId, new CallBackData<List<RoomDTO>>() {
             @Override
             public void onSucess(List<RoomDTO> roomDTOS) {
                 mListRoomView.getListRoomSuccess(roomDTOS);
@@ -34,19 +31,6 @@ public class GetAllRoomPresenter {
             @Override
             public void onFail(String message) {
                 mListRoomView.showError(message);
-            }
-        });
-    }
-    public void getAllDevices(){
-        this.dwdwManagement.getAccessToken(new DWDWManagement.OnDataCallBackAccessToken() {
-            @Override
-            public void onDataSuccess(String accessToken) {
-                getAllDevice(accessToken);
-            }
-
-            @Override
-            public void onDataFail() {
-
             }
         });
     }

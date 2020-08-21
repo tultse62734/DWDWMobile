@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.UserAssginDetailActivity"></activity>
+        <activity android:name=".activities.WorkerReportDetailActivity"></activity>
+        <activity android:name=".activities.UserAssginDetailActivity" />
         <activity android:name=".activities.NotifyMessageActivity" />
-        <activity android:name=".activities.ManagerUserRecordivity"></activity>
+        <activity android:name=".activities.ManagerUserRecordivity" />
         <activity android:name=".activities.ShiftFilterChooseLocationActivity" />
         <activity android:name=".activities.ManagerUpdateShiftActivity" />
         <activity android:name=".activities.UpdateInforAccountActivity" />

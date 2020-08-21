@@ -23,6 +23,10 @@ public interface ServiceRecord {
     Call<ResponseBody> getRecordsByWorkerDate(@HeaderMap Map<String, String> map,@Query("workerID") int id,@Query("date")String date);
 
 
+    @GET(ConfigAPI.Api.GETRECORDBYWORKER)
+    Call<ResponseBody> getRecordsByWorker(@HeaderMap Map<String, String> map,@Query("date")String date,@Query("locationId")int locationId);
+
+
     @GET(ConfigAPI.Api.GETLOCATIONRECORD)
     Call<ResponseBody> getLocationRecord(@HeaderMap Map<String, String> map,@Query("startDate")String startDate
     ,@Query("endDate")String endDate);

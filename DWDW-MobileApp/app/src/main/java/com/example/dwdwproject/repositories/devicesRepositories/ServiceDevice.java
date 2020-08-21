@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ServiceDevice {
-    @GET(ConfigAPI.Api.GETALLDEVICE)
+    @GET(ConfigAPI.Api.GEtUNASSGInDEVICE)
     Call<ResponseBody> getAllDevice(@HeaderMap Map<String, String> map);
     @GET(ConfigAPI.Api.GETDEVICEBYID)
     @Headers({"Content-Type: application/json"})

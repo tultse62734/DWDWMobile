@@ -207,4 +207,39 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             }
         });
     }
+
+    @Override
+    public void getRecordByWorker(final Context context, String token, int locationId,String date,final CallBackData<List<RecordDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getRecordsByWorker(map,date,locationId);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                try {
+                    String result = response.body().string();
+                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                    }.getType();
+                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                        mCallBackData.onSucess(resultReponse.getData().get(0));
+                    } else {
+                        mCallBackData.onFail(resultReponse.getMesssage());
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
 }

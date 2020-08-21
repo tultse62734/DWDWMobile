@@ -8,6 +8,7 @@ public class ConfigAPI {
         String UPDATEINFOR ="User/UpdatePersonalInfo";
         //Device
         String GETALLDEVICE = "Device/GetAllDevice";
+        String GEtUNASSGInDEVICE = "Device/GetUnassignedDevice";
         String GETDEVICEBYID ="";
         String CREATEDEVICE ="Device/CreateDevice";
         String UPDATEDEVICE = "Device/UpdateDevice";
@@ -26,7 +27,7 @@ public class ConfigAPI {
         String ACTIVELOCATION = "Location/UpdateLocationStatus";
         String GETMANAGERLOCATION = "Location/GetLocationsByManagerWorker";
         //Room
-        String GETALLROOM = "";
+        String GETALLROOM = "Room/GetUnassignedRoomsFromLocation/{locationId}";
         String GETROOMBYID ="";
         String CREATEROOM ="Room/CreateRoom";
         String UPDATEROOM = "Room/UpdateRoom";
@@ -59,6 +60,7 @@ public class ConfigAPI {
         String GETRECORDBYLOCATION="Record/GetRecordsByLocationId";
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
         String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";
+        String GETRECORDBYWORKER = "";
         //Notify
         String NOTIFY = "Notification/GetAllNotifications";
     }
