@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 
 public class AccidentReportDetailActivity extends AppCompatActivity implements View.OnClickListener, GetRecordView {
     private LinearLayout mBtnClose;
-    private TextView mTxtRoom,mTxtDevice,mTxtLocation,mTxtDay,mTxtTime;
+    private TextView mTxtRoom,mTxtDevice,mTxtLocation,mTxtDay,mTxtTime,mTxtReason,mTxtStatus;
     private Accident mAccident;
     private TextView mTitle;
     private String title,token;
@@ -50,6 +50,8 @@ public class AccidentReportDetailActivity extends AppCompatActivity implements V
         mTxtTime = findViewById(R.id.txt_record_time_detail);
         mTitle = findViewById(R.id.txt_title_report_detail);
         mImageView = findViewById(R.id.image_accident_detail);
+        mTxtReason = findViewById(R.id.txt_record_reason);
+        mTxtStatus = findViewById(R.id.txt_record_status);
     }
     private void initData(){
         title = SharePreferenceUtils.getStringSharedPreference(AccidentReportDetailActivity.this,BundleString.LOCATIONNAME);
@@ -77,6 +79,8 @@ public class AccidentReportDetailActivity extends AppCompatActivity implements V
         mTxtDevice.setText(recordDTO.getFullname());
         mTxtDay.setText(mAccident.getAccidentDate());
         mTxtTime.setText(mAccident.getTimeDate());
+        mTxtReason.setText(recordDTO.getComment()+"");
+        mTxtStatus.setText(recordDTO.getStatus()+"");
         mTitle.setText(title);
         if(recordDTO.getImage()!=null){
             mImageView.setImageBitmap(ParseBytes.StringToBitMap(recordDTO.getImage()));

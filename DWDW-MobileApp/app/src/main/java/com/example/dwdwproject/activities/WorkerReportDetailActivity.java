@@ -2,26 +2,35 @@ package com.example.dwdwproject.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.dwdwproject.R;
+import com.example.dwdwproject.ResponseDTOs.ConfirmReasonDTO;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
 import com.example.dwdwproject.models.Accident;
+import com.example.dwdwproject.presenters.recordsPresenters.ConfirmRecordPresenter;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdAndTimePresenter;
 import com.example.dwdwproject.utils.BundleString;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.ParseBytes;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
+import com.example.dwdwproject.views.recordsViews.ConfirmRecordView;
 import com.example.dwdwproject.views.recordsViews.GetRecordView;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class WorkerReportDetailActivity extends AppCompatActivity implements View.OnClickListener , GetRecordView {
+public class WorkerReportDetailActivity extends AppCompatActivity implements View.OnClickListener , GetRecordView , ConfirmRecordView {
     private LinearLayout mBtnClose,mBtnConfirm;
     private TextView mTxtRoom,mTxtDevice,mTxtLocation,mTxtDay,mTxtTime;
     private Accident mAccident;
@@ -29,8 +38,10 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
     private String title,token;
     private RecordDTO recordDTO;
     private ImageView mImageView;
+    private String reason;
     private GetRecordsByLocationIdAndTimePresenter mIdAndTimePresenter;
     Charset charset = StandardCharsets.UTF_16;
+    private ConfirmRecordPresenter confirmRecordPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
         mAccident = (Accident) bundle.getSerializable(BundleString.RECORDDETAIL);
         token = SharePreferenceUtils.getStringSharedPreference(WorkerReportDetailActivity.this,BundleString.TOKEN);
         mIdAndTimePresenter = new GetRecordsByLocationIdAndTimePresenter(WorkerReportDetailActivity.this,this);
+        confirmRecordPresenter = new ConfirmRecordPresenter(WorkerReportDetailActivity.this,this);
         mBtnClose.setOnClickListener(this);
         mBtnConfirm.setOnClickListener(this);
         mIdAndTimePresenter.getRecordById(token,mAccident.getAccidentId());
@@ -69,6 +81,7 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
                 finish();
                 break;
             case R.id.lnl_btn_confirm_record:
+                showDialogConfirm();
                 break;
         }
     }
@@ -88,5 +101,47 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
     @Override
     public void showError(String message) {
         DialogNotifyError.showErrorLoginDialog(WorkerReportDetailActivity.this,message);
+    }
+    private void showDialogConfirm(){
+        final Dialog dialog = new Dialog(WorkerReportDetailActivity.this);
+        dialog.setContentView(R.layout.alert_layout_cofirm_reason);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button buttonOk = dialog.findViewById(R.id.btn_sumbit_confirm);
+        final RadioGroup mRadioGroup = dialog.findViewById(R.id.radio_group);
+        EditText mEdtReason = dialog.findViewById(R.id.edit_reasion);
+        reason = mEdtReason.getText().toString();
+        Button buttonCancel = dialog.findViewById(R.id.btn_cancel_confirm);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (mRadioGroup.getCheckedRadioButtonId()) {
+                    case R.id.rd_accep:
+                        confirmReason(reason,"ACCEPT");
+                        break;
+                    case R.id.rd_refuse:
+                        confirmReason(reason,"REFUSE");
+                        break;
+                }
+            }
+        });
+        dialog.show();
+    }
+    private void confirmReason(String reasonString,String status){
+        ConfirmReasonDTO mConfirmReasonDTO = new ConfirmReasonDTO();
+        mConfirmReasonDTO.setRecordId(recordDTO.getRecordId());
+        mConfirmReasonDTO.setRecordDateTime(recordDTO.getRecordDateTime());
+        mConfirmReasonDTO.setStatus(status);
+        mConfirmReasonDTO.setComment(reasonString);
+        confirmRecordPresenter.confirmRecord(token,mConfirmReasonDTO);
+    }
+    @Override
+    public void confirmRecordSuccess(ConfirmReasonDTO mConfirmReasonDTO) {
+       finish();
     }
 }

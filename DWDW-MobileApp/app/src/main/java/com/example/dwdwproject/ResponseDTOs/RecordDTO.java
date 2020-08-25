@@ -17,6 +17,10 @@ public class RecordDTO implements Serializable {
     private String roomCode;
     @SerializedName("fullName")
     private String fullname;
+    @SerializedName("status")
+    private String status;
+    @SerializedName("comment")
+    private String comment;
     public int getRecordId() {
         return recordId;
     }
@@ -63,5 +67,21 @@ public class RecordDTO implements Serializable {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

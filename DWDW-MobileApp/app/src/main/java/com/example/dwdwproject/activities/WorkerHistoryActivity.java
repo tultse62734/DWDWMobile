@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.dwdwproject.R;
 import com.example.dwdwproject.ResponseDTOs.RecordDTO;
@@ -29,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class WorkerReportActivity extends AppCompatActivity implements View.OnClickListener, GetAllRecordsView {
+public class WorkerHistoryActivity extends AppCompatActivity implements View.OnClickListener, GetAllRecordsView {
     private LinearLayout mLnlClose;
     private List<Accident> mAccidentList;
     private RecyclerView mRecyclerView;
@@ -46,25 +45,25 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_worker_report);
+        setContentView(R.layout.activity_worker_history);
         initView();
         initData();
     }
     private void initView(){
-        mRecyclerView = findViewById(R.id.rcv_accident_worker);
-        mLnlClose = findViewById(R.id.lnl_close_manage_accident_worker);
+        mRecyclerView = findViewById(R.id.rcv_accident_worker_history);
+        mLnlClose = findViewById(R.id.lnl_close_manage_accident_worker_history);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
     }
     private void initData(){
-        mGetRecordByWorker = new GetRecordByWorker(WorkerReportActivity.this,this);
-        token = SharePreferenceUtils.getStringSharedPreference(WorkerReportActivity.this, BundleString.TOKEN);
-        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerReportActivity.this,BundleString.LOCATIONID);
-        locationName= SharePreferenceUtils.getStringSharedPreference(WorkerReportActivity.this,BundleString.LOCATIONNAME);
-        date = BundleString.getSelectedDate(WorkerReportActivity.this);
+        mGetRecordByWorker = new GetRecordByWorker(WorkerHistoryActivity.this,this);
+        token = SharePreferenceUtils.getStringSharedPreference(WorkerHistoryActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerHistoryActivity.this,BundleString.LOCATIONID);
+        locationName= SharePreferenceUtils.getStringSharedPreference(WorkerHistoryActivity.this,BundleString.LOCATIONNAME);
+        date = BundleString.getSelectedDate(WorkerHistoryActivity.this);
         setDataCalendar();
         mLnlClose.setOnClickListener(this);
-        mGetRecordByWorker.getUnknowRecordByWorker(token,locationId,date);
+        mGetRecordByWorker.getConfirmRecordByWorker(token,locationId,date);
     }
     @Override
     protected void onResume() {
@@ -74,12 +73,12 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
 
     private void updateUI(){
         if(mAccidentAdapter == null){
-            mAccidentAdapter = new AccidentAdapter(WorkerReportActivity.this,mAccidentList);
+            mAccidentAdapter = new AccidentAdapter(WorkerHistoryActivity.this,mAccidentList);
             mRecyclerView.setAdapter(mAccidentAdapter);
             mAccidentAdapter.onItemClick(new AccidentAdapter.OnItemCkickListerner() {
                 @Override
                 public void onItemClick(int pos) {
-                    Intent intent = new Intent(WorkerReportActivity.this,WorkerReportDetailActivity.class);
+                    Intent intent = new Intent(WorkerHistoryActivity.this,AccidentReportDetailActivity.class);
                     Bundle bundle = new Bundle();
                     mAccidentList.get(pos).setImage(mAccidentList.get(pos).getImage());
                     bundle.putSerializable(BundleString.RECORDDETAIL,mAccidentList.get(pos));
@@ -92,7 +91,7 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
         }
     }
     public void setDataCalendar() {
-        compactCalendarView = (CompactCalendarView)findViewById(R.id.compactcalendar_worker_record);
+        compactCalendarView = (CompactCalendarView)findViewById(R.id.compactcalendar_worker_record_history);
         compactCalendarView.setUseThreeLetterAbbreviation(false);
         compactCalendarView.setIsRtl(false);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
@@ -101,9 +100,10 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                String dateChoose = dateFormatForDisplaying.format(dateClicked);
-                date = DateManagement.changeDateStringToString(dateChoose);
-                mGetRecordByWorker.getUnknowRecordByWorker(token,locationId,date);
+                String datechoose   = dateFormatForDisplaying.format(dateClicked);
+                date = DateManagement.changeDateStringToString(datechoose);
+                SharePreferenceUtils.saveStringSharedPreference(WorkerHistoryActivity.this,BundleString.FILTER_DATE_IS_SELECTE,date);
+                mGetRecordByWorker.getConfirmRecordByWorker(token,locationId,date);
             }
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
@@ -111,17 +111,17 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
         });
     }
     private void loadData(){
-        token = SharePreferenceUtils.getStringSharedPreference(WorkerReportActivity.this, BundleString.TOKEN);
-        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerReportActivity.this,BundleString.LOCATIONID);
-        date = BundleString.getSelectedDate(WorkerReportActivity.this);
-        mGetRecordByWorker = new GetRecordByWorker(WorkerReportActivity.this,this);
-        mGetRecordByWorker.getUnknowRecordByWorker(token,locationId,date);
+        token = SharePreferenceUtils.getStringSharedPreference(WorkerHistoryActivity.this, BundleString.TOKEN);
+        locationId = SharePreferenceUtils.getIntSharedPreference(WorkerHistoryActivity.this,BundleString.LOCATIONID);
+        date = BundleString.getSelectedDate(WorkerHistoryActivity.this);
+        mGetRecordByWorker = new GetRecordByWorker(WorkerHistoryActivity.this,this);
+        mGetRecordByWorker.getConfirmRecordByWorker(token,locationId,date);
     }
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id){
-            case R.id.lnl_close_manage_accident_worker:
+            case R.id.lnl_close_manage_accident_worker_history:
                 finish();
                 break;
         }
@@ -144,7 +144,6 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
             updateUI();
         }
     }
-
     private String splitFromDay(String filterDate) {
         String[] tmp = filterDate.split("T");
         day = tmp[0];
@@ -157,6 +156,6 @@ public class WorkerReportActivity extends AppCompatActivity implements View.OnCl
     }
     @Override
     public void showError(String message) {
-        DialogNotifyError.showErrorLoginDialog(WorkerReportActivity.this,message);
+        DialogNotifyError.showErrorLoginDialog(WorkerHistoryActivity.this,message);
     }
 }

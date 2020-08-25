@@ -203,6 +203,36 @@
                             android:textStyle="bold">
                         </TextView>
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lnl_manage_history_worker"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_weight="5"
+                        android:background="@drawable/radius_conner_grey"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:scaleType="fitXY"
+                            android:layout_width="@dimen/dp80"
+                            android:layout_height="@dimen/dp80"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:src="@mipmap/ic_history"></ImageView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginBottom="@dimen/dp10"
+                            android:gravity="center"
+                            android:text="History"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp15"
+                            android:textStyle="bold">
+                        </TextView>
+                    </LinearLayout>
 
 
                 </LinearLayout>

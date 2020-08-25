@@ -61,6 +61,9 @@ public class ConfigAPI {
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
         String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";
         String GETRECORDBYWORKER = "";
+        String GETUNKNOWRECORDBYWORKER = "Record/GetUnknownRecordByLocationDateForWorker";
+        String GETCONFIRMRECORDBYWORKER ="Record/GetConfirmRecordByLocationDateForWorker";
+        String UPDATERECORDBYWORKER = "Record/UpdateRecordStatusWorker";
         //Notify
         String NOTIFY = "Notification/GetAllNotifications";
     }

@@ -41,13 +41,7 @@ public class AccidentAdapter extends RecyclerView.Adapter<AccidentAdapter.Accide
         holder.mTxtDateReport.setText("Day : " + mAccidentList.get(position).getAccidentDate());
         holder.mTxtLocationReport.setText(mAccidentList.get(position).getLocationAccident());
         holder.mTxtTime.setText("Time : "+ mAccidentList.get(position).getTimeDate());
-        if(mAccidentList.get(position).isStatus()){
-            holder.mTxtStatusReport.setText("Active");
-            holder.mTxtStatusReport.setTextColor(Color.parseColor("#4CAF50"));
-        }else {
-            holder.mTxtStatusReport.setText("Deactive");
-            holder.mTxtStatusReport.setTextColor(Color.parseColor("#D81B21"));
-        }
+        holder.mTxtStatusReport.setText(mAccidentList.get(position).getStatus());
         holder.mLnlRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

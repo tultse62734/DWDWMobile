@@ -20,8 +20,22 @@ public class GetRecordByWorker {
         this.mGetAllRecordsView = mGetAllRecordsView;
         this.mRecordRepositories = new RecordRepositoriesImpl();
     }
-    public void getRecordByWorker(String token,int locationId,String date){
-        this.mRecordRepositories.getRecordByWorker(mContext, token, locationId, date, new CallBackData<List<RecordDTO>>() {
+    public void getConfirmRecordByWorker(String token,int locationId,String date){
+        this.mRecordRepositories.getConfirmRecordByWorker(mContext, token, locationId, date, new CallBackData<List<RecordDTO>>() {
+            @Override
+            public void onSucess(List<RecordDTO> recordDTOS) {
+                mGetAllRecordsView.getAllRecordSuccess(recordDTOS);
+            }
+
+            @Override
+            public void onFail(String message) {
+                mGetAllRecordsView.showError(message);
+            }
+        });
+    }
+
+    public void getUnknowRecordByWorker(String token,int locationId,String date){
+        this.mRecordRepositories.getUnknowRecordByWorker(mContext, token, locationId, date, new CallBackData<List<RecordDTO>>() {
             @Override
             public void onSucess(List<RecordDTO> recordDTOS) {
                 mGetAllRecordsView.getAllRecordSuccess(recordDTOS);

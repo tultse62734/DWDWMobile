@@ -4,10 +4,14 @@ import com.example.dwdwproject.utils.ConfigAPI;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -32,5 +36,15 @@ public interface ServiceRecord {
     ,@Query("endDate")String endDate);
     @GET(ConfigAPI.Api.GETRECORDBYID)
     Call<ResponseBody> getRecordsById(@HeaderMap Map<String, String> map,@Query("recordId") int id);
+
+    @GET(ConfigAPI.Api.GETUNKNOWRECORDBYWORKER)
+    Call<ResponseBody> getUnknowRecordByWorker(@HeaderMap Map<String, String> map,@Query("locationID")int locationId,@Query("date")String date);
+
+    @GET(ConfigAPI.Api.GETCONFIRMRECORDBYWORKER)
+    Call<ResponseBody> getConfirmRecordByWorker(@HeaderMap Map<String, String> map,@Query("locationID")int locationId,@Query("date")String date);
+
+    @PUT(ConfigAPI.Api.UPDATERECORDBYWORKER)
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> confirmRecordByWorker(@HeaderMap Map<String, String> map, @Body RequestBody mRequestBody);
 
 }

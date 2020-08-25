@@ -166,14 +166,12 @@ public class DateManagement {
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         return cal.getTime();
     }
-
     public static Date getEndPreviosWeek() {
         final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
         cal.add(Calendar.DAY_OF_MONTH, -1);
         return cal.getTime();
     }
-
     public static String getStartPreviosWeekDateString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getStartPreviosWeek());
@@ -182,7 +180,6 @@ public class DateManagement {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(getEndPreviosWeek());
     }
-
     public static Date getStartThisWeek() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.WEEK_OF_YEAR, 0);

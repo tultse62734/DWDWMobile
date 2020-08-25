@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/radius_conner_white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp30">
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Confirm"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            android:textColor="@color/colorOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+            <RadioGroup
+                android:layout_marginTop="@dimen/dp10"
+                android:orientation="horizontal"
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/rd_accep"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOrange"
+                    android:layout_weight="1"
+                    android:text="Accept"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </RadioButton>
+                <RadioButton
+                    android:id="@+id/rd_refuse"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOrange"
+                    android:layout_weight="1"
+                    android:text="Refuse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </RadioButton>
+            </RadioGroup>
+            <EditText
+                android:id="@+id/edit_reasion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:background="@drawable/rounder_edit_text_1dp"
+                android:lines="5"
+                android:textColorHint="@color/colorOrange"
+                android:hint="Input your reason"
+                android:textColor="@color/colorOrange"
+                android:textSize="16dp"
+                android:textStyle="italic" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp16"
+            android:orientation="horizontal">
+            <Button
+                android:layout_marginRight="@dimen/dp20"
+                android:id="@+id/btn_sumbit_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/radius_conner_orange"
+                android:clickable="true"
+                android:text="Ok"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+            <Button
+                android:layout_marginLeft="@dimen/dp20"
+                android:id="@+id/btn_cancel_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/radius_conner_orange"
+                android:clickable="true"
+                android:text="Cancel"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

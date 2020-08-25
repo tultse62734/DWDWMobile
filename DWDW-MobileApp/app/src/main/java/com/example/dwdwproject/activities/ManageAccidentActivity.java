@@ -103,10 +103,10 @@ public class ManageAccidentActivity extends AppCompatActivity implements View.On
                 String locationname = locationName;
                 String recordDate = splitFromToDay(mRecordDTOList.get(i).getRecordDateTime());
                 String recordTime = splitFromToTime(mRecordDTOList.get(i).getRecordDateTime());
-                String recordName = mShiftDTO.getUsername();
+                String recordName = mShiftDTO.getFullname();
                 String roomCode = mShiftDTO.getRoomCode();
-                boolean isActive = true;
-                mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,roomCode,isActive));
+                String status = mRecordDTOList.get(i).getStatus();
+                mAccidentList.add(new Accident(recordId,recordName,recordDate,recordTime,locationname,image,roomCode,status));
             }
             updateUI();
         }

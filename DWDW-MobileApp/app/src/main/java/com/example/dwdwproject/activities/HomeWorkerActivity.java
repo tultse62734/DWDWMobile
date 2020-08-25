@@ -15,7 +15,7 @@ import com.example.dwdwproject.R;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 public class HomeWorkerActivity extends AppCompatActivity implements View.OnClickListener {
-    private LinearLayout mLnlAccountWorker, mLnlReportWorker, mLnlShiftWorker;
+    private LinearLayout mLnlAccountWorker, mLnlReportWorker, mLnlShiftWorker,mLnlHistoryWorker;
     private LinearLayout mBtnLogOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class HomeWorkerActivity extends AppCompatActivity implements View.OnClic
         mLnlAccountWorker = findViewById(R.id.lnl_manage_account_worker);
         mLnlReportWorker = findViewById(R.id.lnl_manage_report_worker);
         mLnlShiftWorker = findViewById(R.id.lnl_manage_shift_worker);
+        mLnlHistoryWorker = findViewById(R.id.lnl_manage_history_worker);
     }
 
     private void initData() {
@@ -37,6 +38,7 @@ public class HomeWorkerActivity extends AppCompatActivity implements View.OnClic
         mLnlShiftWorker.setOnClickListener(this);
         mLnlReportWorker.setOnClickListener(this);
         mBtnLogOut.setOnClickListener(this);
+        mLnlHistoryWorker.setOnClickListener(this);
     }
 
     @Override
@@ -55,6 +57,9 @@ public class HomeWorkerActivity extends AppCompatActivity implements View.OnClic
             case R.id.lnl_log_out_worker:
                 showLogoutDialog();
                 break;
+            case R.id.lnl_manage_history_worker:
+                intentToHistoryWorkerActivty();
+                break;
         }
     }
     private void intentToProfileActivty() {
@@ -63,6 +68,10 @@ public class HomeWorkerActivity extends AppCompatActivity implements View.OnClic
     }
     private void intentToReportWorkerActivty() {
         Intent intent = new Intent(HomeWorkerActivity.this,WorkerReportActivity.class);
+        startActivity(intent);
+    }
+    private void intentToHistoryWorkerActivty() {
+        Intent intent = new Intent(HomeWorkerActivity.this,WorkerHistoryActivity.class);
         startActivity(intent);
     }
     private void intentToShiftWorkerActivty() {

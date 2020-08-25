@@ -143,7 +143,7 @@ public class ManagerUserRecordivity extends AppCompatActivity implements View.On
             mShiftDTO = mShiftDTOList;
             for (int i = 0; i <mShiftDTOList.size() ; i++) {
                 String locationName = SharePreferenceUtils.getStringSharedPreference(ManagerUserRecordivity.this,BundleString.LOCATIONNAME);
-                String username =mShiftDTOList.get(i).getUsername();
+                String username =mShiftDTOList.get(i).getFullname();
                 String roomCode = mShiftDTOList.get(i).getRoomCode();
                 mWorkerRecordList.add(new WorkerRecord(username,locationName,roomCode));
             }
