@@ -48,8 +48,7 @@ public interface ServiceUsers {
 
     @PUT(ConfigAPI.Api.DEASSGINUSER)
     @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> deassginUser(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);
-
+    Call<ResponseBody> deassginUser(@HeaderMap Map<String, String> map,@Query("arrangementID") int id);
     @PUT(ConfigAPI.Api.UPDATEUSERSTATUS)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> updateUserStatus(@HeaderMap Map<String, String> map,@Body RequestBody mRequestBody);

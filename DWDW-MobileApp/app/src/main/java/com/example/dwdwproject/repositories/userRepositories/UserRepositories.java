@@ -17,6 +17,6 @@ public interface UserRepositories {
     void deleteUserById(Context context,String token,int userId,CallBackData<String>mCallBackData);
     void assignUserToLocation(Context context, String token, AssignUserDTO assignUserDTO,CallBackData<AssignUserDTO> mCallBackData);
     void updateUserStatus(Context context ,String token,int userId,boolean isActive,CallBackData<UserDTO> mCallBackData);
-    void deassginUserToLocatioṇ(Context context ,String token,int userId,int locationId,CallBackData<AssignUserDTO> mCallBackData);
+    void deassginUserToLocatioṇ(Context context ,String token,int arrangementID,CallBackData<AssignUserDTO> mCallBackData);
     void searchUserId(Context context, String token,int userId, CallBackData<UserDTO>mCallBackData);
 }

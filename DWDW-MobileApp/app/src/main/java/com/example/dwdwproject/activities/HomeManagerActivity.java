@@ -136,7 +136,6 @@ public class HomeManagerActivity extends AppCompatActivity implements View.OnCli
         dialog.show();
 
     }
-
     private void intentToLogOutActivity(){
         Intent intent = new Intent(HomeManagerActivity.this,LoginActivity.class);
         startActivity(intent);

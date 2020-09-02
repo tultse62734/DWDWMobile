@@ -1,6 +1,6 @@
 package com.example.dwdwproject.utils;
 public class ConfigAPI {
-    public  static final String BASE_URL = "https://dwdw-api-gv6.conveyor.cloud/api/";
+    public  static final String BASE_URL = "https://dwx2.azurewebsites.net/api/";
     public interface Api {
         //User
         String LOGIN = "User/Login";
@@ -61,9 +61,11 @@ public class ConfigAPI {
         String GETLOCATIONRECORD = "Location/GetLocationsRecord";
         String GETRECORDBYWORKERDATE = "Record/GetRecordByWorkerDateForManager";
         String GETRECORDBYWORKER = "";
-        String GETUNKNOWRECORDBYWORKER = "Record/GetUnknownRecordByLocationDateForWorker";
-        String GETCONFIRMRECORDBYWORKER ="Record/GetConfirmRecordByLocationDateForWorker";
-        String UPDATERECORDBYWORKER = "Record/UpdateRecordStatusWorker";
+        String GETUNKNOWRECORDBYWORKER = "Record/GetSleepyRecordByLocationDateForWorker";
+        String GETCONFIRMRECORDBYWORKER ="Record/GetDeniedRecordByLocationDateForWorker";
+        String UPDATERECORDBYWORKER = "Record/DenyRecordStatusWorker";
+        String GETSLEEPRECORDBYLOCATIONFORMANAGER ="Record/GetSleepyRecordByLocationWorkerDateForManager";
+        String GETDENIEDRECORDBYLOCATIONFORMANAGER ="Record/GetDeniedRecordByLocationWorkerDateForManager";
         //Notify
         String NOTIFY = "Notification/GetAllNotifications";
     }

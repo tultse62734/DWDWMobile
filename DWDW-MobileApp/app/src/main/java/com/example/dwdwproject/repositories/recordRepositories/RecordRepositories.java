@@ -22,4 +22,9 @@ public interface RecordRepositories {
     void getConfirmRecordByWorker(Context context,String token,int locationId,String date,CallBackData<List<RecordDTO>> mCallBackData);
     void getUnknowRecordByWorker(Context context,String token,int locationId,String date,CallBackData<List<RecordDTO>> mCallBackData);
     void confirmRecordByWorker(Context context, String token, ConfirmReasonDTO confirmReasonDTO,CallBackData<ConfirmReasonDTO> mCallBackData);
+    void getSleppRecordByManager(Context context,String token,int workerId,int locationId,String date,CallBackData<List<RecordDTO>> mCallBackData);
+
+    void getDeniedRecordByManager(Context context,String token,int workerId,int locationId,String date,CallBackData<List<RecordDTO>> mCallBackData);
+
+
 }

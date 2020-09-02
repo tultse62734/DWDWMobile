@@ -133,7 +133,7 @@ public class WorkerHistoryActivity extends AppCompatActivity implements View.OnC
             for (int i = 0; i <mRecordDTOList.size() ; i++) {
                 int recordId= mRecordDTOList.get(i).getRecordId();
                 String image  =mRecordDTOList.get(i).getImage();
-                String locationname = locationName;
+                String locationname = SharePreferenceUtils.getStringSharedPreference(WorkerHistoryActivity.this,BundleString.LOCATIONNAME);
                 String recordDate = splitFromDay(mRecordDTOList.get(i).getRecordDateTime());
                 String recordTime = splitFromToTime(mRecordDTOList.get(i).getRecordDateTime());
                 String recordName = mRecordDTOList.get(i).getFullname();

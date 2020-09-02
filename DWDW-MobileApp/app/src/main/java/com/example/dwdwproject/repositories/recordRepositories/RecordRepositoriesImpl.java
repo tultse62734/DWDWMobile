@@ -49,20 +49,31 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseRecordDTO<RecordDTO>>() {
-                    }.getType();
-                    ResultReponseRecordDTO<RecordDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
-                    }
+                if(response.code()==200&& response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseRecordDTO<RecordDTO>>() {
+                        }.getType();
+                        ResultReponseRecordDTO<RecordDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
+                    mCallBackData.onFail("Record is not found");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -83,20 +94,31 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
-                    }.getType();
-                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMesssage());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
+                else{
+                    mCallBackData.onFail("Record is not found");
+                }
+
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -118,20 +140,30 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponnseListLocationRecordDTO<List<LocationRecord>>>() {
-                    }.getType();
-                    ResultReponnseListLocationRecordDTO<List<LocationRecord>> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessgae());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponnseListLocationRecordDTO<List<LocationRecord>>>() {
+                        }.getType();
+                        ResultReponnseListLocationRecordDTO<List<LocationRecord>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessgae());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
+                else{
+                    mCallBackData.onFail("Record is not found");
+                }
+
             }
 
             @Override
@@ -191,20 +223,30 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
-                    }.getType();
-                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMesssage());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
+                else{
+                    mCallBackData.onFail("Record is not found");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -226,20 +268,30 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
-                    }.getType();
-                    ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMesssage());
-                    }
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
                 }
+                else{
+                    mCallBackData.onFail("Record is not found");
+                }
+
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -339,7 +391,6 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             }
         });
     }
-
     @Override
     public void confirmRecordByWorker(final Context context, String token, ConfirmReasonDTO confirmReasonDTO,final CallBackData<ConfirmReasonDTO> mCallBackData) {
         String hearder = "Bearer " + token;
@@ -351,8 +402,6 @@ public class RecordRepositoriesImpl implements RecordRepositories {
             data.put("recordId",confirmReasonDTO.getRecordId());
 
             data.put("recordDateTime",confirmReasonDTO.getRecordDateTime());
-
-            data.put("status",confirmReasonDTO.getStatus());
 
             data.put("comment",confirmReasonDTO.getComment());
 
@@ -388,6 +437,94 @@ public class RecordRepositoriesImpl implements RecordRepositories {
                 }
                 else{
                     mCallBackData.onFail("Confirm failed");
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getSleppRecordByManager(final Context context, String token, int workerId, int locationId, String date,final CallBackData<List<RecordDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getSleepRecordByManager(map,workerId,locationId,date);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
+                    mCallBackData.onFail("There's no record  at this date");
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                KProgressHUDManager.dismiss(context, khub);
+                mCallBackData.onFail(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void getDeniedRecordByManager(final Context context, String token, int workerId, int locationId, String date, final CallBackData<List<RecordDTO>> mCallBackData) {
+        String hearder = "Bearer " + token;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", hearder);
+        ClientApi clientApi = new ClientApi();
+        Call<ResponseBody> mBodyCall = clientApi.ServiceRecord().getDeniedRecordByManager(map,workerId,locationId,date);
+        final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
+        mBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                KProgressHUDManager.dismiss(context, khub);
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseListRecordDTO<List<RecordDTO>>>() {
+                        }.getType();
+                        ResultReponseListRecordDTO<List<RecordDTO>> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMesssage());
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
+                    mCallBackData.onFail("There's no record  at this date");
                 }
             }
             @Override

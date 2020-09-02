@@ -19,8 +19,8 @@ public class DeAssignUsrToLocationPresenter {
         this.mAssignUserView = mAssignUserView;
         this.mUserRepositories = new UserRepositotiesImpl();
     }
-    public void deassginUser(String token,int userId,int locationId){
-        this.mUserRepositories.deassginUserToLocatioṇ(context, token, userId, locationId, new CallBackData<AssignUserDTO>() {
+    public void deassginUser(String token,int arrangementID){
+        this.mUserRepositories.deassginUserToLocatioṇ(context, token,arrangementID, new CallBackData<AssignUserDTO>() {
             @Override
             public void onSucess(AssignUserDTO assignUserDTO) {
                 mAssignUserView.getAssignUserSuccess(assignUserDTO);

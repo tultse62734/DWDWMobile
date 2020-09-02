@@ -77,41 +77,39 @@ public class UserRepositotiesImpl implements UserRepositories {
             }
         });
     }
-
     @Override
-    public void deassginUserToLocatioṇ(final Context context, String token, int userId, int locationId, final CallBackData<AssignUserDTO> mCallBackData) {
+    public void deassginUserToLocatioṇ(final Context context, String token, int arrangementID, final CallBackData<AssignUserDTO> mCallBackData) {
         String hearder = "Bearer " + token;
         Map<String, String> map = new HashMap<>();
         map.put("Authorization", hearder);
         ClientApi clientApi = new ClientApi();
-        JSONObject data = new JSONObject();
-        try {
-            data.put("userId",userId);
-
-            data.put("locationId",locationId);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data.toString());
-        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().deassginUser(map,body);
+        Call<ResponseBody> mBodyCall = clientApi.ServicesUsers().deassginUser(map,arrangementID);
         final KProgressHUD khub = KProgressHUDManager.showProgressBar(context);
         mBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 KProgressHUDManager.dismiss(context, khub);
-                try {
-                    String result = response.body().string();
-                    Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
-                    }.getType();
-                    ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
-                    if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
-                        mCallBackData.onSucess(resultReponse.getData().get(0));
-                    } else {
-                        mCallBackData.onFail(resultReponse.getMessage());
+                if(response.code()==200 && response.body()!=null){
+                    try {
+                        String result = response.body().string();
+                        Type type = new TypeToken<ResultReponseAssignUserDTO<AssignUserDTO>>() {
+                        }.getType();
+                        ResultReponseAssignUserDTO<AssignUserDTO> resultReponse = new Gson().fromJson(result,type);
+                        if (resultReponse.getStatusCode() == 200 &&resultReponse.getData() != null) {
+                            mCallBackData.onSucess(resultReponse.getData().get(0));
+                        } else {
+                            mCallBackData.onFail(resultReponse.getMessage());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                }else if(response.code()==403 && response.body()!=null){
+                    mCallBackData.onFail("Foriden Authorization");
+                }else if(response.code() ==500){
+                    mCallBackData.onFail("Server is error");
+                }
+                else{
+                    mCallBackData.onFail("The relationship between this user and location is not existed");
                 }
             }
             @Override
@@ -121,7 +119,6 @@ public class UserRepositotiesImpl implements UserRepositories {
             }
         });
     }
-
     @Override
     public void getAll(final Context mContext, String token,final CallBackData<List<UserDTO>> mCallBackData) {
         String hearder = "Bearer " + token;

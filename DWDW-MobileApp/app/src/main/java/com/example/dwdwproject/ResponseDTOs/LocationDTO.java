@@ -7,6 +7,8 @@ import java.io.Serializable;
 public class LocationDTO implements Serializable {
     @SerializedName("locationId")
     private int locationId;
+    @SerializedName("arrangementId")
+    private int arrangementId;
     @SerializedName("locationCode")
     private String locationCode;
     @SerializedName("startDate")
@@ -59,5 +61,13 @@ public class LocationDTO implements Serializable {
     @Override
     public String toString() {
         return locationCode;
+    }
+
+    public int getArrangementId() {
+        return arrangementId;
+    }
+
+    public void setArrangementId(int arrangementId) {
+        this.arrangementId = arrangementId;
     }
 }

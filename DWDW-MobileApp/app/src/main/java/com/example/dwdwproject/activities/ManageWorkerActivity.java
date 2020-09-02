@@ -74,6 +74,16 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
         if(manageAdapter ==null){
             manageAdapter = new ChooseManagerAdapter(ManageWorkerActivity.this,mManagerList);
             mRecyclerView.setAdapter(manageAdapter);
+            manageAdapter.OnItemClickListener(new ManageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int pos) {
+                    Intent intent = new Intent(ManageWorkerActivity.this,RecordManagerActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BundleString.MANAGERDETAIL,mManagerList.get(pos));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
         else {
             manageAdapter.notifyDataSetChanged();
@@ -104,7 +114,6 @@ public class ManageWorkerActivity extends AppCompatActivity implements View.OnCl
                 String phone = userDTOList.get(i).getPhone();
                 String location = SharePreferenceUtils.getStringSharedPreference(ManageWorkerActivity.this,BundleString.LOCATIONNAME);
                 String roleName = "Worker";
-
                 boolean isActive = userDTOList.get(i).isActive();
                 mManagerList.add(new Manager(userId,name,phone,roleName,location,isActive));
             }

@@ -12,7 +12,7 @@
         <TextView
             android:gravity="center"
             android:layout_gravity="center"
-            android:text="Confirm"
+            android:text="Deny"
             android:textSize="@dimen/sp18"
             android:textStyle="bold"
             android:textColor="@color/colorOrange"
@@ -20,44 +20,18 @@
             android:layout_height="wrap_content">
 
         </TextView>
-            <RadioGroup
-                android:layout_marginTop="@dimen/dp10"
-                android:orientation="horizontal"
-                android:id="@+id/radio_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <RadioButton
-                    android:id="@+id/rd_accep"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorOrange"
-                    android:layout_weight="1"
-                    android:text="Accept"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
 
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/rd_refuse"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorOrange"
-                    android:layout_weight="1"
-                    android:text="Refuse"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-
-                </RadioButton>
-            </RadioGroup>
             <EditText
                 android:id="@+id/edit_reasion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginTop="@dimen/dp10"
                 android:gravity="center"
                 android:background="@drawable/rounder_edit_text_1dp"
-                android:lines="5"
+                android:lines="10"
                 android:textColorHint="@color/colorOrange"
-                android:hint="Input your reason"
+                android:hint="Input your commnent"
                 android:textColor="@color/colorOrange"
                 android:textSize="16dp"
                 android:textStyle="italic" />

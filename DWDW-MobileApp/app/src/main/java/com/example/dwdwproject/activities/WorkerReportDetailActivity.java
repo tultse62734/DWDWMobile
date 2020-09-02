@@ -21,6 +21,7 @@ import com.example.dwdwproject.models.Accident;
 import com.example.dwdwproject.presenters.recordsPresenters.ConfirmRecordPresenter;
 import com.example.dwdwproject.presenters.recordsPresenters.GetRecordsByLocationIdAndTimePresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.CheckVaildateEditTexxt;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.ParseBytes;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
@@ -107,9 +108,7 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
         dialog.setContentView(R.layout.alert_layout_cofirm_reason);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Button buttonOk = dialog.findViewById(R.id.btn_sumbit_confirm);
-        final RadioGroup mRadioGroup = dialog.findViewById(R.id.radio_group);
-        EditText mEdtReason = dialog.findViewById(R.id.edit_reasion);
-        reason = mEdtReason.getText().toString();
+        final EditText mEdtReason = dialog.findViewById(R.id.edit_reasion);
         Button buttonCancel = dialog.findViewById(R.id.btn_cancel_confirm);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,23 +119,19 @@ public class WorkerReportDetailActivity extends AppCompatActivity implements Vie
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (mRadioGroup.getCheckedRadioButtonId()) {
-                    case R.id.rd_accep:
-                        confirmReason(reason,"ACCEPT");
-                        break;
-                    case R.id.rd_refuse:
-                        confirmReason(reason,"REFUSE");
-                        break;
+                if(CheckVaildateEditTexxt.checkEditTextNull(mEdtReason.getText().toString())){
+                    DialogNotifyError.showErrorLoginDialog(WorkerReportDetailActivity.this,"Please Input Commnent");
+                }else{
+                        confirmReason(mEdtReason.getText().toString());
                 }
             }
         });
         dialog.show();
     }
-    private void confirmReason(String reasonString,String status){
+    private void confirmReason(String reasonString){
         ConfirmReasonDTO mConfirmReasonDTO = new ConfirmReasonDTO();
         mConfirmReasonDTO.setRecordId(recordDTO.getRecordId());
         mConfirmReasonDTO.setRecordDateTime(recordDTO.getRecordDateTime());
-        mConfirmReasonDTO.setStatus(status);
         mConfirmReasonDTO.setComment(reasonString);
         confirmRecordPresenter.confirmRecord(token,mConfirmReasonDTO);
     }

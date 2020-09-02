@@ -137,6 +137,7 @@ public class AdminAssignUserActivity extends AppCompatActivity  implements  View
     }
     public void clickOnRdOption() {
         Calendar calendar = Calendar.getInstance();
+
         DatePickerDialog datePickerDialog = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
                 AdminAssignUserActivity.this,
                 calendar.get(Calendar.YEAR),

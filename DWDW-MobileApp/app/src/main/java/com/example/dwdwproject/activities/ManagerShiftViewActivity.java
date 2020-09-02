@@ -118,16 +118,6 @@ public class ManagerShiftViewActivity extends AppCompatActivity implements View.
         if(mShiftAdapter == null){
             mShiftAdapter = new ShiftAdapter(ManagerShiftViewActivity.this,mShiftList);
             mRecyclerView.setAdapter(mShiftAdapter);
-            mShiftAdapter.OnItemClick(new ShiftAdapter.OnItemClickListerner() {
-                @Override
-                public void onItemClick(int pos) {
-                    Intent intent = new Intent(ManagerShiftViewActivity.this,ManagerUpdateShiftActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(BundleString.SHIFTDETAIL,mShiftDTOS.get(pos));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
             mShiftAdapter.OnItemAciveClickListener(new ShiftAdapter.OnItemActiveClick() {
                 @Override
                 public void onItemActiveClick(int pos) {

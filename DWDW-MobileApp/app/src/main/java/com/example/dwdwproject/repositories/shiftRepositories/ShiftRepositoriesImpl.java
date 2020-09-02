@@ -144,9 +144,8 @@ public class ShiftRepositoriesImpl implements ShiftRepositories {
                     CallBackData.onFail("Server is error");
                 }
                 else{
-                    CallBackData.onFail("Shift is existed ");
+                    CallBackData.onFail("This shift date is invalid");
                 }
-
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {

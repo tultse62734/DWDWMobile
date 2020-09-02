@@ -7,21 +7,23 @@ import com.example.dwdwproject.repositories.recordRepositories.RecordRepositorie
 import com.example.dwdwproject.repositories.recordRepositories.RecordRepositoriesImpl;
 import com.example.dwdwproject.utils.CallBackData;
 import com.example.dwdwproject.views.recordsViews.GetAllRecordsView;
+import com.example.dwdwproject.views.recordsViews.GetRecordView;
 
 import java.util.List;
 
-public class GetRecordByWorker {
-    private Context mContext;
-    private RecordRepositories mRecordRepositories;
+public class GetRecordByManager {
+    private Context context;
     private GetAllRecordsView mGetAllRecordsView;
+    private RecordRepositories mRecordRepositoriesl;
 
-    public GetRecordByWorker(Context mContext, GetAllRecordsView mGetAllRecordsView) {
-        this.mContext = mContext;
+    public GetRecordByManager(Context context, GetAllRecordsView mGetAllRecordsView) {
+        this.context = context;
         this.mGetAllRecordsView = mGetAllRecordsView;
-        this.mRecordRepositories = new RecordRepositoriesImpl();
+        this.mRecordRepositoriesl = new RecordRepositoriesImpl();
+
     }
-    public void getConfirmRecordByWorker(String token,int locationId,String date){
-        this.mRecordRepositories.getConfirmRecordByWorker(mContext, token, locationId, date, new CallBackData<List<RecordDTO>>() {
+    public void getSleepRecordByLocationManager(String token,int workerId,int location,String date){
+        this.mRecordRepositoriesl.getSleppRecordByManager(context, token, workerId, location, date, new CallBackData<List<RecordDTO>>() {
             @Override
             public void onSucess(List<RecordDTO> recordDTOS) {
                 mGetAllRecordsView.getAllRecordSuccess(recordDTOS);
@@ -33,13 +35,13 @@ public class GetRecordByWorker {
             }
         });
     }
-
-    public void getUnknowRecordByWorker(String token,int locationId,String date){
-        this.mRecordRepositories.getUnknowRecordByWorker(mContext, token, locationId, date, new CallBackData<List<RecordDTO>>() {
+    public void getDeniedRecordByLocationManager(String token,int workerId,int location,String date){
+        this.mRecordRepositoriesl.getDeniedRecordByManager(context, token, workerId, location, date, new CallBackData<List<RecordDTO>>() {
             @Override
             public void onSucess(List<RecordDTO> recordDTOS) {
                 mGetAllRecordsView.getAllRecordSuccess(recordDTOS);
             }
+
             @Override
             public void onFail(String message) {
                 mGetAllRecordsView.showError(message);

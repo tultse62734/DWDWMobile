@@ -46,5 +46,9 @@ public interface ServiceRecord {
     @PUT(ConfigAPI.Api.UPDATERECORDBYWORKER)
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> confirmRecordByWorker(@HeaderMap Map<String, String> map, @Body RequestBody mRequestBody);
+    @GET(ConfigAPI.Api.GETSLEEPRECORDBYLOCATIONFORMANAGER)
+    Call<ResponseBody> getSleepRecordByManager(@HeaderMap Map<String, String> map,@Query("workerID") int workerId,@Query("locationID")int locationId,@Query("date")String date);
 
+    @GET(ConfigAPI.Api.GETDENIEDRECORDBYLOCATIONFORMANAGER)
+    Call<ResponseBody> getDeniedRecordByManager(@HeaderMap Map<String, String> map,@Query("workerID") int workerId,@Query("locationID")int locationId,@Query("date")String date);
 }

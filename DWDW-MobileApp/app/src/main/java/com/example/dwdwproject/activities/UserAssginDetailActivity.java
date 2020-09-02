@@ -25,12 +25,14 @@ import com.example.dwdwproject.models.Location;
 import com.example.dwdwproject.presenters.userPresenters.DeAssignUsrToLocationPresenter;
 import com.example.dwdwproject.presenters.userPresenters.SearchUserByIdPresenter;
 import com.example.dwdwproject.utils.BundleString;
+import com.example.dwdwproject.utils.DateManagement;
 import com.example.dwdwproject.utils.DialogNotifyError;
 import com.example.dwdwproject.utils.SharePreferenceUtils;
 import com.example.dwdwproject.views.userViews.AssignUserView;
 import com.example.dwdwproject.views.userViews.GetUserView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 public class UserAssginDetailActivity extends AppCompatActivity implements View.OnClickListener, GetUserView, AssignUserView {
     private UserDTO mUserDTO;
@@ -75,7 +77,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
             mLocationAdapter.OnClickDeleteItemListener(new LocationAssginAdapter.OnClickDeleteItem() {
                 @Override
                 public void OnClickDeleteItem(int position) {
-                    showDeactivetDialog("Do you want to deassgin user into location ?",mUserDTO.getmLocationDTO().get(position).getLocationId());
+                    showDeactivetDialog("Do you want to deassgin user into location ?",mUserDTO.getmLocationDTO().get(position).getArrangementId());
                 }
             });
         }
@@ -112,7 +114,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
                 int locationId  = mLocationDTOS.get(i).getLocationId();
                 String locationName = mLocationDTOS.get(i).getLocationCode();
                 boolean isactive = mLocationDTOS.get(i).isActive();
-                String date = mLocationDTOS.get(i).getStartDate() + "to" +mLocationDTOS.get(i).getEndDate();
+                String date = DateManagement.changeFormatDate1(mLocationDTOS.get(i).getStartDate()) + "-" +DateManagement.changeFormatDate1(mLocationDTOS.get(i).getEndDate());
                 this.mLocationList.add(new Location(locationId,locationName,date,isactive));
             }
             updateUI();
@@ -134,7 +136,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
     public void getAssignUserSuccess(AssignUserDTO mAssignUserDTO) {
         mSearchUserByIdPresenter.searchUserById(token,mUserDTO.getUserId());
     }
-    private void showDeactivetDialog(String message, final int locationId) {
+    private void showDeactivetDialog(String message, final int arragementId ) {
         final Dialog dialog = new Dialog(UserAssginDetailActivity.this);
         dialog.setContentView(R.layout.alert_dialog_notify_sign_out);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -146,7 +148,7 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                mAssignUsrToLocationPresenter.deassginUser(token,mUserDTO.getUserId(),locationId);
+                mAssignUsrToLocationPresenter.deassginUser(token,arragementId);
             }
         });
         buttonNo.setOnClickListener(new View.OnClickListener() {
@@ -157,4 +159,5 @@ public class UserAssginDetailActivity extends AppCompatActivity implements View.
         });
         dialog.show();
     }
+
 }
